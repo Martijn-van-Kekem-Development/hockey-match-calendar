@@ -1,11 +1,11 @@
 [
-  {"in": "Pool A", "out": "M A"},
-  {"in": "Final", "out": "M GF"},
-  {"in": "Semi-final (2)", "out": "M SF2"},
-  {"in": "Semi-final 1", "out": "M SF1"},
-  {"in": "Semi-final", "out": "M SF"},
-  {"in": "3th-4th", "out": "M 3v4"},
-  {"in": "SF1 (M1)", "out": "M SF1"},
-  {"in": "QF2", "out": "M QF2"},
+  {"in": "Pool A", "out": "POOL A M01"},
+  {"in": "Final", "out": "GF M01"},
+  {"in": "Semi-final (2)", "out": "SF2 M01"},
+  {"in": "Semi-final 1", "out": "SF1 M01"},
+  {"in": "Semi-final", "out": "SF M01"},
+  {"in": "3th-4th", "out": "3v4 M01"},
+  {"in": "SF1 (M1)", "out": "SF1 M01"},
+  {"in": "QF2", "out": "QF2 M01"},
   {"in": "Something unknown", "out": "M01"}
 ]
