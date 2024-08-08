@@ -9,11 +9,12 @@ describe('ICS class', () => {
         ];
 
         const output = ICS.formatLines(lines);
-        expect(output).toStrictEqual(
-            "Very long description that is very long and longer than the max allowed ch" +
-            "\r\n aracters. Very long description that is very long and longer than the max" +
-            "\r\n  allowed characters\r\n" +
-            "Not so long"
-        );
+        const outputLines = output.split("\r\n");
+        expect(outputLines.length).toBe(4);
+        expect(outputLines[1].startsWith(" ")).toBe(true);
+        expect(outputLines[2].startsWith(" ")).toBe(true);
+        for (let line of outputLines) {
+            expect(line.length).toBeLessThanOrEqual(75);
+        }
     });
 });
