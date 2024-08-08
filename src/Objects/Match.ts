@@ -244,7 +244,7 @@ export class Match {
         if (this.competition && this.competition.getFetcher())
             lines.push(...this.competition.getFetcher().descriptionToAppend(this.competition,  this, html));
 
-        return lines.join("\\n");
+        return lines.join(html ? "<br>" : "\\n");
     }
 
     /**
