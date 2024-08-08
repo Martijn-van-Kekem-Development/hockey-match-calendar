@@ -1,8 +1,0 @@
-BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//mvk-development//fih-event-calendar//1675//EN
-NAME:FIH Indoor Hockey Women's World Cup Croatia 2025
-X-WR-CALNAME:FIH Indoor Hockey Women's World Cup Croatia 2025
-REFRESH-INTERVAL;VALUE=DURATION:PT12H
-X-PUBLISHED-TTL:PT12H
-END:VCALENDAR

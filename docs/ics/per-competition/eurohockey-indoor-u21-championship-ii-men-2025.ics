@@ -1,0 +1,8 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//mvk-development//fih-event-calendar//1556//EN
+NAME:EuroHockey Indoor U21 Championship II Men 2025
+X-WR-CALNAME:EuroHockey Indoor U21 Championship II Men 2025
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+END:VCALENDAR

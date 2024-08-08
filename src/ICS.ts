@@ -3,15 +3,30 @@ import * as fs from "fs/promises";
 
 export class ICS {
     /**
+     * The stored file paths.
+     * @private
+     */
+    private static filePaths: {name: string, url: string}[] = [];
+    /**
      * Write the ICS string to a file.
      * @param ics The ICS content.
+     * @param title The ICS title.
      * @param fileName The file name without extension.
      */
-    public static async writeToFile(ics: string, fileName: string) {
-        const outputFile = `out/${fileName}.ics`;
+    public static async writeToFile(ics: string, title: string, fileName: string) {
+        const outputFile = `docs/ics/${fileName}.ics`;
         const outputFolder = outputFile.split("/").slice(0, -1).join("/");
         await fs.mkdir(outputFolder, {recursive: true});
         await fs.writeFile(outputFile, ics, {flag: "w+"});
+
+        this.filePaths.push({name: title, url: outputFile})
+    }
+
+    /**
+     * Store the file paths in a JSON file.
+     */
+    public static async storeFilePaths() {
+        await fs.writeFile("docs/files.json", JSON.stringify(this.filePaths));
     }
 
     /**

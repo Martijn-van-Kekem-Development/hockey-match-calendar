@@ -21,9 +21,12 @@ export class Main {
 
         await Promise.all(promises);
         const allMatches = Array.from(competitions.values());
-        await this.createTotalICS(allMatches);
-        await this.createGenderTotalICS(allMatches, "M");
-        await this.createGenderTotalICS(allMatches, "W");
+        await Promise.all([
+            this.createTotalICS(allMatches),
+            this.createGenderTotalICS(allMatches, "M"),
+            this.createGenderTotalICS(allMatches, "W")
+        ]);
+        await ICS.storeFilePaths();
     }
 
     /**
@@ -34,7 +37,8 @@ export class Main {
     private async createTotalICS(competitions: Competition[]) {
         const matches = competitions.map(e => e.getMatches()).flat();
         const path = "all-matches";
-        await ICS.writeToFile(ICS.calendarToICS("FIH - All matches", "fih-all", matches), path);
+        const title = "FIH - All matches";
+        await ICS.writeToFile(ICS.calendarToICS(title, "fih-all", matches), title, path);
     }
 
     /**
@@ -47,8 +51,8 @@ export class Main {
         let matches = competitions.map(e => e.getMatches()).flat();
         matches = matches.filter(m => m.getGender() === gender);
         const path = `${gender === "M" ? "mens" : "womens"}-matches`;
-        await ICS.writeToFile(ICS.calendarToICS(
-            `FIH - ${gender === "M" ? "Men's" : "Women's"} matches`, path, matches), path);
+        const title = `FIH - ${gender === "M" ? "Men's" : "Women's"} matches`;
+        await ICS.writeToFile(ICS.calendarToICS(title, path, matches), title, path);
     }
 
     /**
@@ -58,7 +62,8 @@ export class Main {
      */
     private async createCompetitionICS(competition: Competition) {
         const path = "per-competition/" + competition.getLowercaseName();
-        await ICS.writeToFile(ICS.calendarToICS(competition.getName(), competition.getID(), competition.getMatches()), path);
+        const title = competition.getName();
+        await ICS.writeToFile(ICS.calendarToICS(title, competition.getID(), competition.getMatches()), title, path);
     }
 }
 
