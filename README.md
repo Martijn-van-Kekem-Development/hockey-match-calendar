@@ -1,11 +1,11 @@
-# FIH Event Calendar
-This script automatically pulls past, active, and upcoming matches from TMS and converts them into neat ICS files to import into your calendar.
+# Hockey Match Calendar
+This script automatically pulls past, active, and upcoming matches from various sources and converts them into neat ics-files for you to subscribe to.
 
 ## How does this work?
-Every hour, the script automatically fetches all past, in progress, and upcoming competitions from the FIH, together with the matches that belong to that competition.
+Every hour, the script automatically fetches all past, in progress, and upcoming competitions from the configured sources, together with the matches that belong to that competition.
 The script will generate an .ics file for every competition separately, and a big .ics file containing all (men's/women's) matches.
 
-Do not import the .ics file manually, rather subscribe to the calendar so you'll receive updates.
+Do not import the .ics file manually, rather subscribe to the calendar, so you'll receive updates.
 The script will append a checkmark and the final score to matches that have been completed.
 
 ## Getting started
