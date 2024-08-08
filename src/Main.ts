@@ -2,7 +2,6 @@ import {CompetitionFetcher} from "./FIH/CompetitionFetcher.js";
 import {MatchFetcher} from "./FIH/MatchFetcher.js";
 import {ICS} from "./ICS.js";
 import {Competition} from "./Competition.js";
-import * as fs from "node:fs/promises";
 
 export class Main {
     /**
@@ -21,7 +20,10 @@ export class Main {
         }
 
         await Promise.all(promises);
-        await this.createTotalICS(Array.from(competitions.values()));
+        const allMatches = Array.from(competitions.values());
+        await this.createTotalICS(allMatches);
+        await this.createGenderTotalICS(allMatches, "M");
+        await this.createGenderTotalICS(allMatches, "W");
     }
 
     /**
@@ -33,6 +35,20 @@ export class Main {
         const matches = competitions.map(e => e.getMatches()).flat();
         const path = "all-matches";
         await ICS.writeToFile(ICS.calendarToICS("FIH - All matches", "fih-all", matches), path);
+    }
+
+    /**
+     * Create one big ICS file of all matches of a specific gender.
+     * @param competitions All competitions to include.
+     * @param gender The gender to create.
+     * @private
+     */
+    private async createGenderTotalICS(competitions: Competition[], gender: "M" | "W") {
+        let matches = competitions.map(e => e.getMatches()).flat();
+        matches = matches.filter(m => m.getGender() === gender);
+        const path = `${gender === "M" ? "mens" : "womens"}-matches`;
+        await ICS.writeToFile(ICS.calendarToICS(
+            `FIH - ${gender === "M" ? "Men's" : "Women's"} matches`, path, matches), path);
     }
 
     /**
