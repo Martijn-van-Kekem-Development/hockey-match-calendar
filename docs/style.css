@@ -23,12 +23,39 @@ h1 {
     margin-bottom: 0.5rem;
 }
 
+h2 {
+    margin-bottom: 0.8rem;
+}
+
 .links {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
     text-align: center;
     flex-wrap: wrap;
+}
+
+.origin-buttons {
+    list-style: none;
+    display: flex;
+    margin: 0 0 0.5rem 0;
+    padding: 0;
+    gap: 0.5rem;
+}
+
+.origin-buttons li button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: rgb(63 81 181 / 10%);
+    border: none;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+
+.origin-buttons li.selected button {
+    background: rgb(63 81 181 / 35%)
 }
 
 a {

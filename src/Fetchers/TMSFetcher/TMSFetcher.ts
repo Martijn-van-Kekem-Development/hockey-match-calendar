@@ -25,11 +25,12 @@ export class TMSFetcher extends Fetcher {
 
     /**
      * Constructor for TMSFetcher.
+     * @param id The id of this fetcher.
      * @param name The name of this fetcher.
      * @param baseURL The base URL of the TMS system.
      */
-    constructor(name: string, baseURL: string) {
-        super(name, baseURL);
+    constructor(id: string, name: string, baseURL: string) {
+        super(id, name, baseURL);
 
         this.competitionFetcher = new TMSCompetitionFetcher(this);
         this.matchFetcher = new TMSMatchFetcher(this);
@@ -75,7 +76,7 @@ export class TMSFetcher extends Fetcher {
      * @override
      */
     async fetchCompetitions(): Promise<Map<string, Competition>> {
-        return await this.competitionFetcher.fetch("all", "1678");
+        return await this.competitionFetcher.fetch("all", 2024);
     }
 
     /**

@@ -1,5 +1,6 @@
 import {Competition} from "../Objects/Competition.js";
 import {Match} from "../Objects/Match.js";
+import {ICS} from "../ICS.js";
 
 export abstract class Fetcher {
     /**
@@ -9,6 +10,12 @@ export abstract class Fetcher {
     protected baseURL: string;
 
     /**
+     * The id of this fetcher.
+     * @protected
+     */
+    protected id: string;
+
+    /**
      * The name of this fetcher.
      * @protected
      */
@@ -16,12 +23,16 @@ export abstract class Fetcher {
 
     /**
      * The base URL for this fetcher.
+     * @param id The id of this fetcher.
      * @param name The name of this fetcher.
      * @param baseURL The base URL.
      */
-    protected constructor(name: string, baseURL: string) {
+    protected constructor(id: string, name: string, baseURL: string) {
+        this.id = id;
         this.name = name;
         this.baseURL = baseURL;
+
+        ICS.addFetcher(this);
     }
 
     /**
@@ -36,6 +47,13 @@ export abstract class Fetcher {
      */
     public getName(): string {
         return this.name;
+    }
+
+    /**
+     * Get the id of this fetcher.
+     */
+    public getID(): string {
+        return this.id;
     }
 
     /**

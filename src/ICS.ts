@@ -7,7 +7,25 @@ export class ICS {
      * The stored file paths.
      * @private
      */
-    private static filePaths: Record<string, Metadata[]> = {};
+    private static filePaths: Record<string, FetcherData> = {};
+
+    /**
+     * The total file paths.
+     * @private
+     */
+    private static totalPaths: Metadata[] = [];
+
+    /**
+     * Add a new fetcher.
+     * @param fetcher The fetcher to add.
+     */
+    public static addFetcher(fetcher: Fetcher) {
+        this.filePaths[fetcher.getID()] = {
+            name: fetcher.getName(),
+            id: fetcher.getID(),
+            paths: []
+        };
+    }
 
     /**
      * Write the ICS string to a file.
@@ -23,10 +41,12 @@ export class ICS {
         await fs.mkdir(outputFolder, {recursive: true});
         await fs.writeFile(outputFile, ics, {flag: "w+"});
 
-        const fetcherName = fetcher === null ? "total" : fetcher.getName();
-        if (typeof this.filePaths[fetcherName] === "undefined") this.filePaths[fetcherName] = [];
-        this.filePaths[fetcherName]
-            .push({name: title, path: outputFile.split("/").slice(1).join("/"), ...metadata})
+        const pathArray = fetcher === null ? this.totalPaths : this.filePaths[fetcher.getID()].paths;
+        pathArray.push({
+            name: title,
+            path: outputFile.split("/").slice(1).join("/"),
+            ...metadata
+        });
     }
 
     /**
@@ -35,7 +55,10 @@ export class ICS {
     public static async storeFilePaths() {
         await fs.writeFile("docs/files.json", JSON.stringify({
             lastUpdate: (new Date()).getTime(),
-            paths: this.filePaths
+            total: this.totalPaths,
+            origins: {
+                ...this.filePaths
+            }
         }));
     }
 
@@ -108,6 +131,12 @@ export class ICS {
 
         return parsed.join("\r\n");
     }
+}
+
+export interface FetcherData {
+    id: string,
+    name: string,
+    paths: Metadata[]
 }
 
 export interface Metadata {
