@@ -1,0 +1,32 @@
+html,body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: "Arial", sans-serif;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+table {
+    text-align: left;
+    width: 100%;
+}
+
+table tr th,
+table tr td {
+    padding: 0.3rem 0.2rem;
+    white-space: nowrap;
+}
+
+
+table tr th:nth-child(2),
+table tr td:nth-child(2) {
+    width: 10rem;
+}

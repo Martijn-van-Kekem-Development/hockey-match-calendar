@@ -6,27 +6,31 @@ export class ICS {
      * The stored file paths.
      * @private
      */
-    private static filePaths: {name: string, url: string}[] = [];
+    private static filePaths: {name: string, url: string, type: string}[] = [];
+
     /**
      * Write the ICS string to a file.
      * @param ics The ICS content.
      * @param title The ICS title.
      * @param fileName The file name without extension.
      */
-    public static async writeToFile(ics: string, title: string, fileName: string) {
+    public static async writeToFile(ics: string, title: string, fileName: string, type: "total" | "competition") {
         const outputFile = `docs/ics/${fileName}.ics`;
         const outputFolder = outputFile.split("/").slice(0, -1).join("/");
         await fs.mkdir(outputFolder, {recursive: true});
         await fs.writeFile(outputFile, ics, {flag: "w+"});
 
-        this.filePaths.push({name: title, url: outputFile})
+        this.filePaths.push({name: title, url: outputFile, type})
     }
 
     /**
      * Store the file paths in a JSON file.
      */
     public static async storeFilePaths() {
-        await fs.writeFile("docs/files.json", JSON.stringify(this.filePaths));
+        await fs.writeFile("docs/files.json", JSON.stringify({
+            lastUpdate: (new Date()).getTime(),
+            paths: this.filePaths
+        }));
     }
 
     /**
