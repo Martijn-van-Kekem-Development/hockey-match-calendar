@@ -3,6 +3,8 @@ name: Auto update calendar
 on:
   schedule:
     - cron: "0 * * * *"
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
