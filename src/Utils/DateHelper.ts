@@ -15,6 +15,6 @@ export class DateHelper {
      * @param date The date
      */
     static toICS(date: Moment) {
-        return date.toISOString(false).split(".")[0] + "Z";
+        return (date.toISOString(false).split(".")[0] + "Z").replaceAll(/[\-:]/g, "");
     }
 }
