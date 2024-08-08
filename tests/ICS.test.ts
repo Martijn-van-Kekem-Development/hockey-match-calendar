@@ -14,6 +14,7 @@ describe('ICS class', () => {
         expect(outputLines[1].startsWith(" ")).toBe(true);
         expect(outputLines[2].startsWith(" ")).toBe(true);
         expect(outputLines[3].startsWith(" ")).toBe(false);
+
         for (let line of outputLines) {
             expect(line.length).toBeLessThanOrEqual(75);
         }
