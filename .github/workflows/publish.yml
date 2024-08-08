@@ -38,7 +38,7 @@ jobs:
         run: echo "today=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "calendar updates on ${{ env.today }} (GMT)"
+          commit_message: "Automatic calendar update on ${{ env.today }} (GMT)"
           commit_author: "GitHub Actions <actions@noreply.github.com>"
           commit_user_name: "GitHub Actions"
           commit_user_email: "actions@noreply.github.com"
