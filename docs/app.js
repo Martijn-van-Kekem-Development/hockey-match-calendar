@@ -1,3 +1,17 @@
+async function copyURL(evt) {
+    evt.preventDefault();
+    await navigator.clipboard.writeText(evt.target.href);
+
+    // Temporarily change text to a check mark to indicate success.
+    const currentText = evt.target.textContent;
+    evt.target.textContent = "Copied!";
+    evt.target.classList.add("copied");
+    setTimeout(() => {
+        evt.target.textContent = currentText
+        evt.target.classList.remove("copied");
+    }, 1500);
+}
+
 window.addEventListener("DOMContentLoaded", async () => {
     const files = await fetch("files.json");
     const data = await files.text();
@@ -21,7 +35,11 @@ window.addEventListener("DOMContentLoaded", async () => {
         tableRow.append(matchesCol);
 
         let urlCol = document.createElement("td");
-        urlCol.innerHTML = `<a href="${row.path}">Download</a>`;
+        let copyEl = document.createElement("a");
+        copyEl.href = row.path;
+        copyEl.addEventListener("click", e => copyURL(e));
+        copyEl.textContent = "Copy URL";
+        urlCol.append(copyEl);
         tableRow.append(urlCol);
 
         (row.type === "total" ? allContainer : compContainer).append(tableRow);

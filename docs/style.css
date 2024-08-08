@@ -24,6 +24,10 @@ h1, p {
      color: #3F51B5;
  }
 
+ a.copied {
+     color: #4CAF50;
+ }
+
  a:visited {
      color: #3F51B5;
  }
