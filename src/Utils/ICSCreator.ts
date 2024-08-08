@@ -48,7 +48,7 @@ export class ICSCreator {
      * @param competition The competition.
      */
     public static async createCompetitionICS(competition: Competition) {
-        const path = competition.getFetcher().getID() + "/per-competition/" + competition.getLowercaseName();
+        const path = competition.getFetcher().getID() + "/per-competition/" + `${competition.getID()}-${competition.getLowercaseName()}`;
         const title = competition.getName();
 
         console.info(`[TMSFetcher] Writing ${competition.getMatches().length} matches to ${path}.`);
