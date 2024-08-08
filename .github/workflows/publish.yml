@@ -39,6 +39,7 @@ jobs:
           commit_message: "calendar updates on ${{ env.today }}"
 
   deploy:
+    needs: run
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
