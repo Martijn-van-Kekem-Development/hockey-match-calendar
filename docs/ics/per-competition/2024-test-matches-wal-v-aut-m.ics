@@ -16,15 +16,15 @@ UID:20024
 DTSTAMP;TZID=UTC:20240808T160000
 DTSTART;TZID=UTC:20240808T160000
 DTEND;TZID=UTC:20240808T180000
-SUMMARY:🏑 TEST M01 | WAL - AUT
+SUMMARY:✅ TEST M01 | WAL - AUT
 LOCATION:Pitch 1 | Cardiff, Wales
-DESCRIPTION:WAL - AUT\nGender: Men\nEvent: 2024 Test Matches WAL v AUT (M)\
- n\nMatch link: https://tms.fih.ch/matches/20024\nEvent link: https://tms.fi
- h.ch/competitions/1686
-X-ALT-DESC;FMTTYPE=text/html:WAL - AUT<br>Gender: Men<br>Event: 2024 Test M
- atches WAL v AUT (M)<br><br><a href="https://tms.fih.ch/matches/20024">View
-  match details</a><br><a href="https://tms.fih.ch/competitions/1686">View c
- ompetition details</a>
+DESCRIPTION:WAL - AUT\nFinal score: 5 - 1\nGender: Men\nEvent: 2024 Test Ma
+ tches WAL v AUT (M)\n\nMatch link: https://tms.fih.ch/matches/20024\nEvent 
+ link: https://tms.fih.ch/competitions/1686
+X-ALT-DESC;FMTTYPE=text/html:WAL - AUT<br>Final score: 5 - 1<br>Gender: Men
+ <br>Event: 2024 Test Matches WAL v AUT (M)<br><br><a href="https://tms.fih.
+ ch/matches/20024">View match details</a><br><a href="https://tms.fih.ch/com
+ petitions/1686">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:20025
