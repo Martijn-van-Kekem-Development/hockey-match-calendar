@@ -17,12 +17,18 @@ window.addEventListener("DOMContentLoaded", async () => {
     const data = await files.text();
     let json = JSON.parse(data);
 
+    // Clear current table
     const allContainer = document.getElementById("all_matches_body");
     const compContainer = document.getElementById("competition_body");
     allContainer.innerHTML = "";
     compContainer.innerHTML = "";
 
-    const paths = json.paths.sort((a, b) => a.name.toString().localeCompare(b.name));
+    // Sort items
+    const paths = json.paths.sort((a, b) =>
+        ((a.index ?? 0) - (b.index ?? 0)) ||
+        a.name.toString().localeCompare(b.name)
+    );
+
     for (let row of paths) {
         let tableRow = document.createElement("tr");
 

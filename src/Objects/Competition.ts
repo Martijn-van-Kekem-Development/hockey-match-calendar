@@ -7,7 +7,13 @@ export class Competition {
      * The fetcher that received this competition.
      * @private
      */
-    private fetcher: Fetcher;
+    private readonly fetcher: Fetcher;
+
+    /**
+     * The competition index.
+     * @private
+     */
+    private readonly index: number;
 
     /**
      * The name of this event.
@@ -42,9 +48,11 @@ export class Competition {
     /**
      * Constructor for Competition.
      * @param fetcher The fetcher that fetched this competition.
+     * @param index The competition index.
      */
-    constructor(fetcher: Fetcher) {
+    constructor(fetcher: Fetcher, index: number) {
         this.fetcher = fetcher;
+        this.index = index;
     }
 
     /**
@@ -135,5 +143,12 @@ export class Competition {
      */
     public getFetcher(): Fetcher {
         return this.fetcher;
+    }
+
+    /**
+     * Get the competition index.
+     */
+    public getIndex(): number {
+        return this.index;
     }
 }

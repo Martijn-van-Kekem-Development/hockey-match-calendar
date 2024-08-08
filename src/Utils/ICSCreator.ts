@@ -41,6 +41,7 @@ export class ICSCreator {
         const title = competition.getName();
         await ICS.writeToFile(ICS.calendarToICS(title, competition.getID(), competition.getMatches()), title, path, {
             type: "competition",
+            index: competition.getIndex(),
             count: competition.getMatches().length
         });
     }

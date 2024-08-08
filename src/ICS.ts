@@ -113,6 +113,7 @@ export class ICS {
 export interface Metadata {
     name?: string,
     type?: "total" | "competition",
+    index?: number,
     path?: string,
     count?: number
 

@@ -29,6 +29,7 @@ export class TMSCompetitionFetcher {
         let page = 1;
         const competitions: Map<string, Competition> = new Map();
 
+        let index = 0;
         fetchLoop:
             while (true) {
                 // Get data from TMS.
@@ -43,8 +44,8 @@ export class TMSCompetitionFetcher {
                 if (rows.length === 1 && rows[0].innerText.trim() === "No results") break;
 
                 // Create competition from every row.
-                for (const row of rows) {
-                    const item = this.createCompetition(row);
+                for (let row of rows) {
+                    const item = this.createCompetition(row, index++);
 
                     // Check if we need to stop
                     if ((type === "previous" || type === "all") && item.getID() === stopID) break fetchLoop;
@@ -62,9 +63,10 @@ export class TMSCompetitionFetcher {
     /**
      * Create a competition object from an FIH row.
      * @param row
+     * @param index
      */
-    public createCompetition(row: HTMLElement): Competition {
-        const object = new Competition(this.fetcher);
+    public createCompetition(row: HTMLElement, index: number): Competition {
+        const object = new Competition(this.fetcher, index);
 
         const link = row.querySelector("td:nth-child(2) a[href]");
 
