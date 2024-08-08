@@ -1,0 +1,96 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//mvk-development//fih-event-calendar//1632//EN
+NAME:EuroHockey U21 Championship II-B Women 2024
+X-WR-CALNAME:EuroHockey U21 Championship II-B Women 2024
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:19523
+DTSTAMP:2024-07-16T12:00:00Z
+DTSTART:2024-07-16T12:00:00Z
+DTEND:2024-07-16T14:00:00Z
+SUMMARY:✅ U21C W01 | SCO - UKR
+LOCATION:Pitch 1 | Konya, Türkiye
+DESCRIPTION:SCO - UKR \nFinal score: 3 - 1\nGender: Women\nEvent: EuroHocke
+ y U21 Championship II-B Women 2024\n\nMatch link: https://tms.fih.ch/matche
+ s/19523\nEvent link: https://tms.fih.ch/competitions/1632
+END:VEVENT
+BEGIN:VEVENT
+UID:19524
+DTSTAMP:2024-07-16T14:15:00Z
+DTSTART:2024-07-16T14:15:00Z
+DTEND:2024-07-16T16:15:00Z
+SUMMARY:✅ U21C W02 | POL - TUR
+LOCATION:Pitch 1 | Konya, Türkiye
+DESCRIPTION:POL - TUR \nFinal score: 2 - 1\nGender: Women\nEvent: EuroHocke
+ y U21 Championship II-B Women 2024\n\nMatch link: https://tms.fih.ch/matche
+ s/19524\nEvent link: https://tms.fih.ch/competitions/1632
+END:VEVENT
+BEGIN:VEVENT
+UID:19525
+DTSTAMP:2024-07-17T12:00:00Z
+DTSTART:2024-07-17T12:00:00Z
+DTEND:2024-07-17T14:00:00Z
+SUMMARY:✅ U21C W03 | POL - SCO 
+LOCATION:Pitch 1 | Konya, Türkiye
+DESCRIPTION:POL - SCO \nFinal score: 1 - 2\nGender: Women\nEvent: EuroHocke
+ y U21 Championship II-B Women 2024\n\nMatch link: https://tms.fih.ch/matche
+ s/19525\nEvent link: https://tms.fih.ch/competitions/1632
+END:VEVENT
+BEGIN:VEVENT
+UID:19526
+DTSTAMP:2024-07-17T14:15:00Z
+DTSTART:2024-07-17T14:15:00Z
+DTEND:2024-07-17T16:15:00Z
+SUMMARY:✅ U21C W04 | UKR - TUR
+LOCATION:Pitch 1 | Konya, Türkiye
+DESCRIPTION:UKR - TUR \nFinal score: 5 - 2\nGender: Women\nEvent: EuroHocke
+ y U21 Championship II-B Women 2024\n\nMatch link: https://tms.fih.ch/matche
+ s/19526\nEvent link: https://tms.fih.ch/competitions/1632
+END:VEVENT
+BEGIN:VEVENT
+UID:19527
+DTSTAMP:2024-07-19T06:00:00Z
+DTSTART:2024-07-19T06:00:00Z
+DTEND:2024-07-19T08:00:00Z
+SUMMARY:✅ U21C W05 | UKR - POL
+LOCATION:Pitch 1 | Konya, Türkiye
+DESCRIPTION:UKR - POL \nFinal score: 0 - 0\nGender: Women\nEvent: EuroHocke
+ y U21 Championship II-B Women 2024\n\nMatch link: https://tms.fih.ch/matche
+ s/19527\nEvent link: https://tms.fih.ch/competitions/1632
+END:VEVENT
+BEGIN:VEVENT
+UID:19528
+DTSTAMP:2024-07-19T08:15:00Z
+DTSTART:2024-07-19T08:15:00Z
+DTEND:2024-07-19T10:15:00Z
+SUMMARY:✅ U21C W06 | SCO - TUR
+LOCATION:Pitch 1 | Konya, Türkiye
+DESCRIPTION:SCO - TUR \nFinal score: 4 - 0\nGender: Women\nEvent: EuroHocke
+ y U21 Championship II-B Women 2024\n\nMatch link: https://tms.fih.ch/matche
+ s/19528\nEvent link: https://tms.fih.ch/competitions/1632
+END:VEVENT
+BEGIN:VEVENT
+UID:19529
+DTSTAMP:2024-07-20T06:00:00Z
+DTSTART:2024-07-20T06:00:00Z
+DTEND:2024-07-20T08:00:00Z
+SUMMARY:✅ U21C W07 | POL - TUR
+LOCATION:Pitch 1 | Konya, Türkiye
+DESCRIPTION:POL - TUR \nFinal score: 4 - 1\nGender: Women\nEvent: EuroHocke
+ y U21 Championship II-B Women 2024\n\nMatch link: https://tms.fih.ch/matche
+ s/19529\nEvent link: https://tms.fih.ch/competitions/1632
+END:VEVENT
+BEGIN:VEVENT
+UID:19530
+DTSTAMP:2024-07-20T08:15:00Z
+DTSTART:2024-07-20T08:15:00Z
+DTEND:2024-07-20T10:15:00Z
+SUMMARY:✅ U21C W08 | SCO - UKR
+LOCATION:Pitch 1 | Konya, Türkiye
+DESCRIPTION:SCO - UKR \nFinal score: 1 - 0\nGender: Women\nEvent: EuroHocke
+ y U21 Championship II-B Women 2024\n\nMatch link: https://tms.fih.ch/matche
+ s/19530\nEvent link: https://tms.fih.ch/competitions/1632
+END:VEVENT
+END:VCALENDAR

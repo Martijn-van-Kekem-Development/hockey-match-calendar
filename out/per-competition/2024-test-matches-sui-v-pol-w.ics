@@ -1,0 +1,41 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//mvk-development//fih-event-calendar//1681//EN
+NAME:2024 Test Matches SUI v POL (W)
+X-WR-CALNAME:2024 Test Matches SUI v POL (W)
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:19996
+DTSTAMP:2024-08-02T19:30:00Z
+DTSTART:2024-08-02T19:30:00Z
+DTEND:2024-08-02T21:30:00Z
+SUMMARY:✅ TEST W01 | SUI - POL
+LOCATION:Pitch 1 | Lucerne
+DESCRIPTION:SUI - POL\nFinal score: 0 - 1\nGender: Women\nEvent: 2024 Test 
+ Matches SUI v POL (W)\n\nMatch link: https://tms.fih.ch/matches/19996\nEven
+ t link: https://tms.fih.ch/competitions/1681
+END:VEVENT
+BEGIN:VEVENT
+UID:19997
+DTSTAMP:2024-08-03T16:00:00Z
+DTSTART:2024-08-03T16:00:00Z
+DTEND:2024-08-03T18:00:00Z
+SUMMARY:✅ TEST W02 | SUI - POL
+LOCATION:Pitch 1 | Lucerne
+DESCRIPTION:SUI - POL\nFinal score: 0 - 3\nGender: Women\nEvent: 2024 Test 
+ Matches SUI v POL (W)\n\nMatch link: https://tms.fih.ch/matches/19997\nEven
+ t link: https://tms.fih.ch/competitions/1681
+END:VEVENT
+BEGIN:VEVENT
+UID:19998
+DTSTAMP:2024-08-04T11:00:00Z
+DTSTART:2024-08-04T11:00:00Z
+DTEND:2024-08-04T13:00:00Z
+SUMMARY:✅ TEST W03 | SUI - POL
+LOCATION:Pitch 1 | Lucerne
+DESCRIPTION:SUI - POL\nFinal score: 0 - 0\nGender: Women\nEvent: 2024 Test 
+ Matches SUI v POL (W)\n\nMatch link: https://tms.fih.ch/matches/19998\nEven
+ t link: https://tms.fih.ch/competitions/1681
+END:VEVENT
+END:VCALENDAR

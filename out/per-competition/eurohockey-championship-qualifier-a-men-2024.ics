@@ -1,0 +1,140 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//mvk-development//fih-event-calendar//1621//EN
+NAME:EuroHockey Championship Qualifier A Men 2024
+X-WR-CALNAME:EuroHockey Championship Qualifier A Men 2024
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:19665
+DTSTAMP:2024-08-22T09:00:00Z
+DTSTART:2024-08-22T09:00:00Z
+DTEND:2024-08-22T11:00:00Z
+SUMMARY:🏑 EHCQ M01 | UKR - LTU
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:UKR - LTU \nGender: Men\nEvent: EuroHockey Championship Qualifi
+ er A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19665\nEvent link: 
+ https://tms.fih.ch/competitions/1621
+END:VEVENT
+BEGIN:VEVENT
+UID:19666
+DTSTAMP:2024-08-22T11:15:00Z
+DTSTART:2024-08-22T11:15:00Z
+DTEND:2024-08-22T13:15:00Z
+SUMMARY:🏑 EHCQ M02 | SCO - CRO 
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:SCO - CRO \nGender: Men\nEvent: EuroHockey Championship Qualifi
+ er A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19666\nEvent link: 
+ https://tms.fih.ch/competitions/1621
+END:VEVENT
+BEGIN:VEVENT
+UID:19667
+DTSTAMP:2024-08-22T13:30:00Z
+DTSTART:2024-08-22T13:30:00Z
+DTEND:2024-08-22T15:30:00Z
+SUMMARY:🏑 EHCQ M03 | SUI - POR 
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:SUI - POR \nGender: Men\nEvent: EuroHockey Championship Qualifi
+ er A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19667\nEvent link: 
+ https://tms.fih.ch/competitions/1621
+END:VEVENT
+BEGIN:VEVENT
+UID:19668
+DTSTAMP:2024-08-22T15:45:00Z
+DTSTART:2024-08-22T15:45:00Z
+DTEND:2024-08-22T17:45:00Z
+SUMMARY:🏑 EHCQ M04 | AUT - HUN
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:AUT - HUN \nGender: Men\nEvent: EuroHockey Championship Qualifi
+ er A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19668\nEvent link: 
+ https://tms.fih.ch/competitions/1621
+END:VEVENT
+BEGIN:VEVENT
+UID:19669
+DTSTAMP:2024-08-23T13:30:00Z
+DTSTART:2024-08-23T13:30:00Z
+DTEND:2024-08-23T15:30:00Z
+SUMMARY:🏑 EHCQ M05 | Loser M1 - Loser M2 
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:Loser M1 - Loser M2 \nGender: Men\nEvent: EuroHockey Championsh
+ ip Qualifier A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19669\nEv
+ ent link: https://tms.fih.ch/competitions/1621
+END:VEVENT
+BEGIN:VEVENT
+UID:19670
+DTSTAMP:2024-08-23T15:45:00Z
+DTSTART:2024-08-23T15:45:00Z
+DTEND:2024-08-23T17:45:00Z
+SUMMARY:🏑 EHCQ M06 | Loser M4 - Loser M3 
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:Loser M4 - Loser M3 \nGender: Men\nEvent: EuroHockey Championsh
+ ip Qualifier A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19670\nEv
+ ent link: https://tms.fih.ch/competitions/1621
+END:VEVENT
+BEGIN:VEVENT
+UID:19671
+DTSTAMP:2024-08-24T10:00:00Z
+DTSTART:2024-08-24T10:00:00Z
+DTEND:2024-08-24T12:00:00Z
+SUMMARY:🏑 EHCQ M07 | Winner M1 - Winner M2 
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:Winner M1 - Winner M2 \nGender: Men\nEvent: EuroHockey Champion
+ ship Qualifier A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19671\n
+ Event link: https://tms.fih.ch/competitions/1621
+END:VEVENT
+BEGIN:VEVENT
+UID:19672
+DTSTAMP:2024-08-24T12:15:00Z
+DTSTART:2024-08-24T12:15:00Z
+DTEND:2024-08-24T14:15:00Z
+SUMMARY:🏑 EHCQ M08 | Winner M4 - Winner M3 
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:Winner M4 - Winner M3 \nGender: Men\nEvent: EuroHockey Champion
+ ship Qualifier A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19672\n
+ Event link: https://tms.fih.ch/competitions/1621
+END:VEVENT
+BEGIN:VEVENT
+UID:19673
+DTSTAMP:2024-08-25T07:15:00Z
+DTSTART:2024-08-25T07:15:00Z
+DTEND:2024-08-25T09:15:00Z
+SUMMARY:🏑 EHCQ M09 | Loser M5 - Loser M6 
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:Loser M5 - Loser M6 \nGender: Men\nEvent: EuroHockey Championsh
+ ip Qualifier A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19673\nEv
+ ent link: https://tms.fih.ch/competitions/1621
+END:VEVENT
+BEGIN:VEVENT
+UID:19674
+DTSTAMP:2024-08-25T09:30:00Z
+DTSTART:2024-08-25T09:30:00Z
+DTEND:2024-08-25T11:30:00Z
+SUMMARY:🏑 EHCQ M10 | Winner M5 - Winner M6 
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:Winner M5 - Winner M6 \nGender: Men\nEvent: EuroHockey Champion
+ ship Qualifier A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19674\n
+ Event link: https://tms.fih.ch/competitions/1621
+END:VEVENT
+BEGIN:VEVENT
+UID:19675
+DTSTAMP:2024-08-25T11:45:00Z
+DTSTART:2024-08-25T11:45:00Z
+DTEND:2024-08-25T13:45:00Z
+SUMMARY:🏑 EHCQ M11 | Loser SF2 - Loser SF1 
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:Loser SF2 - Loser SF1 \nGender: Men\nEvent: EuroHockey Champion
+ ship Qualifier A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19675\n
+ Event link: https://tms.fih.ch/competitions/1621
+END:VEVENT
+BEGIN:VEVENT
+UID:19676
+DTSTAMP:2024-08-25T14:00:00Z
+DTSTART:2024-08-25T14:00:00Z
+DTEND:2024-08-25T16:00:00Z
+SUMMARY:🏑 EHCQ M12 | Winner SF2 - Winner SF1 
+LOCATION:Pitch 1 | Vienna, Austria
+DESCRIPTION:Winner SF2 - Winner SF1 \nGender: Men\nEvent: EuroHockey Champi
+ onship Qualifier A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19676
+ \nEvent link: https://tms.fih.ch/competitions/1621
+END:VEVENT
+END:VCALENDAR

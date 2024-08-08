@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//mvk-development//fih-event-calendar//1623//EN
+NAME:EuroHockey Championship Qualifier A Women 2024
+X-WR-CALNAME:EuroHockey Championship Qualifier A Women 2024
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:19658
+DTSTAMP:2024-08-22T15:15:00Z
+DTSTART:2024-08-22T15:15:00Z
+DTEND:2024-08-22T17:15:00Z
+SUMMARY:🏑 EHCQ W01 | WAL - CRO 
+LOCATION:Pitch 1 | Glasgow, Scotland
+DESCRIPTION:WAL - CRO \nGender: Women\nEvent: EuroHockey Championship Quali
+ fier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19658\nEvent li
+ nk: https://tms.fih.ch/competitions/1623
+END:VEVENT
+BEGIN:VEVENT
+UID:19659
+DTSTAMP:2024-08-22T17:30:00Z
+DTSTART:2024-08-22T17:30:00Z
+DTEND:2024-08-22T19:30:00Z
+SUMMARY:🏑 EHCQ W02 | AUT - LTU
+LOCATION:Pitch 1 | Glasgow, Scotland
+DESCRIPTION:AUT - LTU \nGender: Women\nEvent: EuroHockey Championship Quali
+ fier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19659\nEvent li
+ nk: https://tms.fih.ch/competitions/1623
+END:VEVENT
+BEGIN:VEVENT
+UID:19660
+DTSTAMP:2024-08-23T17:30:00Z
+DTSTART:2024-08-23T17:30:00Z
+DTEND:2024-08-23T19:30:00Z
+SUMMARY:🏑 EHCQ W03 | Loser M1 - Loser M2 
+LOCATION:Pitch 1 | Glasgow, Scotland
+DESCRIPTION:Loser M1 - Loser M2 \nGender: Women\nEvent: EuroHockey Champion
+ ship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19660
+ \nEvent link: https://tms.fih.ch/competitions/1623
+END:VEVENT
+BEGIN:VEVENT
+UID:19661
+DTSTAMP:2024-08-24T11:00:00Z
+DTSTART:2024-08-24T11:00:00Z
+DTEND:2024-08-24T13:00:00Z
+SUMMARY:🏑 EHCQ W04 | CZE - Winner M1 
+LOCATION:Pitch 1 | Glasgow, Scotland
+DESCRIPTION:CZE - Winner M1 \nGender: Women\nEvent: EuroHockey Championship
+  Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19661\nEv
+ ent link: https://tms.fih.ch/competitions/1623
+END:VEVENT
+BEGIN:VEVENT
+UID:19662
+DTSTAMP:2024-08-24T13:15:00Z
+DTSTART:2024-08-24T13:15:00Z
+DTEND:2024-08-24T15:15:00Z
+SUMMARY:🏑 EHCQ W05 | SCO - Winner M2 
+LOCATION:Pitch 1 | Glasgow, Scotland
+DESCRIPTION:SCO - Winner M2 \nGender: Women\nEvent: EuroHockey Championship
+  Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19662\nEv
+ ent link: https://tms.fih.ch/competitions/1623
+END:VEVENT
+BEGIN:VEVENT
+UID:19663
+DTSTAMP:2024-08-25T10:00:00Z
+DTSTART:2024-08-25T10:00:00Z
+DTEND:2024-08-25T12:00:00Z
+SUMMARY:🏑 EHCQ W06 | Loser SF2 - Loser SF1 
+LOCATION:Pitch 1 | Glasgow, Scotland
+DESCRIPTION:Loser SF2 - Loser SF1 \nGender: Women\nEvent: EuroHockey Champi
+ onship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/196
+ 63\nEvent link: https://tms.fih.ch/competitions/1623
+END:VEVENT
+BEGIN:VEVENT
+UID:19664
+DTSTAMP:2024-08-25T12:15:00Z
+DTSTART:2024-08-25T12:15:00Z
+DTEND:2024-08-25T14:15:00Z
+SUMMARY:🏑 EHCQ W07 | Winner SF2 - Winner SF1 
+LOCATION:Pitch 1 | Glasgow, Scotland
+DESCRIPTION:Winner SF2 - Winner SF1 \nGender: Women\nEvent: EuroHockey Cham
+ pionship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/1
+ 9664\nEvent link: https://tms.fih.ch/competitions/1623
+END:VEVENT
+END:VCALENDAR

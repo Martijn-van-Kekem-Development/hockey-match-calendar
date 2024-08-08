@@ -1,0 +1,41 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//mvk-development//fih-event-calendar//1680//EN
+NAME:2024 Test Matches SUI v AUT (W)
+X-WR-CALNAME:2024 Test Matches SUI v AUT (W)
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:19993
+DTSTAMP:2024-07-26T19:30:00Z
+DTSTART:2024-07-26T19:30:00Z
+DTEND:2024-07-26T21:30:00Z
+SUMMARY:🏑 TEST W01 | SUI - AUT
+LOCATION:Pitch 1 | Lucerne
+DESCRIPTION:SUI - AUT\nGender: Women\nEvent: 2024 Test Matches SUI v AUT (W
+ )\n\nMatch link: https://tms.fih.ch/matches/19993\nEvent link: https://tms.
+ fih.ch/competitions/1680
+END:VEVENT
+BEGIN:VEVENT
+UID:19994
+DTSTAMP:2024-07-27T16:00:00Z
+DTSTART:2024-07-27T16:00:00Z
+DTEND:2024-07-27T18:00:00Z
+SUMMARY:🏑 TEST W02 | SUI - AUT
+LOCATION:Pitch 1 | Lucerne
+DESCRIPTION:SUI - AUT\nGender: Women\nEvent: 2024 Test Matches SUI v AUT (W
+ )\n\nMatch link: https://tms.fih.ch/matches/19994\nEvent link: https://tms.
+ fih.ch/competitions/1680
+END:VEVENT
+BEGIN:VEVENT
+UID:19995
+DTSTAMP:2024-07-28T11:00:00Z
+DTSTART:2024-07-28T11:00:00Z
+DTEND:2024-07-28T13:00:00Z
+SUMMARY:🏑 TEST W03 | SUI - AUT
+LOCATION:Pitch 1 | Lucerne
+DESCRIPTION:SUI - AUT\nGender: Women\nEvent: 2024 Test Matches SUI v AUT (W
+ )\n\nMatch link: https://tms.fih.ch/matches/19995\nEvent link: https://tms.
+ fih.ch/competitions/1680
+END:VEVENT
+END:VCALENDAR

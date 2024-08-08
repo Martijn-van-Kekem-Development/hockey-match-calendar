@@ -1,0 +1,107 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//mvk-development//fih-event-calendar//1624//EN
+NAME:EuroHockey Championship Qualifier B Women 2024
+X-WR-CALNAME:EuroHockey Championship Qualifier B Women 2024
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:19649
+DTSTAMP:2024-08-22T11:00:00Z
+DTSTART:2024-08-22T11:00:00Z
+DTEND:2024-08-22T13:00:00Z
+SUMMARY:🏑 EHCQ W01 | POL - TUR
+LOCATION:Pitch 1 | Douai, France
+DESCRIPTION:POL - TUR \nGender: Women\nEvent: EuroHockey Championship Quali
+ fier B Women 2024\n\nMatch link: https://tms.fih.ch/matches/19649\nEvent li
+ nk: https://tms.fih.ch/competitions/1624
+END:VEVENT
+BEGIN:VEVENT
+UID:19650
+DTSTAMP:2024-08-22T13:15:00Z
+DTSTART:2024-08-22T13:15:00Z
+DTEND:2024-08-22T15:15:00Z
+SUMMARY:🏑 EHCQ W02 | UKR - SUI 
+LOCATION:Pitch 1 | Douai, France
+DESCRIPTION:UKR - SUI \nGender: Women\nEvent: EuroHockey Championship Quali
+ fier B Women 2024\n\nMatch link: https://tms.fih.ch/matches/19650\nEvent li
+ nk: https://tms.fih.ch/competitions/1624
+END:VEVENT
+BEGIN:VEVENT
+UID:19651
+DTSTAMP:2024-08-22T15:30:00Z
+DTSTART:2024-08-22T15:30:00Z
+DTEND:2024-08-22T17:30:00Z
+SUMMARY:🏑 EHCQ W03 | FRA - LUX
+LOCATION:Pitch 1 | Douai, France
+DESCRIPTION:FRA - LUX \nGender: Women\nEvent: EuroHockey Championship Quali
+ fier B Women 2024\n\nMatch link: https://tms.fih.ch/matches/19651\nEvent li
+ nk: https://tms.fih.ch/competitions/1624
+END:VEVENT
+BEGIN:VEVENT
+UID:19652
+DTSTAMP:2024-08-23T15:30:00Z
+DTSTART:2024-08-23T15:30:00Z
+DTEND:2024-08-23T17:30:00Z
+SUMMARY:🏑 EHCQ W04 | Loser M3 - Loser M2 
+LOCATION:Pitch 1 | Douai, France
+DESCRIPTION:Loser M3 - Loser M2 \nGender: Women\nEvent: EuroHockey Champion
+ ship Qualifier B Women 2024\n\nMatch link: https://tms.fih.ch/matches/19652
+ \nEvent link: https://tms.fih.ch/competitions/1624
+END:VEVENT
+BEGIN:VEVENT
+UID:19653
+DTSTAMP:2024-08-24T10:00:00Z
+DTSTART:2024-08-24T10:00:00Z
+DTEND:2024-08-24T12:00:00Z
+SUMMARY:🏑 EHCQ W05 | ITA - Winner M1 
+LOCATION:Pitch 1 | Douai, France
+DESCRIPTION:ITA - Winner M1 \nGender: Women\nEvent: EuroHockey Championship
+  Qualifier B Women 2024\n\nMatch link: https://tms.fih.ch/matches/19653\nEv
+ ent link: https://tms.fih.ch/competitions/1624
+END:VEVENT
+BEGIN:VEVENT
+UID:19654
+DTSTAMP:2024-08-24T12:15:00Z
+DTSTART:2024-08-24T12:15:00Z
+DTEND:2024-08-24T14:15:00Z
+SUMMARY:🏑 EHCQ W06 | Winner M3 - Winner M2 
+LOCATION:Pitch 1 | Douai, France
+DESCRIPTION:Winner M3 - Winner M2 \nGender: Women\nEvent: EuroHockey Champi
+ onship Qualifier B Women 2024\n\nMatch link: https://tms.fih.ch/matches/196
+ 54\nEvent link: https://tms.fih.ch/competitions/1624
+END:VEVENT
+BEGIN:VEVENT
+UID:19655
+DTSTAMP:2024-08-25T07:30:00Z
+DTSTART:2024-08-25T07:30:00Z
+DTEND:2024-08-25T09:30:00Z
+SUMMARY:🏑 EHCQ W07 | Loser M1 - Winner M4 
+LOCATION:Pitch 1 | Douai, France
+DESCRIPTION:Loser M1 - Winner M4 \nGender: Women\nEvent: EuroHockey Champio
+ nship Qualifier B Women 2024\n\nMatch link: https://tms.fih.ch/matches/1965
+ 5\nEvent link: https://tms.fih.ch/competitions/1624
+END:VEVENT
+BEGIN:VEVENT
+UID:19656
+DTSTAMP:2024-08-25T09:45:00Z
+DTSTART:2024-08-25T09:45:00Z
+DTEND:2024-08-25T11:45:00Z
+SUMMARY:🏑 EHCQ W08 | Loser SF1 - Loser SF2 
+LOCATION:Pitch 1 | Douai, France
+DESCRIPTION:Loser SF1 - Loser SF2 \nGender: Women\nEvent: EuroHockey Champi
+ onship Qualifier B Women 2024\n\nMatch link: https://tms.fih.ch/matches/196
+ 56\nEvent link: https://tms.fih.ch/competitions/1624
+END:VEVENT
+BEGIN:VEVENT
+UID:19657
+DTSTAMP:2024-08-25T12:00:00Z
+DTSTART:2024-08-25T12:00:00Z
+DTEND:2024-08-25T14:00:00Z
+SUMMARY:🏑 EHCQ W09 | Winner SF1 - Winner SF2 
+LOCATION:Pitch 1 | Douai, France
+DESCRIPTION:Winner SF1 - Winner SF2 \nGender: Women\nEvent: EuroHockey Cham
+ pionship Qualifier B Women 2024\n\nMatch link: https://tms.fih.ch/matches/1
+ 9657\nEvent link: https://tms.fih.ch/competitions/1624
+END:VEVENT
+END:VCALENDAR
