@@ -1,0 +1,92 @@
+import {Match} from "../Match.js";
+import {HTMLElement, parse} from "node-html-parser";
+import {FIH} from "./FIH.js";
+import {Competition} from "../Competition.js";
+import {FIHAbbreviations} from "../Utils/FIHAbbreviations.js";
+import {aw} from "vitest/dist/chunks/reporters.C_zwCd4j.js";
+import {DateHelper} from "../Utils/DateHelper.js";
+
+export class MatchFetcher {
+    /**
+     * Get the matches in a given competition.
+     * @param competition The competition to get the matches for.
+     */
+    public static async fetch(competition: Competition) {
+        const matches: Map<String, Match> = new Map();
+
+        // Get data from TMS.
+        const data = await fetch(`${FIH.BASE_URL}/competitions/${competition.getID()}/matches`);
+        const html = parse(await data.text());
+        const rows = html.querySelectorAll(".tab-content table tbody tr");
+
+        // Check no results
+        if (rows.length === 1 && rows[0].innerText.trim() === "No results") return matches;
+
+        // Create match from every row.
+        for (const row of rows) {
+            const item = this.createMatch(competition, row);
+            matches.set(item.getID(), item);
+        }
+
+        return matches;
+    }
+
+    /**
+     * Create a match object from an FIH row.
+     * @param competition
+     * @param row
+     */
+    public static createMatch(competition: Competition, row: HTMLElement): Match {
+        const object = new Match();
+        object.setCompetition(competition);
+
+        const link = row.querySelector("td:nth-child(3) a[href]");
+        if (!link) throw new Error(`Can't fetch title from ${competition.getID()}`);
+        this.parseTitle(object, link.textContent.trim());
+
+        // Add match ID.
+        const id = link.getAttribute("href").split("/").slice(-1)[0] ?? null;
+        if (!id)
+            throw new Error("Failed to get ID for match.");
+        else
+            object.setID(id);
+
+        // Add match index
+        const index = row.querySelector("td:nth-child(1)");
+        object.setIndex(Number(index.textContent.trim()));
+
+        // Add gender
+        const gender = FIHAbbreviations.getGender(competition.getType());
+        object.setGender(gender);
+
+        // Add date and time
+        const dateString = row.querySelector("td:nth-child(2) span[data-timezone]");
+        object.setMatchDate(DateHelper.toUTC(dateString.textContent, dateString.getAttribute("data-timezone")));
+
+        // Add completed state
+        const status = row.querySelector("td:nth-child(5)");
+        if (status.textContent.toLowerCase().trim() === "official") {
+            object.setCompleted(true);
+            const score = row.querySelector("td:nth-child(4)");
+            object.setScore(score.textContent.trim());
+        }
+
+        // Add venue
+        const venue = row.querySelector("td:nth-child(6)");
+        object.setVenue(venue.textContent.trim());
+
+        return object;
+    }
+
+    /**
+     * Parse the title.
+     * @param object The match object.
+     * @param title The title to parse
+     */
+    static parseTitle(object: Match, title: string) {
+        const [, home, away, matchType] = title.match(/([A-Za-z0-9 \-]+) v ([A-Za-z0-9 \-]+)(?: \((.+)\))?/);
+        object.setHomeTeam(home);
+        object.setAwayTeam(away);
+        object.setType(matchType ?? "");
+    }
+}

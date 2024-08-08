@@ -1,0 +1,25 @@
+{
+  "name": "fih-event-calendar",
+  "version": "1.0.0",
+  "description": "Create an calendar file from upcoming and past matches on fih.hockey.",
+  "main": "src/Main.ts",
+  "scripts": {
+    "start": "node --import=tsx src/Main.ts",
+    "test": "vitest --run",
+    "create-cal": "tsx src/Main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Martijn-van-Kekem-Development/fih-event-calendar"
+  },
+  "devDependencies": {
+    "@types/node": "^22.1.0",
+    "tsx": "^4.16.5",
+    "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "country-to-iso": "^1.3.0",
+    "moment-timezone": "^0.5.45",
+    "node-html-parser": "^6.1.13"
+  }
+}
