@@ -1,9 +1,16 @@
 # FIH Event Calendar
-This script automatically pulls past, active and upcoming matches from TMS and converts them into neat ICS files to import into your own calendar.
+This script automatically pulls past, active, and upcoming matches from TMS and converts them into neat ICS files to import into your calendar.
 
-## How-to
-[This link](https://martijn-van-kekem-development.github.io/fih-event-calendar/) contains all downloadable ICS-files.
-The files get updated automatically every hour.
+## How does this work?
+Every hour, the script automatically fetches all past, in progress, and upcoming competitions from the FIH, together with the matches that belong to that competition.
+The script will generate an .ics file for every competition separately, and a big .ics file containing all (men's/women's) matches.
+
+Do not import the .ics file manually, rather subscribe to the calendar so you'll receive updates.
+The script will append a checkmark and the final score to matches that have been completed.
+
+## Getting started
+Visit [this link](https://martijn-van-kekem-development.github.io/fih-event-calendar/) to view all available .ics calendars.
+Copy the link of the calendar you want to subscribe to and add it to the calendar client of your liking.
 
 ## Support
-If you appreciate the work I've done on this project, and want to buy me a coffee, you can [click here](https://buymeacoffee.com/martijnvankekem).
+If you appreciate the work I've done on this project and want to buy me a coffee, you can [click here](https://buymeacoffee.com/martijnvankekem).
