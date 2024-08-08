@@ -106,7 +106,7 @@ UID:19671
 DTSTAMP:20240824T100000Z
 DTSTART:20240824T100000Z
 DTEND:20240824T120000Z
-SUMMARY:🏑 EHCQ M GF | Winner M1 - Winner M2
+SUMMARY:🏑 EHCQ M07 | Winner M1 - Winner M2
 LOCATION:Pitch 1 | Vienna, Austria
 DESCRIPTION:Winner M1 - Winner M2\nGender: Men\nEvent: EuroHockey Champions
  hip Qualifier A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19671\nE
@@ -121,7 +121,7 @@ UID:19672
 DTSTAMP:20240824T121500Z
 DTSTART:20240824T121500Z
 DTEND:20240824T141500Z
-SUMMARY:🏑 EHCQ M GF | Winner M4 - Winner M3
+SUMMARY:🏑 EHCQ M08 | Winner M4 - Winner M3
 LOCATION:Pitch 1 | Vienna, Austria
 DESCRIPTION:Winner M4 - Winner M3\nGender: Men\nEvent: EuroHockey Champions
  hip Qualifier A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19672\nE
@@ -286,7 +286,7 @@ UID:19307
 DTSTAMP:20240824T110000Z
 DTSTART:20240824T110000Z
 DTEND:20240824T130000Z
-SUMMARY:🏑 EHCQ M GF | Winner Match 1 - Winner Match 2
+SUMMARY:🏑 EHCQ M07 | Winner Match 1 - Winner Match 2
 LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:Winner Match 1 - Winner Match 2\nGender: Men\nEvent: EuroHockey
   Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matche
@@ -301,7 +301,7 @@ UID:19308
 DTSTAMP:20240824T131500Z
 DTSTART:20240824T131500Z
 DTEND:20240824T151500Z
-SUMMARY:🏑 EHCQ M GF | Winner Match 4 - Winner Match 3
+SUMMARY:🏑 EHCQ M08 | Winner Match 4 - Winner Match 3
 LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:Winner Match 4 - Winner Match 3\nGender: Men\nEvent: EuroHockey
   Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matche
@@ -1156,7 +1156,7 @@ UID:19566
 DTSTAMP:20240719T144500Z
 DTSTART:20240719T144500Z
 DTEND:20240719T164500Z
-SUMMARY:✅ U21C M GF | NED - GER
+SUMMARY:✅ U21C M SF | NED - GER
 LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:NED - GER\nFinal score: 3 - 2\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19566\nE
@@ -1186,7 +1186,7 @@ UID:19564
 DTSTAMP:20240719T170000Z
 DTSTART:20240719T170000Z
 DTEND:20240719T190000Z
-SUMMARY:✅ U21C M GF | BEL - ESP
+SUMMARY:✅ U21C M SF | BEL - ESP
 LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:BEL - ESP\nFinal score: 2 - 3\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19564\nE
