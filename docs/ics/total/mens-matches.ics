@@ -541,15 +541,15 @@ UID:20027
 DTSTAMP;TZID=UTC:20240808T180000
 DTSTART;TZID=UTC:20240808T180000
 DTEND;TZID=UTC:20240808T200000
-SUMMARY:🏑 TEST M01 | POL - SCO
+SUMMARY:✅ TEST M01 | POL - SCO
 LOCATION: | Poznań, Poland
-DESCRIPTION:POL - SCO\nGender: Men\nEvent: 2024 Test Matches POL v SCO v CZ
- E (M)\n\nMatch link: https://tms.fih.ch/matches/20027\nEvent link: https://
- tms.fih.ch/competitions/1687
-X-ALT-DESC;FMTTYPE=text/html:POL - SCO<br>Gender: Men<br>Event: 2024 Test M
- atches POL v SCO v CZE (M)<br><br><a href="https://tms.fih.ch/matches/20027
- ">View match details</a><br><a href="https://tms.fih.ch/competitions/1687">
- View competition details</a>
+DESCRIPTION:POL - SCO\nFinal score: 2 - 2 (3 - 5 SO)\nGender: Men\nEvent: 2
+ 024 Test Matches POL v SCO v CZE (M)\n\nMatch link: https://tms.fih.ch/matc
+ hes/20027\nEvent link: https://tms.fih.ch/competitions/1687
+X-ALT-DESC;FMTTYPE=text/html:POL - SCO<br>Final score: 2 - 2 (3 - 5 SO)<br>
+ Gender: Men<br>Event: 2024 Test Matches POL v SCO v CZE (M)<br><br><a href=
+ "https://tms.fih.ch/matches/20027">View match details</a><br><a href="https
+ ://tms.fih.ch/competitions/1687">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:20028
