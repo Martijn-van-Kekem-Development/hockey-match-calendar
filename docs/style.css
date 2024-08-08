@@ -19,18 +19,28 @@ h1, p {
     text-align: center;
 }
 
- a {
-     text-decoration: none;
-     color: #3F51B5;
- }
+h1 {
+    margin-bottom: 0.5rem;
+}
 
- a.copied {
-     color: #4CAF50;
- }
+.links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
 
- a:visited {
-     color: #3F51B5;
- }
+a {
+    text-decoration: none;
+    color: #3F51B5;
+}
+
+a.copied {
+    color: #4CAF50;
+}
+
+a:visited {
+    color: #3F51B5;
+}
 
 table {
     text-align: left;
@@ -39,7 +49,7 @@ table {
 
 table tr th,
 table tr td {
-    padding: 0.4rem 0.2rem;
+    padding: 0.4rem;
 }
 
 table tr th:nth-child(1),
@@ -48,14 +58,10 @@ table tr td:nth-child(1) {
 }
 
 table tr th:nth-child(2),
-table tr td:nth-child(2) {
-    text-align: center;
-}
-
-table tr th:nth-child(2),
 table tr td:nth-child(2),
 table tr th:nth-child(3),
 table tr td:nth-child(3) {
     width: 0;
+    text-align: center;
     white-space: nowrap;
 }
