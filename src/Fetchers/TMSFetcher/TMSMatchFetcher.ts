@@ -98,7 +98,7 @@ export class TMSMatchFetcher {
      */
     parseTitle(object: Match, title: string) {
         const [, home, away, matchType] =
-            title.match(/([A-Za-z0-9 \-]+) v ([A-Za-z0-9 \-]+)(?: \((.+)\))?/);
+            title.match(/([A-Za-z0-9 \-]+) v ([A-Za-z0-9 \-]+)(?: \((.+)\))?$/);
 
         object.setHomeTeam(home);
         object.setAwayTeam(away);

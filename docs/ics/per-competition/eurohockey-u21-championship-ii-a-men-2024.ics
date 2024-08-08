@@ -10,164 +10,164 @@ UID:19508
 DTSTAMP:20240715T070000Z
 DTSTART:20240715T070000Z
 DTEND:20240715T090000Z
-SUMMARY:✅ U21C M01 | AUT - LUX
+SUMMARY:✅ U21C M A | AUT - LUX
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:AUT - LUX \nFinal score: 13 - 0\nGender: Men\nEvent: EuroHockey
-  U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/1
- 9508\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:AUT - LUX\nFinal score: 13 - 0\nGender: Men\nEvent: EuroHockey 
+ U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
+ 508\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19509
 DTSTAMP:20240715T091500Z
 DTSTART:20240715T091500Z
 DTEND:20240715T111500Z
-SUMMARY:✅ U21C M02 | ITA - UKR
+SUMMARY:✅ U21C M A | ITA - UKR
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:ITA - UKR \nFinal score: 1 - 0\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 509\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:ITA - UKR\nFinal score: 1 - 0\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 09\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19510
 DTSTAMP:20240715T113000Z
 DTSTART:20240715T113000Z
 DTEND:20240715T133000Z
-SUMMARY:✅ U21C M03 | POL - LTU
+SUMMARY:✅ U21C M A | POL - LTU
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:POL - LTU \nFinal score: 14 - 5\nGender: Men\nEvent: EuroHockey
-  U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/1
- 9510\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:POL - LTU\nFinal score: 14 - 5\nGender: Men\nEvent: EuroHockey 
+ U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
+ 510\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19511
 DTSTAMP:20240716T123000Z
 DTSTART:20240716T123000Z
 DTEND:20240716T143000Z
-SUMMARY:✅ U21C M04 | AUT - LTU
+SUMMARY:✅ U21C M A | AUT - LTU
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:AUT - LTU \nFinal score: 6 - 1\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 511\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:AUT - LTU\nFinal score: 6 - 1\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 11\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19512
 DTSTAMP:20240716T144500Z
 DTSTART:20240716T144500Z
 DTEND:20240716T164500Z
-SUMMARY:✅ U21C M05 | LUX - ITA
+SUMMARY:✅ U21C M A | LUX - ITA
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:LUX - ITA \nFinal score: 0 - 4\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 512\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:LUX - ITA\nFinal score: 0 - 4\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 12\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19513
 DTSTAMP:20240716T170000Z
 DTSTART:20240716T170000Z
 DTEND:20240716T190000Z
-SUMMARY:✅ U21C M06 | POL - UKR
+SUMMARY:✅ U21C M A | POL - UKR
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:POL - UKR \nFinal score: 3 - 2\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 513\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:POL - UKR\nFinal score: 3 - 2\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 13\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19514
 DTSTAMP:20240717T123000Z
 DTSTART:20240717T123000Z
 DTEND:20240717T143000Z
-SUMMARY:✅ U21C M07 | ITA - AUT
+SUMMARY:✅ U21C M A | ITA - AUT
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:ITA - AUT \nFinal score: 5 - 6\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 514\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:ITA - AUT\nFinal score: 5 - 6\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 14\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19515
 DTSTAMP:20240717T144500Z
 DTSTART:20240717T144500Z
 DTEND:20240717T164500Z
-SUMMARY:✅ U21C M08 | UKR - LTU
+SUMMARY:✅ U21C M A | UKR - LTU
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:UKR - LTU \nFinal score: 5 - 1\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 515\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:UKR - LTU\nFinal score: 5 - 1\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 15\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19516
 DTSTAMP:20240717T170000Z
 DTSTART:20240717T170000Z
 DTEND:20240717T190000Z
-SUMMARY:✅ U21C M09 | LUX - POL
+SUMMARY:✅ U21C M A | LUX - POL
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:LUX - POL \nFinal score: 1 - 13\nGender: Men\nEvent: EuroHockey
-  U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/1
- 9516\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:LUX - POL\nFinal score: 1 - 13\nGender: Men\nEvent: EuroHockey 
+ U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
+ 516\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19517
 DTSTAMP:20240719T070000Z
 DTSTART:20240719T070000Z
 DTEND:20240719T090000Z
-SUMMARY:✅ U21C M10 | UKR - LUX
+SUMMARY:✅ U21C M A | UKR - LUX
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:UKR - LUX \nFinal score: 5 - 1\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 517\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:UKR - LUX\nFinal score: 5 - 1\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 17\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19518
 DTSTAMP:20240719T091500Z
 DTSTART:20240719T091500Z
 DTEND:20240719T111500Z
-SUMMARY:✅ U21C M11 | LTU - ITA
+SUMMARY:✅ U21C M A | LTU - ITA
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:LTU - ITA \nFinal score: 4 - 7\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 518\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:LTU - ITA\nFinal score: 4 - 7\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 18\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19519
 DTSTAMP:20240719T113000Z
 DTSTART:20240719T113000Z
 DTEND:20240719T133000Z
-SUMMARY:✅ U21C M12 | POL - AUT
+SUMMARY:✅ U21C M A | POL - AUT
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:POL - AUT \nFinal score: 2 - 4\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 519\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:POL - AUT\nFinal score: 2 - 4\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 19\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19520
 DTSTAMP:20240720T070000Z
 DTSTART:20240720T070000Z
 DTEND:20240720T090000Z
-SUMMARY:✅ U21C M13 | LTU - LUX
+SUMMARY:✅ U21C M A | LTU - LUX
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:LTU - LUX \nFinal score: 6 - 2\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 520\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:LTU - LUX\nFinal score: 6 - 2\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 20\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19521
 DTSTAMP:20240720T091500Z
 DTSTART:20240720T091500Z
 DTEND:20240720T111500Z
-SUMMARY:✅ U21C M14 | AUT - UKR
+SUMMARY:✅ U21C M A | AUT - UKR
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:AUT - UKR \nFinal score: 7 - 2\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 521\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:AUT - UKR\nFinal score: 7 - 2\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 21\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 BEGIN:VEVENT
 UID:19522
 DTSTAMP:20240720T113000Z
 DTSTART:20240720T113000Z
 DTEND:20240720T133000Z
-SUMMARY:✅ U21C M15 | ITA - POL
+SUMMARY:✅ U21C M A | ITA - POL
 LOCATION:Pitch 1 | Walcz, Poland
-DESCRIPTION:ITA - POL \nFinal score: 2 - 2\nGender: Men\nEvent: EuroHockey 
- U21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/19
- 522\nEvent link: https://tms.fih.ch/competitions/1628
+DESCRIPTION:ITA - POL\nFinal score: 2 - 2\nGender: Men\nEvent: EuroHockey U
+ 21 Championship II-A Men 2024\n\nMatch link: https://tms.fih.ch/matches/195
+ 22\nEvent link: https://tms.fih.ch/competitions/1628
 END:VEVENT
 END:VCALENDAR

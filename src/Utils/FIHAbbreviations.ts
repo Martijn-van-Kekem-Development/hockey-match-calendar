@@ -1,5 +1,4 @@
 import * as fs from "node:fs";
-import {ab} from "vitest/dist/chunks/reporters.C_zwCd4j.js";
 
 export class FIHAbbreviations {
     /**
@@ -22,11 +21,10 @@ export class FIHAbbreviations {
      */
     public static getMatchType(type: string, gender: "M" | "W", index: number): string {
         if (!this.MatchTypeAbbreviations) this.getMatchTypeAbbreviations();
-        let abbr = type.split(" ").map(v => v.slice(0, 1)).join("").toUpperCase();
 
         // Look for abbreviation.
         for (let [regex, value] of Object.entries(this.MatchTypeAbbreviations)) {
-            const matches = type.match(regex);
+            const matches = RegExp(regex, "i").exec(type);
             if (!matches) continue;
 
             // No groups, return value
@@ -37,13 +35,11 @@ export class FIHAbbreviations {
                 }
             }
 
-            abbr = value.replaceAll("%g", gender).replaceAll("%i", `${index}`);
-            break;
+            return value.replaceAll("%g", gender).replaceAll("%i", `${index}`);
         }
 
         // No match found
-        abbr = abbr.length === 0 ? "" : `${abbr} `;
-        return `${abbr}${gender}${this.padStart(index)}`;
+        return `${gender}${this.padStart(index)}`;
     }
 
     /**

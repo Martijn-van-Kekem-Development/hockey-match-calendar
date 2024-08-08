@@ -10,76 +10,76 @@ UID:19658
 DTSTAMP:20240822T151500Z
 DTSTART:20240822T151500Z
 DTEND:20240822T171500Z
-SUMMARY:🏑 EHCQ W01 | WAL - CRO 
+SUMMARY:🏑 EHCQ W QF2 | WAL - CRO
 LOCATION:Pitch 1 | Glasgow, Scotland
-DESCRIPTION:WAL - CRO \nGender: Women\nEvent: EuroHockey Championship Quali
- fier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19658\nEvent li
- nk: https://tms.fih.ch/competitions/1623
+DESCRIPTION:WAL - CRO\nGender: Women\nEvent: EuroHockey Championship Qualif
+ ier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19658\nEvent lin
+ k: https://tms.fih.ch/competitions/1623
 END:VEVENT
 BEGIN:VEVENT
 UID:19659
 DTSTAMP:20240822T173000Z
 DTSTART:20240822T173000Z
 DTEND:20240822T193000Z
-SUMMARY:🏑 EHCQ W02 | AUT - LTU
+SUMMARY:🏑 EHCQ W QF3 | AUT - LTU
 LOCATION:Pitch 1 | Glasgow, Scotland
-DESCRIPTION:AUT - LTU \nGender: Women\nEvent: EuroHockey Championship Quali
- fier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19659\nEvent li
- nk: https://tms.fih.ch/competitions/1623
+DESCRIPTION:AUT - LTU\nGender: Women\nEvent: EuroHockey Championship Qualif
+ ier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19659\nEvent lin
+ k: https://tms.fih.ch/competitions/1623
 END:VEVENT
 BEGIN:VEVENT
 UID:19660
 DTSTAMP:20240823T173000Z
 DTSTART:20240823T173000Z
 DTEND:20240823T193000Z
-SUMMARY:🏑 EHCQ W03 | Loser M1 - Loser M2 
+SUMMARY:🏑 EHCQ W 5v6 | Loser M1 - Loser M2
 LOCATION:Pitch 1 | Glasgow, Scotland
-DESCRIPTION:Loser M1 - Loser M2 \nGender: Women\nEvent: EuroHockey Champion
- ship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19660
- \nEvent link: https://tms.fih.ch/competitions/1623
+DESCRIPTION:Loser M1 - Loser M2\nGender: Women\nEvent: EuroHockey Champions
+ hip Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19660\
+ nEvent link: https://tms.fih.ch/competitions/1623
 END:VEVENT
 BEGIN:VEVENT
 UID:19661
 DTSTAMP:20240824T110000Z
 DTSTART:20240824T110000Z
 DTEND:20240824T130000Z
-SUMMARY:🏑 EHCQ W04 | CZE - Winner M1 
+SUMMARY:🏑 EHCQ W SF1 | CZE - Winner M1
 LOCATION:Pitch 1 | Glasgow, Scotland
-DESCRIPTION:CZE - Winner M1 \nGender: Women\nEvent: EuroHockey Championship
-  Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19661\nEv
- ent link: https://tms.fih.ch/competitions/1623
+DESCRIPTION:CZE - Winner M1\nGender: Women\nEvent: EuroHockey Championship 
+ Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19661\nEve
+ nt link: https://tms.fih.ch/competitions/1623
 END:VEVENT
 BEGIN:VEVENT
 UID:19662
 DTSTAMP:20240824T131500Z
 DTSTART:20240824T131500Z
 DTEND:20240824T151500Z
-SUMMARY:🏑 EHCQ W05 | SCO - Winner M2 
+SUMMARY:🏑 EHCQ W SF2 | SCO - Winner M2
 LOCATION:Pitch 1 | Glasgow, Scotland
-DESCRIPTION:SCO - Winner M2 \nGender: Women\nEvent: EuroHockey Championship
-  Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19662\nEv
- ent link: https://tms.fih.ch/competitions/1623
+DESCRIPTION:SCO - Winner M2\nGender: Women\nEvent: EuroHockey Championship 
+ Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19662\nEve
+ nt link: https://tms.fih.ch/competitions/1623
 END:VEVENT
 BEGIN:VEVENT
 UID:19663
 DTSTAMP:20240825T100000Z
 DTSTART:20240825T100000Z
 DTEND:20240825T120000Z
-SUMMARY:🏑 EHCQ W06 | Loser SF2 - Loser SF1 
+SUMMARY:🏑 EHCQ W 3v4 | Loser SF2 - Loser SF1
 LOCATION:Pitch 1 | Glasgow, Scotland
-DESCRIPTION:Loser SF2 - Loser SF1 \nGender: Women\nEvent: EuroHockey Champi
- onship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/196
- 63\nEvent link: https://tms.fih.ch/competitions/1623
+DESCRIPTION:Loser SF2 - Loser SF1\nGender: Women\nEvent: EuroHockey Champio
+ nship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/1966
+ 3\nEvent link: https://tms.fih.ch/competitions/1623
 END:VEVENT
 BEGIN:VEVENT
 UID:19664
 DTSTAMP:20240825T121500Z
 DTSTART:20240825T121500Z
 DTEND:20240825T141500Z
-SUMMARY:🏑 EHCQ W07 | Winner SF2 - Winner SF1 
+SUMMARY:🏑 EHCQ W GF | Winner SF2 - Winner SF1
 LOCATION:Pitch 1 | Glasgow, Scotland
-DESCRIPTION:Winner SF2 - Winner SF1 \nGender: Women\nEvent: EuroHockey Cham
- pionship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/1
- 9664\nEvent link: https://tms.fih.ch/competitions/1623
+DESCRIPTION:Winner SF2 - Winner SF1\nGender: Women\nEvent: EuroHockey Champ
+ ionship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19
+ 664\nEvent link: https://tms.fih.ch/competitions/1623
 END:VEVENT
 END:VCALENDAR

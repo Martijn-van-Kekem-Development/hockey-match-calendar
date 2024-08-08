@@ -10,44 +10,44 @@ UID:20030
 DTSTAMP:20240817T100000Z
 DTSTART:20240817T100000Z
 DTEND:20240817T120000Z
-SUMMARY:🏑 CSAQ W01 | NAM - ESW 
+SUMMARY:🏑 CSAQ W01 | NAM - ESW
 LOCATION:Pitch 1 | HARARE
-DESCRIPTION:NAM - ESW \nGender: Women\nEvent: Central-South Africa Qualifie
- r for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20030\nEvent l
- ink: https://tms.fih.ch/competitions/1685
+DESCRIPTION:NAM - ESW\nGender: Women\nEvent: Central-South Africa Qualifier
+  for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20030\nEvent li
+ nk: https://tms.fih.ch/competitions/1685
 END:VEVENT
 BEGIN:VEVENT
 UID:20031
 DTSTAMP:20240817T140000Z
 DTSTART:20240817T140000Z
 DTEND:20240817T160000Z
-SUMMARY:🏑 CSAQ W02 | ZIM - ZAM 
+SUMMARY:🏑 CSAQ W02 | ZIM - ZAM
 LOCATION:Pitch 1 | HARARE
-DESCRIPTION:ZIM - ZAM \nGender: Women\nEvent: Central-South Africa Qualifie
- r for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20031\nEvent l
- ink: https://tms.fih.ch/competitions/1685
+DESCRIPTION:ZIM - ZAM\nGender: Women\nEvent: Central-South Africa Qualifier
+  for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20031\nEvent li
+ nk: https://tms.fih.ch/competitions/1685
 END:VEVENT
 BEGIN:VEVENT
 UID:20032
 DTSTAMP:20240818T100000Z
 DTSTART:20240818T100000Z
 DTEND:20240818T120000Z
-SUMMARY:🏑 CSAQ W03 | ZAM - ESW 
+SUMMARY:🏑 CSAQ W03 | ZAM - ESW
 LOCATION: | HARARE
-DESCRIPTION:ZAM - ESW \nGender: Women\nEvent: Central-South Africa Qualifie
- r for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20032\nEvent l
- ink: https://tms.fih.ch/competitions/1685
+DESCRIPTION:ZAM - ESW\nGender: Women\nEvent: Central-South Africa Qualifier
+  for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20032\nEvent li
+ nk: https://tms.fih.ch/competitions/1685
 END:VEVENT
 BEGIN:VEVENT
 UID:20033
 DTSTAMP:20240818T140000Z
 DTSTART:20240818T140000Z
 DTEND:20240818T160000Z
-SUMMARY:🏑 CSAQ W04 | NAM - ZIM 
+SUMMARY:🏑 CSAQ W04 | NAM - ZIM
 LOCATION:Pitch 1 | HARARE
-DESCRIPTION:NAM - ZIM \nGender: Women\nEvent: Central-South Africa Qualifie
- r for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20033\nEvent l
- ink: https://tms.fih.ch/competitions/1685
+DESCRIPTION:NAM - ZIM\nGender: Women\nEvent: Central-South Africa Qualifier
+  for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20033\nEvent li
+ nk: https://tms.fih.ch/competitions/1685
 END:VEVENT
 BEGIN:VEVENT
 UID:20034
@@ -56,41 +56,41 @@ DTSTART:20240820T100000Z
 DTEND:20240820T120000Z
 SUMMARY:🏑 CSAQ W05 | ZAM - NAM
 LOCATION:Pitch 1 | HARARE
-DESCRIPTION:ZAM - NAM \nGender: Women\nEvent: Central-South Africa Qualifie
- r for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20034\nEvent l
- ink: https://tms.fih.ch/competitions/1685
+DESCRIPTION:ZAM - NAM\nGender: Women\nEvent: Central-South Africa Qualifier
+  for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20034\nEvent li
+ nk: https://tms.fih.ch/competitions/1685
 END:VEVENT
 BEGIN:VEVENT
 UID:20035
 DTSTAMP:20240820T140000Z
 DTSTART:20240820T140000Z
 DTEND:20240820T160000Z
-SUMMARY:🏑 CSAQ W06 | ZIM - ESW 
+SUMMARY:🏑 CSAQ W06 | ZIM - ESW
 LOCATION:Pitch 1 | HARARE
-DESCRIPTION:ZIM - ESW \nGender: Women\nEvent: Central-South Africa Qualifie
- r for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20035\nEvent l
- ink: https://tms.fih.ch/competitions/1685
+DESCRIPTION:ZIM - ESW\nGender: Women\nEvent: Central-South Africa Qualifier
+  for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20035\nEvent li
+ nk: https://tms.fih.ch/competitions/1685
 END:VEVENT
 BEGIN:VEVENT
 UID:20036
 DTSTAMP:20240821T090000Z
 DTSTART:20240821T090000Z
 DTEND:20240821T110000Z
-SUMMARY:🏑 CSAQ W07 | 3rd ONE POOL - 4th ONE POOL 
+SUMMARY:🏑 CSAQ W07 | 3rd ONE POOL - 4th ONE POOL
 LOCATION:Pitch 1 | HARARE
-DESCRIPTION:3rd ONE POOL - 4th ONE POOL \nGender: Women\nEvent: Central-Sou
- th Africa Qualifier for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matc
- hes/20036\nEvent link: https://tms.fih.ch/competitions/1685
+DESCRIPTION:3rd ONE POOL - 4th ONE POOL\nGender: Women\nEvent: Central-Sout
+ h Africa Qualifier for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/match
+ es/20036\nEvent link: https://tms.fih.ch/competitions/1685
 END:VEVENT
 BEGIN:VEVENT
 UID:20037
 DTSTAMP:20240821T133000Z
 DTSTART:20240821T133000Z
 DTEND:20240821T153000Z
-SUMMARY:🏑 CSAQ W08 | 1st ONE POOL - 2nd ONE POOL 
+SUMMARY:🏑 CSAQ W GF | 1st ONE POOL - 2nd ONE POOL
 LOCATION:Pitch 1 | HARARE
-DESCRIPTION:1st ONE POOL - 2nd ONE POOL \nGender: Women\nEvent: Central-Sou
- th Africa Qualifier for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matc
- hes/20037\nEvent link: https://tms.fih.ch/competitions/1685
+DESCRIPTION:1st ONE POOL - 2nd ONE POOL\nGender: Women\nEvent: Central-Sout
+ h Africa Qualifier for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/match
+ es/20037\nEvent link: https://tms.fih.ch/competitions/1685
 END:VEVENT
 END:VCALENDAR

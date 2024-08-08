@@ -1,5 +1,8 @@
 {
-  "Pool ([A-Z]{1})": "%1",
-  "Final": "GF",
-  "Semi-final \\((\\d\\))": "SF%1"
+  "Pool ([A-Z]{1})": "%g %1",
+  "Final": "%g GF",
+  "Semi-final \\((\\d\\))": "%g SF%1",
+  "Semi-final$": "%g SF",
+  "(?:(\\d)(?:nd|th|rd)?)(?:\\/|-)(?:(\\d)(?:nd|th|rd)?)( place.*)?$": "%g %1v%2",
+  "(?:((?:Q|S)F)(\\d))(?: \\(.*\\))?$": "%g %1%2"
 }
