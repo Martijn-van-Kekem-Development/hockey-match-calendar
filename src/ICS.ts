@@ -98,12 +98,7 @@ export class ICS {
                 line = line.slice(75);
             }
 
-            parsed = [
-                ...parsed.slice(0, i),
-                ...parts,
-                " " + line,
-                ...parsed.slice(i + 1)
-            ];
+            parsed = [...parsed.slice(0, i), ...parts, " " + line, ...parsed.slice(i + 1)];
         }
 
         return parsed.join("\r\n");

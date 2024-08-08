@@ -35,12 +35,15 @@ export class TMSFetcher extends Fetcher {
     public async fetch() {
         const competitions = await this.fetchCompetitions();
         let promises = [];
+
         for (let competition of competitions.values()) {
+            // Fetch match for every competition
             const matchPromise = this.fetchMatches(competition);
             matchPromise.then(result => {
                 competition.getMatches().push(...result.values());
                 return ICSCreator.createCompetitionICS(competition);
             });
+
             promises.push(matchPromise);
         }
 

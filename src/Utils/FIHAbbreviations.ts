@@ -35,6 +35,7 @@ export class FIHAbbreviations {
                 }
             }
 
+            // Replace gender and index values.
             return value.replaceAll("%g", gender).replaceAll("%i", `${index}`);
         }
 

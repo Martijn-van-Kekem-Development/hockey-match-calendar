@@ -67,22 +67,17 @@ export class TMSCompetitionFetcher {
      */
     public createCompetition(row: HTMLElement, index: number): Competition {
         const object = new Competition(this.fetcher, index);
-
         const link = row.querySelector("td:nth-child(2) a[href]");
 
         // Add competition ID.
         const id = link.getAttribute("href").split("/").slice(-1)[0] ?? null;
-        if (!id)
-            throw new Error("Failed to get ID for match.");
-        else
-            object.setID(id);
+        if (!id) throw new Error("Failed to get ID for match.");
+        else object.setID(id);
 
         // Add competition name.
         const name = link.textContent ?? null;
-        if (!name)
-            throw new Error("Failed to get name for match.");
-        else
-            object.setName(name.trim());
+        if (!name) throw new Error("Failed to get name for match.");
+        else object.setName(name.trim());
 
         // Add competition location
         const location = row.querySelector("td:nth-child(4)");

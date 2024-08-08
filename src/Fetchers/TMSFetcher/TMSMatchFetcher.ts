@@ -59,10 +59,8 @@ export class TMSMatchFetcher {
 
         // Add match ID.
         const id = link.getAttribute("href").split("/").slice(-1)[0] ?? null;
-        if (!id)
-            throw new Error("Failed to get ID for match.");
-        else
-            object.setID(id);
+        if (!id) throw new Error("Failed to get ID for match.");
+        else object.setID(id);
 
         // Add match index
         const index = row.querySelector("td:nth-child(1)");
