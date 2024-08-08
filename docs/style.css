@@ -19,6 +19,15 @@ h1, p {
     text-align: center;
 }
 
+ a {
+     text-decoration: none;
+     color: #3F51B5;
+ }
+
+ a:visited {
+     color: #3F51B5;
+ }
+
 table {
     text-align: left;
     width: 100%;
