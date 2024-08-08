@@ -30,9 +30,10 @@ export class Countries {
      * @param iso The ISO value.
      * @constructor
      */
-    public static ISOToIOC(iso: string): string {
+    public static ISOToIOC(iso: string | null): string | null {
         if (!this.ISODict) this.getISODict();
 
+        if (!iso) return iso;
         return this.ISODict[iso.toUpperCase()] ?? iso;
     }
 }
