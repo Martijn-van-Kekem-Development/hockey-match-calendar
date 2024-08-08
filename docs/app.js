@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     compContainer.innerHTML = "";
 
     // Sort items
-    const paths = json.paths.sort((a, b) =>
+    const paths = json.paths.fih.sort((a, b) =>
         ((a.index ?? 0) - (b.index ?? 0)) ||
         a.name.toString().localeCompare(b.name)
     );
