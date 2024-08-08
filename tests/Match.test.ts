@@ -1,5 +1,5 @@
 import {describe, test, expect} from "vitest";
-import {Match} from "../src/Match.js";
+import {Match} from "../src/Objects/Match.js";
 
 describe("Match tests", () => {
     test("Match ID - ID set", () => {

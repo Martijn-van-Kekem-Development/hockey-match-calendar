@@ -1,4 +1,4 @@
-import {Match} from "./Match.js";
+import {Match} from "./Objects/Match.js";
 import * as fs from "fs/promises";
 
 export class ICS {
