@@ -15,7 +15,7 @@ html,body {
     padding-inline: 1rem;
 }
 
-h1, p {
+header {
     text-align: center;
 }
 
@@ -74,6 +74,7 @@ a:visited {
 table {
     text-align: left;
     width: 100%;
+    border-collapse: collapse;
 }
 
 table tr th,
@@ -84,6 +85,12 @@ table tr td {
 table tr th:nth-child(1),
 table tr td:nth-child(1) {
     line-break: anywhere;
+    padding-left: 0;
+}
+
+table tr th:nth-child(3),
+table tr td:nth-child(3) {
+    padding-right: 0;
 }
 
 table tr th:nth-child(2),
