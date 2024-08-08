@@ -3,7 +3,6 @@ import {Competition} from "../../Objects/Competition.js";
 import {Match} from "../../Objects/Match.js";
 import {TMSCompetitionFetcher} from "./TMSCompetitionFetcher.js";
 import {TMSMatchFetcher} from "./TMSMatchFetcher.js";
-import {ICS} from "../../ICS.js";
 import {ICSCreator} from "../../Utils/ICSCreator.js";
 
 export class TMSFetcher extends Fetcher {
@@ -26,10 +25,11 @@ export class TMSFetcher extends Fetcher {
 
     /**
      * Constructor for TMSFetcher.
+     * @param name The name of this fetcher.
      * @param baseURL The base URL of the TMS system.
      */
-    constructor(baseURL: string) {
-        super(baseURL);
+    constructor(name: string, baseURL: string) {
+        super(name, baseURL);
 
         this.competitionFetcher = new TMSCompetitionFetcher(this);
         this.matchFetcher = new TMSMatchFetcher(this);
@@ -62,15 +62,13 @@ export class TMSFetcher extends Fetcher {
 
         // Create calendar files.
         await Promise.all([
-            ICSCreator.createTotalICS(competitionsArray),
-            ICSCreator.createGenderTotalICS(competitionsArray, "M"),
-            ICSCreator.createGenderTotalICS(competitionsArray, "W")
+            ICSCreator.createTotalICS(this, competitionsArray),
+            ICSCreator.createGenderTotalICS(this, competitionsArray, "M"),
+            ICSCreator.createGenderTotalICS(this, competitionsArray, "W")
         ]);
 
-        // Store file paths in JSON.
-        console.info(`[TMSFetcher] Storing ICS paths in files.json.`);
-        await ICS.storeFilePaths();
         console.info(`[TMSFetcher] Finished.`);
+        return competitionsArray;
     }
 
     /**

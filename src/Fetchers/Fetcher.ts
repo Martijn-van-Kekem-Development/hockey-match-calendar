@@ -9,10 +9,18 @@ export abstract class Fetcher {
     protected baseURL: string;
 
     /**
+     * The name of this fetcher.
+     * @protected
+     */
+    protected name: string;
+
+    /**
      * The base URL for this fetcher.
+     * @param name The name of this fetcher.
      * @param baseURL The base URL.
      */
-    protected constructor(baseURL: string) {
+    protected constructor(name: string, baseURL: string) {
+        this.name = name;
         this.baseURL = baseURL;
     }
 
@@ -24,9 +32,16 @@ export abstract class Fetcher {
     }
 
     /**
+     * Get the name of this fetcher.
+     */
+    public getName(): string {
+        return this.name;
+    }
+
+    /**
      * Run this fetcher.
      */
-    public abstract fetch(): Promise<void>;
+    public abstract fetch(): Promise<Competition[]>;
 
     /**
      * Fetch the competitions and map them by their ID.
