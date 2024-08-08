@@ -10,6 +10,8 @@ export class ICSCreator {
         const matches = competitions.map(e => e.getMatches()).flat();
         const path = "all-matches";
         const title = "FIH - All matches";
+
+        console.info(`[TMSFetcher] Writing ${matches.length} matches to ${path}.`);
         await ICS.writeToFile(ICS.calendarToICS(title, "fih-all", matches), title, path, {
             type: "total",
             count: matches.length
@@ -26,6 +28,8 @@ export class ICSCreator {
         matches = matches.filter(m => m.getGender() === gender);
         const path = `${gender === "M" ? "mens" : "womens"}-matches`;
         const title = `FIH - ${gender === "M" ? "Men's" : "Women's"} matches`;
+
+        console.info(`[TMSFetcher] Writing ${matches.length} matches to ${path}.`);
         await ICS.writeToFile(ICS.calendarToICS(title, path, matches), title, path, {
             type: "total",
             count: matches.length
@@ -39,6 +43,8 @@ export class ICSCreator {
     public static async createCompetitionICS(competition: Competition) {
         const path = "per-competition/" + competition.getLowercaseName();
         const title = competition.getName();
+
+        console.info(`[TMSFetcher] Writing ${competition.getMatches().length} matches to ${path}.`);
         await ICS.writeToFile(ICS.calendarToICS(title, competition.getID(), competition.getMatches()), title, path, {
             type: "competition",
             index: competition.getIndex(),

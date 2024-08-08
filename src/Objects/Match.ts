@@ -180,9 +180,9 @@ export class Match {
         const endDate = this.getMatchDate().clone().add(2, "hours");
         return {
             UID: this.getMatchID(),
-            DTSTAMP: DateHelper.toICS(this.getMatchDate()),
-            DTSTART: DateHelper.toICS(this.getMatchDate()),
-            DTEND: DateHelper.toICS(endDate),
+            "DTSTAMP;TZID=UTC": DateHelper.toICS(this.getMatchDate()),
+            "DTSTART;TZID=UTC": DateHelper.toICS(this.getMatchDate()),
+            "DTEND;TZID=UTC": DateHelper.toICS(endDate),
             SUMMARY: this.getMatchTitle(),
             LOCATION: this.getLocation(),
             DESCRIPTION: this.getMatchDescription(false),

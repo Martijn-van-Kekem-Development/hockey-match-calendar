@@ -33,9 +33,12 @@ export class TMSFetcher extends Fetcher {
      * Fetch the matches from TMS.
      */
     public async fetch() {
+        console.info(`[TMSFetcher] Fetching competitions...`);
         const competitions = await this.fetchCompetitions();
         let promises = [];
 
+        console.info(`[TMSFetcher] Found ${competitions.size} competitions.`);
+        console.info(`[TMSFetcher] Fetching matches...`);
         for (let competition of competitions.values()) {
             // Fetch match for every competition
             const matchPromise = this.fetchMatches(competition);
@@ -49,17 +52,19 @@ export class TMSFetcher extends Fetcher {
 
         // Wait for all matches to fetch
         await Promise.all(promises);
-        const allMatches = Array.from(competitions.values());
+        const competitionsArray = Array.from(competitions.values());
 
         // Create calendar files.
         await Promise.all([
-            ICSCreator.createTotalICS(allMatches),
-            ICSCreator.createGenderTotalICS(allMatches, "M"),
-            ICSCreator.createGenderTotalICS(allMatches, "W")
+            ICSCreator.createTotalICS(competitionsArray),
+            ICSCreator.createGenderTotalICS(competitionsArray, "M"),
+            ICSCreator.createGenderTotalICS(competitionsArray, "W")
         ]);
 
         // Store file paths in JSON.
+        console.info(`[TMSFetcher] Storing ICS paths in files.json.`);
         await ICS.storeFilePaths();
+        console.info(`[TMSFetcher] Finished.`);
     }
 
     /**
