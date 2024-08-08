@@ -8,6 +8,11 @@ import {ICSCreator} from "../../Utils/ICSCreator.js";
 
 export class TMSFetcher extends Fetcher {
     /**
+     * The FIH TMS url.
+     */
+    public static readonly FIH_BASE_URL: string = "https://tms.fih.ch";
+
+    /**
      * The competition fetcher.
      * @private
      */
@@ -21,9 +26,10 @@ export class TMSFetcher extends Fetcher {
 
     /**
      * Constructor for TMSFetcher.
+     * @param baseURL The base URL of the TMS system.
      */
-    constructor() {
-        super();
+    constructor(baseURL: string) {
+        super(baseURL);
 
         this.competitionFetcher = new TMSCompetitionFetcher(this);
         this.matchFetcher = new TMSMatchFetcher(this);
@@ -98,12 +104,4 @@ export class TMSFetcher extends Fetcher {
 
         return lines;
     }
-
-    /**
-     * @override
-     */
-    getBaseURL(): string {
-        return "https://tms.fih.ch";
-    }
-
 }
