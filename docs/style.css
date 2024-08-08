@@ -12,6 +12,11 @@ html,body {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
+    padding-inline: 1rem;
+}
+
+h1, p {
+    text-align: center;
 }
 
 table {
@@ -21,20 +26,23 @@ table {
 
 table tr th,
 table tr td {
-    padding: 0.3rem 0.2rem;
-    white-space: nowrap;
+    padding: 0.4rem 0.2rem;
 }
 
+table tr th:nth-child(1),
+table tr td:nth-child(1) {
+    line-break: anywhere;
+}
 
 table tr th:nth-child(2),
 table tr td:nth-child(2) {
-    width: 7rem;
-    text-align: right;
+    text-align: center;
 }
 
-
+table tr th:nth-child(2),
+table tr td:nth-child(2),
 table tr th:nth-child(3),
 table tr td:nth-child(3) {
-    width: 10rem;
-    text-align: right;
+    width: 0;
+    white-space: nowrap;
 }
