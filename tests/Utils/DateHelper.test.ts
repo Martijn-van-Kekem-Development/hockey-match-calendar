@@ -9,6 +9,6 @@ describe("DateHelper tests", () => {
 
     test("From UTC to ICS", () => {
         const output = DateHelper.toICS(DateHelper.toUTC("8 Aug 2024 18:08", "America/Vancouver"));
-        expect(output).toBe("20240809T010800");
+        expect(output).toBe("20240809T010800Z");
     });
 })

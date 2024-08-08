@@ -10,9 +10,9 @@ describe('ICS class', () => {
 
         const output = ICS.formatLines(lines);
         expect(output).toStrictEqual(
-            "Very long description that is very long and longer than the max allowed cha" +
-            "\r\n racters. Very long description that is very long and longer than the max al" +
-            "\r\n lowed characters\r\n" +
+            "Very long description that is very long and longer than the max allowed ch" +
+            "\r\n aracters. Very long description that is very long and longer than the max" +
+            "\r\n  allowed characters\r\n" +
             "Not so long"
         );
     });

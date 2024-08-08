@@ -94,13 +94,13 @@ export class ICS {
             if (parsed[i].length <= 75) continue;
             let line = parsed[i];
 
-            const parts = [line.slice(0, 75)];
-            line = line.slice(75);
+            const parts = [line.slice(0, 74)];
+            line = line.slice(74);
 
             // Do for every line that is too long.
-            while (line.length > 75) {
-                parts.push(" "  + line.slice(0, 75));
-                line = line.slice(75);
+            while (line.length >= 75) {
+                parts.push(" "  + line.slice(0, 73));
+                line = line.slice(73);
             }
 
             parsed = [...parsed.slice(0, i), ...parts, " " + line, ...parsed.slice(i + 1)];
