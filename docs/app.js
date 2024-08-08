@@ -16,8 +16,12 @@ window.addEventListener("DOMContentLoaded", async () => {
         nameCol.textContent = row.name ?? "";
         tableRow.append(nameCol);
 
+        let matchesCol = document.createElement("td");
+        matchesCol.innerHTML = `${row.count}`;
+        tableRow.append(matchesCol);
+
         let urlCol = document.createElement("td");
-        urlCol.innerHTML = `<a href="${row.url}">Download</a>`;
+        urlCol.innerHTML = `<a href="${row.path}">Download</a>`;
         tableRow.append(urlCol);
 
         (row.type === "total" ? allContainer : compContainer).append(tableRow);

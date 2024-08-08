@@ -6,21 +6,22 @@ export class ICS {
      * The stored file paths.
      * @private
      */
-    private static filePaths: {name: string, url: string, type: string}[] = [];
+    private static filePaths: Metadata[] = [];
 
     /**
      * Write the ICS string to a file.
      * @param ics The ICS content.
      * @param title The ICS title.
      * @param fileName The file name without extension.
+     * @param metadata Extra data to save.
      */
-    public static async writeToFile(ics: string, title: string, fileName: string, type: "total" | "competition") {
+    public static async writeToFile(ics: string, title: string, fileName: string, metadata: Metadata) {
         const outputFile = `docs/ics/${fileName}.ics`;
         const outputFolder = outputFile.split("/").slice(0, -1).join("/");
         await fs.mkdir(outputFolder, {recursive: true});
         await fs.writeFile(outputFile, ics, {flag: "w+"});
 
-        this.filePaths.push({name: title, url: outputFile.split("/").slice(1).join("/"), type})
+        this.filePaths.push({name: title, path: outputFile.split("/").slice(1).join("/"), ...metadata})
     }
 
     /**
@@ -104,4 +105,12 @@ export class ICS {
 
         return parsed.join("\r\n");
     }
+}
+
+export interface Metadata {
+    name?: string,
+    type?: "total" | "competition",
+    path?: string,
+    count?: number
+
 }

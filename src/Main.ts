@@ -38,7 +38,10 @@ export class Main {
         const matches = competitions.map(e => e.getMatches()).flat();
         const path = "all-matches";
         const title = "FIH - All matches";
-        await ICS.writeToFile(ICS.calendarToICS(title, "fih-all", matches), title, path, "total");
+        await ICS.writeToFile(ICS.calendarToICS(title, "fih-all", matches), title, path, {
+            type: "total",
+            count: matches.length
+        });
     }
 
     /**
@@ -52,7 +55,10 @@ export class Main {
         matches = matches.filter(m => m.getGender() === gender);
         const path = `${gender === "M" ? "mens" : "womens"}-matches`;
         const title = `FIH - ${gender === "M" ? "Men's" : "Women's"} matches`;
-        await ICS.writeToFile(ICS.calendarToICS(title, path, matches), title, path, "total");
+        await ICS.writeToFile(ICS.calendarToICS(title, path, matches), title, path, {
+            type: "total",
+            count: matches.length
+        });
     }
 
     /**
@@ -63,7 +69,10 @@ export class Main {
     private async createCompetitionICS(competition: Competition) {
         const path = "per-competition/" + competition.getLowercaseName();
         const title = competition.getName();
-        await ICS.writeToFile(ICS.calendarToICS(title, competition.getID(), competition.getMatches()), title, path, "competition");
+        await ICS.writeToFile(ICS.calendarToICS(title, competition.getID(), competition.getMatches()), title, path, {
+            type: "competition",
+            count: competition.getMatches().length
+        });
     }
 }
 
