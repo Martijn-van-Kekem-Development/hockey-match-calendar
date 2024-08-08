@@ -65,11 +65,11 @@ export class FIHAbbreviations {
 
         // Look for abbreviation.
         for (const [regex, value] of Object.entries(this.CompetitionAbbreviations)) {
-            if (name.match(regex)) return value;
+            if (name.match(RegExp(regex, "i"))) return value;
         }
 
         // No match found
-        return name.replaceAll(/[^A-Za-z0-9]/g, "").split(" ").map(v => v.slice(0, 1)).join("").toUpperCase();
+        return name.replaceAll(/[^A-Za-z ]/g, "").split(" ").map(v => v.slice(0, 1)).join("").toUpperCase();
     }
 
     /**

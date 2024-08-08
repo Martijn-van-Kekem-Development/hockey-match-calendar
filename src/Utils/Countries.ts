@@ -1,4 +1,4 @@
-import {countryToAlpha2, countryToAlpha3} from "country-to-iso/src/country-to-code.js";
+import {countryToAlpha3} from "country-to-iso/src/country-to-code.js";
 import * as fs from "node:fs";
 
 export class Countries {
@@ -33,6 +33,6 @@ export class Countries {
     public static ISOToIOC(iso: string): string {
         if (!this.ISODict) this.getISODict();
 
-        return this.ISODict[iso] ?? iso;
+        return this.ISODict[iso.toUpperCase()] ?? iso;
     }
 }

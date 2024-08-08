@@ -1,0 +1,10 @@
+[
+  {"in": "Pool A", "out": "M A"},
+  {"in": "Final", "out": "M GF"},
+  {"in": "Semi-final (2)", "out": "M SF2"},
+  {"in": "Semi-final", "out": "M SF"},
+  {"in": "3th-4th", "out": "M 3v4"},
+  {"in": "SF1 (M1)", "out": "M SF1"},
+  {"in": "QF2", "out": "M QF2"},
+  {"in": "Something unknown", "out": "M01"}
+]

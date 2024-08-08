@@ -1,0 +1,11 @@
+[
+  {"in": "1234 Olympic Games (M)", "out": "OG"},
+  {"in": "1234 Test matches sadf (W)", "out": "TEST"},
+  {"in": "EuroHockey U21 Championship", "out": "U21C"},
+  {"in": "EuroHockey Championship Qualifier", "out": "EHCQ"},
+  {"in": "FIH Indoor Hockey Women's World Cup", "out": "IWC"},
+  {"in": "FIH Indoor Hockey Men's World Cup", "out": "IWC"},
+  {"in": "Central-South Africa Qualifier", "out": "CSAQ"},
+  {"in": "Something unknown", "out":  "SU"},
+  {"in": "Something 12 7t_8 unknown", "out":  "STU"}
+]
