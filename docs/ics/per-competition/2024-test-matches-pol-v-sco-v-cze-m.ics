@@ -21,10 +21,10 @@ LOCATION: | Poznań, Poland
 DESCRIPTION:POL - SCO\nGender: Men\nEvent: 2024 Test Matches POL v SCO v CZ
  E (M)\n\nMatch link: https://tms.fih.ch/matches/20027\nEvent link: https://
  tms.fih.ch/competitions/1687
-X-ALT-DESC;FMTTYPE=text/html:POL - SCO\nGender: Men\nEvent: 2024 Test Match
- es POL v SCO v CZE (M)\n\n<a href="https://tms.fih.ch/matches/20027">View m
- atch details</a>\n<a href="https://tms.fih.ch/competitions/1687">View compe
- tition details</a>
+X-ALT-DESC;FMTTYPE=text/html:POL - SCO<br>Gender: Men<br>Event: 2024 Test M
+ atches POL v SCO v CZE (M)<br><br><a href="https://tms.fih.ch/matches/20027
+ ">View match details</a><br><a href="https://tms.fih.ch/competitions/1687">
+ View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:20028
@@ -36,10 +36,10 @@ LOCATION: | Poznań, Poland
 DESCRIPTION:POL - SCO\nGender: Men\nEvent: 2024 Test Matches POL v SCO v CZ
  E (M)\n\nMatch link: https://tms.fih.ch/matches/20028\nEvent link: https://
  tms.fih.ch/competitions/1687
-X-ALT-DESC;FMTTYPE=text/html:POL - SCO\nGender: Men\nEvent: 2024 Test Match
- es POL v SCO v CZE (M)\n\n<a href="https://tms.fih.ch/matches/20028">View m
- atch details</a>\n<a href="https://tms.fih.ch/competitions/1687">View compe
- tition details</a>
+X-ALT-DESC;FMTTYPE=text/html:POL - SCO<br>Gender: Men<br>Event: 2024 Test M
+ atches POL v SCO v CZE (M)<br><br><a href="https://tms.fih.ch/matches/20028
+ ">View match details</a><br><a href="https://tms.fih.ch/competitions/1687">
+ View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:20029
@@ -51,9 +51,9 @@ LOCATION: | Poznań, Poland
 DESCRIPTION:POL - CZE\nGender: Men\nEvent: 2024 Test Matches POL v SCO v CZ
  E (M)\n\nMatch link: https://tms.fih.ch/matches/20029\nEvent link: https://
  tms.fih.ch/competitions/1687
-X-ALT-DESC;FMTTYPE=text/html:POL - CZE\nGender: Men\nEvent: 2024 Test Match
- es POL v SCO v CZE (M)\n\n<a href="https://tms.fih.ch/matches/20029">View m
- atch details</a>\n<a href="https://tms.fih.ch/competitions/1687">View compe
- tition details</a>
+X-ALT-DESC;FMTTYPE=text/html:POL - CZE<br>Gender: Men<br>Event: 2024 Test M
+ atches POL v SCO v CZE (M)<br><br><a href="https://tms.fih.ch/matches/20029
+ ">View match details</a><br><a href="https://tms.fih.ch/competitions/1687">
+ View competition details</a>
 END:VEVENT
 END:VCALENDAR

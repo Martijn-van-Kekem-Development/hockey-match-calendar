@@ -21,10 +21,10 @@ LOCATION:Pitch 2 | Terrassa, Spain
 DESCRIPTION:FRA - TUR\nFinal score: 13 - 1\nGender: Men\nEvent: EuroHockey 
  U21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19551\n
  Event link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:FRA - TUR\nFinal score: 13 - 1\nGender: Men\nE
- vent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/m
- atches/19551">View match details</a>\n<a href="https://tms.fih.ch/competiti
- ons/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:FRA - TUR<br>Final score: 13 - 1<br>Gender: Me
+ n<br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tm
+ s.fih.ch/matches/19551">View match details</a><br><a href="https://tms.fih.
+ ch/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19552
@@ -36,10 +36,10 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:GER - BEL\nFinal score: 3 - 3\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19552\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:GER - BEL\nFinal score: 3 - 3\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19552">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:GER - BEL<br>Final score: 3 - 3<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19552">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19553
@@ -51,10 +51,10 @@ LOCATION:Pitch 2 | Terrassa, Spain
 DESCRIPTION:NED - ENG\nFinal score: 3 - 2\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19553\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:NED - ENG\nFinal score: 3 - 2\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19553">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:NED - ENG<br>Final score: 3 - 2<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19553">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19554
@@ -66,10 +66,10 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:ESP - IRL\nFinal score: 3 - 3\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19554\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:ESP - IRL\nFinal score: 3 - 3\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19554">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:ESP - IRL<br>Final score: 3 - 3<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19554">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19555
@@ -81,10 +81,10 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:BEL - TUR\nFinal score: 8 - 1\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19555\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:BEL - TUR\nFinal score: 8 - 1\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19555">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:BEL - TUR<br>Final score: 8 - 1<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19555">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19556
@@ -96,10 +96,10 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:FRA - GER\nFinal score: 4 - 4\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19556\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:FRA - GER\nFinal score: 4 - 4\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19556">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:FRA - GER<br>Final score: 4 - 4<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19556">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19557
@@ -111,10 +111,10 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:ENG - IRL\nFinal score: 1 - 1\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19557\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:ENG - IRL\nFinal score: 1 - 1\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19557">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:ENG - IRL<br>Final score: 1 - 1<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19557">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19558
@@ -126,10 +126,10 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:ESP - NED\nFinal score: 3 - 3\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19558\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:ESP - NED\nFinal score: 3 - 3\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19558">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:ESP - NED<br>Final score: 3 - 3<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19558">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19559
@@ -141,10 +141,10 @@ LOCATION:Pitch 2 | Terrassa, Spain
 DESCRIPTION:GER - TUR\nFinal score: 15 - 1\nGender: Men\nEvent: EuroHockey 
  U21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19559\n
  Event link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:GER - TUR\nFinal score: 15 - 1\nGender: Men\nE
- vent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/m
- atches/19559">View match details</a>\n<a href="https://tms.fih.ch/competiti
- ons/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:GER - TUR<br>Final score: 15 - 1<br>Gender: Me
+ n<br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tm
+ s.fih.ch/matches/19559">View match details</a><br><a href="https://tms.fih.
+ ch/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19560
@@ -156,10 +156,10 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:BEL - FRA\nFinal score: 3 - 2\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19560\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:BEL - FRA\nFinal score: 3 - 2\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19560">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:BEL - FRA<br>Final score: 3 - 2<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19560">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19561
@@ -171,10 +171,10 @@ LOCATION:Pitch 2 | Terrassa, Spain
 DESCRIPTION:NED - IRL\nFinal score: 4 - 1\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19561\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:NED - IRL\nFinal score: 4 - 1\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19561">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:NED - IRL<br>Final score: 4 - 1<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19561">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19562
@@ -186,10 +186,10 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:ENG - ESP\nFinal score: 3 - 3\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19562\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:ENG - ESP\nFinal score: 3 - 3\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19562">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:ENG - ESP<br>Final score: 3 - 3<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19562">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19563
@@ -201,10 +201,10 @@ LOCATION:Pitch 2 | Terrassa, Spain
 DESCRIPTION:FRA - ENG\nFinal score: 2 - 4\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19563\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:FRA - ENG\nFinal score: 2 - 4\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19563">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:FRA - ENG<br>Final score: 2 - 4<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19563">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19566
@@ -216,10 +216,10 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:NED - GER\nFinal score: 3 - 2\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19566\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:NED - GER\nFinal score: 3 - 2\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19566">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:NED - GER<br>Final score: 3 - 2<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19566">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19565
@@ -231,10 +231,10 @@ LOCATION:Pitch 2 | Terrassa, Spain
 DESCRIPTION:TUR - IRL\nFinal score: 3 - 6\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19565\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:TUR - IRL\nFinal score: 3 - 6\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19565">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:TUR - IRL<br>Final score: 3 - 6<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19565">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19564
@@ -246,10 +246,10 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:BEL - ESP\nFinal score: 2 - 3\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19564\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:BEL - ESP\nFinal score: 2 - 3\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19564">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:BEL - ESP<br>Final score: 2 - 3<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19564">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19567
@@ -261,10 +261,10 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:BEL - GER\nFinal score: 4 - 3\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19567\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:BEL - GER\nFinal score: 4 - 3\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19567">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:BEL - GER<br>Final score: 4 - 3<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19567">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19568
@@ -276,10 +276,10 @@ LOCATION:Pitch 2 | Terrassa, Spain
 DESCRIPTION:FRA - IRL\nFinal score: 4 - 1\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19568\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:FRA - IRL\nFinal score: 4 - 1\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19568">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:FRA - IRL<br>Final score: 4 - 1<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19568">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19569
@@ -291,10 +291,10 @@ LOCATION:Pitch 2 | Terrassa, Spain
 DESCRIPTION:ENG - TUR\nFinal score: 9 - 0\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19569\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:ENG - TUR\nFinal score: 9 - 0\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19569">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:ENG - TUR<br>Final score: 9 - 0<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19569">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19570
@@ -306,9 +306,9 @@ LOCATION:Pitch 1 (LIVE on EHTV) | Terrassa, Spain
 DESCRIPTION:ESP - NED\nFinal score: 3 - 1\nGender: Men\nEvent: EuroHockey U
  21 Championship Men 2024\n\nMatch link: https://tms.fih.ch/matches/19570\nE
  vent link: https://tms.fih.ch/competitions/1627
-X-ALT-DESC;FMTTYPE=text/html:ESP - NED\nFinal score: 3 - 1\nGender: Men\nEv
- ent: EuroHockey U21 Championship Men 2024\n\n<a href="https://tms.fih.ch/ma
- tches/19570">View match details</a>\n<a href="https://tms.fih.ch/competitio
- ns/1627">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:ESP - NED<br>Final score: 3 - 1<br>Gender: Men
+ <br>Event: EuroHockey U21 Championship Men 2024<br><br><a href="https://tms
+ .fih.ch/matches/19570">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1627">View competition details</a>
 END:VEVENT
 END:VCALENDAR

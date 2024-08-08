@@ -21,10 +21,10 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:WAL - LUX\nGender: Men\nEvent: EuroHockey Championship Qualifie
  r B Men 2024\n\nMatch link: https://tms.fih.ch/matches/19301\nEvent link: h
  ttps://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:WAL - LUX\nGender: Men\nEvent: EuroHockey Cham
- pionship Qualifier B Men 2024\n\n<a href="https://tms.fih.ch/matches/19301"
- >View match details</a>\n<a href="https://tms.fih.ch/competitions/1622">Vie
- w competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:WAL - LUX<br>Gender: Men<br>Event: EuroHockey 
+ Championship Qualifier B Men 2024<br><br><a href="https://tms.fih.ch/matche
+ s/19301">View match details</a><br><a href="https://tms.fih.ch/competitions
+ /1622">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19302
@@ -36,10 +36,10 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:CZE - TUR\nGender: Men\nEvent: EuroHockey Championship Qualifie
  r B Men 2024\n\nMatch link: https://tms.fih.ch/matches/19302\nEvent link: h
  ttps://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:CZE - TUR\nGender: Men\nEvent: EuroHockey Cham
- pionship Qualifier B Men 2024\n\n<a href="https://tms.fih.ch/matches/19302"
- >View match details</a>\n<a href="https://tms.fih.ch/competitions/1622">Vie
- w competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:CZE - TUR<br>Gender: Men<br>Event: EuroHockey 
+ Championship Qualifier B Men 2024<br><br><a href="https://tms.fih.ch/matche
+ s/19302">View match details</a><br><a href="https://tms.fih.ch/competitions
+ /1622">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19303
@@ -51,10 +51,10 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:ITA - POL\nGender: Men\nEvent: EuroHockey Championship Qualifie
  r B Men 2024\n\nMatch link: https://tms.fih.ch/matches/19303\nEvent link: h
  ttps://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:ITA - POL\nGender: Men\nEvent: EuroHockey Cham
- pionship Qualifier B Men 2024\n\n<a href="https://tms.fih.ch/matches/19303"
- >View match details</a>\n<a href="https://tms.fih.ch/competitions/1622">Vie
- w competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:ITA - POL<br>Gender: Men<br>Event: EuroHockey 
+ Championship Qualifier B Men 2024<br><br><a href="https://tms.fih.ch/matche
+ s/19303">View match details</a><br><a href="https://tms.fih.ch/competitions
+ /1622">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19304
@@ -66,10 +66,10 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:IRL - MLT\nGender: Men\nEvent: EuroHockey Championship Qualifie
  r B Men 2024\n\nMatch link: https://tms.fih.ch/matches/19304\nEvent link: h
  ttps://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:IRL - MLT\nGender: Men\nEvent: EuroHockey Cham
- pionship Qualifier B Men 2024\n\n<a href="https://tms.fih.ch/matches/19304"
- >View match details</a>\n<a href="https://tms.fih.ch/competitions/1622">Vie
- w competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:IRL - MLT<br>Gender: Men<br>Event: EuroHockey 
+ Championship Qualifier B Men 2024<br><br><a href="https://tms.fih.ch/matche
+ s/19304">View match details</a><br><a href="https://tms.fih.ch/competitions
+ /1622">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19305
@@ -81,10 +81,10 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:Loser Match 1 - Loser Match 2\nGender: Men\nEvent: EuroHockey C
  hampionship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matches/
  19305\nEvent link: https://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:Loser Match 1 - Loser Match 2\nGender: Men\nEv
- ent: EuroHockey Championship Qualifier B Men 2024\n\n<a href="https://tms.f
- ih.ch/matches/19305">View match details</a>\n<a href="https://tms.fih.ch/co
- mpetitions/1622">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:Loser Match 1 - Loser Match 2<br>Gender: Men<b
+ r>Event: EuroHockey Championship Qualifier B Men 2024<br><br><a href="https
+ ://tms.fih.ch/matches/19305">View match details</a><br><a href="https://tms
+ .fih.ch/competitions/1622">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19306
@@ -96,10 +96,10 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:Loser Match 4 - Loser Match 3\nGender: Men\nEvent: EuroHockey C
  hampionship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matches/
  19306\nEvent link: https://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:Loser Match 4 - Loser Match 3\nGender: Men\nEv
- ent: EuroHockey Championship Qualifier B Men 2024\n\n<a href="https://tms.f
- ih.ch/matches/19306">View match details</a>\n<a href="https://tms.fih.ch/co
- mpetitions/1622">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:Loser Match 4 - Loser Match 3<br>Gender: Men<b
+ r>Event: EuroHockey Championship Qualifier B Men 2024<br><br><a href="https
+ ://tms.fih.ch/matches/19306">View match details</a><br><a href="https://tms
+ .fih.ch/competitions/1622">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19307
@@ -111,10 +111,10 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:Winner Match 1 - Winner Match 2\nGender: Men\nEvent: EuroHockey
   Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matche
  s/19307\nEvent link: https://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:Winner Match 1 - Winner Match 2\nGender: Men\n
- Event: EuroHockey Championship Qualifier B Men 2024\n\n<a href="https://tms
- .fih.ch/matches/19307">View match details</a>\n<a href="https://tms.fih.ch/
- competitions/1622">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:Winner Match 1 - Winner Match 2<br>Gender: Men
+ <br>Event: EuroHockey Championship Qualifier B Men 2024<br><br><a href="htt
+ ps://tms.fih.ch/matches/19307">View match details</a><br><a href="https://t
+ ms.fih.ch/competitions/1622">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19308
@@ -126,10 +126,10 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:Winner Match 4 - Winner Match 3\nGender: Men\nEvent: EuroHockey
   Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matche
  s/19308\nEvent link: https://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:Winner Match 4 - Winner Match 3\nGender: Men\n
- Event: EuroHockey Championship Qualifier B Men 2024\n\n<a href="https://tms
- .fih.ch/matches/19308">View match details</a>\n<a href="https://tms.fih.ch/
- competitions/1622">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:Winner Match 4 - Winner Match 3<br>Gender: Men
+ <br>Event: EuroHockey Championship Qualifier B Men 2024<br><br><a href="htt
+ ps://tms.fih.ch/matches/19308">View match details</a><br><a href="https://t
+ ms.fih.ch/competitions/1622">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19309
@@ -141,10 +141,10 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:Loser Match 5 - Loser Match 6\nGender: Men\nEvent: EuroHockey C
  hampionship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matches/
  19309\nEvent link: https://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:Loser Match 5 - Loser Match 6\nGender: Men\nEv
- ent: EuroHockey Championship Qualifier B Men 2024\n\n<a href="https://tms.f
- ih.ch/matches/19309">View match details</a>\n<a href="https://tms.fih.ch/co
- mpetitions/1622">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:Loser Match 5 - Loser Match 6<br>Gender: Men<b
+ r>Event: EuroHockey Championship Qualifier B Men 2024<br><br><a href="https
+ ://tms.fih.ch/matches/19309">View match details</a><br><a href="https://tms
+ .fih.ch/competitions/1622">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19310
@@ -156,10 +156,10 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:Winner Match 5 - Winner Match 6\nGender: Men\nEvent: EuroHockey
   Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matche
  s/19310\nEvent link: https://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:Winner Match 5 - Winner Match 6\nGender: Men\n
- Event: EuroHockey Championship Qualifier B Men 2024\n\n<a href="https://tms
- .fih.ch/matches/19310">View match details</a>\n<a href="https://tms.fih.ch/
- competitions/1622">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:Winner Match 5 - Winner Match 6<br>Gender: Men
+ <br>Event: EuroHockey Championship Qualifier B Men 2024<br><br><a href="htt
+ ps://tms.fih.ch/matches/19310">View match details</a><br><a href="https://t
+ ms.fih.ch/competitions/1622">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19311
@@ -171,10 +171,10 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:Loser semi-final 2 - Loser semi-final 1\nGender: Men\nEvent: Eu
  roHockey Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih.c
  h/matches/19311\nEvent link: https://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:Loser semi-final 2 - Loser semi-final 1\nGende
- r: Men\nEvent: EuroHockey Championship Qualifier B Men 2024\n\n<a href="htt
- ps://tms.fih.ch/matches/19311">View match details</a>\n<a href="https://tms
- .fih.ch/competitions/1622">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:Loser semi-final 2 - Loser semi-final 1<br>Gen
+ der: Men<br>Event: EuroHockey Championship Qualifier B Men 2024<br><br><a h
+ ref="https://tms.fih.ch/matches/19311">View match details</a><br><a href="h
+ ttps://tms.fih.ch/competitions/1622">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19313
@@ -186,9 +186,9 @@ LOCATION:Pitch 1 | Dublin, Ireland
 DESCRIPTION:Winner semi-final 2 - Winner semi-final 1\nGender: Men\nEvent: 
  EuroHockey Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih
  .ch/matches/19313\nEvent link: https://tms.fih.ch/competitions/1622
-X-ALT-DESC;FMTTYPE=text/html:Winner semi-final 2 - Winner semi-final 1\nGen
- der: Men\nEvent: EuroHockey Championship Qualifier B Men 2024\n\n<a href="h
- ttps://tms.fih.ch/matches/19313">View match details</a>\n<a href="https://t
- ms.fih.ch/competitions/1622">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:Winner semi-final 2 - Winner semi-final 1<br>G
+ ender: Men<br>Event: EuroHockey Championship Qualifier B Men 2024<br><br><a
+  href="https://tms.fih.ch/matches/19313">View match details</a><br><a href=
+ "https://tms.fih.ch/competitions/1622">View competition details</a>
 END:VEVENT
 END:VCALENDAR

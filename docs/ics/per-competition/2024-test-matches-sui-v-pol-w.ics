@@ -21,10 +21,10 @@ LOCATION:Pitch 1 | Lucerne
 DESCRIPTION:SUI - POL\nFinal score: 0 - 1\nGender: Women\nEvent: 2024 Test 
  Matches SUI v POL (W)\n\nMatch link: https://tms.fih.ch/matches/19996\nEven
  t link: https://tms.fih.ch/competitions/1681
-X-ALT-DESC;FMTTYPE=text/html:SUI - POL\nFinal score: 0 - 1\nGender: Women\n
- Event: 2024 Test Matches SUI v POL (W)\n\n<a href="https://tms.fih.ch/match
- es/19996">View match details</a>\n<a href="https://tms.fih.ch/competitions/
- 1681">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:SUI - POL<br>Final score: 0 - 1<br>Gender: Wom
+ en<br>Event: 2024 Test Matches SUI v POL (W)<br><br><a href="https://tms.fi
+ h.ch/matches/19996">View match details</a><br><a href="https://tms.fih.ch/c
+ ompetitions/1681">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19997
@@ -36,10 +36,10 @@ LOCATION:Pitch 1 | Lucerne
 DESCRIPTION:SUI - POL\nFinal score: 0 - 3\nGender: Women\nEvent: 2024 Test 
  Matches SUI v POL (W)\n\nMatch link: https://tms.fih.ch/matches/19997\nEven
  t link: https://tms.fih.ch/competitions/1681
-X-ALT-DESC;FMTTYPE=text/html:SUI - POL\nFinal score: 0 - 3\nGender: Women\n
- Event: 2024 Test Matches SUI v POL (W)\n\n<a href="https://tms.fih.ch/match
- es/19997">View match details</a>\n<a href="https://tms.fih.ch/competitions/
- 1681">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:SUI - POL<br>Final score: 0 - 3<br>Gender: Wom
+ en<br>Event: 2024 Test Matches SUI v POL (W)<br><br><a href="https://tms.fi
+ h.ch/matches/19997">View match details</a><br><a href="https://tms.fih.ch/c
+ ompetitions/1681">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19998
@@ -51,9 +51,9 @@ LOCATION:Pitch 1 | Lucerne
 DESCRIPTION:SUI - POL\nFinal score: 0 - 0\nGender: Women\nEvent: 2024 Test 
  Matches SUI v POL (W)\n\nMatch link: https://tms.fih.ch/matches/19998\nEven
  t link: https://tms.fih.ch/competitions/1681
-X-ALT-DESC;FMTTYPE=text/html:SUI - POL\nFinal score: 0 - 0\nGender: Women\n
- Event: 2024 Test Matches SUI v POL (W)\n\n<a href="https://tms.fih.ch/match
- es/19998">View match details</a>\n<a href="https://tms.fih.ch/competitions/
- 1681">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:SUI - POL<br>Final score: 0 - 0<br>Gender: Wom
+ en<br>Event: 2024 Test Matches SUI v POL (W)<br><br><a href="https://tms.fi
+ h.ch/matches/19998">View match details</a><br><a href="https://tms.fih.ch/c
+ ompetitions/1681">View competition details</a>
 END:VEVENT
 END:VCALENDAR

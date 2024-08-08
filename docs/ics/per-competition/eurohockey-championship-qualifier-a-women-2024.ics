@@ -21,10 +21,10 @@ LOCATION:Pitch 1 | Glasgow, Scotland
 DESCRIPTION:WAL - CRO\nGender: Women\nEvent: EuroHockey Championship Qualif
  ier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19658\nEvent lin
  k: https://tms.fih.ch/competitions/1623
-X-ALT-DESC;FMTTYPE=text/html:WAL - CRO\nGender: Women\nEvent: EuroHockey Ch
- ampionship Qualifier A Women 2024\n\n<a href="https://tms.fih.ch/matches/19
- 658">View match details</a>\n<a href="https://tms.fih.ch/competitions/1623"
- >View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:WAL - CRO<br>Gender: Women<br>Event: EuroHocke
+ y Championship Qualifier A Women 2024<br><br><a href="https://tms.fih.ch/ma
+ tches/19658">View match details</a><br><a href="https://tms.fih.ch/competit
+ ions/1623">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19659
@@ -36,10 +36,10 @@ LOCATION:Pitch 1 | Glasgow, Scotland
 DESCRIPTION:AUT - LTU\nGender: Women\nEvent: EuroHockey Championship Qualif
  ier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19659\nEvent lin
  k: https://tms.fih.ch/competitions/1623
-X-ALT-DESC;FMTTYPE=text/html:AUT - LTU\nGender: Women\nEvent: EuroHockey Ch
- ampionship Qualifier A Women 2024\n\n<a href="https://tms.fih.ch/matches/19
- 659">View match details</a>\n<a href="https://tms.fih.ch/competitions/1623"
- >View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:AUT - LTU<br>Gender: Women<br>Event: EuroHocke
+ y Championship Qualifier A Women 2024<br><br><a href="https://tms.fih.ch/ma
+ tches/19659">View match details</a><br><a href="https://tms.fih.ch/competit
+ ions/1623">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19660
@@ -51,10 +51,10 @@ LOCATION:Pitch 1 | Glasgow, Scotland
 DESCRIPTION:Loser M1 - Loser M2\nGender: Women\nEvent: EuroHockey Champions
  hip Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19660\
  nEvent link: https://tms.fih.ch/competitions/1623
-X-ALT-DESC;FMTTYPE=text/html:Loser M1 - Loser M2\nGender: Women\nEvent: Eur
- oHockey Championship Qualifier A Women 2024\n\n<a href="https://tms.fih.ch/
- matches/19660">View match details</a>\n<a href="https://tms.fih.ch/competit
- ions/1623">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:Loser M1 - Loser M2<br>Gender: Women<br>Event:
+  EuroHockey Championship Qualifier A Women 2024<br><br><a href="https://tms
+ .fih.ch/matches/19660">View match details</a><br><a href="https://tms.fih.c
+ h/competitions/1623">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19661
@@ -66,10 +66,10 @@ LOCATION:Pitch 1 | Glasgow, Scotland
 DESCRIPTION:CZE - Winner M1\nGender: Women\nEvent: EuroHockey Championship 
  Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19661\nEve
  nt link: https://tms.fih.ch/competitions/1623
-X-ALT-DESC;FMTTYPE=text/html:CZE - Winner M1\nGender: Women\nEvent: EuroHoc
- key Championship Qualifier A Women 2024\n\n<a href="https://tms.fih.ch/matc
- hes/19661">View match details</a>\n<a href="https://tms.fih.ch/competitions
- /1623">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:CZE - Winner M1<br>Gender: Women<br>Event: Eur
+ oHockey Championship Qualifier A Women 2024<br><br><a href="https://tms.fih
+ .ch/matches/19661">View match details</a><br><a href="https://tms.fih.ch/co
+ mpetitions/1623">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19662
@@ -81,10 +81,10 @@ LOCATION:Pitch 1 | Glasgow, Scotland
 DESCRIPTION:SCO - Winner M2\nGender: Women\nEvent: EuroHockey Championship 
  Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19662\nEve
  nt link: https://tms.fih.ch/competitions/1623
-X-ALT-DESC;FMTTYPE=text/html:SCO - Winner M2\nGender: Women\nEvent: EuroHoc
- key Championship Qualifier A Women 2024\n\n<a href="https://tms.fih.ch/matc
- hes/19662">View match details</a>\n<a href="https://tms.fih.ch/competitions
- /1623">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:SCO - Winner M2<br>Gender: Women<br>Event: Eur
+ oHockey Championship Qualifier A Women 2024<br><br><a href="https://tms.fih
+ .ch/matches/19662">View match details</a><br><a href="https://tms.fih.ch/co
+ mpetitions/1623">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19663
@@ -96,10 +96,10 @@ LOCATION:Pitch 1 | Glasgow, Scotland
 DESCRIPTION:Loser SF2 - Loser SF1\nGender: Women\nEvent: EuroHockey Champio
  nship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/1966
  3\nEvent link: https://tms.fih.ch/competitions/1623
-X-ALT-DESC;FMTTYPE=text/html:Loser SF2 - Loser SF1\nGender: Women\nEvent: E
- uroHockey Championship Qualifier A Women 2024\n\n<a href="https://tms.fih.c
- h/matches/19663">View match details</a>\n<a href="https://tms.fih.ch/compet
- itions/1623">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:Loser SF2 - Loser SF1<br>Gender: Women<br>Even
+ t: EuroHockey Championship Qualifier A Women 2024<br><br><a href="https://t
+ ms.fih.ch/matches/19663">View match details</a><br><a href="https://tms.fih
+ .ch/competitions/1623">View competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19664
@@ -111,9 +111,9 @@ LOCATION:Pitch 1 | Glasgow, Scotland
 DESCRIPTION:Winner SF2 - Winner SF1\nGender: Women\nEvent: EuroHockey Champ
  ionship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19
  664\nEvent link: https://tms.fih.ch/competitions/1623
-X-ALT-DESC;FMTTYPE=text/html:Winner SF2 - Winner SF1\nGender: Women\nEvent:
-  EuroHockey Championship Qualifier A Women 2024\n\n<a href="https://tms.fih
- .ch/matches/19664">View match details</a>\n<a href="https://tms.fih.ch/comp
- etitions/1623">View competition details</a>
+X-ALT-DESC;FMTTYPE=text/html:Winner SF2 - Winner SF1<br>Gender: Women<br>Ev
+ ent: EuroHockey Championship Qualifier A Women 2024<br><br><a href="https:/
+ /tms.fih.ch/matches/19664">View match details</a><br><a href="https://tms.f
+ ih.ch/competitions/1623">View competition details</a>
 END:VEVENT
 END:VCALENDAR

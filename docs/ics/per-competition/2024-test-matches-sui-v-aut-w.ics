@@ -21,10 +21,10 @@ LOCATION:Pitch 1 | Lucerne
 DESCRIPTION:SUI - AUT\nGender: Women\nEvent: 2024 Test Matches SUI v AUT (W
  )\n\nMatch link: https://tms.fih.ch/matches/19993\nEvent link: https://tms.
  fih.ch/competitions/1680
-X-ALT-DESC;FMTTYPE=text/html:SUI - AUT\nGender: Women\nEvent: 2024 Test Mat
- ches SUI v AUT (W)\n\n<a href="https://tms.fih.ch/matches/19993">View match
-  details</a>\n<a href="https://tms.fih.ch/competitions/1680">View competiti
- on details</a>
+X-ALT-DESC;FMTTYPE=text/html:SUI - AUT<br>Gender: Women<br>Event: 2024 Test
+  Matches SUI v AUT (W)<br><br><a href="https://tms.fih.ch/matches/19993">Vi
+ ew match details</a><br><a href="https://tms.fih.ch/competitions/1680">View
+  competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19994
@@ -36,10 +36,10 @@ LOCATION:Pitch 1 | Lucerne
 DESCRIPTION:SUI - AUT\nGender: Women\nEvent: 2024 Test Matches SUI v AUT (W
  )\n\nMatch link: https://tms.fih.ch/matches/19994\nEvent link: https://tms.
  fih.ch/competitions/1680
-X-ALT-DESC;FMTTYPE=text/html:SUI - AUT\nGender: Women\nEvent: 2024 Test Mat
- ches SUI v AUT (W)\n\n<a href="https://tms.fih.ch/matches/19994">View match
-  details</a>\n<a href="https://tms.fih.ch/competitions/1680">View competiti
- on details</a>
+X-ALT-DESC;FMTTYPE=text/html:SUI - AUT<br>Gender: Women<br>Event: 2024 Test
+  Matches SUI v AUT (W)<br><br><a href="https://tms.fih.ch/matches/19994">Vi
+ ew match details</a><br><a href="https://tms.fih.ch/competitions/1680">View
+  competition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:19995
@@ -51,9 +51,9 @@ LOCATION:Pitch 1 | Lucerne
 DESCRIPTION:SUI - AUT\nGender: Women\nEvent: 2024 Test Matches SUI v AUT (W
  )\n\nMatch link: https://tms.fih.ch/matches/19995\nEvent link: https://tms.
  fih.ch/competitions/1680
-X-ALT-DESC;FMTTYPE=text/html:SUI - AUT\nGender: Women\nEvent: 2024 Test Mat
- ches SUI v AUT (W)\n\n<a href="https://tms.fih.ch/matches/19995">View match
-  details</a>\n<a href="https://tms.fih.ch/competitions/1680">View competiti
- on details</a>
+X-ALT-DESC;FMTTYPE=text/html:SUI - AUT<br>Gender: Women<br>Event: 2024 Test
+  Matches SUI v AUT (W)<br><br><a href="https://tms.fih.ch/matches/19995">Vi
+ ew match details</a><br><a href="https://tms.fih.ch/competitions/1680">View
+  competition details</a>
 END:VEVENT
 END:VCALENDAR

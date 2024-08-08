@@ -21,10 +21,10 @@ LOCATION:Pitch 1 | Cardiff, Wales
 DESCRIPTION:WAL - AUT\nGender: Men\nEvent: 2024 Test Matches WAL v AUT (M)\
  n\nMatch link: https://tms.fih.ch/matches/20024\nEvent link: https://tms.fi
  h.ch/competitions/1686
-X-ALT-DESC;FMTTYPE=text/html:WAL - AUT\nGender: Men\nEvent: 2024 Test Match
- es WAL v AUT (M)\n\n<a href="https://tms.fih.ch/matches/20024">View match d
- etails</a>\n<a href="https://tms.fih.ch/competitions/1686">View competition
-  details</a>
+X-ALT-DESC;FMTTYPE=text/html:WAL - AUT<br>Gender: Men<br>Event: 2024 Test M
+ atches WAL v AUT (M)<br><br><a href="https://tms.fih.ch/matches/20024">View
+  match details</a><br><a href="https://tms.fih.ch/competitions/1686">View c
+ ompetition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:20025
@@ -36,10 +36,10 @@ LOCATION:Pitch 1 | Cardiff, Wales
 DESCRIPTION:WAL - AUT\nGender: Men\nEvent: 2024 Test Matches WAL v AUT (M)\
  n\nMatch link: https://tms.fih.ch/matches/20025\nEvent link: https://tms.fi
  h.ch/competitions/1686
-X-ALT-DESC;FMTTYPE=text/html:WAL - AUT\nGender: Men\nEvent: 2024 Test Match
- es WAL v AUT (M)\n\n<a href="https://tms.fih.ch/matches/20025">View match d
- etails</a>\n<a href="https://tms.fih.ch/competitions/1686">View competition
-  details</a>
+X-ALT-DESC;FMTTYPE=text/html:WAL - AUT<br>Gender: Men<br>Event: 2024 Test M
+ atches WAL v AUT (M)<br><br><a href="https://tms.fih.ch/matches/20025">View
+  match details</a><br><a href="https://tms.fih.ch/competitions/1686">View c
+ ompetition details</a>
 END:VEVENT
 BEGIN:VEVENT
 UID:20026
@@ -51,9 +51,9 @@ LOCATION:Pitch 1 | Cardiff, Wales
 DESCRIPTION:WAL - AUT\nGender: Men\nEvent: 2024 Test Matches WAL v AUT (M)\
  n\nMatch link: https://tms.fih.ch/matches/20026\nEvent link: https://tms.fi
  h.ch/competitions/1686
-X-ALT-DESC;FMTTYPE=text/html:WAL - AUT\nGender: Men\nEvent: 2024 Test Match
- es WAL v AUT (M)\n\n<a href="https://tms.fih.ch/matches/20026">View match d
- etails</a>\n<a href="https://tms.fih.ch/competitions/1686">View competition
-  details</a>
+X-ALT-DESC;FMTTYPE=text/html:WAL - AUT<br>Gender: Men<br>Event: 2024 Test M
+ atches WAL v AUT (M)<br><br><a href="https://tms.fih.ch/matches/20026">View
+  match details</a><br><a href="https://tms.fih.ch/competitions/1686">View c
+ ompetition details</a>
 END:VEVENT
 END:VCALENDAR
