@@ -13,7 +13,7 @@ async function copyURL(evt) {
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
-    const files = await fetch("files.json");
+    const files = await fetch("files.json", {cache: "no-store"});
     const data = await files.text();
     let json = JSON.parse(data);
 
