@@ -185,6 +185,7 @@ export class Match {
             "DTEND;TZID=UTC": DateHelper.toICS(endDate),
             SUMMARY: this.getMatchTitle(),
             LOCATION: this.getLocation(),
+            TRANSP: "TRANSPARENT",
             DESCRIPTION: this.getMatchDescription(false),
             "X-ALT-DESC;FMTTYPE=text/html": this.getMatchDescription(true)
         }
