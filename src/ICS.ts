@@ -8,7 +8,10 @@ export class ICS {
      * @param fileName The file name without extension.
      */
     public static async writeToFile(ics: string, fileName: string) {
-        await fs.writeFile(`out/${fileName}.ics`, ics, {flag: "w+"});
+        const outputFile = `out/${fileName}.ics`;
+        const outputFolder = outputFile.split("/").slice(0, -1).join("/");
+        await fs.mkdir(outputFolder, {recursive: true});
+        await fs.writeFile(outputFile, ics, {flag: "w+"});
     }
 
     /**
