@@ -20,12 +20,11 @@ export class TMSCompetitionFetcher {
     /**
      * Get the competitions.
      * @param type The type of competitions to get.
-     * @param stopID The ID of the competition to stop looking.
-     *               The parser will stop fetching competitions when this ID is reached.
-     *               This parameter is ignored for types other than 'previous' and 'all'.
-     *               The competition with the given stop ID will not be included in the result.
+     * @param minYear The minimum year to include in the result.
+     *                The parser will stop fetching competitions when this year has past.
+     *                This parameter is ignored for types other than 'previous' and 'all'.
      */
-    public async fetch(type: "all" | "upcoming" | "previous" | "in-progress", stopID: string = null) {
+    public async fetch(type: "all" | "upcoming" | "previous" | "in-progress", minYear: number = null) {
         let page = 1;
         const competitions: Map<string, Competition> = new Map();
 
@@ -48,7 +47,7 @@ export class TMSCompetitionFetcher {
                     const item = this.createCompetition(row, index++);
 
                     // Check if we need to stop
-                    if ((type === "previous" || type === "all") && item.getID() === stopID) break fetchLoop;
+                    if ((type === "previous" || type === "all") && item.getYear() < minYear) break fetchLoop;
 
                     competitions.set(item.getID(), item);
                 }
@@ -71,12 +70,17 @@ export class TMSCompetitionFetcher {
 
         // Add competition ID.
         const id = link.getAttribute("href").split("/").slice(-1)[0] ?? null;
-        if (!id) throw new Error("Failed to get ID for match.");
+        if (!id) throw new Error("Failed to get ID for competition.");
         else object.setID(id);
+
+        // Add competition year.
+        const year = row.querySelector("td:nth-child(3)").textContent.trim().slice(-4);
+        if (!year) throw new Error("Failed to get year for competition.");
+        else object.setYear(Number(year));
 
         // Add competition name.
         const name = link.textContent ?? null;
-        if (!name) throw new Error("Failed to get name for match.");
+        if (!name) throw new Error("Failed to get name for competition.");
         else object.setName(name.trim());
 
         // Add competition location

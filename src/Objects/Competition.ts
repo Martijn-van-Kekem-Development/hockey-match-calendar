@@ -46,6 +46,12 @@ export class Competition {
     private matches: Match[] = [];
 
     /**
+     * The year this competition takes place.
+     * @private
+     */
+    private year: number;
+
+    /**
      * Constructor for Competition.
      * @param fetcher The fetcher that fetched this competition.
      * @param index The competition index.
@@ -61,6 +67,14 @@ export class Competition {
      */
     public setName(name: string) {
         this.name = name;
+    }
+
+    /**
+     * Set the year for this competition.
+     * @param year The year
+     */
+    public setYear(year: number) {
+        this.year = year;
     }
 
     /**
@@ -115,6 +129,13 @@ export class Competition {
      */
     public getLocation(): string {
         return this.location;
+    }
+
+    /**
+     * Get the year for this competition.
+     */
+    public getYear(): number {
+        return this.year;
     }
 
     /**
