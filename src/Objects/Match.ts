@@ -185,7 +185,8 @@ export class Match {
             DTEND: DateHelper.toICS(endDate),
             SUMMARY: this.getMatchTitle(),
             LOCATION: this.getLocation(),
-            DESCRIPTION: this.getMatchDescription()
+            DESCRIPTION: this.getMatchDescription(false),
+            "X-ALT-DESC;FMTTYPE=text/html": this.getMatchDescription(true)
         }
     }
 
@@ -227,8 +228,9 @@ export class Match {
 
     /**
      * Get the match description.
+     * @param html Whether to return HTML.
      */
-    public getMatchDescription(): string {
+    public getMatchDescription(html: boolean): string {
         const lines: string[] = [];
 
         // Add match data.
@@ -240,7 +242,7 @@ export class Match {
 
         // Append fetcher description
         if (this.competition && this.competition.getFetcher())
-            lines.push(...this.competition.getFetcher().descriptionToAppend(this.competition,  this));
+            lines.push(...this.competition.getFetcher().descriptionToAppend(this.competition,  this, html));
 
         return lines.join("\\n");
     }

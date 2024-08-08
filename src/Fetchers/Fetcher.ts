@@ -22,6 +22,7 @@ export abstract class Fetcher {
      * Specifies what description to append to each match event when this fetcher is used.
      * @param competition The competition object.
      * @param match The match object.
+     * @param html Whether to add HTML.
      */
-    public abstract descriptionToAppend(competition: Competition, match: Match): string[];
+    public abstract descriptionToAppend(competition: Competition, match: Match, html: boolean): string[];
 }

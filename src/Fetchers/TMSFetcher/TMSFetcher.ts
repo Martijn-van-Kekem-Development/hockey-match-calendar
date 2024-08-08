@@ -76,12 +76,17 @@ export class TMSFetcher extends Fetcher {
     /**
      * @override
      */
-    descriptionToAppend(competition: Competition, match: Match): string[] {
+    descriptionToAppend(competition: Competition, match: Match, html: boolean): string[] {
         const lines: string[] = [];
 
         // Add TMS links
-        if (match.getID()) lines.push("Match link: " + `${this.getBaseURL()}/matches/${match.getID()}`);
-        if (competition.getID()) lines.push("Event link: " + `${this.getBaseURL()}/competitions/${competition.getID()}`);
+        if (html) {
+            if (match.getID()) lines.push(`<a href="${this.getBaseURL()}/matches/${match.getID()}">View match details</a>`);
+            if (competition.getID()) lines.push(`<a href="${this.getBaseURL()}/competitions/${competition.getID()}">View competition details</a>`);
+        } else {
+            if (match.getID()) lines.push("Match link: " + `${this.getBaseURL()}/matches/${match.getID()}`);
+            if (competition.getID()) lines.push("Event link: " + `${this.getBaseURL()}/competitions/${competition.getID()}`);
+        }
 
         return lines;
     }
