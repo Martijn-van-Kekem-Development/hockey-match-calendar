@@ -18,6 +18,7 @@ DTSTART;TZID=UTC:20240822T151500
 DTEND;TZID=UTC:20240822T171500
 SUMMARY:🏑 EHCQ W QF2 | WAL - CRO
 LOCATION:Pitch 1 | Glasgow, Scotland
+TRANSP:TRANSPARENT
 DESCRIPTION:WAL - CRO\nGender: Women\nEvent: EuroHockey Championship Qualif
  ier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19658\nEvent lin
  k: https://tms.fih.ch/competitions/1623
@@ -33,6 +34,7 @@ DTSTART;TZID=UTC:20240822T173000
 DTEND;TZID=UTC:20240822T193000
 SUMMARY:🏑 EHCQ W QF3 | AUT - LTU
 LOCATION:Pitch 1 | Glasgow, Scotland
+TRANSP:TRANSPARENT
 DESCRIPTION:AUT - LTU\nGender: Women\nEvent: EuroHockey Championship Qualif
  ier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19659\nEvent lin
  k: https://tms.fih.ch/competitions/1623
@@ -48,6 +50,7 @@ DTSTART;TZID=UTC:20240823T173000
 DTEND;TZID=UTC:20240823T193000
 SUMMARY:🏑 EHCQ W 5v6 | Loser M1 - Loser M2
 LOCATION:Pitch 1 | Glasgow, Scotland
+TRANSP:TRANSPARENT
 DESCRIPTION:Loser M1 - Loser M2\nGender: Women\nEvent: EuroHockey Champions
  hip Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19660\
  nEvent link: https://tms.fih.ch/competitions/1623
@@ -63,6 +66,7 @@ DTSTART;TZID=UTC:20240824T110000
 DTEND;TZID=UTC:20240824T130000
 SUMMARY:🏑 EHCQ W SF1 | CZE - Winner M1
 LOCATION:Pitch 1 | Glasgow, Scotland
+TRANSP:TRANSPARENT
 DESCRIPTION:CZE - Winner M1\nGender: Women\nEvent: EuroHockey Championship 
  Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19661\nEve
  nt link: https://tms.fih.ch/competitions/1623
@@ -78,6 +82,7 @@ DTSTART;TZID=UTC:20240824T131500
 DTEND;TZID=UTC:20240824T151500
 SUMMARY:🏑 EHCQ W SF2 | SCO - Winner M2
 LOCATION:Pitch 1 | Glasgow, Scotland
+TRANSP:TRANSPARENT
 DESCRIPTION:SCO - Winner M2\nGender: Women\nEvent: EuroHockey Championship 
  Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19662\nEve
  nt link: https://tms.fih.ch/competitions/1623
@@ -93,6 +98,7 @@ DTSTART;TZID=UTC:20240825T100000
 DTEND;TZID=UTC:20240825T120000
 SUMMARY:🏑 EHCQ W 3v4 | Loser SF2 - Loser SF1
 LOCATION:Pitch 1 | Glasgow, Scotland
+TRANSP:TRANSPARENT
 DESCRIPTION:Loser SF2 - Loser SF1\nGender: Women\nEvent: EuroHockey Champio
  nship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/1966
  3\nEvent link: https://tms.fih.ch/competitions/1623
@@ -108,6 +114,7 @@ DTSTART;TZID=UTC:20240825T121500
 DTEND;TZID=UTC:20240825T141500
 SUMMARY:🏑 EHCQ W GF | Winner SF2 - Winner SF1
 LOCATION:Pitch 1 | Glasgow, Scotland
+TRANSP:TRANSPARENT
 DESCRIPTION:Winner SF2 - Winner SF1\nGender: Women\nEvent: EuroHockey Champ
  ionship Qualifier A Women 2024\n\nMatch link: https://tms.fih.ch/matches/19
  664\nEvent link: https://tms.fih.ch/competitions/1623

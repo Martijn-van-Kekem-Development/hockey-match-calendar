@@ -18,6 +18,7 @@ DTSTART;TZID=UTC:20240716T140000
 DTEND;TZID=UTC:20240716T160000
 SUMMARY:✅ U21C W A | WAL - ITA
 LOCATION:Pitch 1 | Rakovnik, Czechia
+TRANSP:TRANSPARENT
 DESCRIPTION:WAL - ITA\nFinal score: 2 - 2\nGender: Women\nEvent: EuroHockey
   U21 Championship II-A Women 2024\n\nMatch link: https://tms.fih.ch/matches
  /19490\nEvent link: https://tms.fih.ch/competitions/1631
@@ -33,6 +34,7 @@ DTSTART;TZID=UTC:20240716T161500
 DTEND;TZID=UTC:20240716T181500
 SUMMARY:✅ U21C W A | CZE - LTU
 LOCATION:Pitch 1 | Rakovnik, Czechia
+TRANSP:TRANSPARENT
 DESCRIPTION:CZE - LTU\nFinal score: 2 - 0\nGender: Women\nEvent: EuroHockey
   U21 Championship II-A Women 2024\n\nMatch link: https://tms.fih.ch/matches
  /19491\nEvent link: https://tms.fih.ch/competitions/1631
@@ -48,6 +50,7 @@ DTSTART;TZID=UTC:20240717T140000
 DTEND;TZID=UTC:20240717T160000
 SUMMARY:✅ U21C W A | ITA - LTU
 LOCATION:Pitch 1 | Rakovnik, Czechia
+TRANSP:TRANSPARENT
 DESCRIPTION:ITA - LTU\nFinal score: 2 - 0\nGender: Women\nEvent: EuroHockey
   U21 Championship II-A Women 2024\n\nMatch link: https://tms.fih.ch/matches
  /19492\nEvent link: https://tms.fih.ch/competitions/1631
@@ -63,6 +66,7 @@ DTSTART;TZID=UTC:20240717T161500
 DTEND;TZID=UTC:20240717T181500
 SUMMARY:✅ U21C W A | CZE - WAL
 LOCATION:Pitch 1 | Rakovnik, Czechia
+TRANSP:TRANSPARENT
 DESCRIPTION:CZE - WAL\nFinal score: 0 - 1\nGender: Women\nEvent: EuroHockey
   U21 Championship II-A Women 2024\n\nMatch link: https://tms.fih.ch/matches
  /19493\nEvent link: https://tms.fih.ch/competitions/1631
@@ -78,6 +82,7 @@ DTSTART;TZID=UTC:20240719T080000
 DTEND;TZID=UTC:20240719T100000
 SUMMARY:✅ U21C W A | WAL - LTU
 LOCATION:Pitch 1 | Rakovnik, Czechia
+TRANSP:TRANSPARENT
 DESCRIPTION:WAL - LTU\nFinal score: 5 - 0\nGender: Women\nEvent: EuroHockey
   U21 Championship II-A Women 2024\n\nMatch link: https://tms.fih.ch/matches
  /19494\nEvent link: https://tms.fih.ch/competitions/1631
@@ -93,6 +98,7 @@ DTSTART;TZID=UTC:20240719T101500
 DTEND;TZID=UTC:20240719T121500
 SUMMARY:✅ U21C W A | ITA - CZE
 LOCATION:Pitch 1 | Rakovnik, Czechia
+TRANSP:TRANSPARENT
 DESCRIPTION:ITA - CZE\nFinal score: 1 - 2\nGender: Women\nEvent: EuroHockey
   U21 Championship II-A Women 2024\n\nMatch link: https://tms.fih.ch/matches
  /19495\nEvent link: https://tms.fih.ch/competitions/1631
@@ -108,6 +114,7 @@ DTSTART;TZID=UTC:20240720T080000
 DTEND;TZID=UTC:20240720T100000
 SUMMARY:✅ U21C W 3v4 | ITA - LTU
 LOCATION:Pitch 1 | Rakovnik, Czechia
+TRANSP:TRANSPARENT
 DESCRIPTION:ITA - LTU\nFinal score: 7 - 0\nGender: Women\nEvent: EuroHockey
   U21 Championship II-A Women 2024\n\nMatch link: https://tms.fih.ch/matches
  /19496\nEvent link: https://tms.fih.ch/competitions/1631
@@ -123,6 +130,7 @@ DTSTART;TZID=UTC:20240720T101500
 DTEND;TZID=UTC:20240720T121500
 SUMMARY:✅ U21C W GF | WAL - CZE
 LOCATION:Pitch 1 | Rakovnik, Czechia
+TRANSP:TRANSPARENT
 DESCRIPTION:WAL - CZE\nFinal score: 3 - 2\nGender: Women\nEvent: EuroHockey
   U21 Championship II-A Women 2024\n\nMatch link: https://tms.fih.ch/matches
  /19497\nEvent link: https://tms.fih.ch/competitions/1631

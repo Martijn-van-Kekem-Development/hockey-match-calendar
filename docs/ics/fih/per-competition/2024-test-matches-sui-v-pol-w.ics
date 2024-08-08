@@ -18,6 +18,7 @@ DTSTART;TZID=UTC:20240802T193000
 DTEND;TZID=UTC:20240802T213000
 SUMMARY:✅ TEST W01 | SUI - POL
 LOCATION:Pitch 1 | Lucerne
+TRANSP:TRANSPARENT
 DESCRIPTION:SUI - POL\nFinal score: 0 - 1\nGender: Women\nEvent: 2024 Test 
  Matches SUI v POL (W)\n\nMatch link: https://tms.fih.ch/matches/19996\nEven
  t link: https://tms.fih.ch/competitions/1681
@@ -33,6 +34,7 @@ DTSTART;TZID=UTC:20240803T160000
 DTEND;TZID=UTC:20240803T180000
 SUMMARY:✅ TEST W02 | SUI - POL
 LOCATION:Pitch 1 | Lucerne
+TRANSP:TRANSPARENT
 DESCRIPTION:SUI - POL\nFinal score: 0 - 3\nGender: Women\nEvent: 2024 Test 
  Matches SUI v POL (W)\n\nMatch link: https://tms.fih.ch/matches/19997\nEven
  t link: https://tms.fih.ch/competitions/1681
@@ -48,6 +50,7 @@ DTSTART;TZID=UTC:20240804T110000
 DTEND;TZID=UTC:20240804T130000
 SUMMARY:✅ TEST W03 | SUI - POL
 LOCATION:Pitch 1 | Lucerne
+TRANSP:TRANSPARENT
 DESCRIPTION:SUI - POL\nFinal score: 0 - 0\nGender: Women\nEvent: 2024 Test 
  Matches SUI v POL (W)\n\nMatch link: https://tms.fih.ch/matches/19998\nEven
  t link: https://tms.fih.ch/competitions/1681

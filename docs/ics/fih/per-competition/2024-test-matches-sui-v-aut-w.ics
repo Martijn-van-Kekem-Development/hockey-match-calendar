@@ -18,6 +18,7 @@ DTSTART;TZID=UTC:20240726T193000
 DTEND;TZID=UTC:20240726T213000
 SUMMARY:🏑 TEST W01 | SUI - AUT
 LOCATION:Pitch 1 | Lucerne
+TRANSP:TRANSPARENT
 DESCRIPTION:SUI - AUT\nGender: Women\nEvent: 2024 Test Matches SUI v AUT (W
  )\n\nMatch link: https://tms.fih.ch/matches/19993\nEvent link: https://tms.
  fih.ch/competitions/1680
@@ -33,6 +34,7 @@ DTSTART;TZID=UTC:20240727T160000
 DTEND;TZID=UTC:20240727T180000
 SUMMARY:🏑 TEST W02 | SUI - AUT
 LOCATION:Pitch 1 | Lucerne
+TRANSP:TRANSPARENT
 DESCRIPTION:SUI - AUT\nGender: Women\nEvent: 2024 Test Matches SUI v AUT (W
  )\n\nMatch link: https://tms.fih.ch/matches/19994\nEvent link: https://tms.
  fih.ch/competitions/1680
@@ -48,6 +50,7 @@ DTSTART;TZID=UTC:20240728T110000
 DTEND;TZID=UTC:20240728T130000
 SUMMARY:🏑 TEST W03 | SUI - AUT
 LOCATION:Pitch 1 | Lucerne
+TRANSP:TRANSPARENT
 DESCRIPTION:SUI - AUT\nGender: Women\nEvent: 2024 Test Matches SUI v AUT (W
  )\n\nMatch link: https://tms.fih.ch/matches/19995\nEvent link: https://tms.
  fih.ch/competitions/1680

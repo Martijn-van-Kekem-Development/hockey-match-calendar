@@ -18,6 +18,7 @@ DTSTART;TZID=UTC:20240817T100000
 DTEND;TZID=UTC:20240817T120000
 SUMMARY:🏑 CSAQ W01 | NAM - ESW
 LOCATION:Pitch 1 | HARARE
+TRANSP:TRANSPARENT
 DESCRIPTION:NAM - ESW\nGender: Women\nEvent: Central-South Africa Qualifier
   for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20030\nEvent li
  nk: https://tms.fih.ch/competitions/1685
@@ -33,6 +34,7 @@ DTSTART;TZID=UTC:20240817T140000
 DTEND;TZID=UTC:20240817T160000
 SUMMARY:🏑 CSAQ W02 | ZIM - ZAM
 LOCATION:Pitch 1 | HARARE
+TRANSP:TRANSPARENT
 DESCRIPTION:ZIM - ZAM\nGender: Women\nEvent: Central-South Africa Qualifier
   for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20031\nEvent li
  nk: https://tms.fih.ch/competitions/1685
@@ -48,6 +50,7 @@ DTSTART;TZID=UTC:20240818T100000
 DTEND;TZID=UTC:20240818T120000
 SUMMARY:🏑 CSAQ W03 | ZAM - ESW
 LOCATION: | HARARE
+TRANSP:TRANSPARENT
 DESCRIPTION:ZAM - ESW\nGender: Women\nEvent: Central-South Africa Qualifier
   for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20032\nEvent li
  nk: https://tms.fih.ch/competitions/1685
@@ -63,6 +66,7 @@ DTSTART;TZID=UTC:20240818T140000
 DTEND;TZID=UTC:20240818T160000
 SUMMARY:🏑 CSAQ W04 | NAM - ZIM
 LOCATION:Pitch 1 | HARARE
+TRANSP:TRANSPARENT
 DESCRIPTION:NAM - ZIM\nGender: Women\nEvent: Central-South Africa Qualifier
   for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20033\nEvent li
  nk: https://tms.fih.ch/competitions/1685
@@ -78,6 +82,7 @@ DTSTART;TZID=UTC:20240820T100000
 DTEND;TZID=UTC:20240820T120000
 SUMMARY:🏑 CSAQ W05 | ZAM - NAM
 LOCATION:Pitch 1 | HARARE
+TRANSP:TRANSPARENT
 DESCRIPTION:ZAM - NAM\nGender: Women\nEvent: Central-South Africa Qualifier
   for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20034\nEvent li
  nk: https://tms.fih.ch/competitions/1685
@@ -93,6 +98,7 @@ DTSTART;TZID=UTC:20240820T140000
 DTEND;TZID=UTC:20240820T160000
 SUMMARY:🏑 CSAQ W06 | ZIM - ESW
 LOCATION:Pitch 1 | HARARE
+TRANSP:TRANSPARENT
 DESCRIPTION:ZIM - ESW\nGender: Women\nEvent: Central-South Africa Qualifier
   for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/matches/20035\nEvent li
  nk: https://tms.fih.ch/competitions/1685
@@ -108,6 +114,7 @@ DTSTART;TZID=UTC:20240821T090000
 DTEND;TZID=UTC:20240821T110000
 SUMMARY:🏑 CSAQ W07 | 3rd ONE POOL - 4th ONE POOL
 LOCATION:Pitch 1 | HARARE
+TRANSP:TRANSPARENT
 DESCRIPTION:3rd ONE POOL - 4th ONE POOL\nGender: Women\nEvent: Central-Sout
  h Africa Qualifier for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/match
  es/20036\nEvent link: https://tms.fih.ch/competitions/1685
@@ -123,6 +130,7 @@ DTSTART;TZID=UTC:20240821T133000
 DTEND;TZID=UTC:20240821T153000
 SUMMARY:🏑 CSAQ W GF | 1st ONE POOL - 2nd ONE POOL
 LOCATION:Pitch 1 | HARARE
+TRANSP:TRANSPARENT
 DESCRIPTION:1st ONE POOL - 2nd ONE POOL\nGender: Women\nEvent: Central-Sout
  h Africa Qualifier for ACN 2025 (W)\n\nMatch link: https://tms.fih.ch/match
  es/20037\nEvent link: https://tms.fih.ch/competitions/1685

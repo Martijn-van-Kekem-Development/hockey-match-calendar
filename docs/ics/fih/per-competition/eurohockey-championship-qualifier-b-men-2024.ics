@@ -18,6 +18,7 @@ DTSTART;TZID=UTC:20240822T100000
 DTEND;TZID=UTC:20240822T120000
 SUMMARY:🏑 EHCQ M01 | WAL - LUX
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:WAL - LUX\nGender: Men\nEvent: EuroHockey Championship Qualifie
  r B Men 2024\n\nMatch link: https://tms.fih.ch/matches/19301\nEvent link: h
  ttps://tms.fih.ch/competitions/1622
@@ -33,6 +34,7 @@ DTSTART;TZID=UTC:20240822T121500
 DTEND;TZID=UTC:20240822T141500
 SUMMARY:🏑 EHCQ M02 | CZE - TUR
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:CZE - TUR\nGender: Men\nEvent: EuroHockey Championship Qualifie
  r B Men 2024\n\nMatch link: https://tms.fih.ch/matches/19302\nEvent link: h
  ttps://tms.fih.ch/competitions/1622
@@ -48,6 +50,7 @@ DTSTART;TZID=UTC:20240822T143000
 DTEND;TZID=UTC:20240822T163000
 SUMMARY:🏑 EHCQ M03 | ITA - POL
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:ITA - POL\nGender: Men\nEvent: EuroHockey Championship Qualifie
  r B Men 2024\n\nMatch link: https://tms.fih.ch/matches/19303\nEvent link: h
  ttps://tms.fih.ch/competitions/1622
@@ -63,6 +66,7 @@ DTSTART;TZID=UTC:20240822T164500
 DTEND;TZID=UTC:20240822T184500
 SUMMARY:🏑 EHCQ M04 | IRL - MLT
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:IRL - MLT\nGender: Men\nEvent: EuroHockey Championship Qualifie
  r B Men 2024\n\nMatch link: https://tms.fih.ch/matches/19304\nEvent link: h
  ttps://tms.fih.ch/competitions/1622
@@ -78,6 +82,7 @@ DTSTART;TZID=UTC:20240823T143000
 DTEND;TZID=UTC:20240823T163000
 SUMMARY:🏑 EHCQ M 5v8 | Loser Match 1 - Loser Match 2
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:Loser Match 1 - Loser Match 2\nGender: Men\nEvent: EuroHockey C
  hampionship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matches/
  19305\nEvent link: https://tms.fih.ch/competitions/1622
@@ -93,6 +98,7 @@ DTSTART;TZID=UTC:20240823T164500
 DTEND;TZID=UTC:20240823T184500
 SUMMARY:🏑 EHCQ M 5v8 | Loser Match 4 - Loser Match 3
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:Loser Match 4 - Loser Match 3\nGender: Men\nEvent: EuroHockey C
  hampionship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matches/
  19306\nEvent link: https://tms.fih.ch/competitions/1622
@@ -108,6 +114,7 @@ DTSTART;TZID=UTC:20240824T110000
 DTEND;TZID=UTC:20240824T130000
 SUMMARY:🏑 EHCQ M SF1 | Winner Match 1 - Winner Match 2
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:Winner Match 1 - Winner Match 2\nGender: Men\nEvent: EuroHockey
   Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matche
  s/19307\nEvent link: https://tms.fih.ch/competitions/1622
@@ -123,6 +130,7 @@ DTSTART;TZID=UTC:20240824T131500
 DTEND;TZID=UTC:20240824T151500
 SUMMARY:🏑 EHCQ M SF2 | Winner Match 4 - Winner Match 3
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:Winner Match 4 - Winner Match 3\nGender: Men\nEvent: EuroHockey
   Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matche
  s/19308\nEvent link: https://tms.fih.ch/competitions/1622
@@ -138,6 +146,7 @@ DTSTART;TZID=UTC:20240825T081500
 DTEND;TZID=UTC:20240825T101500
 SUMMARY:🏑 EHCQ M 7v8 | Loser Match 5 - Loser Match 6
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:Loser Match 5 - Loser Match 6\nGender: Men\nEvent: EuroHockey C
  hampionship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matches/
  19309\nEvent link: https://tms.fih.ch/competitions/1622
@@ -153,6 +162,7 @@ DTSTART;TZID=UTC:20240825T103000
 DTEND;TZID=UTC:20240825T123000
 SUMMARY:🏑 EHCQ M 5v6 | Winner Match 5 - Winner Match 6
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:Winner Match 5 - Winner Match 6\nGender: Men\nEvent: EuroHockey
   Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih.ch/matche
  s/19310\nEvent link: https://tms.fih.ch/competitions/1622
@@ -168,6 +178,7 @@ DTSTART;TZID=UTC:20240825T124500
 DTEND;TZID=UTC:20240825T144500
 SUMMARY:🏑 EHCQ M 3v4 | Loser semi-final 2 - Loser semi-final 1
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:Loser semi-final 2 - Loser semi-final 1\nGender: Men\nEvent: Eu
  roHockey Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih.c
  h/matches/19311\nEvent link: https://tms.fih.ch/competitions/1622
@@ -183,6 +194,7 @@ DTSTART;TZID=UTC:20240825T150000
 DTEND;TZID=UTC:20240825T170000
 SUMMARY:🏑 EHCQ M GF | Winner semi-final 2 - Winner semi-final 1
 LOCATION:Pitch 1 | Dublin, Ireland
+TRANSP:TRANSPARENT
 DESCRIPTION:Winner semi-final 2 - Winner semi-final 1\nGender: Men\nEvent: 
  EuroHockey Championship Qualifier B Men 2024\n\nMatch link: https://tms.fih
  .ch/matches/19313\nEvent link: https://tms.fih.ch/competitions/1622
