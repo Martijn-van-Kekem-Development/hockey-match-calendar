@@ -42,7 +42,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         let urlCol = document.createElement("td");
         let copyEl = document.createElement("a");
-        copyEl.href = row.path;
+        copyEl.href = `${row.path}?t=${json.lastUpdate}`;
         copyEl.addEventListener("click", e => copyURL(e));
         copyEl.textContent = "Copy URL";
         urlCol.append(copyEl);
