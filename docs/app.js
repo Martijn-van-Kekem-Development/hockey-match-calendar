@@ -17,7 +17,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         tableRow.append(nameCol);
 
         let urlCol = document.createElement("td");
-        urlCol.innerHTML = `<a href="../${row.url}">Download</a>`;
+        urlCol.innerHTML = `<a href="${row.url}">Download</a>`;
         tableRow.append(urlCol);
 
         (row.type === "total" ? allContainer : compContainer).append(tableRow);

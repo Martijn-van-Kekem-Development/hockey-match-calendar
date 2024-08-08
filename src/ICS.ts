@@ -20,7 +20,7 @@ export class ICS {
         await fs.mkdir(outputFolder, {recursive: true});
         await fs.writeFile(outputFile, ics, {flag: "w+"});
 
-        this.filePaths.push({name: title, url: outputFile, type})
+        this.filePaths.push({name: title, url: outputFile.split("/").slice(1).join("/"), type})
     }
 
     /**
