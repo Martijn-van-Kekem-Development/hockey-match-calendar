@@ -9,7 +9,7 @@ Do not import the .ics file manually, rather subscribe to the calendar, so you'l
 The script will append a checkmark and the final score to matches that have been completed.
 
 ## Getting started
-Visit [this link](https://martijn-van-kekem-development.github.io/hockey-match-calendar) to view all available .ics calendars.
+Visit [this link](https://hockeycal.vankekem.com) to view all available .ics calendars.
 Copy the link of the calendar you want to subscribe to and add it to the calendar client of your liking.
 
 ## Support
