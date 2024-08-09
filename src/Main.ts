@@ -35,9 +35,18 @@ export class Main {
      * @private
      */
     private async saveFetchers() {
-        const fetchers = Object.keys(this.fetchers());
+        const fetchers = this.fetchers();
+        const output = {};
+        for (let fetcher of Object.values(fetchers)) {
+            output[fetcher.getID()] = {
+                id: fetcher.getID(),
+                name: fetcher.getName(),
+                index: fetcher.getIndex()
+            };
+        }
+
         fs.mkdirSync(`docs/ics`, {recursive: true});
-        fs.writeFileSync(`docs/ics/fetchers.json`, JSON.stringify(fetchers));
+        fs.writeFileSync(`docs/ics/fetchers.json`, JSON.stringify(output));
     }
 
     /**
