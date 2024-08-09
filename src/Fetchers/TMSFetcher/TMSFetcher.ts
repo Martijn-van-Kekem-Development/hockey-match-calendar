@@ -62,7 +62,7 @@ export class TMSFetcher extends Fetcher {
         await Promise.all(promises);
         const competitionsArray = Array.from(competitions.values());
 
-        // Create calendar files.
+        // Create total calendar files.
         await Promise.all([
             ICSCreator.createTotalICS(this, competitionsArray),
             ICSCreator.createGenderTotalICS(this, competitionsArray, "M"),

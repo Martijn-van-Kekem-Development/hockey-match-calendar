@@ -58,6 +58,13 @@ export class KNHBFetcher extends Fetcher {
         await Promise.all(promises);
         const competitionsArray = Array.from(competitions.values());
 
+        // Create total calendar files.
+        await Promise.all([
+            ICSCreator.createTotalICS(this, competitionsArray, true),
+            ICSCreator.createGenderTotalICS(this, competitionsArray, "M", true),
+            ICSCreator.createGenderTotalICS(this, competitionsArray, "W", true),
+        ]);
+
         console.info(`[KNHBFetcher] Finished.`);
         return competitionsArray;
     }
