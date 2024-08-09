@@ -7,5 +7,21 @@
   {"in": "FIH Indoor Hockey Men's World Cup", "out": "IWC"},
   {"in": "Central-South Africa Qualifier", "out": "CSAQ"},
   {"in": "Something unknown", "out":  "SU"},
-  {"in": "Something 12 7t_8 unknown", "out":  "STU"}
+  {"in": "Something 12 7t_8 unknown", "out":  "STU"},
+  {"in": "Tulp Hoofdklasse Heren", "out": "HK"},
+  {"in": "Tulp Hoofdklasse Dames", "out": "HK"},
+  {"in": "Promotieklasse Heren", "out": "PK"},
+  {"in": "Promotieklasse Dames", "out": "PK"},
+  {"in": "Overgangsklasse Heren", "out": "OVK"},
+  {"in": "Overgangsklasse Dames", "out": "OVK"},
+  {"in": "Eerste Klasse Heren", "out": "1EK"},
+  {"in": "Eerste Klasse Dames", "out": "1EK"},
+  {"in": "Tweede Klasse Heren", "out": "2EK"},
+  {"in": "Tweede Klasse Dames", "out": "2EK"},
+  {"in": "Derde Klasse Heren", "out": "3EK"},
+  {"in": "Derde Klasse Dames", "out": "3EK"},
+  {"in": "Landelijk Jongens O18", "out": "O18"},
+  {"in": "Landelijk Meisjes O18", "out": "O18"},
+  {"in": "Landelijk Jongens O16", "out": "O16"},
+  {"in": "Landelijk Meisjes O16", "out": "O16"}
 ]
