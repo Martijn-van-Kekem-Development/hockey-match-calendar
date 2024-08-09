@@ -11,39 +11,51 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  fetch-fih:
+  pre-fetch:
     runs-on: ubuntu-latest
 
     permissions:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install
-      - run: npm start fih
+      - name: Install dependencies
+        run: npm install
+      - name: Setup pages
+        uses: actions/configure-pages@v5
+
+
+  fetch-fih:
+    runs-on: ubuntu-latest
+    needs: pre-fetch
+    permissions:
+      contents: write
+
+    steps:
+      - name: Fetch FIH matches
+        run: npm start fih
 
   fetch-knhb:
     runs-on: ubuntu-latest
-
+    needs: pre-fetch
     permissions:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install
-      - run: npm start knhb
-      
+      - name: Fetch KNHB matches
+        run: npm start knhb
+
   publish:
     runs-on: ubuntu-latest
     needs:
-      - fetch-fih
       - fetch-knhb
+      - fetch-fih
+      
     environment:
       name: github-pages
       url: "${{ steps.deployment.outputs.page_url }}"
@@ -54,14 +66,6 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install
-      - run: npm start save
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
