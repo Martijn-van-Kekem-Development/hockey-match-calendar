@@ -5,6 +5,7 @@
       "es2021",
       "dom"
     ],
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "Node",
     "target": "ES2021"
   }

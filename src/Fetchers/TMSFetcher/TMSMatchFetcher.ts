@@ -72,7 +72,7 @@ export class TMSMatchFetcher {
 
         // Add date and time
         const dateString = row.querySelector("td:nth-child(2) span[data-timezone]");
-        object.setMatchDate(DateHelper.toUTC(dateString.textContent, dateString.getAttribute("data-timezone")));
+        object.setMatchDate(DateHelper.TMStoUTC(dateString.textContent, dateString.getAttribute("data-timezone")));
 
         // Add completed state
         const status = row.querySelector("td:nth-child(5)");

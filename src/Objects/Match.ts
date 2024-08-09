@@ -224,8 +224,13 @@ export class Match {
      */
     public getLocation(): string {
         if (!this.competition) return this.venue;
-        const venue = (this.venue ?? "").length > 0 ? `${this.venue} ` : ``;
-        return `${venue}| ${this.competition.getLocation() ?? "Unknown location"}`;
+        const venue = this.venue ?? "";
+        const location = this.competition.getLocation() ?? "";
+
+        if (venue.length === 0 && location.length === 0) return "";
+        else if (venue.length > 0 && location.length === 0) return venue;
+        else if (venue.length === 0 && location.length > 0) return location;
+        else return `${venue} | ${location}`;
     }
 
     /**

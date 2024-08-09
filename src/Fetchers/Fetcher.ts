@@ -21,14 +21,22 @@ export abstract class Fetcher {
     protected name: string;
 
     /**
+     * The index of this fetcher.
+     * @protected
+     */
+    protected index: number = 0;
+
+    /**
      * The base URL for this fetcher.
      * @param id The id of this fetcher.
      * @param name The name of this fetcher.
+     * @param index The index of this fetcher.
      * @param baseURL The base URL.
      */
-    protected constructor(id: string, name: string, baseURL: string) {
+    protected constructor(id: string, name: string, index: number, baseURL: string) {
         this.id = id;
         this.name = name;
+        this.index = index;
         this.baseURL = baseURL;
     }
 
@@ -44,6 +52,13 @@ export abstract class Fetcher {
      */
     public getName(): string {
         return this.name;
+    }
+
+    /**
+     * Get the index of this fetcher.
+     */
+    public getIndex(): number {
+        return this.index;
     }
 
     /**

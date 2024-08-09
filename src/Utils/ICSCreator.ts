@@ -16,7 +16,7 @@ export class ICSCreator {
         const path = `${fetcherID}/all-matches`;
         const title = `All ${fetcherName}matches`;
 
-        console.info(`[TMSFetcher] Writing ${matches.length} matches to ${path}.`);
+        console.info(`[ICSCreator] Writing ${matches.length} matches to ${path}.`);
         const meta: Metadata = {
             type: "total",
             index: -2,
@@ -40,7 +40,7 @@ export class ICSCreator {
         const path = `${fetcherID}/${gender === "M" ? "mens" : "womens"}-matches`;
         const title = `All ${fetcherName}${gender === "M" ? "men's" : "women's"} matches`;
 
-        console.info(`[TMSFetcher] Writing ${matches.length} matches to ${path}.`);
+        console.info(`[ICSCreator] Writing ${matches.length} matches to ${path}.`);
         const meta: Metadata = {
             type: "total",
             index: -1,
@@ -77,7 +77,7 @@ export class ICSCreator {
             const path = `countries/${countryName}/${fileName}`;
             const fileTitle = `(${countryName}) ${title}`;
 
-            console.info(`[TMSFetcher] Writing ${countryMatches.length} matches to ${path}.`);
+            console.info(`[ICSCreator] Writing ${countryMatches.length} matches to ${path}.`);
             promises.push(ICS.writeToFile(fetcher, ICS.calendarToICS(fileTitle, path, countryMatches), fileTitle, path, countryName,{
                 ...metadata,
                 count: countryMatches.length
@@ -94,7 +94,7 @@ export class ICSCreator {
         const path = competition.getFetcher().getID() + "/per-competition/" + `${competition.getID()}-${competition.getLowercaseName()}`;
         const title = competition.getName();
 
-        console.info(`[TMSFetcher] Writing ${competition.getMatches().length} matches to ${path}.`);
+        console.info(`[ICSCreator] Writing ${competition.getMatches().length} matches to ${path}.`);
         const meta: Metadata = {
             type: "competition",
             index: competition.getIndex(),

@@ -77,8 +77,9 @@ export class FIHAbbreviations {
      * @param type The match type.
      */
     public static getGender(type: string): "M" | "W" {
-        if (type.toLowerCase().includes("womens")) return "W";
-        if (type.toLowerCase().includes("mens")) return "M";
+        const str = type.toLowerCase();
+        if (str.includes("womens")) return "W";
+        if (str.includes("mens")) return "M";
         throw new Error("Couldn't fetch gender for " + type);
     }
 
