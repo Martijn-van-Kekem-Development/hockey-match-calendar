@@ -93,7 +93,7 @@ function selectOrigin(origin) {
 function prepareClubs(origin) {
     const selectContainer = document.getElementById("team");
     selectContainer.querySelectorAll(`option:not([value="null"])`).forEach(e => e.remove());
-    selectContainer.addEventListener("change", () => clubChanged(origin, selectContainer.value));
+    selectContainer.setAttribute("data-origin", origin);
 
     // Add clubs to list.
     const clubs = Object.values(json.origins[origin].clubs)
@@ -135,6 +135,16 @@ function clubChanged(origin, newClub) {
 }
 
 /**
+ * Prepare the club selector.
+ */
+function prepareClubSelector() {
+    const selectContainer = document.getElementById("team");
+    selectContainer.addEventListener("change", () => {
+        clubChanged(selectContainer.getAttribute("data-origin"), selectContainer.value)
+    });
+}
+
+/**
  * When the window has loaded.
  */
 window.addEventListener("DOMContentLoaded", async () => {
@@ -143,6 +153,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     json = JSON.parse(data);
 
     addOriginButtons();
+    prepareClubSelector();
 
     document.getElementById("label_last_update").textContent = (new Date(json.lastUpdate)).toLocaleString();
 })
