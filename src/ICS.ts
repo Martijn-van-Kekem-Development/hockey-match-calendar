@@ -70,10 +70,6 @@ export class ICS {
         this.countries.delete("all_countries");
         await fs.writeFile("docs/files.json", JSON.stringify({
             lastUpdate: (new Date()).getTime(),
-            // total: this.totalPaths,
-            // origins: {
-            //     ...this.filePaths
-            // },
             ...allCountries,
             countries: Object.fromEntries(this.countries)
         }));
