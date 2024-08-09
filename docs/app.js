@@ -1,4 +1,4 @@
-let json;
+const origins = {};
 
 /**
  * When the copy URL link is clicked
@@ -53,7 +53,7 @@ function addOriginButtons() {
     const container = document.getElementById("container_originButtons");
     container.innerHTML = "";
 
-    let originData = Object.values(json.origins).sort((a,b) =>
+    let originData = Object.values(origins).sort((a,b) =>
         (a.index ?? 0) - (b.index ?? 0) || a.name.localeCompare(b.name));
 
     for (let origin of originData) {
@@ -84,7 +84,32 @@ function selectOrigin(origin) {
     const newOriginButton = document.querySelector(`#container_originButtons li[data-id="${origin}"]`);
     newOriginButton.classList.add("selected");
 
+    // Update last update timestamp
+    document.getElementById("label_last_update").textContent = parseDate(new Date(origins[origin].lastUpdate));
     prepareClubs(origin);
+}
+
+/**
+ * Pad a string with zeroes at the start.
+ * @param input The input string.
+ * @returns {string | string}
+ */
+function padStart(input) {
+    input = String(input);
+    while(input.length < 2)
+        input = `0${input}`;
+
+    return input;
+}
+
+/**
+ * Parse the date object to a string.
+ * @param date The date to parse.
+ * @returns {string}
+ */
+function parseDate(date) {
+    return `${padStart(date.getDate())}-${padStart(date.getMonth())}-${
+        date.getFullYear()} ${padStart(date.getHours())}:${padStart(date.getMinutes())}`;
 }
 
 /**
@@ -96,7 +121,7 @@ function prepareClubs(origin) {
     selectContainer.setAttribute("data-origin", origin);
 
     // Add clubs to list.
-    const clubs = Object.values(json.origins[origin].clubs)
+    const clubs = Object.values(origins[origin].clubs)
         .sort((a,b) => a.name.localeCompare(b.name));
 
     for (let club of clubs) {
@@ -116,7 +141,7 @@ function prepareClubs(origin) {
  */
 function clubChanged(origin, newClub) {
     // Sort paths
-    let paths = newClub === "null" ? json.origins[origin].paths : json.origins[origin].clubs[newClub].paths;
+    let paths = newClub === "null" ? origins[origin].paths : origins[origin].clubs[newClub].paths;
     paths = paths.sort((a, b) => ((a.index ?? 0) - (b.index ?? 0)) || a.name.toString().localeCompare(b.name));
 
     // Empty current container
@@ -131,7 +156,7 @@ function clubChanged(origin, newClub) {
     const warningNotification = document.getElementById("warning_team");
     warningNotification.classList.toggle("hidden", newClub === "null");
     if (newClub !== "null")
-        document.getElementById("team_selected").textContent = json.origins[origin].clubs[newClub].name;
+        document.getElementById("team_selected").textContent = origins[origin].clubs[newClub].name;
 }
 
 /**
@@ -148,12 +173,11 @@ function prepareClubSelector() {
  * When the window has loaded.
  */
 window.addEventListener("DOMContentLoaded", async () => {
-    const files = await fetch("files.json", {cache: "no-store"});
-    const data = await files.text();
-    json = JSON.parse(data);
+    const fetchers = await (await fetch("ics/fetchers.json")).json();
+    for (let fetcher of fetchers) {
+        origins[fetcher] = await (await fetch(`ics/${fetcher}/paths.json`)).json();
+    }
 
     addOriginButtons();
     prepareClubSelector();
-
-    document.getElementById("label_last_update").textContent = (new Date(json.lastUpdate)).toLocaleString();
 })

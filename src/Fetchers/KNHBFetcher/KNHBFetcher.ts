@@ -66,6 +66,7 @@ export class KNHBFetcher extends Fetcher {
         ]);
 
         console.info(`[KNHBFetcher] Finished.`);
+        await super.fetch();
         return competitionsArray;
     }
     /**
