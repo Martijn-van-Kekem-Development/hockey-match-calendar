@@ -1,8 +1,13 @@
 {
-  "name": "fih-event-calendar",
+  "name": "hockey-match-calendar",
   "version": "1.0.0",
-  "description": "Create an calendar file from upcoming and past matches on fih.hockey.",
+  "description": "Automatically generate ICS calendar files for field hockey matches from various sources.",
   "main": "src/Main.ts",
+  "homepage": "https://hockeycal.vankekem.com",
+  "author": {
+    "name": "Martijn van Kekem Development",
+    "url": "https://www.vankekem.com"
+  },
   "scripts": {
     "start": "node --import=tsx src/Main.ts",
     "test": "vitest --run",
@@ -11,7 +16,7 @@
   "license": "GPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Martijn-van-Kekem-Development/fih-event-calendar"
+    "url": "https://github.com/Martijn-van-Kekem-Development/hockey-match-calendar"
   },
   "devDependencies": {
     "@types/node": "^22.1.0",
