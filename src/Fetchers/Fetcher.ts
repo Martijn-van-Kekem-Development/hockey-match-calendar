@@ -1,6 +1,5 @@
 import {Competition} from "../Objects/Competition.js";
 import {Match} from "../Objects/Match.js";
-import {ICS} from "../ICS.js";
 
 export abstract class Fetcher {
     /**
@@ -31,8 +30,6 @@ export abstract class Fetcher {
         this.id = id;
         this.name = name;
         this.baseURL = baseURL;
-
-        ICS.addFetcher(this);
     }
 
     /**

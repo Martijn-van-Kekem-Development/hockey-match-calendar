@@ -1,4 +1,3 @@
-import {countryToAlpha3} from "country-to-iso/src/country-to-code.js";
 import * as fs from "node:fs";
 
 export class Countries {
@@ -6,14 +5,32 @@ export class Countries {
      * The ISO IOC mapping dict.
      * @private
      */
-    private static ISODict: Record<string, string>;
+    private static ISODict: Record<string, Country>;
 
     /**
-     * Get the abbreviation of a given country.
-     * @param name The country name.
+     * The IOC ISO mapping dict.
+     * @private
      */
-    public static getAbbr(name: string) {
-        return this.ISOToIOC(countryToAlpha3(name));
+    private static IOCDict: Record<string, Country>;
+
+    /**
+     * Get the country data by a given IOC.
+     * @param ioc The IOC.
+     */
+    public static getCountryByIOC(ioc: string): Country {
+        if (!this.IOCDict) this.getIOCDict();
+
+        return this.IOCDict[ioc] ?? null;
+    }
+
+    /**
+     * Get the country data by a given ISO.
+     * @param iso The ISO.
+     */
+    public static getCountryByISO(iso: string): Country {
+        if (!this.ISODict) this.getISODict();
+
+        return this.ISODict[iso] ?? null;
     }
 
     /**
@@ -21,19 +38,23 @@ export class Countries {
      * @private
      */
     private static getISODict() {
-        const data = fs.readFileSync("includes/iso-ioc.json", {encoding: "utf-8"});
+        const data = fs.readFileSync("includes/countries-by-iso.json", {encoding: "utf-8"});
         this.ISODict = JSON.parse(data);
     }
 
     /**
-     * Convert ISO abbreviation to the IOC abbreviation.
-     * @param iso The ISO value.
-     * @constructor
+     * Get the ISO dict.
+     * @private
      */
-    public static ISOToIOC(iso: string | null): string | null {
-        if (!this.ISODict) this.getISODict();
-
-        if (!iso) return iso;
-        return this.ISODict[iso.toUpperCase()] ?? iso;
+    private static getIOCDict() {
+        const data = fs.readFileSync("includes/countries-by-ioc.json", {encoding: "utf-8"});
+        this.IOCDict = JSON.parse(data);
     }
+}
+
+export interface Country {
+    ioc: string,
+    a2: string,
+    a3: string,
+    full: string
 }

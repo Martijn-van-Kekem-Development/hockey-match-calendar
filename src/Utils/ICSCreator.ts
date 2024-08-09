@@ -1,6 +1,7 @@
-import {ICS} from "../ICS.js";
+import {ICS, Metadata} from "../ICS.js";
 import {Competition} from "../Objects/Competition.js";
 import {Fetcher} from "../Fetchers/Fetcher.js";
+import {Match} from "../Objects/Match.js";
 
 export class ICSCreator {
     /**
@@ -15,11 +16,13 @@ export class ICSCreator {
         const title = `All matches`;
 
         console.info(`[TMSFetcher] Writing ${matches.length} matches to ${path}.`);
-        await ICS.writeToFile(fetcher, ICS.calendarToICS(title, path, matches), title, path, {
+        const meta: Metadata = {
             type: "total",
             index: -2,
             count: matches.length
-        });
+        };
+        await ICS.writeToFile(fetcher, ICS.calendarToICS(title, path, matches), title, path, null, meta);
+        await ICSCreator.createCountryICS(fetcher, matches, path, title, meta);
     }
 
     /**
@@ -36,11 +39,48 @@ export class ICSCreator {
         const title = `${gender === "M" ? "Men's" : "Women's"} matches`;
 
         console.info(`[TMSFetcher] Writing ${matches.length} matches to ${path}.`);
-        await ICS.writeToFile(fetcher, ICS.calendarToICS(title, path, matches), title, path, {
+        const meta: Metadata = {
             type: "total",
             index: -1,
             count: matches.length
-        });
+        };
+        await ICS.writeToFile(fetcher, ICS.calendarToICS(title, path, matches), title, path, null, meta);
+        await ICSCreator.createCountryICS(fetcher, matches, path, title, meta);
+    }
+
+    /**
+     * Create one big ICS file of all matches of a specific country.
+     * @param fetcher The fetcher
+     * @param matches All matches.
+     * @param fileName The output file name.
+     * @param title The calendar title.
+     * @param metadata The metadata
+     */
+    public static async createCountryICS(fetcher: Fetcher, matches: Match[], fileName: string, title: string, metadata: Metadata) {
+        const countryMap: Map<string, Match[]> = new Map();
+
+        // Function to add a country.
+        const addCountry = (country: string, match: Match) => {
+            if (!countryMap.has(country)) countryMap.set(country, []);
+            countryMap.get(country).push(match);
+        }
+
+        // Add each match to the correct countries
+        for (let match of matches) {
+            match.getIncludedCountries().forEach(val => addCountry(val, match));
+        }
+
+        let promises = [];
+        for (let [countryName, countryMatches] of countryMap) {
+            const path = `countries/${countryName}/${fileName}`;
+
+            console.info(`[TMSFetcher] Writing ${countryMatches.length} matches to ${path}.`);
+            promises.push(ICS.writeToFile(fetcher, ICS.calendarToICS(title, path, countryMatches), title, path, countryName,{
+                ...metadata,
+                count: countryMatches.length
+            }));
+        }
+        await Promise.all(promises);
     }
 
     /**
@@ -52,10 +92,12 @@ export class ICSCreator {
         const title = competition.getName();
 
         console.info(`[TMSFetcher] Writing ${competition.getMatches().length} matches to ${path}.`);
-        await ICS.writeToFile(competition.getFetcher(), ICS.calendarToICS(title, competition.getID(), competition.getMatches()), title, path, {
+        const meta: Metadata = {
             type: "competition",
             index: competition.getIndex(),
             count: competition.getMatches().length
-        });
+        };
+        await ICS.writeToFile(competition.getFetcher(), ICS.calendarToICS(title, competition.getID(), competition.getMatches()), title, path, null, meta);
+        await ICSCreator.createCountryICS(competition.getFetcher(), competition.getMatches(), path, title, meta);
     }
 }

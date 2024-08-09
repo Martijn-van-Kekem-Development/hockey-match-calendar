@@ -48,13 +48,15 @@ function createTableRow(data) {
 
 /**
  * Add the total rows to the table.
+ * @param country The country
  */
-function addTotalRows() {
+function addTotalRows(country) {
     const allContainer = document.getElementById("all_matches_body");
     allContainer.innerHTML = "";
 
     // Order paths by name
-    const paths = json.total.sort((a, b) => a.name.toString().localeCompare(b.name));
+    let paths = country === "null" ? json.total : json.countries[country].total;
+    paths = paths.sort((a, b) => a.name.toString().localeCompare(b.name));
     for (let row of paths) {
         allContainer.append(createTableRow(row));
     }
@@ -62,33 +64,34 @@ function addTotalRows() {
 
 /**
  * Add the origin buttons to the DOM.
+ * @param country The country to add the origin buttons for
  */
-function addOriginButtons() {
+function addOriginButtons(country) {
     const container = document.getElementById("container_originButtons");
     container.innerHTML = "";
 
-    for (let origin of Object.values(json.origins)) {
+    let origins = country === "null" ? json.origins : json.countries[country].origins;
+    for (let origin of Object.values(origins)) {
         const listEl = document.createElement("li");
         const buttonEl = document.createElement("button");
 
         listEl.setAttribute("data-id", origin.id);
         buttonEl.textContent = origin.name;
-        buttonEl.addEventListener("click", () => this.selectOrigin(origin.id));
+        buttonEl.addEventListener("click", () => selectOrigin(country, origin.id));
 
         listEl.append(buttonEl);
         container.append(listEl);
     }
 
-    selectOrigin(Object.keys(json.origins)[0]);
+    selectOrigin(country, Object.keys(origins)[0]);
 }
 
 /**
  * Select an origin for the specific calendars.
- * @param origin
+ * @param country The country for this origin.
+ * @param origin The origin
  */
-function selectOrigin(origin) {
-    if (!json.origins[origin]) return;
-
+function selectOrigin(country, origin) {
     // Remove currently active button
     const activeButton = document.querySelector("#container_originButtons li.selected");
     if (activeButton) activeButton.classList.remove("selected");
@@ -102,15 +105,43 @@ function selectOrigin(origin) {
     container.innerHTML = "";
 
     // Sort paths
-    const paths = json.origins[origin].paths.sort((a, b) =>
-        ((a.index ?? 0) - (b.index ?? 0)) ||
-        a.name.toString().localeCompare(b.name)
-    );
+    let paths = country === "null" ? json.origins[origin].paths : json.countries[country].origins[origin].paths;
+    paths = paths.sort((a, b) => ((a.index ?? 0) - (b.index ?? 0)) || a.name.toString().localeCompare(b.name));
 
     // Load content into table
     for (let row of paths) {
         container.append(this.createTableRow(row));
     }
+}
+
+/**
+ * Prepare the country picker.
+ */
+function prepareCountry() {
+    const selectContainer = document.getElementById("country");
+    selectContainer.addEventListener("change", () => countryChanged(selectContainer.value));
+
+    // Add countries to list.
+    for (let country of Object.keys(json.countries).sort((a,b) => a.localeCompare(b))) {
+        const optionEl = document.createElement("option");
+        optionEl.textContent = country;
+        optionEl.value = country;
+        selectContainer.append(optionEl);
+    }
+}
+
+/**
+ * Select a new country.
+ * @param newCountry The new country
+ */
+function countryChanged(newCountry) {
+    addOriginButtons(newCountry);
+    addTotalRows(newCountry);
+    
+    const warningNotification = document.getElementById("warning_country");
+    warningNotification.classList.toggle("hidden", newCountry === "null");
+    if (newCountry !== "null")
+        document.getElementById("country_selected").textContent = newCountry;
 }
 
 /**
@@ -121,20 +152,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     const data = await files.text();
     json = JSON.parse(data);
 
-    addOriginButtons();
-    addTotalRows();
-
-    // // Clear current table
-    // const compContainer = document.getElementById("competition_body");
-    // compContainer.innerHTML = "";
-    //
-    // // Sort items
-    // const paths = json.paths.fih.sort((a, b) =>
-    //     ((a.index ?? 0) - (b.index ?? 0)) ||
-    //     a.name.toString().localeCompare(b.name)
-    // );
-
-
+    prepareCountry();
+    countryChanged("null");
 
     document.getElementById("label_last_update").textContent = (new Date(json.lastUpdate)).toLocaleString();
 })

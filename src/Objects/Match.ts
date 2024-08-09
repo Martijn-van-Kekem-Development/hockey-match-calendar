@@ -1,5 +1,5 @@
 import {Competition} from "./Competition.js";
-import {Countries} from "../Utils/Countries.js";
+import {Countries, Country} from "../Utils/Countries.js";
 import {FIHAbbreviations} from "../Utils/FIHAbbreviations.js";
 import {DateHelper} from "../Utils/DateHelper.js";
 import {Moment} from "moment-timezone";
@@ -33,13 +33,13 @@ export class Match {
      * The home team for this match.
      * @private
      */
-    private homeTeam: string;
+    private homeTeam: Team;
 
     /**
      * The away team for this match.
      * @private
      */
-    private awayTeam: string;
+    private awayTeam: Team;
 
     /**
      * The date and time this match takes place
@@ -76,7 +76,10 @@ export class Match {
      * @param team The home team.
      */
     public setHomeTeam(team: string) {
-        this.homeTeam = team;
+        this.homeTeam = {
+            name: team,
+            country: Countries.getCountryByIOC(team) ?? Countries.getCountryByISO(team) ?? null
+        };
     }
 
     /**
@@ -84,7 +87,10 @@ export class Match {
      * @param team The away team.
      */
     public setAwayTeam(team: string) {
-        this.awayTeam = team;
+        this.awayTeam = {
+            name: team,
+            country: Countries.getCountryByIOC(team) ?? Countries.getCountryByISO(team) ?? null
+        };
     }
 
     /**
@@ -160,17 +166,39 @@ export class Match {
     }
 
     /**
+     * Get the countries that are included in this match.
+     */
+    public getIncludedCountries(): string[] {
+        const countries = [];
+
+        if (this.homeTeam.country) countries.push(this.homeTeam.country.ioc);
+        if (this.awayTeam.country) countries.push(this.awayTeam.country.ioc);
+
+        return countries;
+    }
+
+    /**
      * Get the home team.
      */
-    public getHomeTeam(): string {
-        return Countries.getAbbr(this.homeTeam) ?? this.homeTeam;
+    public getHomeTeam(full: boolean = false): string {
+        if (!full)
+            return this.homeTeam.country === null ?
+                this.homeTeam.name : (this.homeTeam.country.ioc ?? this.homeTeam.name);
+        else
+            return (this.homeTeam.country === null || this.homeTeam.country.full.length === 0) ?
+                this.getHomeTeam() : this.homeTeam.country.full
     }
 
     /**
      * Get the away team.
      */
-    public getAwayTeam(): string {
-        return Countries.getAbbr(this.awayTeam) ?? this.awayTeam;
+    public getAwayTeam(full: boolean = false): string {
+        if (!full)
+            return this.awayTeam.country === null ?
+                this.awayTeam.name : (this.awayTeam.country.ioc ?? this.awayTeam.name);
+        else
+            return (this.awayTeam.country === null || this.awayTeam.country.full.length === 0) ?
+                this.getAwayTeam() : this.awayTeam.country.full
     }
 
     /**
@@ -235,7 +263,7 @@ export class Match {
         const lines: string[] = [];
 
         // Add match data.
-        lines.push(`${this.homeTeam} - ${this.awayTeam}`);
+        lines.push(`${this.getHomeTeam(true)} - ${this.getAwayTeam(true)}`);
         if (this.isCompleted) lines.push(`Final score: ${this.finalScore}`);
         lines.push(`Gender: ${this.gender === "M" ? "Men" : "Women"}`);
         if (this.competition) lines.push(`Event: ${this.competition.getName()}`);
@@ -264,4 +292,9 @@ export class Match {
     public getMatchID(): string {
         return this.id;
     }
+}
+
+export interface Team {
+    name: string,
+    country: Country | null
 }

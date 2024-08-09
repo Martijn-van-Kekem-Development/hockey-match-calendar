@@ -27,8 +27,40 @@ h2 {
     margin-bottom: 0.8rem;
 }
 
-p.warning {
-    color: #F44336;
+.pick-country {
+    margin-top: 1rem;
+}
+
+.pick-country select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    min-width: 8rem;
+    margin-left: 0.5rem;
+    padding: 0.4rem 0.6rem;
+}
+
+.warning {
+    display: flex;
+    padding: 0.8rem 1rem;
+    align-items: center;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    gap: 1rem;
+    background: rgb(254 252 232);
+    color: rgb(161 98 7);
+}
+
+.warning.hidden {
+    display: none;
+}
+
+.warning svg {
+    max-width: 1.5rem;
+    aspect-ratio: 1;
+    fill: rgb(250 204 21);
 }
 
 .links {
