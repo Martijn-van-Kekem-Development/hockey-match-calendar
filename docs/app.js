@@ -49,11 +49,13 @@ function createTableRow(data) {
 /**
  * Add the origin buttons to the DOM.
  */
-function addOriginButtons() {
+async function addOriginButtons() {
+    const fetchers = await (await fetch("ics/fetchers.json")).json();
+
     const container = document.getElementById("container_originButtons");
     container.innerHTML = "";
 
-    let originData = Object.values(origins).sort((a,b) =>
+    let originData = Object.values(fetchers).sort((a,b) =>
         (a.index ?? 0) - (b.index ?? 0) || a.name.localeCompare(b.name));
 
     for (let origin of originData) {
@@ -68,14 +70,19 @@ function addOriginButtons() {
         container.append(listEl);
     }
 
-    selectOrigin(originData[0].id);
+    await selectOrigin(originData[0].id);
 }
 
 /**
  * Select an origin for the specific calendars.
  * @param origin The origin
  */
-function selectOrigin(origin) {
+async function selectOrigin(origin) {
+    if (!origins[origin]) {
+        // Fetch origin
+        origins[origin] = await (await fetch(`ics/${origin}/paths.json`)).json();
+    }
+
     // Remove currently active button
     const activeButton = document.querySelector("#container_originButtons li.selected");
     if (activeButton) activeButton.classList.remove("selected");
@@ -173,11 +180,6 @@ function prepareClubSelector() {
  * When the window has loaded.
  */
 window.addEventListener("DOMContentLoaded", async () => {
-    const fetchers = await (await fetch("ics/fetchers.json")).json();
-    for (let fetcher of fetchers) {
-        origins[fetcher] = await (await fetch(`ics/${fetcher}/paths.json`)).json();
-    }
-
-    addOriginButtons();
+    await addOriginButtons();
     prepareClubSelector();
 })

@@ -17,9 +17,6 @@ export class ICS {
     public static addFetcher(club: Club | null, fetcher: Fetcher) {
         if (!this.fetchers.has(fetcher.getID()))
             this.fetchers.set(fetcher.getID(), {
-                name: fetcher.getName(),
-                id: fetcher.getID(),
-                index: fetcher.getIndex(),
                 clubs: {},
                 paths: []
             });
@@ -152,9 +149,6 @@ export class ICS {
 }
 
 export interface FetcherData {
-    id: string,
-    index: number,
-    name: string,
     paths: Metadata[],
     clubs: Record<string, FetcherClub>
 }
