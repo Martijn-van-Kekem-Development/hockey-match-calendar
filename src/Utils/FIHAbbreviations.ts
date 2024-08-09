@@ -64,12 +64,22 @@ export class FIHAbbreviations {
         if (!this.CompetitionAbbreviations) this.getCompetitionAbbreviations();
 
         // Look for abbreviation.
-        for (const [regex, value] of Object.entries(this.CompetitionAbbreviations)) {
-            if (name.match(RegExp(regex, "i"))) return value;
+        for (let [regex, value] of Object.entries(this.CompetitionAbbreviations)) {
+            const matches = name.match(RegExp(regex, "i"));
+            if (matches) {
+                for (let i = 1; i < matches.length; i++) {
+                    value = value.replaceAll("%1", matches[i]);
+                }
+                return value;
+            }
         }
 
         // No match found
-        return name.replaceAll(/[^A-Za-z ]/g, "").split(" ").map(v => v.slice(0, 1)).join("").toUpperCase();
+        return name
+            .replaceAll(/[^A-Za-z ]/g, "")
+            .split(" ")
+            .map(v => v.slice(0, 1))
+            .join("").toUpperCase();
     }
 
     /**

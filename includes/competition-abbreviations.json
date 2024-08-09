@@ -5,5 +5,13 @@
   "EuroHockey Championship Qualifier.*": "EHCQ",
   "FIH Indoor Hockey Women's World Cup.*": "IWC",
   "FIH Indoor Hockey Men's World Cup.*": "IWC",
-  "Central-South Africa Qualifier.*": "CSAQ"
+  "Central-South Africa Qualifier.*": "CSAQ",
+  ".*Hoofdklasse (Heren|Dames)": "HK",
+  "Promotieklasse (Heren|Dames)": "PK",
+  "Overgangsklasse (Heren|Dames)": "OVK",
+  "Eerste Klasse (Heren|Dames)": "1EK",
+  "Tweede Klasse (Heren|Dames)": "2EK",
+  "Derde Klasse (Heren|Dames)": "3EK",
+  "Vierde Klasse (Heren|Dames)": "4EK",
+  "Landelijk (?:Jongens|Meisjes) O(16|18)": "O%1"
 }
