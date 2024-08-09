@@ -99,8 +99,8 @@ export class TMSMatchFetcher {
         if (!result) throw new Error("Couldn't extract data from match title: " + title);
 
         let [, home, away, matchType] = result;
-        object.setHomeTeam(home);
-        object.setAwayTeam(away);
+        object.setHomeTeam(home.toLowerCase(), home);
+        object.setAwayTeam(away.toLowerCase(), away);
         object.setType(matchType ?? "");
     }
 }

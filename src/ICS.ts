@@ -1,36 +1,38 @@
-import {Match} from "./Objects/Match.js";
+import {Club, Match} from "./Objects/Match.js";
 import * as fs from "fs/promises";
 import {Fetcher} from "./Fetchers/Fetcher.js";
 
 export class ICS {
+    private static origins: Map<string, FetcherData> = new Map();
 
     /**
      * The available countries.
      * @private
      */
-    private static countries: Map<string, CountryData> = new Map();
+    // private static countries: Map<string, CountryData> = new Map();
 
     /**
      * Add a new fetcher.
-     * @param country The country to add the fetcher to.
+     * @param club The club to add the fetcher to.
      * @param fetcher The fetcher to add.
      */
-    public static addFetcher(country: string, fetcher: Fetcher) {
-        // Create country if not exists.
-        if (!this.countries.has(country))
-            this.countries.set(country, {
-                total: [],
-                origins: {}
-            });
-
-        if (fetcher && !this.countries.get(country).origins[fetcher.getID()]) {
-            this.countries.get(country).origins[fetcher.getID()] = {
+    public static addFetcher(club: Club | null, fetcher: Fetcher) {
+        if (!this.origins.has(fetcher.getID()))
+            this.origins.set(fetcher.getID(), {
                 name: fetcher.getName(),
                 id: fetcher.getID(),
                 index: fetcher.getIndex(),
+                clubs: {},
+                paths: []
+            });
+
+        // Create club if not exists.
+        if (club && typeof this.origins.get(fetcher.getID()).clubs[club.id] === "undefined")
+            this.origins.get(fetcher.getID()).clubs[club.id] = {
+                id: club.id,
+                name: club.name,
                 paths: []
             };
-        }
     }
 
     /**
@@ -39,22 +41,21 @@ export class ICS {
      * @param ics The ICS content.
      * @param title The ICS title.
      * @param fileName The file name without extension.
-     * @param country The country to write for, or null if for all.
+     * @param club The club to write for, or null if for all.
      * @param metadata Extra data to save.
      */
-    public static async writeToFile(fetcher: Fetcher, ics: string, title: string, fileName: string, country: string | null, metadata: Metadata) {
-        country = country ?? "all_countries";
-        const outputFile = `docs/ics/${fileName}.ics`;
+    public static async writeToFile(fetcher: Fetcher, ics: string, title: string, fileName: string, club: Club | null, metadata: Metadata) {
+        const outputFile = `docs/ics/${fetcher.getID()}/${fileName}.ics`;
         const outputFolder = outputFile.split("/").slice(0, -1).join("/");
         await fs.mkdir(outputFolder, {recursive: true});
         await fs.writeFile(outputFile, ics, {flag: "w+"});
 
-        this.addFetcher(country, fetcher);
+        this.addFetcher(club, fetcher);
 
-        // Add path to correct country
-        const pathArray = fetcher === null ?
-            this.countries.get(country).total :
-            this.countries.get(country).origins[fetcher.getID()].paths;
+        // Add path to correct club
+        const pathArray = club === null ?
+            this.origins.get(fetcher.getID()).paths :
+            this.origins.get(fetcher.getID()).clubs[club.id].paths;
 
         pathArray.push({
             name: title,
@@ -69,12 +70,9 @@ export class ICS {
     public static async storeFilePaths() {
         console.info(`[ICS] Storing ICS paths in files.json.`);
 
-        const allCountries = this.countries.get("all_countries");
-        this.countries.delete("all_countries");
         await fs.writeFile("docs/files.json", JSON.stringify({
             lastUpdate: (new Date()).getTime(),
-            ...allCountries,
-            countries: Object.fromEntries(this.countries)
+            origins: Object.fromEntries(this.origins),
         }));
     }
 
@@ -151,14 +149,16 @@ export class ICS {
     }
 }
 
-export interface CountryData {
-    origins: Record<string, FetcherData>,
-    total: Metadata[]
-}
-
 export interface FetcherData {
     id: string,
     index: number,
+    name: string,
+    paths: Metadata[],
+    clubs: Record<string, FetcherClub>
+}
+
+export interface FetcherClub {
+    id: string,
     name: string,
     paths: Metadata[]
 }
@@ -166,7 +166,6 @@ export interface FetcherData {
 export interface Metadata {
     name?: string,
     type?: "total" | "competition",
-    country?: string,
     index?: number,
     path?: string,
     count?: number

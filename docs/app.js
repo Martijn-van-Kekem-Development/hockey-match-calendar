@@ -47,54 +47,35 @@ function createTableRow(data) {
 }
 
 /**
- * Add the total rows to the table.
- * @param country The country
- */
-function addTotalRows(country) {
-    const allContainer = document.getElementById("all_matches_body");
-    allContainer.innerHTML = "";
-
-    // Order paths by name
-    let paths = country === "null" ? json.total : json.countries[country].total;
-    paths = paths.sort((a, b) => a.name.toString().localeCompare(b.name));
-    for (let row of paths) {
-        allContainer.append(createTableRow(row));
-    }
-}
-
-/**
  * Add the origin buttons to the DOM.
- * @param country The country to add the origin buttons for
  */
-function addOriginButtons(country) {
+function addOriginButtons() {
     const container = document.getElementById("container_originButtons");
     container.innerHTML = "";
 
-    let origins = (country === "null") ? (json.origins) : (json.countries[country].origins);
-    let originData = Object.values(origins).sort((a,b) => 
+    let originData = Object.values(json.origins).sort((a,b) =>
         (a.index ?? 0) - (b.index ?? 0) || a.name.localeCompare(b.name));
-    
+
     for (let origin of originData) {
         const listEl = document.createElement("li");
         const buttonEl = document.createElement("button");
 
         listEl.setAttribute("data-id", origin.id);
         buttonEl.textContent = origin.name;
-        buttonEl.addEventListener("click", () => selectOrigin(country, origin.id));
+        buttonEl.addEventListener("click", () => selectOrigin(origin.id));
 
         listEl.append(buttonEl);
         container.append(listEl);
     }
 
-    selectOrigin(country, originData[0].id);
+    selectOrigin(originData[0].id);
 }
 
 /**
  * Select an origin for the specific calendars.
- * @param country The country for this origin.
  * @param origin The origin
  */
-function selectOrigin(country, origin) {
+function selectOrigin(origin) {
     // Remove currently active button
     const activeButton = document.querySelector("#container_originButtons li.selected");
     if (activeButton) activeButton.classList.remove("selected");
@@ -103,48 +84,64 @@ function selectOrigin(country, origin) {
     const newOriginButton = document.querySelector(`#container_originButtons li[data-id="${origin}"]`);
     newOriginButton.classList.add("selected");
 
+    prepareClubs(origin);
+}
+
+/**
+ * Prepare the team picker.
+ */
+function prepareClubs(origin) {
+    const selectContainer = document.getElementById("team");
+    selectContainer.querySelectorAll(`option:not([value="null"])`).forEach(e => e.remove());
+    selectContainer.setAttribute("data-origin", origin);
+
+    // Add clubs to list.
+    const clubs = Object.values(json.origins[origin].clubs)
+        .sort((a,b) => a.name.localeCompare(b.name));
+
+    for (let club of clubs) {
+        const optionEl = document.createElement("option");
+        optionEl.textContent = club.name;
+        optionEl.value = club.id;
+        selectContainer.append(optionEl);
+    }
+
+    clubChanged(origin, "null");
+}
+
+/**
+ * Select a new club.
+ * @param origin The origin.
+ * @param newClub The new club
+ */
+function clubChanged(origin, newClub) {
+    // Sort paths
+    let paths = newClub === "null" ? json.origins[origin].paths : json.origins[origin].clubs[newClub].paths;
+    paths = paths.sort((a, b) => ((a.index ?? 0) - (b.index ?? 0)) || a.name.toString().localeCompare(b.name));
+
     // Empty current container
     const container = document.getElementById("specific_body");
     container.innerHTML = "";
-
-    // Sort paths
-    let paths = country === "null" ? json.origins[origin].paths : json.countries[country].origins[origin].paths;
-    paths = paths.sort((a, b) => ((a.index ?? 0) - (b.index ?? 0)) || a.name.toString().localeCompare(b.name));
 
     // Load content into table
     for (let row of paths) {
         container.append(this.createTableRow(row));
     }
+
+    const warningNotification = document.getElementById("warning_team");
+    warningNotification.classList.toggle("hidden", newClub === "null");
+    if (newClub !== "null")
+        document.getElementById("team_selected").textContent = json.origins[origin].clubs[newClub].name;
 }
 
 /**
- * Prepare the country picker.
+ * Prepare the club selector.
  */
-function prepareCountry() {
-    const selectContainer = document.getElementById("country");
-    selectContainer.addEventListener("change", () => countryChanged(selectContainer.value));
-
-    // Add countries to list.
-    for (let country of Object.keys(json.countries).sort((a,b) => a.localeCompare(b))) {
-        const optionEl = document.createElement("option");
-        optionEl.textContent = country;
-        optionEl.value = country;
-        selectContainer.append(optionEl);
-    }
-}
-
-/**
- * Select a new country.
- * @param newCountry The new country
- */
-function countryChanged(newCountry) {
-    addOriginButtons(newCountry);
-    addTotalRows(newCountry);
-
-    const warningNotification = document.getElementById("warning_country");
-    warningNotification.classList.toggle("hidden", newCountry === "null");
-    if (newCountry !== "null")
-        document.getElementById("country_selected").textContent = newCountry;
+function prepareClubSelector() {
+    const selectContainer = document.getElementById("team");
+    selectContainer.addEventListener("change", () => {
+        clubChanged(selectContainer.getAttribute("data-origin"), selectContainer.value)
+    });
 }
 
 /**
@@ -155,8 +152,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     const data = await files.text();
     json = JSON.parse(data);
 
-    prepareCountry();
-    countryChanged("null");
+    addOriginButtons();
+    prepareClubSelector();
 
     document.getElementById("label_last_update").textContent = (new Date(json.lastUpdate)).toLocaleString();
 })

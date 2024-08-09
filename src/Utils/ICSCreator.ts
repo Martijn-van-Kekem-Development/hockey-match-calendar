@@ -1,7 +1,7 @@
 import {ICS, Metadata} from "../ICS.js";
 import {Competition} from "../Objects/Competition.js";
 import {Fetcher} from "../Fetchers/Fetcher.js";
-import {Match} from "../Objects/Match.js";
+import {Club, Match} from "../Objects/Match.js";
 
 export class ICSCreator {
     /**
@@ -11,19 +11,16 @@ export class ICSCreator {
      */
     public static async createTotalICS(fetcher: Fetcher, competitions: Competition[]) {
         const matches = competitions.map(e => e.getMatches()).flat();
-        const fetcherID = fetcher === null ? "total" : fetcher.getID();
-        const fetcherName = fetcher === null ? "" : `${fetcher.getName()} `;
-        const path = `${fetcherID}/all-matches`;
-        const title = `All ${fetcherName}matches`;
+        const path = `all-matches`;
+        const title = `All ${fetcher.getName()} matches`;
 
-        console.info(`[ICSCreator] Writing ${matches.length} matches to ${path}.`);
         const meta: Metadata = {
             type: "total",
             index: -2,
             count: matches.length
         };
         await ICS.writeToFile(fetcher, ICS.calendarToICS(title, path, matches), title, path, null, meta);
-        await ICSCreator.createCountryICS(fetcher, matches, path, title, meta);
+        await ICSCreator.createTeamICS(fetcher, matches, path, title, meta);
     }
 
     /**
@@ -35,52 +32,49 @@ export class ICSCreator {
     public static async createGenderTotalICS(fetcher: Fetcher, competitions: Competition[], gender: "M" | "W") {
         let matches = competitions.map(e => e.getMatches()).flat();
         matches = matches.filter(m => m.getGender() === gender);
-        const fetcherID = fetcher === null ? "total" : fetcher.getID();
-        const fetcherName = fetcher === null ? "" : `${fetcher.getName()} `;
-        const path = `${fetcherID}/${gender === "M" ? "mens" : "womens"}-matches`;
-        const title = `All ${fetcherName}${gender === "M" ? "men's" : "women's"} matches`;
+        const path = `${gender === "M" ? "mens" : "womens"}-matches`;
+        const title = `All ${fetcher.getName()} ${gender === "M" ? "men's" : "women's"} matches`;
 
-        console.info(`[ICSCreator] Writing ${matches.length} matches to ${path}.`);
         const meta: Metadata = {
             type: "total",
             index: -1,
             count: matches.length
         };
         await ICS.writeToFile(fetcher, ICS.calendarToICS(title, path, matches), title, path, null, meta);
-        await ICSCreator.createCountryICS(fetcher, matches, path, title, meta);
+        await ICSCreator.createTeamICS(fetcher, matches, path, title, meta);
     }
 
     /**
-     * Create one big ICS file of all matches of a specific country.
+     * Create one big ICS file of all matches of a specific team.
      * @param fetcher The fetcher
      * @param matches All matches.
      * @param fileName The output file name.
      * @param title The calendar title.
      * @param metadata The metadata
      */
-    public static async createCountryICS(fetcher: Fetcher, matches: Match[], fileName: string, title: string, metadata: Metadata) {
-        const countryMap: Map<string, Match[]> = new Map();
+    public static async createTeamICS(fetcher: Fetcher, matches: Match[], fileName: string, title: string, metadata: Metadata) {
+        const matchMap: Map<string, {matches: Match[], club: Club}> = new Map();
 
         // Function to add a country.
-        const addCountry = (country: string, match: Match) => {
-            if (!countryMap.has(country)) countryMap.set(country, []);
-            countryMap.get(country).push(match);
+        const addTeam = (club: Club, match: Match) => {
+            if (!matchMap.has(club.id)) matchMap.set(club.id, {matches: [], club});
+            matchMap.get(club.id).matches.push(match);
         }
 
-        // Add each match to the correct countries
+        // Add each match to the correct clubs
         for (let match of matches) {
-            match.getIncludedCountries().forEach(val => addCountry(val, match));
+            match.getIncludedClubs().forEach(val => addTeam(val, match));
         }
 
         let promises = [];
-        for (let [countryName, countryMatches] of countryMap) {
-            const path = `countries/${countryName}/${fileName}`;
-            const fileTitle = `(${countryName}) ${title}`;
+        for (let [clubID, clubData] of matchMap) {
+            const path = `clubs/${clubID}/${fileName}`;
+            const fileTitle = `(${clubData.club.name}) ${title}`;
 
-            console.info(`[ICSCreator] Writing ${countryMatches.length} matches to ${path}.`);
-            promises.push(ICS.writeToFile(fetcher, ICS.calendarToICS(fileTitle, path, countryMatches), fileTitle, path, countryName,{
+            const ics = ICS.calendarToICS(fileTitle, path, clubData.matches);
+            promises.push(ICS.writeToFile(fetcher, ics, fileTitle, path, clubData.club,{
                 ...metadata,
-                count: countryMatches.length
+                count: clubData.matches.length
             }));
         }
         await Promise.all(promises);
@@ -91,16 +85,15 @@ export class ICSCreator {
      * @param competition The competition.
      */
     public static async createCompetitionICS(competition: Competition) {
-        const path = competition.getFetcher().getID() + "/per-competition/" + `${competition.getID()}-${competition.getLowercaseName()}`;
+        const path = "per-competition/" + `${competition.getID().toLowerCase()}-${competition.getLowercaseName()}`;
         const title = competition.getName();
 
-        console.info(`[ICSCreator] Writing ${competition.getMatches().length} matches to ${path}.`);
         const meta: Metadata = {
             type: "competition",
             index: competition.getIndex(),
             count: competition.getMatches().length
         };
         await ICS.writeToFile(competition.getFetcher(), ICS.calendarToICS(title, competition.getID(), competition.getMatches()), title, path, null, meta);
-        await ICSCreator.createCountryICS(competition.getFetcher(), competition.getMatches(), path, title, meta);
+        await ICSCreator.createTeamICS(competition.getFetcher(), competition.getMatches(), path, title, meta);
     }
 }
