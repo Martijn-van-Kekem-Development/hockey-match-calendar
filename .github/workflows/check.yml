@@ -1,11 +1,6 @@
-name: Auto update calendar
+name: Verify test cases
 
-on:
-  push
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+on: pull_request
 
 jobs:
   check:
