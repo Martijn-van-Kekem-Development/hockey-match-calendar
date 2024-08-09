@@ -12,8 +12,9 @@ export class ICSCreator {
     public static async createTotalICS(fetcher: Fetcher, competitions: Competition[]) {
         const matches = competitions.map(e => e.getMatches()).flat();
         const fetcherID = fetcher === null ? "total" : fetcher.getID();
+        const fetcherName = fetcher === null ? "" : `${fetcher.getName()} `;
         const path = `${fetcherID}/all-matches`;
-        const title = `All matches`;
+        const title = `All ${fetcherName}matches`;
 
         console.info(`[TMSFetcher] Writing ${matches.length} matches to ${path}.`);
         const meta: Metadata = {
@@ -35,8 +36,9 @@ export class ICSCreator {
         let matches = competitions.map(e => e.getMatches()).flat();
         matches = matches.filter(m => m.getGender() === gender);
         const fetcherID = fetcher === null ? "total" : fetcher.getID();
+        const fetcherName = fetcher === null ? "" : `${fetcher.getName()} `;
         const path = `${fetcherID}/${gender === "M" ? "mens" : "womens"}-matches`;
-        const title = `${gender === "M" ? "Men's" : "Women's"} matches`;
+        const title = `All ${fetcherName}${gender === "M" ? "men's" : "women's"} matches`;
 
         console.info(`[TMSFetcher] Writing ${matches.length} matches to ${path}.`);
         const meta: Metadata = {
