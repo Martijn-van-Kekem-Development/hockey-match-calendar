@@ -92,7 +92,7 @@ async function selectOrigin(origin) {
 
     // Fetch origin if necessary
     if (!origins[origin]) {
-        origins[origin] = await (await fetch(`ics/${origin}/paths.json`)).json();
+        origins[origin] = await (await fetch(`ics/${origin}/paths.json`, {cache: "no-store"})).json();
     }
 
     // Update last update timestamp
