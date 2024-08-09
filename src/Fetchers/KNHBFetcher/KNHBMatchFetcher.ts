@@ -1,5 +1,5 @@
 import {Competition} from "../../Objects/Competition.js";
-import {Match} from "../../Objects/Match.js";
+import {Club, Match} from "../../Objects/Match.js";
 import {KNHBFetcher} from "./KNHBFetcher.js";
 import {DateHelper} from "../../Utils/DateHelper.js";
 import {KNHBAbbreviations} from "../../Utils/KNHBAbbreviations.js";
@@ -60,8 +60,8 @@ export class KNHBMatchFetcher {
         if (data.status !== 200) {
             // Request failed
             if (tryCount < 3) {
-                console.warn("[KNHBMatchFetcher] Request failed, retrying...");
-                await APIHelper.delay(data.status === 429 ? 60000 : 1000);
+                console.warn(`[KNHBMatchFetcher] Request failed (${data.status}), retrying...`);
+                await APIHelper.delay(data.status === 429 ? 10000 : 1000);
                 return await this.makeRequest(type, page, competition);
             } else {
                 // Give up
@@ -85,8 +85,18 @@ export class KNHBMatchFetcher {
         object.setIndex(index);
         object.setMatchDate(DateHelper.KNHBtoUTC(match.datetime));
         object.setVenue(match.location.description);
-        object.setHomeTeam(match.home_team.name);
-        object.setAwayTeam(match.away_team.name);
+
+        // Add teams
+        const homeClub: Club = match.home_team.club_name === null ? null : {
+            id: KNHBAbbreviations.getClubId(match.home_team.club_name),
+            name: match.home_team.club_name
+        };
+        const awayClub: Club = match.away_team.club_name === null ? null : {
+            id: KNHBAbbreviations.getClubId(match.away_team.club_name),
+            name: match.away_team.club_name
+        };
+        object.setHomeTeam(match.home_team.id, match.home_team.name, homeClub);
+        object.setAwayTeam(match.away_team.id, match.away_team.name, awayClub);
 
         // Add gender
         const gender = KNHBAbbreviations.getGender(competition.getName());

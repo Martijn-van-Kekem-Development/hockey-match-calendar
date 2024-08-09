@@ -27,11 +27,12 @@ h2 {
     margin-bottom: 0.8rem;
 }
 
-.pick-country {
+.pick-team {
     margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
 
-.pick-country select {
+.pick-team select {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;

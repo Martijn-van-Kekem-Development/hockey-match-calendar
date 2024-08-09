@@ -73,22 +73,30 @@ export class Match {
 
     /**
      * Set the home team for this match.
+     * @param id The home team ID.
      * @param team The home team.
+     * @param club The club this team is playing for.
      */
-    public setHomeTeam(team: string) {
+    public setHomeTeam(id: string, team: string, club: Club = null) {
         this.homeTeam = {
+            id,
             name: team,
+            club,
             country: Countries.getCountryByIOC(team) ?? Countries.getCountryByISO(team) ?? null
         };
     }
 
     /**
      * Set the away team for this match.
+     * @param id The away team id.
      * @param team The away team.
+     * @param club The club this team is playing for.
      */
-    public setAwayTeam(team: string) {
+    public setAwayTeam(id: string, team: string, club: Club = null) {
         this.awayTeam = {
+            id,
             name: team,
+            club,
             country: Countries.getCountryByIOC(team) ?? Countries.getCountryByISO(team) ?? null
         };
     }
@@ -166,15 +174,28 @@ export class Match {
     }
 
     /**
-     * Get the countries that are included in this match.
+     * Get the clubs that are included in this match.
      */
-    public getIncludedCountries(): string[] {
-        const countries = [];
+    public getIncludedClubs(): Club[] {
+        const clubs: Club[] = [];
 
-        if (this.homeTeam.country) countries.push(this.homeTeam.country.ioc);
-        if (this.awayTeam.country) countries.push(this.awayTeam.country.ioc);
+        if (this.homeTeam.country && this.homeTeam.country.ioc.length === 3)
+            clubs.push({
+                id: this.homeTeam.country.ioc,
+                name: this.homeTeam.country.full
+            });
+        else if (this.homeTeam.club)
+            clubs.push(this.homeTeam.club);
 
-        return countries;
+        if (this.awayTeam.country && this.awayTeam.country.ioc.length === 3)
+            clubs.push({
+                id: this.awayTeam.country.ioc,
+                name: this.awayTeam.country.full
+            });
+        else if (this.awayTeam.club)
+            clubs.push(this.awayTeam.club);
+
+        return clubs;
     }
 
     /**
@@ -301,6 +322,13 @@ export class Match {
 }
 
 export interface Team {
+    id: string,
     name: string,
+    club: Club | null,
     country: Country | null
+}
+
+export interface Club {
+    id: string,
+    name: string
 }

@@ -9,4 +9,15 @@ export class KNHBAbbreviations {
         if (str.includes("(m)") || str.includes("heren") || str.includes("jongens")) return "M";
         throw new Error("Couldn't fetch gender for " + type);
     }
+
+    /**
+     * Get the club id by the supplied name.
+     * @param clubName The club name
+     */
+    public static getClubId(clubName: string): string {
+        return clubName
+            .toLowerCase()
+            .replaceAll(" ", "-")
+            .replaceAll(/[^a-zA-Z]/g, "");
+    }
 }

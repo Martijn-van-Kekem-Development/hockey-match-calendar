@@ -62,13 +62,6 @@ export class KNHBFetcher extends Fetcher {
         await Promise.all(promises);
         const competitionsArray = Array.from(competitions.values());
 
-        // Create calendar files.
-        await Promise.all([
-            ICSCreator.createTotalICS(this, competitionsArray),
-            ICSCreator.createGenderTotalICS(this, competitionsArray, "M"),
-            ICSCreator.createGenderTotalICS(this, competitionsArray, "W"),
-        ]);
-
         console.info(`[KNHBFetcher] Finished.`);
         return competitionsArray;
     }
@@ -83,11 +76,9 @@ export class KNHBFetcher extends Fetcher {
      * @override
      */
     async fetchMatches(competition: Competition): Promise<Map<string, Match>> {
-        const data = await Promise.all([
-            this.matchFetcher.fetch("upcoming", competition),
-            this.matchFetcher.fetch("official", competition)
-        ]);
-        return new Map(data.flatMap(e => [...e]));
+        const upcomingMatches = await this.matchFetcher.fetch("upcoming", competition);
+        const officialMatches = await this.matchFetcher.fetch("official", competition);
+        return new Map([...upcomingMatches, ...officialMatches]);
     }
 
     /**
