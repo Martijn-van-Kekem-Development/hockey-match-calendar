@@ -46,7 +46,7 @@ export class TMSFetcher extends Fetcher {
         let promises = [];
 
         console.info(`[TMSFetcher] Found ${competitions.size} competitions.`);
-        console.info(`[TMSFetcher] Fetching matches...`);
+        console.info(`[TMSFetcher] Fetching matches and creating competition files...`);
         for (let competition of competitions.values()) {
             // Fetch match for every competition
             const matchPromise = this.fetchMatches(competition);

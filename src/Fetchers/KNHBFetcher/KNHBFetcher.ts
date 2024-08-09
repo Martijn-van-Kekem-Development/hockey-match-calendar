@@ -46,7 +46,7 @@ export class KNHBFetcher extends Fetcher {
         let promises = [];
 
         console.info(`[KNHBFetcher] Found ${competitions.size} competitions.`);
-        console.info(`[KNHBFetcher] Fetching matches...`);
+        console.info(`[KNHBFetcher] Fetching matches and creating competition files...`);
         for (let competition of competitions.values()) {
             // Fetch match for every competition
             const matchPromise = this.fetchMatches(competition);
