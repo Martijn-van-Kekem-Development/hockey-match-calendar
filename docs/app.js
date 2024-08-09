@@ -78,22 +78,29 @@ async function addOriginButtons() {
  * @param origin The origin
  */
 async function selectOrigin(origin) {
-    if (!origins[origin]) {
-        // Fetch origin
-        origins[origin] = await (await fetch(`ics/${origin}/paths.json`)).json();
-    }
-
     // Remove currently active button
     const activeButton = document.querySelector("#container_originButtons li.selected");
     if (activeButton) activeButton.classList.remove("selected");
 
     // Select new button
     const newOriginButton = document.querySelector(`#container_originButtons li[data-id="${origin}"]`);
-    newOriginButton.classList.add("selected");
+    newOriginButton.classList.add("selected", "loading");
+
+    // Empty current container
+    const container = document.getElementById("specific_body");
+    container.innerHTML = "";
+
+    // Fetch origin if necessary
+    if (!origins[origin]) {
+        origins[origin] = await (await fetch(`ics/${origin}/paths.json`)).json();
+    }
 
     // Update last update timestamp
     document.getElementById("label_last_update").textContent = parseDate(new Date(origins[origin].lastUpdate));
     prepareClubs(origin);
+    clubChanged(origin, "null");
+
+    newOriginButton.classList.remove("loading");
 }
 
 /**
@@ -137,8 +144,6 @@ function prepareClubs(origin) {
         optionEl.value = club.id;
         selectContainer.append(optionEl);
     }
-
-    clubChanged(origin, "null");
 }
 
 /**

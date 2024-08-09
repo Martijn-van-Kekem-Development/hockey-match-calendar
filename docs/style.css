@@ -1,3 +1,17 @@
+@keyframes loading {
+    0% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 html,body {
     margin: 0;
     padding: 0;
@@ -106,6 +120,10 @@ h2 {
     padding: 0.5rem 0.6rem;
     border-radius: 0.3rem;
     cursor: pointer;
+}
+
+.origin-buttons li.loading button {
+    animation: loading 1s infinite;
 }
 
 .origin-buttons li.selected button {
