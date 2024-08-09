@@ -60,9 +60,9 @@ export class KNHBMatchFetcher {
         if (data.status !== 200) {
             // Request failed
             if (tryCount < 3) {
-                console.warn(`[KNHBMatchFetcher] Request failed (${data.status}), retrying...`);
-                await APIHelper.delay(data.status === 429 ? 10000 : 1000);
-                return await this.makeRequest(type, page, competition);
+                console.warn(`[KNHBMatchFetcher] Request failed (${data.status}, URL: ${data.url}), retrying...`);
+                await APIHelper.delay(data.status === 429 ? 15000 : 1000);
+                return await this.makeRequest(type, page, competition, tryCount++);
             } else {
                 // Give up
                 throw new Error("[KNHBMatchFetcher] Request failed after 3 tries.");
