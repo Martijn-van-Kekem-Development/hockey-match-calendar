@@ -78,7 +78,12 @@ export class TMSFetcher extends Fetcher {
      * @override
      */
     async fetchCompetitions(): Promise<Map<string, Competition>> {
-        return await this.competitionFetcher.fetch("all", 2024);
+        const options = {index: 0};
+        const upcoming = await this.competitionFetcher.fetch("upcoming", options);
+        const inProgress = await this.competitionFetcher.fetch("in-progress", options);
+        const previous = await this.competitionFetcher.fetch("previous", options);
+
+        return new Map([...upcoming, ...inProgress, ...previous]);
     }
 
     /**

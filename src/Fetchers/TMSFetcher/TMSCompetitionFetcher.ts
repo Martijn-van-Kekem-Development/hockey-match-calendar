@@ -20,41 +20,33 @@ export class TMSCompetitionFetcher {
     /**
      * Get the competitions.
      * @param type The type of competitions to get.
-     * @param minYear The minimum year to include in the result.
-     *                The parser will stop fetching competitions when this year has past.
-     *                This parameter is ignored for types other than 'previous' and 'all'.
+     * @param options The index to start the first match at
      */
-    public async fetch(type: "all" | "upcoming" | "previous" | "in-progress", minYear: number = null) {
+    public async fetch(type: "upcoming" | "previous" | "in-progress", options: { index: number }) {
         let page = 1;
         const competitions: Map<string, Competition> = new Map();
 
-        let index = 0;
-        fetchLoop:
-            while (true) {
-                // Get data from TMS.
-                const data = await fetch(
-                    type === "in-progress" ?
-                        `${this.fetcher.getBaseURL()}/competitions?page=${page}` :
-                        `${this.fetcher.getBaseURL()}/competitions?view=${type}&page=${page}`);
-                const html = parse(await data.text());
-                const rows = html.querySelectorAll("#admin_list_of_competitions table tbody tr");
+        while (true) {
+            // Get data from TMS.
+            const data = await fetch(
+                type === "in-progress" ?
+                    `${this.fetcher.getBaseURL()}/competitions?page=${page}` :
+                    `${this.fetcher.getBaseURL()}/competitions?view=${type}&page=${page}`);
+            const html = parse(await data.text());
+            const rows = html.querySelectorAll("#admin_list_of_competitions table tbody tr");
 
-                // Check no results
-                if (rows.length === 1 && rows[0].innerText.trim() === "No results") break;
+            // Check no results
+            if (rows.length === 1 && rows[0].innerText.trim() === "No results") break;
 
-                // Create competition from every row.
-                for (let row of rows) {
-                    const item = this.createCompetition(row, index++);
-
-                    // Check if we need to stop
-                    if ((type === "previous" || type === "all") && item.getYear() < minYear) break fetchLoop;
-
-                    competitions.set(item.getID(), item);
-                }
-
-                // Continue with next page.
-                page++;
+            // Create competition from every row.
+            for (let row of rows) {
+                const item = this.createCompetition(row, options.index++);
+                competitions.set(item.getID(), item);
             }
+
+            // Continue with next page.
+            page++;
+        }
 
         return competitions;
     }
