@@ -1,30 +1,30 @@
+import { Competition } from "../../Objects/Competition.js";
+import { Match } from "../../Objects/Match.js";
 import {Fetcher} from "../Fetcher.js";
-import {Competition} from "../../Objects/Competition.js";
-import {Match} from "../../Objects/Match.js";
-import {TMSCompetitionFetcher} from "./TMSCompetitionFetcher.js";
-import {TMSMatchFetcher} from "./TMSMatchFetcher.js";
+import {KNHBCompetitionFetcher} from "./KNHBCompetitionFetcher.js";
+import {KNHBMatchFetcher} from "./KNHBMatchFetcher.js";
 import {ICSCreator} from "../../Utils/ICSCreator.js";
 
-export class TMSFetcher extends Fetcher {
+export class KNHBFetcher extends Fetcher {
     /**
-     * The FIH TMS url.
+     * The base URL for the KNHB fetcher.
      */
-    public static readonly FIH_BASE_URL: string = "https://tms.fih.ch";
+    public static readonly KNHB_BASE_URL = "https://publicaties.hockeyweerelt.nl/mc";
 
     /**
      * The competition fetcher.
      * @private
      */
-    private competitionFetcher: TMSCompetitionFetcher;
+    private competitionFetcher: KNHBCompetitionFetcher;
 
     /**
      * The match fetcher.
      * @private
      */
-    private matchFetcher: TMSMatchFetcher;
+    private matchFetcher: KNHBMatchFetcher;
 
     /**
-     * Constructor for TMSFetcher.
+     * Constructor for KNHBFetcher.
      * @param id The id of this fetcher.
      * @param name The name of this fetcher.
      * @param index The index of this fetcher.
@@ -33,20 +33,20 @@ export class TMSFetcher extends Fetcher {
     constructor(id: string, name: string, index: number, baseURL: string) {
         super(id, name, index, baseURL);
 
-        this.competitionFetcher = new TMSCompetitionFetcher(this);
-        this.matchFetcher = new TMSMatchFetcher(this);
+        this.competitionFetcher = new KNHBCompetitionFetcher(this);
+        this.matchFetcher = new KNHBMatchFetcher(this);
     }
 
     /**
-     * Fetch the matches from TMS.
+     * @override
      */
-    public async fetch() {
-        console.info(`[TMSFetcher] Fetching competitions...`);
+    public async fetch(): Promise<Competition[]> {
+        console.info(`[KNHBFetcher] Fetching competitions...`);
         const competitions = await this.fetchCompetitions();
         let promises = [];
 
-        console.info(`[TMSFetcher] Found ${competitions.size} competitions.`);
-        console.info(`[TMSFetcher] Fetching matches...`);
+        console.info(`[KNHBFetcher] Found ${competitions.size} competitions.`);
+        console.info(`[KNHBFetcher] Fetching matches...`);
         for (let competition of competitions.values()) {
             // Fetch match for every competition
             const matchPromise = this.fetchMatches(competition);
@@ -69,22 +69,25 @@ export class TMSFetcher extends Fetcher {
             ICSCreator.createGenderTotalICS(this, competitionsArray, "W"),
         ]);
 
-        console.info(`[TMSFetcher] Finished.`);
+        console.info(`[KNHBFetcher] Finished.`);
         return competitionsArray;
     }
-
     /**
      * @override
      */
     async fetchCompetitions(): Promise<Map<string, Competition>> {
-        return await this.competitionFetcher.fetch("all", 2024);
+        return await this.competitionFetcher.fetch();
     }
 
     /**
      * @override
      */
     async fetchMatches(competition: Competition): Promise<Map<string, Match>> {
-        return await this.matchFetcher.fetch(competition);
+        const data = await Promise.all([
+            this.matchFetcher.fetch("upcoming", competition),
+            this.matchFetcher.fetch("official", competition)
+        ]);
+        return new Map(data.flatMap(e => [...e]));
     }
 
     /**
@@ -92,14 +95,15 @@ export class TMSFetcher extends Fetcher {
      */
     descriptionToAppend(competition: Competition, match: Match, html: boolean): string[] {
         const lines: string[] = [];
+        const KNHBUrl = "https://www.knhb.nl/match-center#";
 
-        // Add TMS links
+        // Add KNHB links
         if (html) {
-            if (match.getID()) lines.push(`<a href="${this.getBaseURL()}/matches/${match.getID()}">View match details</a>`);
-            if (competition.getID()) lines.push(`<a href="${this.getBaseURL()}/competitions/${competition.getID()}">View competition details</a>`);
+            if (match.getID()) lines.push(`<a href="${KNHBUrl}/matches/${match.getID()}">View match details</a>`);
+            if (competition.getID()) lines.push(`<a href="${KNHBUrl}/competitions/${competition.getID()}/program">View competition details</a>`);
         } else {
-            if (match.getID()) lines.push("Match link: " + `${this.getBaseURL()}/matches/${match.getID()}`);
-            if (competition.getID()) lines.push("Competition link: " + `${this.getBaseURL()}/competitions/${competition.getID()}`);
+            if (match.getID()) lines.push("Match link: " + `${KNHBUrl}/matches/${match.getID()}`);
+            if (competition.getID()) lines.push("Competition link: " + `${KNHBUrl}/competitions/${competition.getID()}/program`);
         }
 
         return lines;

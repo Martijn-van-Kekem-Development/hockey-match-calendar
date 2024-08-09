@@ -70,8 +70,11 @@ function addOriginButtons(country) {
     const container = document.getElementById("container_originButtons");
     container.innerHTML = "";
 
-    let origins = country === "null" ? json.origins : json.countries[country].origins;
-    for (let origin of Object.values(origins)) {
+    let origins = (country === "null") ? (json.origins) : (json.countries[country].origins);
+    let originData = Object.values(origins).sort((a,b) => 
+        (a.index ?? 0) - (b.index ?? 0) || a.name.localeCompare(b.name));
+    
+    for (let origin of originData) {
         const listEl = document.createElement("li");
         const buttonEl = document.createElement("button");
 
@@ -83,7 +86,7 @@ function addOriginButtons(country) {
         container.append(listEl);
     }
 
-    selectOrigin(country, Object.keys(origins)[0]);
+    selectOrigin(country, originData[0].id);
 }
 
 /**
@@ -137,7 +140,7 @@ function prepareCountry() {
 function countryChanged(newCountry) {
     addOriginButtons(newCountry);
     addTotalRows(newCountry);
-    
+
     const warningNotification = document.getElementById("warning_country");
     warningNotification.classList.toggle("hidden", newCountry === "null");
     if (newCountry !== "null")
