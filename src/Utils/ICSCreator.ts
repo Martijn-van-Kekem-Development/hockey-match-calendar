@@ -73,9 +73,10 @@ export class ICSCreator {
         let promises = [];
         for (let [countryName, countryMatches] of countryMap) {
             const path = `countries/${countryName}/${fileName}`;
+            const fileTitle = `(${countryName}) ${title}`;
 
             console.info(`[TMSFetcher] Writing ${countryMatches.length} matches to ${path}.`);
-            promises.push(ICS.writeToFile(fetcher, ICS.calendarToICS(title, path, countryMatches), title, path, countryName,{
+            promises.push(ICS.writeToFile(fetcher, ICS.calendarToICS(fileTitle, path, countryMatches), fileTitle, path, countryName,{
                 ...metadata,
                 count: countryMatches.length
             }));
