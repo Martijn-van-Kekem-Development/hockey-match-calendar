@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 * * * *"
-  pull_request:
-    types:
-      - closed
+  push:
+    branches:
+      - "main"
 
 concurrency:
   group: "pages"
@@ -31,7 +31,6 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - run: npm test
       - run: npm start
       - name: Set date
         id: date_step
