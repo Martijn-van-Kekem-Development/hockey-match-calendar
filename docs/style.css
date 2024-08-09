@@ -27,28 +27,12 @@ h2 {
     margin-bottom: 0.8rem;
 }
 
-.pick-team {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.pick-team select {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    border: 1px solid #ccc;
-    border-radius: 0.3rem;
-    min-width: 8rem;
-    margin-left: 0.5rem;
-    padding: 0.4rem 0.6rem;
-}
-
 .warning {
     display: flex;
     padding: 0.8rem 1rem;
     align-items: center;
     border-radius: 0.5rem;
-    margin-top: 1rem;
+    margin-block: 0.5rem;
     gap: 1rem;
     background: rgb(254 252 232);
     color: rgb(161 98 7);
@@ -67,10 +51,43 @@ h2 {
 .links {
     display: flex;
     gap: 1.5rem;
+    margin-block: 1.5rem;
     justify-content: center;
     text-align: center;
     flex-wrap: wrap;
 }
+
+.origin-options {
+    display: flex;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+}
+
+.origin-options p.last-update {
+    color: #6c6c6c;
+    font-size: 0.9rem;
+}
+
+.pick-team {
+    margin-right: auto;
+}
+
+.pick-team select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    min-width: 8rem;
+    max-width: 10rem;
+    margin-left: 0.5rem;
+    padding: 0.4rem 0.6rem;
+}
+
 
 .origin-buttons {
     list-style: none;

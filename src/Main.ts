@@ -1,19 +1,78 @@
 import {TMSFetcher} from "./Fetchers/TMSFetcher/TMSFetcher.js";
-import {ICS} from "./ICS.js";
 import {KNHBFetcher} from "./Fetchers/KNHBFetcher/KNHBFetcher.js";
+import {Fetcher} from "./Fetchers/Fetcher.js";
+import * as fs from "node:fs";
 
 export class Main {
+    /**
+     * The available fetchers. The record key corresponds to the command-line argument required to run that fetcher.
+     */
+    public fetchers(): Record<string, Fetcher> {
+        return {
+            "fih": new TMSFetcher("fih", "FIH", 0, TMSFetcher.FIH_BASE_URL),
+            "knhb": new KNHBFetcher("knhb", "KNHB", 1, KNHBFetcher.KNHB_BASE_URL)
+        };
+    }
+
     /**
      * Main entry point for this application
      */
     public async run() {
-        await Promise.all([
-            new TMSFetcher("fih", "FIH", 0, TMSFetcher.FIH_BASE_URL).fetch(),
-            new KNHBFetcher("knhb", "KNHB", 1, KNHBFetcher.KNHB_BASE_URL).fetch()
-        ]);
+        const argument = process.argv[2] ?? "";
+        if (argument.length === 0) {
+            // Invalid request.
+            console.error("No command-line action provided. Exiting...");
+            process.exit(1);
+        }
 
-        // Store file paths in JSON.
-        await ICS.storeFilePaths();
+        if (argument === "all") await this.fetchAll();
+        else if (argument === "save") await this.saveFetchers();
+        else await this.fetch();
+    }
+
+    /**
+     * Save the fetchers to the documentation.
+     * @private
+     */
+    private async saveFetchers() {
+        const fetchers = Object.keys(this.fetchers());
+        fs.writeFileSync(`docs/ics/fetchers.json`, JSON.stringify(fetchers));
+    }
+
+    /**
+     * Fetch all fetchers.
+     * @private
+     */
+    private async fetchAll() {
+        const fetchers = this.fetchers();
+
+        // Fetch all fetchers
+        const promises = [];
+        for (let fetcher of Object.values(fetchers))
+            promises.push(fetcher.fetch());
+
+        await Promise.all(promises);
+    }
+
+    /**
+     * Start the fetching procedure.
+     * @private
+     */
+    private async fetch() {
+        const fetchers = this.fetchers();
+        const fetchersToRun = Object.keys(fetchers).filter(i => process.argv.includes(i));
+
+        if (fetchersToRun.length === 0) {
+            console.error("No valid fetchers specified. Exiting...");
+            process.exit(2);
+        }
+
+        const promises = [];
+        for (let fetcherID of fetchersToRun) {
+            promises.push(fetchers[fetcherID].fetch());
+        }
+
+        await Promise.all(promises);
     }
 }
 

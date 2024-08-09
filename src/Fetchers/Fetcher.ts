@@ -1,5 +1,6 @@
 import {Competition} from "../Objects/Competition.js";
 import {Match} from "../Objects/Match.js";
+import {ICS} from "../ICS.js";
 
 export abstract class Fetcher {
     /**
@@ -71,7 +72,10 @@ export abstract class Fetcher {
     /**
      * Run this fetcher.
      */
-    public abstract fetch(): Promise<Competition[]>;
+    public async fetch(): Promise<Competition[]> {
+        await ICS.storeFilePaths(this);
+        return [];
+    }
 
     /**
      * Fetch the competitions and map them by their ID.

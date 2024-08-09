@@ -3,13 +3,11 @@ import * as fs from "fs/promises";
 import {Fetcher} from "./Fetchers/Fetcher.js";
 
 export class ICS {
-    private static origins: Map<string, FetcherData> = new Map();
-
     /**
-     * The available countries.
+     * The fetcher paths.
      * @private
      */
-    // private static countries: Map<string, CountryData> = new Map();
+    private static fetchers: Map<string, FetcherData> = new Map();
 
     /**
      * Add a new fetcher.
@@ -17,8 +15,8 @@ export class ICS {
      * @param fetcher The fetcher to add.
      */
     public static addFetcher(club: Club | null, fetcher: Fetcher) {
-        if (!this.origins.has(fetcher.getID()))
-            this.origins.set(fetcher.getID(), {
+        if (!this.fetchers.has(fetcher.getID()))
+            this.fetchers.set(fetcher.getID(), {
                 name: fetcher.getName(),
                 id: fetcher.getID(),
                 index: fetcher.getIndex(),
@@ -27,8 +25,8 @@ export class ICS {
             });
 
         // Create club if not exists.
-        if (club && typeof this.origins.get(fetcher.getID()).clubs[club.id] === "undefined")
-            this.origins.get(fetcher.getID()).clubs[club.id] = {
+        if (club && typeof this.fetchers.get(fetcher.getID()).clubs[club.id] === "undefined")
+            this.fetchers.get(fetcher.getID()).clubs[club.id] = {
                 id: club.id,
                 name: club.name,
                 paths: []
@@ -54,8 +52,8 @@ export class ICS {
 
         // Add path to correct club
         const pathArray = club === null ?
-            this.origins.get(fetcher.getID()).paths :
-            this.origins.get(fetcher.getID()).clubs[club.id].paths;
+            this.fetchers.get(fetcher.getID()).paths :
+            this.fetchers.get(fetcher.getID()).clubs[club.id].paths;
 
         pathArray.push({
             name: title,
@@ -66,13 +64,17 @@ export class ICS {
 
     /**
      * Store the file paths in a JSON file.
+     * @param fetcher The fetcher to store the paths for.
      */
-    public static async storeFilePaths() {
-        console.info(`[ICS] Storing ICS paths in files.json.`);
+    public static async storeFilePaths(fetcher: Fetcher) {
+        if (!this.fetchers.has(fetcher.getID())) {
+            console.warn(`[ICS] No file paths to store (${fetcher.getID()})`);
+            return;
+        }
 
-        await fs.writeFile("docs/files.json", JSON.stringify({
+        await fs.writeFile(`docs/ics/${fetcher.getID()}/paths.json`, JSON.stringify({
             lastUpdate: (new Date()).getTime(),
-            origins: Object.fromEntries(this.origins),
+            ...this.fetchers.get(fetcher.getID()),
         }));
     }
 
