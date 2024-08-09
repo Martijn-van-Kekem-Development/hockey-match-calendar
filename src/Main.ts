@@ -10,7 +10,8 @@ export class Main {
     public fetchers(): Record<string, Fetcher> {
         return {
             "fih": new TMSFetcher("fih", "FIH", 0, TMSFetcher.FIH_BASE_URL),
-            "knhb": new KNHBFetcher("knhb", "KNHB", 1, KNHBFetcher.KNHB_BASE_URL)
+            "ehl": new TMSFetcher("ehl", "EHL", 1, TMSFetcher.EHL_BASE_URL),
+            "knhb": new KNHBFetcher("knhb", "KNHB", 2, KNHBFetcher.KNHB_BASE_URL)
         };
     }
 

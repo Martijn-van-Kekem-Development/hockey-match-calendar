@@ -95,7 +95,11 @@ export class TMSMatchFetcher {
      * @param title The title to parse
      */
     parseTitle(object: Match, title: string) {
-        const result = title.match(/([A-Za-z0-9\/ \-]+) v ([A-Za-z0-9\/ \-]+)(?: \((.+)\))?$/);
+        const result = title
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .match(/([A-Za-z0-9\/ \-]+) v ([A-Za-z0-9\/ \-]+)(?: \((.+)\))?$/);
+
         if (!result) throw new Error("Couldn't extract data from match title: " + title);
 
         let [, home, away, matchType] = result;
