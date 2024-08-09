@@ -11,7 +11,9 @@
   "scripts": {
     "start": "node --import=tsx src/Main.ts",
     "test": "vitest --run",
-    "create-cal": "tsx src/Main.ts"
+    "save-fetchers": "npm run start save",
+    "fetch": "npm run start",
+    "fetch-all": "npm run fetch all"
   },
   "license": "GPL-3.0-or-later",
   "repository": {

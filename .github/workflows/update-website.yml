@@ -33,9 +33,11 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Fetch FIH matches
-        run: npm start fih
+        run: npm run fetch fih
       - name: Fetch KNHB matches
-        run: npm start knhb
+        run: npm run fetch knhb
+      - name: Save fetchers
+        run: npm run save-fetchers
       - name: Setup pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
