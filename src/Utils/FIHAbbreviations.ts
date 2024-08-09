@@ -88,8 +88,8 @@ export class FIHAbbreviations {
      */
     public static getGender(type: string): "M" | "W" {
         const str = type.toLowerCase();
-        if (str.includes("womens")) return "W";
-        if (str.includes("mens")) return "M";
+        if (str.includes("womens") || str.includes("girls")) return "W";
+        if (str.includes("mens") || str.includes("boys")) return "M";
         throw new Error("Couldn't fetch gender for " + type);
     }
 

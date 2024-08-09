@@ -12,6 +12,11 @@ export class TMSFetcher extends Fetcher {
     public static readonly FIH_BASE_URL: string = "https://tms.fih.ch";
 
     /**
+     * The EHL TMS url
+     */
+    public static readonly EHL_BASE_URL: string = "https://eurohockey.altiusrt.com";
+
+    /**
      * The competition fetcher.
      * @private
      */

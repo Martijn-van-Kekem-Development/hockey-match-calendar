@@ -36,6 +36,8 @@ jobs:
         run: npm install
       - name: Fetch FIH matches
         run: npm run fetch fih
+      - name: Fetch EHL matches
+        run: npm run fetch ehl
       - name: Fetch KNHB matches
         run: npm run fetch knhb
       - name: Save fetchers
