@@ -49,13 +49,9 @@ export class KNHBFetcher extends Fetcher {
         console.info(`[KNHBFetcher] Fetching matches and creating competition files...`);
         for (let competition of competitions.values()) {
             // Fetch match for every competition
-            const matchPromise = this.fetchMatches(competition);
-            matchPromise.then(result => {
-                competition.getMatches().push(...result.values());
-                return ICSCreator.createCompetitionICS(competition);
-            });
-
-            promises.push(matchPromise);
+            const result = await this.fetchMatches(competition);
+            competition.getMatches().push(...result.values());
+            await ICSCreator.createCompetitionICS(competition);
         }
 
         // Wait for all matches to fetch
