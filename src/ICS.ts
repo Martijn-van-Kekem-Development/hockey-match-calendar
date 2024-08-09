@@ -3,28 +3,33 @@ import * as fs from "fs/promises";
 import {Fetcher} from "./Fetchers/Fetcher.js";
 
 export class ICS {
-    /**
-     * The stored file paths.
-     * @private
-     */
-    private static filePaths: Record<string, FetcherData> = {};
 
     /**
-     * The total file paths.
+     * The available countries.
      * @private
      */
-    private static totalPaths: Metadata[] = [];
+    private static countries: Map<string, CountryData> = new Map();
 
     /**
      * Add a new fetcher.
+     * @param country The country to add the fetcher to.
      * @param fetcher The fetcher to add.
      */
-    public static addFetcher(fetcher: Fetcher) {
-        this.filePaths[fetcher.getID()] = {
-            name: fetcher.getName(),
-            id: fetcher.getID(),
-            paths: []
-        };
+    public static addFetcher(country: string, fetcher: Fetcher) {
+        // Create country if not exists.
+        if (!this.countries.has(country))
+            this.countries.set(country, {
+                total: [],
+                origins: {}
+            });
+
+        if (fetcher && !this.countries.get(country).origins[fetcher.getID()]) {
+            this.countries.get(country).origins[fetcher.getID()] = {
+                name: fetcher.getName(),
+                id: fetcher.getID(),
+                paths: []
+            };
+        }
     }
 
     /**
@@ -33,15 +38,23 @@ export class ICS {
      * @param ics The ICS content.
      * @param title The ICS title.
      * @param fileName The file name without extension.
+     * @param country The country to write for, or null if for all.
      * @param metadata Extra data to save.
      */
-    public static async writeToFile(fetcher: Fetcher, ics: string, title: string, fileName: string, metadata: Metadata) {
+    public static async writeToFile(fetcher: Fetcher, ics: string, title: string, fileName: string, country: string | null, metadata: Metadata) {
+        country = country ?? "all_countries";
         const outputFile = `docs/ics/${fileName}.ics`;
         const outputFolder = outputFile.split("/").slice(0, -1).join("/");
         await fs.mkdir(outputFolder, {recursive: true});
         await fs.writeFile(outputFile, ics, {flag: "w+"});
 
-        const pathArray = fetcher === null ? this.totalPaths : this.filePaths[fetcher.getID()].paths;
+        this.addFetcher(country, fetcher);
+
+        // Add path to correct country
+        const pathArray = fetcher === null ?
+            this.countries.get(country).total :
+            this.countries.get(country).origins[fetcher.getID()].paths;
+
         pathArray.push({
             name: title,
             path: outputFile.split("/").slice(1).join("/"),
@@ -53,12 +66,16 @@ export class ICS {
      * Store the file paths in a JSON file.
      */
     public static async storeFilePaths() {
+        const allCountries = this.countries.get("all_countries");
+        this.countries.delete("all_countries");
         await fs.writeFile("docs/files.json", JSON.stringify({
             lastUpdate: (new Date()).getTime(),
-            total: this.totalPaths,
-            origins: {
-                ...this.filePaths
-            }
+            // total: this.totalPaths,
+            // origins: {
+            //     ...this.filePaths
+            // },
+            ...allCountries,
+            countries: Object.fromEntries(this.countries)
         }));
     }
 
@@ -133,6 +150,11 @@ export class ICS {
     }
 }
 
+export interface CountryData {
+    origins: Record<string, FetcherData>,
+    total: Metadata[]
+}
+
 export interface FetcherData {
     id: string,
     name: string,
@@ -142,6 +164,7 @@ export interface FetcherData {
 export interface Metadata {
     name?: string,
     type?: "total" | "competition",
+    country?: string,
     index?: number,
     path?: string,
     count?: number

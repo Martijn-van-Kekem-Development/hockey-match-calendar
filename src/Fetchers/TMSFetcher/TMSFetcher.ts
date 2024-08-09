@@ -65,7 +65,7 @@ export class TMSFetcher extends Fetcher {
         await Promise.all([
             ICSCreator.createTotalICS(this, competitionsArray),
             ICSCreator.createGenderTotalICS(this, competitionsArray, "M"),
-            ICSCreator.createGenderTotalICS(this, competitionsArray, "W")
+            ICSCreator.createGenderTotalICS(this, competitionsArray, "W"),
         ]);
 
         console.info(`[TMSFetcher] Finished.`);
