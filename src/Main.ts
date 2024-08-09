@@ -36,6 +36,7 @@ export class Main {
      */
     private async saveFetchers() {
         const fetchers = Object.keys(this.fetchers());
+        fs.mkdirSync(`docs/ics`, {recursive: true});
         fs.writeFileSync(`docs/ics/fetchers.json`, JSON.stringify(fetchers));
     }
 
