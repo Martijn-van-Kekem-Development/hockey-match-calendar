@@ -64,7 +64,7 @@ h2 {
 
 .links {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.5rem 2rem;
     margin-block: 1.5rem;
     justify-content: center;
     text-align: center;
@@ -74,8 +74,8 @@ h2 {
 .origin-options {
     display: flex;
     width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 0.2rem;
+    margin-top: 0.7rem;
+    margin-bottom: 0.3rem;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem 1rem;
@@ -84,10 +84,18 @@ h2 {
 .origin-options p.last-update {
     color: #6c6c6c;
     font-size: 0.9rem;
+    margin: 0;
 }
 
 .pick-team {
-    margin-right: auto;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pick-team label {
+    flex-shrink: 0;
 }
 
 .pick-team select {
@@ -97,7 +105,7 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 0.3rem;
     min-width: 8rem;
-    max-width: 10rem;
+    max-width: 15rem;
     margin-left: 0.5rem;
     padding: 0.4rem 0.6rem;
 }
