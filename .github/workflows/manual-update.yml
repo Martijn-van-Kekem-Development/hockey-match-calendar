@@ -13,6 +13,8 @@ on:
           - fih
           - ehl
           - knhb
+  push:
+    branches: ["main"]
 
 concurrency:
   group: "update-calendar"
@@ -38,7 +40,7 @@ jobs:
           ref: 'main'
       - name: Prepare update
         uses: ./.github/workflows/pre-update
-      - name: Update the specified calendar(s)
-        run: npm run fetch ${{ inputs.fetcher }}
+      - name: Update the calendar (${{ inputs.fetcher || 'all' }})
+        run: npm run fetch ${{ inputs.fetcher || 'all' }}
       - name: Finalize update
         uses: ./.github/workflows/post-update
