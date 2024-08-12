@@ -1,0 +1,36 @@
+name: Automatically update the TMS calendars
+
+on:
+  schedule:
+    - cron: "30 */3 * * *" # Every 3 hours
+
+concurrency:
+  group: "update-calendar"
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: "${{ steps.deployment.outputs.page_url }}"
+
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: 'main'
+      - name: Prepare update
+        uses: ./.github/workflows/pre-update
+      - name: Update FIH calendar
+        run: npm run fetch fih
+      - name: Update EHL calendar
+        run: npm run fetch ehl
+      - name: Finalize update
+        uses: ./.github/workflows/post-update

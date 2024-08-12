@@ -1,15 +1,15 @@
-name: Update and publish the calendar
+name: Update and publish all calendars
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - "main"
 #  schedule:
 #    - cron: "0 * * * *"
-#  push:
-#    branches:
-#      - "main"
 
 concurrency:
-  group: "pages"
+  group: "update-calendar"
   cancel-in-progress: false
 
 jobs:
@@ -32,11 +32,7 @@ jobs:
           ref: 'main'
       - name: Prepare update
         uses: ./.github/workflows/pre-update
-      - name: Fetch FIH matches
-        run: npm run fetch fih
-      - name: Fetch EHL matches
-        run: npm run fetch ehl
-      - name: Fetch KNHB matches
-        run: npm run fetch knhb
+      - name: Update all calendars
+        run: npm run fetch-all
       - name: Finalize update
         uses: ./.github/workflows/post-update
