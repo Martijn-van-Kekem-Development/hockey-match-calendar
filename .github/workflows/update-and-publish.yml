@@ -29,9 +29,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: 'live'
+          ref: 'main'
       - name: Merge updates from 'main'
-        run: git fetch origin main:main && git rebase main
+        run: git fetch origin live:live && git checkout live -- docs/ics
       - name: Setup node
         uses: actions/setup-node@v4
         with:
