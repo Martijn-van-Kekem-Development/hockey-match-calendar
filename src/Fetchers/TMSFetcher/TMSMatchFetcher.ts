@@ -1,7 +1,7 @@
 import {Match} from "../../Objects/Match.js";
 import {HTMLElement, parse} from "node-html-parser";
 import {Competition} from "../../Objects/Competition.js";
-import {FIHAbbreviations} from "../../Utils/FIHAbbreviations.js";
+import {Abbreviations} from "../../Utils/Abbreviations.js";
 import {DateHelper} from "../../Utils/DateHelper.js";
 import {TMSFetcher} from "./TMSFetcher.js";
 
@@ -67,7 +67,7 @@ export class TMSMatchFetcher {
         object.setIndex(Number(index.textContent.trim()));
 
         // Add gender
-        const gender = FIHAbbreviations.getGender(competition.getType());
+        const gender = Abbreviations.getGender(competition.getType(), this.fetcher);
         object.setGender(gender);
 
         // Add date and time

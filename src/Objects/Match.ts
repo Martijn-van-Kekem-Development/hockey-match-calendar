@@ -1,6 +1,6 @@
 import {Competition} from "./Competition.js";
 import {Countries, Country} from "../Utils/Countries.js";
-import {FIHAbbreviations} from "../Utils/FIHAbbreviations.js";
+import {Abbreviations} from "../Utils/Abbreviations.js";
 import {DateHelper} from "../Utils/DateHelper.js";
 import {Moment} from "moment-timezone";
 
@@ -258,7 +258,7 @@ export class Match {
      * Get the match abbreviation.
      */
     public getAbbr(): string {
-        return FIHAbbreviations.getMatchType(this.type, this.getGender(), this.matchIndex);
+        return Abbreviations.getMatchType(this.type, this.getGender(), this.matchIndex);
     }
 
     /**
