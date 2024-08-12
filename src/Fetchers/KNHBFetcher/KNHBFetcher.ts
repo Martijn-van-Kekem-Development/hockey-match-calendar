@@ -9,7 +9,7 @@ export class KNHBFetcher extends Fetcher {
     /**
      * The base URL for the KNHB fetcher.
      */
-    public static readonly KNHB_BASE_URL = "https://publicaties.hockeyweerelt.nl/mc";
+    public static readonly KNHB_BASE_URL = "https://publ2icaties.hockeyweerelt.nl/mc";
 
     /**
      * The id for the KNHB fetcher.
