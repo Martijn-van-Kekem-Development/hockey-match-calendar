@@ -1,12 +1,18 @@
-name: Update and publish all calendars
+name: Manual update
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - "main"
-#  schedule:
-#    - cron: "0 * * * *"
+    inputs:
+      fetcher:
+        description: "The calendar to update."
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - fih
+          - ehl
+          - knhb
 
 concurrency:
   group: "update-calendar"
@@ -32,7 +38,7 @@ jobs:
           ref: 'main'
       - name: Prepare update
         uses: ./.github/workflows/pre-update
-      - name: Update all calendars
-        run: npm run fetch-all
+      - name: Update the specified calendar(s)
+        run: npm run fetch ${{ inputs.fetcher }}
       - name: Finalize update
         uses: ./.github/workflows/post-update

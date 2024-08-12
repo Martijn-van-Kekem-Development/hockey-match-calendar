@@ -1,8 +1,8 @@
-name: Automatically update the TMS calendars
+name: Automatic update
 
 on:
   schedule:
-    - cron: "30 */3 * * *" # Every 3 hours
+    - cron: "0 * * * *" # Every hour
 
 concurrency:
   group: "update-calendar"
@@ -28,9 +28,7 @@ jobs:
           ref: 'main'
       - name: Prepare update
         uses: ./.github/workflows/pre-update
-      - name: Update FIH calendar
-        run: npm run fetch fih
-      - name: Update EHL calendar
-        run: npm run fetch ehl
+      - name: Update all calendars
+        run: npm run fetch-all
       - name: Finalize update
         uses: ./.github/workflows/post-update
