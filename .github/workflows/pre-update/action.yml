@@ -21,10 +21,6 @@ jobs:
       id-token: write
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: 'main'
       - name: Merge updates from 'main'
         run: git fetch origin live:live && git checkout live -- docs/ics
       - name: Setup node

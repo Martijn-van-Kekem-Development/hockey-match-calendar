@@ -26,6 +26,10 @@ jobs:
       id-token: write
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: 'main'
       - name: Prepare update
         uses: ./.github/workflows/pre-update
       - name: Fetch FIH matches
