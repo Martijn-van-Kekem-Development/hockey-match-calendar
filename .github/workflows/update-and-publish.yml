@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Prepare update
-        uses: ./.github/workflows/pre-update.yml
+        uses: ./.github/workflows/pre-update
       - name: Fetch FIH matches
         run: npm run fetch fih
       - name: Fetch EHL matches
@@ -35,4 +35,4 @@ jobs:
       - name: Fetch KNHB matches
         run: npm run fetch knhb
       - name: Finalize update
-        uses: ./.github/workflows/post-update.yml
+        uses: ./.github/workflows/post-update

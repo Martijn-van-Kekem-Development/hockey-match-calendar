@@ -2,6 +2,10 @@ name: Run preparations before updating
 
 on:
   workflow_call:
+    outputs:
+      cache-key:
+        description: The key name of the files that were saved to the cache.
+        value: ${{ steps.save-cache.inputs.key }}
 
 jobs:
   pre-update:
