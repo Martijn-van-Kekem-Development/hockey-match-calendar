@@ -70,12 +70,18 @@ export abstract class Fetcher {
     }
 
     /**
+     * Start the fetcher.
+     */
+    public async start(): Promise<Competition[]> {
+        const result = await this.fetch();
+        await ICS.storeFilePaths(this);
+        return result;
+    }
+
+    /**
      * Run this fetcher.
      */
-    public async fetch(): Promise<Competition[]> {
-        await ICS.storeFilePaths(this);
-        return [];
-    }
+    protected abstract fetch(): Promise<Competition[]>;
 
     /**
      * Fetch the competitions and map them by their ID.

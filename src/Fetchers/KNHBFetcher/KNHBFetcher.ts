@@ -40,7 +40,7 @@ export class KNHBFetcher extends Fetcher {
     /**
      * @override
      */
-    public async fetch(): Promise<Competition[]> {
+    protected async fetch(): Promise<Competition[]> {
         console.info(`[KNHBFetcher] Fetching competitions...`);
         const competitions = await this.fetchCompetitions();
         let promises = [];
@@ -66,7 +66,6 @@ export class KNHBFetcher extends Fetcher {
         ]);
 
         console.info(`[KNHBFetcher] Finished.`);
-        await super.fetch();
         return competitionsArray;
     }
     /**

@@ -45,7 +45,7 @@ export class TMSFetcher extends Fetcher {
     /**
      * Fetch the matches from TMS.
      */
-    public async fetch() {
+    protected async fetch() {
         console.info(`[TMSFetcher] Fetching competitions...`);
         const competitions = await this.fetchCompetitions();
         let promises = [];
@@ -75,7 +75,6 @@ export class TMSFetcher extends Fetcher {
         ]);
 
         console.info(`[TMSFetcher] Finished.`);
-        await super.fetch();
         return competitionsArray;
     }
 
