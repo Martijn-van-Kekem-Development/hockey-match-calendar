@@ -33,17 +33,17 @@ export class ICS {
     /**
      * Write the ICS string to a file.
      * @param fetcher The fetcher
-     * @param ics The ICS content.
+     * @param matches The matches to write.
      * @param title The ICS title.
      * @param fileName The file name without extension.
      * @param club The club to write for, or null if for all.
      * @param metadata Extra data to save.
      */
-    public static async writeToFile(fetcher: Fetcher, ics: string, title: string, fileName: string, club: Club | null, metadata: Metadata) {
+    public static async writeToFile(fetcher: Fetcher, matches: Match[], title: string, fileName: string, club: Club | null, metadata: Metadata) {
         const outputFile = `docs/ics/${fetcher.getID()}/${fileName}.ics`;
         const outputFolder = outputFile.split("/").slice(0, -1).join("/");
         await fs.mkdir(outputFolder, {recursive: true});
-        await fs.writeFile(outputFile, ics, {flag: "w+"});
+        await fs.writeFile(outputFile, ICS.calendarToICS(title, fileName, matches), {flag: "w+"});
 
         this.addFetcher(club, fetcher);
 
