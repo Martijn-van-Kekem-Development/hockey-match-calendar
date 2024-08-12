@@ -1,47 +1,32 @@
-name: Finish up after an update.
+name: Post-update
+description: Run the required steps after updating the ICS files.
 
-on:
-  workflow_call:
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-jobs:
-  post-update:
-    runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages
-      url: "${{ steps.deployment.outputs.page_url }}"
-
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-
-    steps:
-      - name: Save fetchers
-        run: npm run save-fetchers
-      - name: Set current date
-        id: date_step
-        run: echo "today=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
-      - name: Pushing files to 'live' branch
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Calendar update (${{ env.today }} UTC)"
-          branch: 'live'
-          file_pattern: 'docs/ics/*'
-          skip_dirty_check: true
-          add_options: '-f'
-          push_options: '-f'
-          create_branch: true
-      - name: Setup pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './docs'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+runs:
+  using: "composite"
+  steps:
+    - name: Save fetchers
+      run: npm run save-fetchers
+      shell: bash
+    - name: Set current date
+      id: date_step
+      run: echo "today=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+      shell: bash
+    - name: Pushing files to 'live' branch
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "Calendar update (${{ env.today }} UTC)"
+        branch: 'live'
+        file_pattern: 'docs/ics/*'
+        skip_dirty_check: true
+        add_options: '-f'
+        push_options: '-f'
+        create_branch: true
+    - name: Setup pages
+      uses: actions/configure-pages@v5
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: './docs'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

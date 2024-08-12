@@ -1,31 +1,16 @@
-name: Run preparations before updating
+name: Pre-update
+description: Run the required steps before updating the ICS files.
 
-on:
-  workflow_call:
-    outputs:
-      cache-key:
-        description: The key name of the files that were saved to the cache.
-        value: ${{ steps.save-cache.inputs.key }}
-
-jobs:
-  pre-update:
-    runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages
-      url: "${{ steps.deployment.outputs.page_url }}"
-
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-
-    steps:
-      - name: Merge updates from 'main'
-        run: git fetch origin live:live && git checkout live -- docs/ics
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install
+runs:
+  using: "composite"
+  steps:
+    - name: Merge updates from 'main'
+      run: git fetch origin live:live && git checkout live -- docs/ics
+      shell: bash
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Install dependencies
+      run: npm install
+      shell: bash
