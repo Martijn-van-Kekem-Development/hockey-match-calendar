@@ -75,7 +75,6 @@ export class TMSFetcher extends Fetcher {
         ]);
 
         console.info(`[TMSFetcher] Finished.`);
-        await super.fetch();
         return competitionsArray;
     }
 

@@ -60,18 +60,6 @@ export class ICS {
     }
 
     /**
-     * Check if the base dir is ready to write.
-     * @param fetcher The fetcher to prepare.
-     * @private
-     */
-    public static async prepareBaseDir(fetcher: Fetcher) {
-        // Remove dir if it exists
-        const directory = `docs/ics/${fetcher.getID()}`;
-        console.info(`[ICS] Removing directory ${directory}`);
-        await fs.rm(directory, {recursive: true, force: true});
-    }
-
-    /**
      * Store the file paths in a JSON file.
      * @param fetcher The fetcher to store the paths for.
      */

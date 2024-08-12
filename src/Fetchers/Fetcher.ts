@@ -73,25 +73,15 @@ export abstract class Fetcher {
      * Start the fetcher.
      */
     public async start(): Promise<Competition[]> {
-        await this.prepare();
-        return await this.fetch();
+        const result = await this.fetch();
+        await ICS.storeFilePaths(this);
+        return result;
     }
 
     /**
      * Run this fetcher.
      */
-    protected async fetch(): Promise<Competition[]> {
-        await ICS.storeFilePaths(this);
-        return [];
-    }
-
-    /**
-     * Prepare the base directory before fetching.
-     * @protected
-     */
-    protected async prepare(): Promise<void> {
-        await ICS.prepareBaseDir(this);
-    }
+    protected abstract fetch(): Promise<Competition[]>;
 
     /**
      * Fetch the competitions and map them by their ID.
