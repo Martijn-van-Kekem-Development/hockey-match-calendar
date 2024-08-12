@@ -11,7 +11,7 @@ runs:
       id: date_step
       run: echo "today=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
       shell: bash
-    - name: Pushing files to 'live' branch
+    - name: Pushing files to 'main' branch
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: "Calendar update (${{ env.today }} UTC)"

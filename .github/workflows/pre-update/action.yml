@@ -4,8 +4,8 @@ description: Run the required steps before updating the ICS files.
 runs:
   using: "composite"
   steps:
-    - name: Merge updates from 'main'
-      run: git fetch origin live:live && git checkout live -- docs/ics
+    - name: Merge updates from 'latest'
+      run: git fetch origin main:main && git checkout main -- docs/ics
       shell: bash
     - name: Setup node
       uses: actions/setup-node@v4
