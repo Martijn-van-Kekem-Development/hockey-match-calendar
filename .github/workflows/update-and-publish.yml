@@ -1,12 +1,12 @@
-name: Update and publish the live branch
+name: Update and publish the calendar
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 * * * *"
-  push:
-    branches:
-      - "main"
+#  schedule:
+#    - cron: "0 * * * *"
+#  push:
+#    branches:
+#      - "main"
 
 concurrency:
   group: "pages"
