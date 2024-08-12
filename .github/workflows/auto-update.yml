@@ -25,12 +25,22 @@ jobs:
 
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v4
         with:
           ref: 'main'
       - name: Prepare update
+        id: prepare
         uses: ./.github/workflows/pre-update
-      - name: Update all calendars
-        run: npm run fetch-all
+      - name: Update FIH calendar
+        if: steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success
+        run: npm run fetch fih
+      - name: Update EHL calendar
+        if: steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success
+        run: npm run fetch ehl
+      - name: Update KNHB calendar
+        if: steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success
+        run: npm run fetch knhb
       - name: Finalize update
+        if: steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success
         uses: ./.github/workflows/post-update
