@@ -31,7 +31,7 @@ jobs:
         with:
           ref: 'live'
       - name: Merge updates from 'main'
-        run: git rebase main
+        run: git rebase origin/main
       - name: Setup node
         uses: actions/setup-node@v4
         with:
