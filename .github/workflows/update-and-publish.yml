@@ -26,45 +26,13 @@ jobs:
       id-token: write
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: 'main'
-      - name: Merge updates from 'main'
-        run: git fetch origin live:live && git checkout live -- docs/ics
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install
+      - name: Prepare update
+        uses: ./.github/workflows/pre-update.yml
       - name: Fetch FIH matches
         run: npm run fetch fih
       - name: Fetch EHL matches
         run: npm run fetch ehl
       - name: Fetch KNHB matches
         run: npm run fetch knhb
-      - name: Save fetchers
-        run: npm run save-fetchers
-      - name: Set current date
-        id: date_step
-        run: echo "today=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
-      - name: Pushing files to 'live' branch
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Calendar update (${{ env.today }} UTC)"
-          branch: 'live'
-          file_pattern: 'docs/ics/*'
-          skip_dirty_check: true
-          add_options: '-f'
-          push_options: '-f'
-          create_branch: true
-      - name: Setup pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './docs'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Finalize update
+        uses: ./.github/workflows/post-update.yml
