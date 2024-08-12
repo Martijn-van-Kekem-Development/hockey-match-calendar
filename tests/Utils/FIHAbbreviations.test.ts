@@ -4,7 +4,7 @@ import * as fs from "node:fs";
 
 describe("FIHAbbreviations tests", () => {
     test("getMatchType()", () => {
-        const items = fs.readFileSync("includes/tests/match-type-abbreviations.json", {encoding: "utf-8"});
+        const items = fs.readFileSync("tests/includes/match-type-abbreviations.json", {encoding: "utf-8"});
         const json = JSON.parse(items);
 
         for (let test of json as Record<string,string>[]) {
@@ -14,7 +14,7 @@ describe("FIHAbbreviations tests", () => {
     });
 
     test("getCompetition()", () => {
-        const items = fs.readFileSync("includes/tests/competition-abbreviations.json", {encoding: "utf-8"});
+        const items = fs.readFileSync("tests/includes/competition-abbreviations.json", {encoding: "utf-8"});
         const json = JSON.parse(items);
 
         for (let test of json as Record<string,string>[]) {
