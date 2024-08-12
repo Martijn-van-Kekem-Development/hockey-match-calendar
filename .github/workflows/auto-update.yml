@@ -33,14 +33,15 @@ jobs:
         id: prepare
         uses: ./.github/workflows/pre-update
       - name: Update FIH calendar
-        if: ${{ steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success' }}
+        if: ${{ success() || (!cancelled() && steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success') }}
+        continue-on-error: true
         run: npm run fetch fih
       - name: Update EHL calendar
-        if: ${{ steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success' }}
+        if: ${{ success() || (!cancelled() && steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success') }}
         run: npm run fetch ehl
       - name: Update KNHB calendar
-        if: ${{ steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success' }}
+        if: ${{ success() || (!cancelled() && steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success') }}
         run: npm run fetch knhb
       - name: Finalize update
-        if: ${{ steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success' }}
+        if: ${{ success() || (!cancelled() && steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success') }}
         uses: ./.github/workflows/post-update
