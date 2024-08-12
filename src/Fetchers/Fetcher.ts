@@ -70,11 +70,27 @@ export abstract class Fetcher {
     }
 
     /**
+     * Start the fetcher.
+     */
+    public async start(): Promise<Competition[]> {
+        await this.prepare();
+        return await this.fetch();
+    }
+
+    /**
      * Run this fetcher.
      */
-    public async fetch(): Promise<Competition[]> {
+    protected async fetch(): Promise<Competition[]> {
         await ICS.storeFilePaths(this);
         return [];
+    }
+
+    /**
+     * Prepare the base directory before fetching.
+     * @protected
+     */
+    protected async prepare(): Promise<void> {
+        await ICS.prepareBaseDir(this);
     }
 
     /**

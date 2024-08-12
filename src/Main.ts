@@ -60,7 +60,7 @@ export class Main {
         // Fetch all fetchers
         const promises = [];
         for (let fetcher of Object.values(fetchers))
-            promises.push(fetcher.fetch());
+            promises.push(fetcher.start());
 
         await Promise.all(promises);
     }
@@ -80,7 +80,7 @@ export class Main {
 
         const promises = [];
         for (let fetcherID of fetchersToRun) {
-            promises.push(fetchers[fetcherID].fetch());
+            promises.push(fetchers[fetcherID].start());
         }
 
         await Promise.all(promises);
