@@ -1,4 +1,4 @@
-name: Update and publish the website
+name: Update and publish the live branch
 
 on:
   workflow_dispatch:
