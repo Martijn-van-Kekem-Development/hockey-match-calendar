@@ -30,6 +30,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: 'live'
+      - name: Merge updates from 'main'
+        run: git rebase main
       - name: Setup node
         uses: actions/setup-node@v4
         with:
@@ -55,6 +57,7 @@ jobs:
           file_pattern: 'docs/ics/*'
           skip_dirty_check: true
           add_options: '-f'
+          push_options: '-f'
           create_branch: true
       - name: Setup pages
         uses: actions/configure-pages@v5
