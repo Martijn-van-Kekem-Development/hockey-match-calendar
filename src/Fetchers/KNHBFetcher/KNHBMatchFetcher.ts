@@ -2,8 +2,8 @@ import {Competition} from "../../Objects/Competition.js";
 import {Club, Match} from "../../Objects/Match.js";
 import {KNHBFetcher} from "./KNHBFetcher.js";
 import {DateHelper} from "../../Utils/DateHelper.js";
-import {KNHBAbbreviations} from "../../Utils/KNHBAbbreviations.js";
 import {APIHelper} from "../../Utils/APIHelper.js";
+import {Abbreviations} from "../../Utils/Abbreviations.js";
 
 export class KNHBMatchFetcher {
     /**
@@ -88,18 +88,18 @@ export class KNHBMatchFetcher {
 
         // Add teams
         const homeClub: Club = match.home_team.club_name === null ? null : {
-            id: KNHBAbbreviations.getClubId(match.home_team.club_name),
+            id: KNHBMatchFetcher.getClubId(match.home_team.club_name),
             name: match.home_team.club_name
         };
         const awayClub: Club = match.away_team.club_name === null ? null : {
-            id: KNHBAbbreviations.getClubId(match.away_team.club_name),
+            id: KNHBMatchFetcher.getClubId(match.away_team.club_name),
             name: match.away_team.club_name
         };
         object.setHomeTeam(match.home_team.id, match.home_team.name, homeClub);
         object.setAwayTeam(match.away_team.id, match.away_team.name, awayClub);
 
         // Add gender
-        const gender = KNHBAbbreviations.getGender(competition.getName());
+        const gender = Abbreviations.getGender(competition.getName(), this.fetcher);
         object.setGender(gender);
 
         // Add completed state
@@ -115,6 +115,17 @@ export class KNHBMatchFetcher {
             }}
 
         return object;
+    }
+
+    /**
+     * Get the club id by the supplied name.
+     * @param clubName The club name
+     */
+    protected static getClubId(clubName: string): string {
+        return clubName
+            .toLowerCase()
+            .replaceAll(" ", "-")
+            .replaceAll(/[^a-zA-Z]/g, "");
     }
 }
 

@@ -8,11 +8,21 @@ export class Main {
      * The available fetchers. The record key corresponds to the command-line argument required to run that fetcher.
      */
     public fetchers(): Record<string, Fetcher> {
-        return {
-            "fih": new TMSFetcher("fih", "FIH", 0, TMSFetcher.FIH_BASE_URL),
-            "ehl": new TMSFetcher("ehl", "EHL", 1, TMSFetcher.EHL_BASE_URL),
-            "knhb": new KNHBFetcher("knhb", "KNHB", 2, KNHBFetcher.KNHB_BASE_URL)
-        };
+        const fetchers = {};
+
+        // FIH
+        fetchers[TMSFetcher.FIH_FETCHER_ID] =
+            new TMSFetcher(TMSFetcher.FIH_FETCHER_ID, "FIH", 0, TMSFetcher.FIH_BASE_URL);
+
+        // EHL
+        fetchers[TMSFetcher.EHL_FETCHER_ID] =
+            new TMSFetcher(TMSFetcher.EHL_FETCHER_ID, "EHL", 1, TMSFetcher.EHL_BASE_URL)
+
+        // KNHB
+        fetchers[KNHBFetcher.KNHB_FETCHER_ID] =
+            new KNHBFetcher(KNHBFetcher.KNHB_FETCHER_ID, "KNHB", 2, KNHBFetcher.KNHB_BASE_URL);
+
+        return fetchers;
     }
 
     /**

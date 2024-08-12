@@ -65,11 +65,6 @@ export class TMSCompetitionFetcher {
         if (!id) throw new Error("Failed to get ID for competition.");
         else object.setID(id);
 
-        // Add competition year.
-        const year = row.querySelector("td:nth-child(3)").textContent.trim().slice(-4);
-        if (!year) throw new Error("Failed to get year for competition.");
-        else object.setYear(Number(year));
-
         // Add competition name.
         const name = link.textContent ?? null;
         if (!name) throw new Error("Failed to get name for competition.");
