@@ -1,0 +1,67 @@
+name: Update and publish the website
+
+on:
+  workflow_dispatch:
+#  schedule:
+#    - cron: "0 * * * *"
+#  push:
+#    branches:
+#      - "main"
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: "${{ steps.deployment.outputs.page_url }}"
+
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: 'live'
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Fetch FIH matches
+        run: npm run fetch fih
+      - name: Fetch EHL matches
+        run: npm run fetch ehl
+      - name: Fetch KNHB matches
+        run: npm run fetch knhb
+      - name: Save fetchers
+        run: npm run save-fetchers
+      - name: Set current date
+        id: date_step
+        run: echo "today=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+      - name: Pushing files to 'live' branch
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Calendar update (${{ env.today }})"
+          branch: 'live'
+          file_pattern: 'docs/ics/*'
+          skip_dirty_check: true
+          add_options: '-f'
+          create_branch: true
+      - name: Setup pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
