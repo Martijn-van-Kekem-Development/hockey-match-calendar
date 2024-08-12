@@ -15,7 +15,7 @@ runs:
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: "Calendar update (${{ env.today }} UTC)"
-        branch: 'live'
+        branch: 'main'
         file_pattern: 'docs/ics/*'
         skip_dirty_check: true
         add_options: '-f'

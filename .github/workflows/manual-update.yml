@@ -35,7 +35,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: 'main'
+          ref: 'latest'
       - name: Prepare update
         uses: ./.github/workflows/pre-update
       - name: Update the calendar (${{ inputs.fetcher || 'all' }})
