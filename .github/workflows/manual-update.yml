@@ -13,8 +13,6 @@ on:
           - fih
           - ehl
           - knhb
-  push:
-    branches: ["main"]
 
 concurrency:
   group: "update-calendar"

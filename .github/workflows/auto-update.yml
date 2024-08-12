@@ -3,6 +3,8 @@ name: Automatic update
 on:
   schedule:
     - cron: "0 * * * *" # Every hour
+  push:
+    branches: ["main"]
 
 concurrency:
   group: "update-calendar"
