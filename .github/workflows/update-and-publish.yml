@@ -2,11 +2,11 @@ name: Update and publish the website
 
 on:
   workflow_dispatch:
-#  schedule:
-#    - cron: "0 * * * *"
-#  push:
-#    branches:
-#      - "main"
+  schedule:
+    - cron: "0 * * * *"
+  push:
+    branches:
+      - "main"
 
 concurrency:
   group: "pages"
@@ -52,7 +52,7 @@ jobs:
       - name: Pushing files to 'live' branch
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Calendar update (${{ env.today }})"
+          commit_message: "Calendar update (${{ env.today }} UTC)"
           branch: 'live'
           file_pattern: 'docs/ics/*'
           skip_dirty_check: true
