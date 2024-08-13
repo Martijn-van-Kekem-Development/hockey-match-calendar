@@ -182,9 +182,17 @@ function prepareClubSelector() {
 }
 
 /**
+ * Initialize the Google Analytics.
+ */
+function initGA() {
+
+}
+
+/**
  * When the window has loaded.
  */
 window.addEventListener("DOMContentLoaded", async () => {
     await addOriginButtons();
     prepareClubSelector();
+    initGA();
 })
