@@ -1,11 +1,14 @@
+let fetchers = {};
 const origins = {};
+let activeOrigin = null;
 
 /**
  * When the copy URL link is clicked
  * @param evt The event that fired
+ * @param tableRow The table row where the link was clicked in.
  * @returns {Promise<void>}
  */
-async function copyURL(evt) {
+async function copyURL(evt, tableRow) {
     evt.preventDefault();
     await navigator.clipboard.writeText(evt.target.href);
 
@@ -17,6 +20,13 @@ async function copyURL(evt) {
         evt.target.textContent = currentText
         evt.target.classList.remove("copied");
     }, 1500);
+
+    gtag('event', 'calendar_download', {
+        cal_path: evt.target.getAttribute("href"),
+        cal_url: evt.target.href,
+        cal_origin: activeOrigin,
+        cal_name: tableRow.firstChild.textContent
+    });
 }
 
 /**
@@ -38,7 +48,7 @@ function createTableRow(data) {
     let urlCol = document.createElement("td");
     let copyEl = document.createElement("a");
     copyEl.href = `${data.path}`;
-    copyEl.addEventListener("click", e => copyURL(e));
+    copyEl.addEventListener("click", e => copyURL(e, tableRow));
     copyEl.textContent = "Copy URL";
     urlCol.append(copyEl);
     tableRow.append(urlCol);
@@ -50,7 +60,7 @@ function createTableRow(data) {
  * Add the origin buttons to the DOM.
  */
 async function addOriginButtons() {
-    const fetchers = await (await fetch("ics/fetchers.json")).json();
+    fetchers = await (await fetch("ics/fetchers.json")).json();
 
     const container = document.getElementById("container_originButtons");
     container.innerHTML = "";
@@ -60,31 +70,45 @@ async function addOriginButtons() {
 
     for (let origin of originData) {
         const listEl = document.createElement("li");
-        const buttonEl = document.createElement("button");
+        const linkEl = document.createElement("a");
 
         listEl.setAttribute("data-id", origin.id);
-        buttonEl.textContent = origin.name;
-        buttonEl.addEventListener("click", () => selectOrigin(origin.id));
+        linkEl.textContent = origin.name;
+        linkEl.href = `#${origin.id}`;
 
-        listEl.append(buttonEl);
+        listEl.append(linkEl);
         container.append(listEl);
     }
 
-    await selectOrigin(originData[0].id);
+    window.addEventListener("hashchange", () => this.selectOrigin(location.hash.substring(1), true));
+    if (this.getOriginButton(location.hash.substring(1)))
+        await selectOrigin(location.hash.substring(1), false);
+    else
+        await selectOrigin(originData[0].id, false);
+}
+
+/**
+ * Get the origin button belonging to the given origin.
+ * @param origin The origin to get the button for.
+ * @returns {Element}
+ */
+function getOriginButton(origin) {
+    return document.querySelector(`#container_originButtons li[data-id="${origin}"]`);
 }
 
 /**
  * Select an origin for the specific calendars.
  * @param origin The origin
+ * @param userClick Whether this was a user click action.
  */
-async function selectOrigin(origin) {
-    // Remove currently active button
+async function selectOrigin(origin, userClick) {
     const activeButton = document.querySelector("#container_originButtons li.selected");
-    if (activeButton) activeButton.classList.remove("selected");
+    const newOriginButton = getOriginButton(origin);
+    if (!newOriginButton) return; // Origin does not exist.
 
-    // Select new button
-    const newOriginButton = document.querySelector(`#container_originButtons li[data-id="${origin}"]`);
+    if (activeButton) activeButton.classList.remove("selected");
     newOriginButton.classList.add("selected", "loading");
+    activeOrigin = origin;
 
     // Empty current container
     const container = document.getElementById("specific_body");
@@ -101,6 +125,13 @@ async function selectOrigin(origin) {
     clubChanged(origin, "null");
 
     newOriginButton.classList.remove("loading");
+
+    if (userClick) {
+        gtag('event', 'origin_select', {
+            origin_id: origin,
+            origin_name: origins[origin].name
+        });
+    }
 }
 
 /**
@@ -122,7 +153,7 @@ function padStart(input) {
  * @returns {string}
  */
 function parseDate(date) {
-    return `${padStart(date.getDate())}-${padStart(date.getMonth())}-${
+    return `${padStart(date.getDate())}-${padStart(date.getMonth() + 1)}-${
         date.getFullYear()} ${padStart(date.getHours())}:${padStart(date.getMinutes())}`;
 }
 
@@ -182,9 +213,17 @@ function prepareClubSelector() {
 }
 
 /**
+ * Initialize the Google Analytics.
+ */
+function initGA() {
+
+}
+
+/**
  * When the window has loaded.
  */
 window.addEventListener("DOMContentLoaded", async () => {
     await addOriginButtons();
     prepareClubSelector();
+    initGA();
 })
