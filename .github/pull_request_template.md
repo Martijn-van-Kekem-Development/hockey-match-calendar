@@ -13,7 +13,7 @@ _Explain the changes you've made with this PR_
 
 ## Checklist
 
-- [ ] I have read the [contribution document](https://github.com/Martijn-van-Kekem-Development/hockey-match-calendar/CONTRIBUTING.md).
+- [ ] I have read the [contribution document](https://github.com/Martijn-van-Kekem-Development/hockey-match-calendar/blob/main/CONTRIBUTING.md).
 - [ ] I have added test cases to cover my changes (if applicable).
 - [ ] All new and existing test cases have passed.
 - [ ] My code adheres to the coding style of this project.
