@@ -79,6 +79,16 @@ export abstract class Fetcher {
     }
 
     /**
+     * Send a log message from this fetcher.
+     * @param type The type of message to log.
+     * @param message The message itself.
+     * @protected
+     */
+    public log(type: "error" | "log" | "info" | "warn" | "debug", message: string): void {
+        console[type](`[Fetcher - ${this.getID()}] ${message}`);
+    }
+
+    /**
      * Run this fetcher.
      */
     protected abstract fetch(): Promise<Competition[]>;

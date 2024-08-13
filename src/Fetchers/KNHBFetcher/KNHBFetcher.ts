@@ -46,12 +46,13 @@ export class KNHBFetcher extends Fetcher {
      * @override
      */
     protected async fetch(): Promise<Competition[]> {
-        console.info(`[KNHBFetcher] Fetching competitions...`);
+        this.log("info", `Fetching competitions.`);
         const competitions = await this.fetchCompetitions();
         let promises = [];
 
-        console.info(`[KNHBFetcher] Found ${competitions.size} competitions.`);
-        console.info(`[KNHBFetcher] Fetching matches and creating competition files...`);
+        this.log("info", `Found ${competitions.size} competitions.`);
+        this.log("info", `Fetching matches and creating competition files.`);
+
         for (let competition of competitions.values()) {
             // Fetch match for every competition
             const result = await this.fetchMatches(competition);
@@ -70,7 +71,7 @@ export class KNHBFetcher extends Fetcher {
             ICSCreator.createGenderTotalICS(this, competitionsArray, "W", true),
         ]);
 
-        console.info(`[KNHBFetcher] Finished.`);
+        this.log("info", `Finished.`);
         return competitionsArray;
     }
     /**

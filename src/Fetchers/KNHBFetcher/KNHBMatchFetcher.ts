@@ -60,12 +60,14 @@ export class KNHBMatchFetcher {
         if (data.status !== 200) {
             // Request failed
             if (tryCount < 3) {
-                console.warn(`[KNHBMatchFetcher] Request failed (${data.status}, URL: ${data.url}), retrying...`);
-                await APIHelper.delay(data.status === 429 ? 30000 : 1000);
+                const delay = data.status === 429 ? 30 : 100;
+                this.fetcher.log("warn", `Request failed (${data.status}, URL: ${data.url}), retrying in ${delay} second(s).`);
+                await APIHelper.delay(delay * 1000);
                 return await this.makeRequest(type, page, competition, tryCount++);
             } else {
                 // Give up
-                throw new Error("[KNHBMatchFetcher] Request failed after 3 tries.");
+                this.fetcher.log("error", `Request failed after 3 tries. Aborting.`);
+                throw new Error();
             }
         }
 
