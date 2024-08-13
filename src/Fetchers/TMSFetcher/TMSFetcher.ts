@@ -66,12 +66,12 @@ export class TMSFetcher extends Fetcher {
      * Fetch the matches from TMS.
      */
     protected async fetch() {
-        console.info(`[TMSFetcher] Fetching competitions...`);
+        console.info(`[TMSFetcher] [${this.name}] Fetching competitions...`);
         const competitions = await this.fetchCompetitions();
         let promises = [];
 
-        console.info(`[TMSFetcher] Found ${competitions.size} competitions.`);
-        console.info(`[TMSFetcher] Fetching matches and creating competition files...`);
+        console.info(`[TMSFetcher] [${this.name}] Found ${competitions.size} competitions.`);
+        console.info(`[TMSFetcher] [${this.name}] Fetching matches and creating competition files...`);
         for (let competition of competitions.values()) {
             // Fetch match for every competition
             const matchPromise = this.fetchMatches(competition);
@@ -94,7 +94,7 @@ export class TMSFetcher extends Fetcher {
             ICSCreator.createGenderTotalICS(this, competitionsArray, "W"),
         ]);
 
-        console.info(`[TMSFetcher] Finished.`);
+        console.info(`[TMSFetcher] [${this.name}] Finished.`);
         return competitionsArray;
     }
 
