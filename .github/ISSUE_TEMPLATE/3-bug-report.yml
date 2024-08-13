@@ -1,0 +1,23 @@
+name: Report a bug
+description: You've encountered an error and want to report it to us.
+title: "[BUG REPORT]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Fill out this form in order to report an error you've encountered. |
+        Do **not** use this form to request additional sources.
+
+  - type: textarea
+    attributes:
+      label: Explain what went wrong.
+      description: Please explain in detail what went wrong. If possible, include screenshots.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional info
+      description: If there is any additional information that's important for us to know, please report it here.
+    validations:
+      required: false

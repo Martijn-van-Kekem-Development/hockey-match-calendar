@@ -1,0 +1,16 @@
+name: Ask a question
+description: You have a question you want to ask the developers of this application.
+title: "[QUESTION]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: Fill out this form to ask a question you might have. |
+        Do **not** use this form to request additional sources.
+
+  - type: textarea
+    attributes:
+      label: What's your question?
+      description: Please explain the question you want an answer to.
+    validations:
+      required: true
