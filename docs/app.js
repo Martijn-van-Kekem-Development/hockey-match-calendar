@@ -1,11 +1,14 @@
+let fetchers = {};
 const origins = {};
+let activeOrigin = null;
 
 /**
  * When the copy URL link is clicked
  * @param evt The event that fired
+ * @param tableRow The table row where the link was clicked in.
  * @returns {Promise<void>}
  */
-async function copyURL(evt) {
+async function copyURL(evt, tableRow) {
     evt.preventDefault();
     await navigator.clipboard.writeText(evt.target.href);
 
@@ -18,18 +21,12 @@ async function copyURL(evt) {
         evt.target.classList.remove("copied");
     }, 1500);
 
-    sendClickEvent(evt.target.href);
-}
-
-/**
- * Send a click event to Google Analytics
- * @param href The URL of the link that was clicked.
- */
-function sendClickEvent(href) {
-    const link = new URL(href);
-    gtag('event', 'click', {
-        "link_domain": link.host,
-        "link_url": link.href,
+    const link = new URL(evt.target.href);
+    gtag('event', 'calendar_download', {
+        cal_path: evt.target.getAttribute("href"),
+        cal_url: evt.target.href,
+        cal_origin: activeOrigin,
+        cal_name: tableRow.firstChild.textContent
     });
 }
 
@@ -52,7 +49,7 @@ function createTableRow(data) {
     let urlCol = document.createElement("td");
     let copyEl = document.createElement("a");
     copyEl.href = `${data.path}`;
-    copyEl.addEventListener("click", e => copyURL(e));
+    copyEl.addEventListener("click", e => copyURL(e, tableRow));
     copyEl.textContent = "Copy URL";
     urlCol.append(copyEl);
     tableRow.append(urlCol);
@@ -64,7 +61,7 @@ function createTableRow(data) {
  * Add the origin buttons to the DOM.
  */
 async function addOriginButtons() {
-    const fetchers = await (await fetch("ics/fetchers.json")).json();
+    fetchers = await (await fetch("ics/fetchers.json")).json();
 
     const container = document.getElementById("container_originButtons");
     container.innerHTML = "";
@@ -112,6 +109,7 @@ async function selectOrigin(origin, userClick) {
 
     if (activeButton) activeButton.classList.remove("selected");
     newOriginButton.classList.add("selected", "loading");
+    activeOrigin = origin;
 
     // Empty current container
     const container = document.getElementById("specific_body");
@@ -128,7 +126,13 @@ async function selectOrigin(origin, userClick) {
     clubChanged(origin, "null");
 
     newOriginButton.classList.remove("loading");
-    if (userClick) sendClickEvent(window.location.href);
+
+    if (userClick) {
+        gtag('event', 'origin_select', {
+            origin_id: origin,
+            origin_name: origins[origin].name
+        });
+    }
 }
 
 /**
