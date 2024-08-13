@@ -17,6 +17,11 @@ export class TMSFetcher extends Fetcher {
     public static readonly EHL_BASE_URL: string = "https://eurohockey.altiusrt.com";
 
     /**
+     * The World Masters Hockey TMS url.
+    */
+    public static readonly WMH_BASE_URL: string = "https://masters.altiusrt.com";
+
+    /**
      * The FIH fetcher id.
      */
     public static readonly FIH_FETCHER_ID: string = "fih";
@@ -25,6 +30,11 @@ export class TMSFetcher extends Fetcher {
      * The EHL fetcher id.
      */
     public static readonly EHL_FETCHER_ID: string = "ehl";
+
+    /**
+     * The World Masters Hockey fetcher id.
+     */
+    public static readonly WMH_FETCHER_ID: string = "wmh";
 
     /**
      * The competition fetcher.
