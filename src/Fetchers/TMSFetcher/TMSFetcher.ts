@@ -17,6 +17,11 @@ export class TMSFetcher extends Fetcher {
     public static readonly EHL_BASE_URL: string = "https://eurohockey.altiusrt.com";
 
     /**
+     * The World Masters Hockey TMS url.
+    */
+    public static readonly WMH_BASE_URL: string = "https://masters.altiusrt.com";
+
+    /**
      * The FIH fetcher id.
      */
     public static readonly FIH_FETCHER_ID: string = "fih";
@@ -25,6 +30,11 @@ export class TMSFetcher extends Fetcher {
      * The EHL fetcher id.
      */
     public static readonly EHL_FETCHER_ID: string = "ehl";
+
+    /**
+     * The World Masters Hockey fetcher id.
+     */
+    public static readonly WMH_FETCHER_ID: string = "wmh";
 
     /**
      * The competition fetcher.
@@ -56,12 +66,12 @@ export class TMSFetcher extends Fetcher {
      * Fetch the matches from TMS.
      */
     protected async fetch() {
-        console.info(`[TMSFetcher] Fetching competitions...`);
+        console.info(`[TMSFetcher] [${this.name}] Fetching competitions...`);
         const competitions = await this.fetchCompetitions();
         let promises = [];
 
-        console.info(`[TMSFetcher] Found ${competitions.size} competitions.`);
-        console.info(`[TMSFetcher] Fetching matches and creating competition files...`);
+        console.info(`[TMSFetcher] [${this.name}] Found ${competitions.size} competitions.`);
+        console.info(`[TMSFetcher] [${this.name}] Fetching matches and creating competition files...`);
         for (let competition of competitions.values()) {
             // Fetch match for every competition
             const matchPromise = this.fetchMatches(competition);
@@ -84,7 +94,7 @@ export class TMSFetcher extends Fetcher {
             ICSCreator.createGenderTotalICS(this, competitionsArray, "W"),
         ]);
 
-        console.info(`[TMSFetcher] Finished.`);
+        console.info(`[TMSFetcher] [${this.name}] Finished.`);
         return competitionsArray;
     }
 

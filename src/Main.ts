@@ -22,6 +22,10 @@ export class Main {
         fetchers[KNHBFetcher.KNHB_FETCHER_ID] =
             new KNHBFetcher(KNHBFetcher.KNHB_FETCHER_ID, "KNHB", 2, KNHBFetcher.KNHB_BASE_URL);
 
+        // WMH
+        fetchers[TMSFetcher.WMH_FETCHER_ID] =
+            new TMSFetcher(TMSFetcher.WMH_FETCHER_ID, "WMH", 3, TMSFetcher.WMH_BASE_URL);
+
         return fetchers;
     }
 
