@@ -1,0 +1,37 @@
+name: Request a new source
+description: Propose a new source for matches to be added to the match calendar.
+title: "[FETCHER REQUEST]: "
+labels: ["fetcher request"]
+body:
+  - type: markdown
+    attributes:
+      value: Fill out this form in order to request a new source. |
+        This does not guarantee that your source will actually be added.
+
+  - type: input
+    attributes:
+      label: Name
+      description: What's the name of the source you're requesting to add?
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: URL
+      description: What's the URL of the source you're requesting to add?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Added value.
+      description: Please explain the added value of the source you're proposing. Who is going to benefit from this apart from yourself?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional info
+      description: If there is any additional information that's important for us to know, please report it here.
+    validations:
+      required: false
