@@ -18,21 +18,19 @@ async function copyURL(evt) {
         evt.target.classList.remove("copied");
     }, 1500);
 
-    sendClickEvent(evt.target);
+    sendClickEvent(evt.target.href);
 }
 
 /**
  * Send a click event to Google Analytics
- * @param element The element that was clicked
+ * @param href The URL of the link that was clicked.
  */
-function sendClickEvent(element) {
-    window.dataLayer.push({
-        "event": "gtm.linkClick",
-        "gtm.element": element,
-        "gtm.elementTarget": element.target,
-        "gtm.elementUrl": element.href,
-        "gtm.elementText": element.textContent
-    })
+function sendClickEvent(href) {
+    const link = new URL(href);
+    gtag('event', 'click', {
+        "link_domain": link.host,
+        "link_url": link.href,
+    });
 }
 
 /**
@@ -86,11 +84,11 @@ async function addOriginButtons() {
         container.append(listEl);
     }
 
-    window.addEventListener("hashchange", () => this.selectOrigin(location.hash.substring(1)));
+    window.addEventListener("hashchange", () => this.selectOrigin(location.hash.substring(1), true));
     if (this.getOriginButton(location.hash.substring(1)))
-        await selectOrigin(location.hash.substring(1));
+        await selectOrigin(location.hash.substring(1), false);
     else
-        await selectOrigin(originData[0].id);
+        await selectOrigin(originData[0].id, false);
 }
 
 /**
@@ -105,8 +103,9 @@ function getOriginButton(origin) {
 /**
  * Select an origin for the specific calendars.
  * @param origin The origin
+ * @param userClick Whether this was a user click action.
  */
-async function selectOrigin(origin) {
+async function selectOrigin(origin, userClick) {
     const activeButton = document.querySelector("#container_originButtons li.selected");
     const newOriginButton = getOriginButton(origin);
     if (!newOriginButton) return; // Origin does not exist.
@@ -129,6 +128,7 @@ async function selectOrigin(origin) {
     clubChanged(origin, "null");
 
     newOriginButton.classList.remove("loading");
+    if (userClick) sendClickEvent(window.location.href);
 }
 
 /**
