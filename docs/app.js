@@ -122,7 +122,7 @@ function padStart(input) {
  * @returns {string}
  */
 function parseDate(date) {
-    return `${padStart(date.getDate())}-${padStart(date.getMonth())}-${
+    return `${padStart(date.getDate())}-${padStart(date.getMonth() + 1)}-${
         date.getFullYear()} ${padStart(date.getHours())}:${padStart(date.getMinutes())}`;
 }
 
