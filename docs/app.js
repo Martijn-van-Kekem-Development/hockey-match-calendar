@@ -21,7 +21,6 @@ async function copyURL(evt, tableRow) {
         evt.target.classList.remove("copied");
     }, 1500);
 
-    const link = new URL(evt.target.href);
     gtag('event', 'calendar_download', {
         cal_path: evt.target.getAttribute("href"),
         cal_url: evt.target.href,
