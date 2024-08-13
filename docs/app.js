@@ -17,6 +17,22 @@ async function copyURL(evt) {
         evt.target.textContent = currentText
         evt.target.classList.remove("copied");
     }, 1500);
+
+    sendClickEvent(evt.target);
+}
+
+/**
+ * Send a click event to Google Analytics
+ * @param element The element that was clicked
+ */
+function sendClickEvent(element) {
+    window.dataLayer.push({
+        "event": "gtm.linkClick",
+        "gtm.element": element,
+        "gtm.elementTarget": element.target,
+        "gtm.elementUrl": element.href,
+        "gtm.elementText": element.textContent
+    })
 }
 
 /**
@@ -60,17 +76,30 @@ async function addOriginButtons() {
 
     for (let origin of originData) {
         const listEl = document.createElement("li");
-        const buttonEl = document.createElement("button");
+        const linkEl = document.createElement("a");
 
         listEl.setAttribute("data-id", origin.id);
-        buttonEl.textContent = origin.name;
-        buttonEl.addEventListener("click", () => selectOrigin(origin.id));
+        linkEl.textContent = origin.name;
+        linkEl.href = `#${origin.id}`;
 
-        listEl.append(buttonEl);
+        listEl.append(linkEl);
         container.append(listEl);
     }
 
-    await selectOrigin(originData[0].id);
+    window.addEventListener("hashchange", () => this.selectOrigin(location.hash.substring(1)));
+    if (this.getOriginButton(location.hash.substring(1)))
+        await selectOrigin(location.hash.substring(1));
+    else
+        await selectOrigin(originData[0].id);
+}
+
+/**
+ * Get the origin button belonging to the given origin.
+ * @param origin The origin to get the button for.
+ * @returns {Element}
+ */
+function getOriginButton(origin) {
+    return document.querySelector(`#container_originButtons li[data-id="${origin}"]`);
 }
 
 /**
@@ -78,12 +107,11 @@ async function addOriginButtons() {
  * @param origin The origin
  */
 async function selectOrigin(origin) {
-    // Remove currently active button
     const activeButton = document.querySelector("#container_originButtons li.selected");
-    if (activeButton) activeButton.classList.remove("selected");
+    const newOriginButton = getOriginButton(origin);
+    if (!newOriginButton) return; // Origin does not exist.
 
-    // Select new button
-    const newOriginButton = document.querySelector(`#container_originButtons li[data-id="${origin}"]`);
+    if (activeButton) activeButton.classList.remove("selected");
     newOriginButton.classList.add("selected", "loading");
 
     // Empty current container
