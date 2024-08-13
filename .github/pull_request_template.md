@@ -1,7 +1,8 @@
-Thank you for contributing to this application!\
+Thank you for contributing to this application!
+
 **Important**: make sure you create an issue first before submitting a pull request. Replace [ISSUE NUMBER] with the ID of the issue that is solved by this PR.
 
-Closes: #[ISSUE NUMBER]
+Closes #[ISSUE NUMBER]
 
 ## Proposed Changes
 _Explain the changes you've made with this PR_
