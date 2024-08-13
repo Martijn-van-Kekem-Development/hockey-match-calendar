@@ -24,7 +24,7 @@ async function copyURL(evt, tableRow) {
     gtag('event', 'calendar_download', {
         cal_path: evt.target.getAttribute("href"),
         cal_url: evt.target.href,
-        cal_origin: activeOrigin,
+        origin_id: activeOrigin,
         cal_name: tableRow.firstChild.textContent
     });
 }
