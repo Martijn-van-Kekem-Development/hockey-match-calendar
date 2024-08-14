@@ -1,4 +1,4 @@
-name: Verify test cases
+name: Verify test cases and linter
 
 on: pull_request
 
