@@ -1,9 +1,9 @@
-import {Match} from "../../Objects/Match.js";
-import {HTMLElement, parse} from "node-html-parser";
-import {Competition} from "../../Objects/Competition.js";
-import {Abbreviations} from "../../Utils/Abbreviations.js";
-import {DateHelper} from "../../Utils/DateHelper.js";
-import {TMSFetcher} from "./TMSFetcher.js";
+import { Match } from "../../Objects/Match.js";
+import { HTMLElement, parse } from "node-html-parser";
+import { Competition } from "../../Objects/Competition.js";
+import { Abbreviations } from "../../Utils/Abbreviations.js";
+import { DateHelper } from "../../Utils/DateHelper.js";
+import { TMSFetcher } from "./TMSFetcher.js";
 
 export class TMSMatchFetcher {
     /**
@@ -98,11 +98,11 @@ export class TMSMatchFetcher {
         const result = title
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
-            .match(/([A-Za-z0-9\/ \-]+) v ([A-Za-z0-9\/ \-]+)(?: \((.+)\))?$/);
+            .match(/([A-Za-z0-9/ -]+) v ([A-Za-z0-9/ -]+)(?: \((.+)\))?$/);
 
         if (!result) throw new Error("Couldn't extract data from match title: " + title);
 
-        let [, home, away, matchType] = result;
+        const [, home, away, matchType] = result;
         object.setHomeTeam(home.toLowerCase(), home);
         object.setAwayTeam(away.toLowerCase(), away);
         object.setType(matchType ?? "");

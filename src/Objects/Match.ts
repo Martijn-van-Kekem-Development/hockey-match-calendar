@@ -1,8 +1,8 @@
-import {Competition} from "./Competition.js";
-import {Countries, Country} from "../Utils/Countries.js";
-import {Abbreviations} from "../Utils/Abbreviations.js";
-import {DateHelper} from "../Utils/DateHelper.js";
-import {Moment} from "moment-timezone";
+import { Competition } from "./Competition.js";
+import { Countries, Country } from "../Utils/Countries.js";
+import { Abbreviations } from "../Utils/Abbreviations.js";
+import { DateHelper } from "../Utils/DateHelper.js";
+import { Moment } from "moment-timezone";
 
 export class Match {
     /**
@@ -203,11 +203,11 @@ export class Match {
      */
     public getHomeTeam(full: boolean = false): string {
         if (!full)
-            return this.homeTeam.country === null ?
-                this.homeTeam.name : (this.homeTeam.country.ioc ?? this.homeTeam.name);
+            return this.homeTeam.country === null
+                ? this.homeTeam.name : (this.homeTeam.country.ioc ?? this.homeTeam.name);
         else
-            return (this.homeTeam.country === null || this.homeTeam.country.full.length === 0) ?
-                this.getHomeTeam() : this.homeTeam.country.full
+            return (this.homeTeam.country === null || this.homeTeam.country.full.length === 0)
+                ? this.getHomeTeam() : this.homeTeam.country.full;
     }
 
     /**
@@ -215,11 +215,11 @@ export class Match {
      */
     public getAwayTeam(full: boolean = false): string {
         if (!full)
-            return this.awayTeam.country === null ?
-                this.awayTeam.name : (this.awayTeam.country.ioc ?? this.awayTeam.name);
+            return this.awayTeam.country === null
+                ? this.awayTeam.name : (this.awayTeam.country.ioc ?? this.awayTeam.name);
         else
-            return (this.awayTeam.country === null || this.awayTeam.country.full.length === 0) ?
-                this.getAwayTeam() : this.awayTeam.country.full
+            return (this.awayTeam.country === null || this.awayTeam.country.full.length === 0)
+                ? this.getAwayTeam() : this.awayTeam.country.full;
     }
 
     /**
@@ -237,7 +237,7 @@ export class Match {
             TRANSP: "TRANSPARENT",
             DESCRIPTION: this.getMatchDescription(false),
             "X-ALT-DESC;FMTTYPE=text/html": this.getMatchDescription(true)
-        }
+        };
     }
 
     /**

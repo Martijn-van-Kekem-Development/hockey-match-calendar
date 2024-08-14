@@ -38,7 +38,7 @@ export class Countries {
      * @private
      */
     private static getISODict() {
-        const data = fs.readFileSync("includes/countries-by-iso.json", {encoding: "utf-8"});
+        const data = fs.readFileSync("includes/countries-by-iso.json", { encoding: "utf-8" });
         this.ISODict = JSON.parse(data);
     }
 
@@ -47,7 +47,7 @@ export class Countries {
      * @private
      */
     private static getIOCDict() {
-        const data = fs.readFileSync("includes/countries-by-ioc.json", {encoding: "utf-8"});
+        const data = fs.readFileSync("includes/countries-by-ioc.json", { encoding: "utf-8" });
         this.IOCDict = JSON.parse(data);
     }
 }

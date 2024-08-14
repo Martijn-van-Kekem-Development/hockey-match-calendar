@@ -1,5 +1,5 @@
-import {KNHBFetcher} from "./KNHBFetcher.js";
-import {Competition} from "../../Objects/Competition.js";
+import { KNHBFetcher } from "./KNHBFetcher.js";
+import { Competition } from "../../Objects/Competition.js";
 
 export class KNHBCompetitionFetcher {
     /**

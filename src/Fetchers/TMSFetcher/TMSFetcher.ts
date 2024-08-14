@@ -1,9 +1,9 @@
-import {Fetcher} from "../Fetcher.js";
-import {Competition} from "../../Objects/Competition.js";
-import {Match} from "../../Objects/Match.js";
-import {TMSCompetitionFetcher} from "./TMSCompetitionFetcher.js";
-import {TMSMatchFetcher} from "./TMSMatchFetcher.js";
-import {ICSCreator} from "../../Utils/ICSCreator.js";
+import { Fetcher } from "../Fetcher.js";
+import { Competition } from "../../Objects/Competition.js";
+import { Match } from "../../Objects/Match.js";
+import { TMSCompetitionFetcher } from "./TMSCompetitionFetcher.js";
+import { TMSMatchFetcher } from "./TMSMatchFetcher.js";
+import { ICSCreator } from "../../Utils/ICSCreator.js";
 
 export class TMSFetcher extends Fetcher {
     /**
@@ -68,12 +68,12 @@ export class TMSFetcher extends Fetcher {
     protected async fetch() {
         this.log("info", `Fetching competitions.`);
         const competitions = await this.fetchCompetitions();
-        let promises = [];
+        const promises = [];
 
         this.log("info", `Found ${competitions.size} competitions.`);
         this.log("info", `Fetching matches and creating competition files.`);
 
-        for (let competition of competitions.values()) {
+        for (const competition of competitions.values()) {
             // Fetch match for every competition
             const matchPromise = this.fetchMatches(competition);
             matchPromise.then(result => {
@@ -103,7 +103,7 @@ export class TMSFetcher extends Fetcher {
      * @override
      */
     async fetchCompetitions(): Promise<Map<string, Competition>> {
-        const options = {index: 0};
+        const options = { index: 0 };
         const upcoming = await this.competitionFetcher.fetch("upcoming", options);
         const inProgress = await this.competitionFetcher.fetch("in-progress", options);
         const previous = await this.competitionFetcher.fetch("previous", options);

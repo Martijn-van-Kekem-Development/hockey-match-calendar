@@ -1,4 +1,4 @@
-import {Moment, tz} from "moment-timezone";
+import { Moment, tz } from "moment-timezone";
 import moment from "moment";
 
 export class DateHelper {
@@ -26,6 +26,6 @@ export class DateHelper {
     static toICS(date: Moment) {
         return (date.toISOString(false)
             .split(".")[0] + "Z")
-            .replaceAll(/[\-:]/g, "");
+            .replaceAll(/[-:]/g, "");
     }
 }

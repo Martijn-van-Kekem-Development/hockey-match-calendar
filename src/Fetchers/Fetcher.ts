@@ -1,6 +1,6 @@
-import {Competition} from "../Objects/Competition.js";
-import {Match} from "../Objects/Match.js";
-import {ICS} from "../ICS.js";
+import { Competition } from "../Objects/Competition.js";
+import { Match } from "../Objects/Match.js";
+import { ICS } from "../ICS.js";
 
 export abstract class Fetcher {
     /**

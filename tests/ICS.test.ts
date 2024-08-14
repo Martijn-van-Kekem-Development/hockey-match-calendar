@@ -1,5 +1,6 @@
-import {ICS} from "../src/ICS.js";
-import {test, describe, expect} from "vitest";
+import { ICS } from "../src/ICS.js";
+import { test, describe, expect } from "vitest";
+import { icsCalendarToObject } from "ts-ics";
 
 describe('ICS class', () => {
     test("formatLines()", () => {
@@ -15,8 +16,13 @@ describe('ICS class', () => {
         expect(outputLines[2].startsWith(" ")).toBe(true);
         expect(outputLines[3].startsWith(" ")).toBe(false);
 
-        for (let line of outputLines) {
+        for (const line of outputLines) {
             expect(line.length).toBeLessThanOrEqual(75);
         }
+    });
+
+    test("Calendar details", async () => {
+        const calendar = icsCalendarToObject(ICS.calendarToICS("1", "2", []));
+        expect(calendar.prodId).toBe("-//mvk-development//hockey-match-calendar//2//EN");
     });
 });

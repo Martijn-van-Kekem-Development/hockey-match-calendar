@@ -1,6 +1,6 @@
-import {Match} from "./Match.js";
-import {Abbreviations} from "../Utils/Abbreviations.js";
-import {Fetcher} from "../Fetchers/Fetcher.js";
+import { Match } from "./Match.js";
+import { Abbreviations } from "../Utils/Abbreviations.js";
+import { Fetcher } from "../Fetchers/Fetcher.js";
 
 export class Competition {
     /**
@@ -100,7 +100,7 @@ export class Competition {
     public getLowercaseName(): string {
         return this.name.toLowerCase()
             .replaceAll(" ", "-")
-            .replaceAll(/[^A-Za-z0-9\-]/g, "");
+            .replaceAll(/[^A-Za-z0-9-]/g, "");
     }
 
     /**

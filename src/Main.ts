@@ -1,6 +1,6 @@
-import {TMSFetcher} from "./Fetchers/TMSFetcher/TMSFetcher.js";
-import {KNHBFetcher} from "./Fetchers/KNHBFetcher/KNHBFetcher.js";
-import {Fetcher} from "./Fetchers/Fetcher.js";
+import { TMSFetcher } from "./Fetchers/TMSFetcher/TMSFetcher.js";
+import { KNHBFetcher } from "./Fetchers/KNHBFetcher/KNHBFetcher.js";
+import { Fetcher } from "./Fetchers/Fetcher.js";
 import * as fs from "node:fs";
 
 export class Main {
@@ -16,7 +16,7 @@ export class Main {
 
         // EHL
         fetchers[TMSFetcher.EHL_FETCHER_ID] =
-            new TMSFetcher(TMSFetcher.EHL_FETCHER_ID, "EHL", 1, TMSFetcher.EHL_BASE_URL)
+            new TMSFetcher(TMSFetcher.EHL_FETCHER_ID, "EHL", 1, TMSFetcher.EHL_BASE_URL);
 
         // KNHB
         fetchers[KNHBFetcher.KNHB_FETCHER_ID] =
@@ -52,7 +52,7 @@ export class Main {
     private async saveFetchers() {
         const fetchers = this.fetchers();
         const output = {};
-        for (let fetcher of Object.values(fetchers)) {
+        for (const fetcher of Object.values(fetchers)) {
             output[fetcher.getID()] = {
                 id: fetcher.getID(),
                 name: fetcher.getName(),
@@ -60,7 +60,7 @@ export class Main {
             };
         }
 
-        fs.mkdirSync(`docs/ics`, {recursive: true});
+        fs.mkdirSync(`docs/ics`, { recursive: true });
         fs.writeFileSync(`docs/ics/fetchers.json`, JSON.stringify(output));
     }
 
@@ -73,7 +73,7 @@ export class Main {
 
         // Fetch all fetchers
         const promises = [];
-        for (let fetcher of Object.values(fetchers))
+        for (const fetcher of Object.values(fetchers))
             promises.push(fetcher.start());
 
         await Promise.all(promises);
@@ -93,7 +93,7 @@ export class Main {
         }
 
         const promises = [];
-        for (let fetcherID of fetchersToRun) {
+        for (const fetcherID of fetchersToRun) {
             promises.push(fetchers[fetcherID].start());
         }
 

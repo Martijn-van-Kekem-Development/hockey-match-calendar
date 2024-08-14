@@ -1,5 +1,5 @@
-import {describe, expect, test} from "vitest";
-import {DateHelper} from "../../src/Utils/DateHelper.js";
+import { describe, expect, test } from "vitest";
+import { DateHelper } from "../../src/Utils/DateHelper.js";
 
 describe("DateHelper tests", () => {
     test("From Vancouver to UTC", () => {
@@ -11,4 +11,4 @@ describe("DateHelper tests", () => {
         const output = DateHelper.toICS(DateHelper.TMStoUTC("8 Aug 2024 18:08", "America/Vancouver"));
         expect(output).toBe("20240809T010800Z");
     });
-})
+});
