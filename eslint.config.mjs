@@ -37,7 +37,6 @@ export default [
             "no-unused-vars": ["error", { vars: "all", args: "all" }],
             "@stylistic/object-curly-spacing": ["error", "always"],
             "@stylistic/array-bracket-spacing": ["error", "never"],
-            "@stylistic/linebreak-style": ["error", "windows"],
             "@stylistic/rest-spread-spacing": ["error", "never"],
             "@stylistic/dot-location": ["error", "property"],
             "@stylistic/no-multiple-empty-lines": ["error", { max: 1, maxEOF: 0, maxBOF: 0 }],
