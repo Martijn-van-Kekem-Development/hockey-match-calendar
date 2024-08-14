@@ -1,9 +1,9 @@
-import {Competition} from "../../Objects/Competition.js";
-import {Club, Match} from "../../Objects/Match.js";
-import {KNHBFetcher} from "./KNHBFetcher.js";
-import {DateHelper} from "../../Utils/DateHelper.js";
-import {APIHelper} from "../../Utils/APIHelper.js";
-import {Abbreviations} from "../../Utils/Abbreviations.js";
+import { Competition } from "../../Objects/Competition.js";
+import { Club, Match } from "../../Objects/Match.js";
+import { KNHBFetcher } from "./KNHBFetcher.js";
+import { DateHelper } from "../../Utils/DateHelper.js";
+import { APIHelper } from "../../Utils/APIHelper.js";
+import { Abbreviations } from "../../Utils/Abbreviations.js";
 
 export class KNHBMatchFetcher {
     /**
@@ -28,7 +28,7 @@ export class KNHBMatchFetcher {
     public async fetch(type: "upcoming" | "official", competition: Competition) {
         const matches: Map<string, Match> = new Map();
         let index = 1;
-        let page = 1
+        let page = 1;
 
         while (true) {
             const json = await this.makeRequest(type, page, competition);
@@ -114,7 +114,8 @@ export class KNHBMatchFetcher {
                 }
 
                 object.setScore(scoreString);
-            }}
+            }
+        }
 
         return object;
     }

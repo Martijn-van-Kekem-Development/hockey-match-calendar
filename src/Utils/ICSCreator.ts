@@ -1,7 +1,7 @@
-import {ICS, Metadata} from "../ICS.js";
-import {Competition} from "../Objects/Competition.js";
-import {Fetcher} from "../Fetchers/Fetcher.js";
-import {Club, Match} from "../Objects/Match.js";
+import { ICS, Metadata } from "../ICS.js";
+import { Competition } from "../Objects/Competition.js";
+import { Fetcher } from "../Fetchers/Fetcher.js";
+import { Club, Match } from "../Objects/Match.js";
 
 export class ICSCreator {
     /**
@@ -65,13 +65,13 @@ export class ICSCreator {
     public static async createClubICS(fetcher: Fetcher, matches: Match[], fileName: string,
                                       title: string, metadata: Metadata) {
 
-        const matchMap: Map<string, {matches: Match[], club: Club}> = new Map();
+        const matchMap: Map<string, { matches: Match[], club: Club }> = new Map();
 
         // Function to add a country.
         const addTeam = (club: Club, match: Match) => {
-            if (!matchMap.has(club.id)) matchMap.set(club.id, {matches: [], club});
+            if (!matchMap.has(club.id)) matchMap.set(club.id, { matches: [], club });
             matchMap.get(club.id).matches.push(match);
-        }
+        };
 
         // Add each match to the correct clubs
         for (const match of matches) {
@@ -83,7 +83,7 @@ export class ICSCreator {
             const path = `clubs/${clubID}/${fileName}`;
             const fileTitle = `(${clubData.club.name}) ${title}`;
 
-            promises.push(ICS.writeToFile(fetcher, clubData.matches, fileTitle, path, clubData.club,{
+            promises.push(ICS.writeToFile(fetcher, clubData.matches, fileTitle, path, clubData.club, {
                 ...metadata,
                 count: clubData.matches.length
             }));

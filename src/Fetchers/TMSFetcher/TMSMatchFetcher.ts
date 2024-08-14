@@ -1,9 +1,9 @@
-import {Match} from "../../Objects/Match.js";
-import {HTMLElement, parse} from "node-html-parser";
-import {Competition} from "../../Objects/Competition.js";
-import {Abbreviations} from "../../Utils/Abbreviations.js";
-import {DateHelper} from "../../Utils/DateHelper.js";
-import {TMSFetcher} from "./TMSFetcher.js";
+import { Match } from "../../Objects/Match.js";
+import { HTMLElement, parse } from "node-html-parser";
+import { Competition } from "../../Objects/Competition.js";
+import { Abbreviations } from "../../Utils/Abbreviations.js";
+import { DateHelper } from "../../Utils/DateHelper.js";
+import { TMSFetcher } from "./TMSFetcher.js";
 
 export class TMSMatchFetcher {
     /**

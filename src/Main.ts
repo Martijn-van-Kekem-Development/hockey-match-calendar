@@ -1,6 +1,6 @@
-import {TMSFetcher} from "./Fetchers/TMSFetcher/TMSFetcher.js";
-import {KNHBFetcher} from "./Fetchers/KNHBFetcher/KNHBFetcher.js";
-import {Fetcher} from "./Fetchers/Fetcher.js";
+import { TMSFetcher } from "./Fetchers/TMSFetcher/TMSFetcher.js";
+import { KNHBFetcher } from "./Fetchers/KNHBFetcher/KNHBFetcher.js";
+import { Fetcher } from "./Fetchers/Fetcher.js";
 import * as fs from "node:fs";
 
 export class Main {
@@ -16,7 +16,7 @@ export class Main {
 
         // EHL
         fetchers[TMSFetcher.EHL_FETCHER_ID] =
-            new TMSFetcher(TMSFetcher.EHL_FETCHER_ID, "EHL", 1, TMSFetcher.EHL_BASE_URL)
+            new TMSFetcher(TMSFetcher.EHL_FETCHER_ID, "EHL", 1, TMSFetcher.EHL_BASE_URL);
 
         // KNHB
         fetchers[KNHBFetcher.KNHB_FETCHER_ID] =
@@ -60,7 +60,7 @@ export class Main {
             };
         }
 
-        fs.mkdirSync(`docs/ics`, {recursive: true});
+        fs.mkdirSync(`docs/ics`, { recursive: true });
         fs.writeFileSync(`docs/ics/fetchers.json`, JSON.stringify(output));
     }
 

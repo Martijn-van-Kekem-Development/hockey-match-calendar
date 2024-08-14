@@ -1,9 +1,9 @@
 import { Competition } from "../../Objects/Competition.js";
 import { Match } from "../../Objects/Match.js";
-import {Fetcher} from "../Fetcher.js";
-import {KNHBCompetitionFetcher} from "./KNHBCompetitionFetcher.js";
-import {KNHBMatchFetcher} from "./KNHBMatchFetcher.js";
-import {ICSCreator} from "../../Utils/ICSCreator.js";
+import { Fetcher } from "../Fetcher.js";
+import { KNHBCompetitionFetcher } from "./KNHBCompetitionFetcher.js";
+import { KNHBMatchFetcher } from "./KNHBMatchFetcher.js";
+import { ICSCreator } from "../../Utils/ICSCreator.js";
 
 export class KNHBFetcher extends Fetcher {
     /**

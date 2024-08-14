@@ -1,6 +1,6 @@
-import {Competition} from "../../Objects/Competition.js";
-import {HTMLElement, parse} from "node-html-parser";
-import {TMSFetcher} from "./TMSFetcher.js";
+import { Competition } from "../../Objects/Competition.js";
+import { HTMLElement, parse } from "node-html-parser";
+import { TMSFetcher } from "./TMSFetcher.js";
 
 export class TMSCompetitionFetcher {
     /**
@@ -29,9 +29,9 @@ export class TMSCompetitionFetcher {
         while (true) {
             // Get data from TMS.
             const data = await fetch(
-                type === "in-progress" ?
-                    `${this.fetcher.getBaseURL()}/competitions?page=${page}` :
-                    `${this.fetcher.getBaseURL()}/competitions?view=${type}&page=${page}`);
+                type === "in-progress"
+                    ? `${this.fetcher.getBaseURL()}/competitions?page=${page}`
+                    : `${this.fetcher.getBaseURL()}/competitions?view=${type}&page=${page}`);
             const html = parse(await data.text());
             const rows = html.querySelectorAll("#admin_list_of_competitions table tbody tr");
 

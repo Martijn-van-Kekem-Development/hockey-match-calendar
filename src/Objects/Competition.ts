@@ -1,6 +1,6 @@
-import {Match} from "./Match.js";
-import {Abbreviations} from "../Utils/Abbreviations.js";
-import {Fetcher} from "../Fetchers/Fetcher.js";
+import { Match } from "./Match.js";
+import { Abbreviations } from "../Utils/Abbreviations.js";
+import { Fetcher } from "../Fetchers/Fetcher.js";
 
 export class Competition {
     /**

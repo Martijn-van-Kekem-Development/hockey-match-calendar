@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
-import {Fetcher} from "../Fetchers/Fetcher.js";
-import {TMSFetcher} from "../Fetchers/TMSFetcher/TMSFetcher.js";
-import {KNHBFetcher} from "../Fetchers/KNHBFetcher/KNHBFetcher.js";
+import { Fetcher } from "../Fetchers/Fetcher.js";
+import { TMSFetcher } from "../Fetchers/TMSFetcher/TMSFetcher.js";
+import { KNHBFetcher } from "../Fetchers/KNHBFetcher/KNHBFetcher.js";
 
 export class Abbreviations {
     /**
@@ -39,7 +39,7 @@ export class Abbreviations {
             }
 
             // Replace gender and index values.
-            return `${value} ${gender}${this.padStart(index)}`
+            return `${value} ${gender}${this.padStart(index)}`;
         }
 
         // No match found
@@ -108,7 +108,7 @@ export class Abbreviations {
      * Get the match type abbreviations.
      */
     public static getMatchTypeAbbreviations() {
-        const data = fs.readFileSync("includes/match-type-abbreviations.json", { encoding: "utf-8"});
+        const data = fs.readFileSync("includes/match-type-abbreviations.json", { encoding: "utf-8" });
         this.MatchTypeAbbreviations = JSON.parse(data);
     }
 
@@ -116,7 +116,7 @@ export class Abbreviations {
      * Get the competition abbreviations
      */
     public static getCompetitionAbbreviations() {
-        const data = fs.readFileSync("includes/competition-abbreviations.json", { encoding: "utf-8"});
+        const data = fs.readFileSync("includes/competition-abbreviations.json", { encoding: "utf-8" });
         this.CompetitionAbbreviations = JSON.parse(data);
     }
 }

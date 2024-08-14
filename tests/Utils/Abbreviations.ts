@@ -1,25 +1,25 @@
-import {describe, expect, test} from "vitest";
-import {Abbreviations} from "../../src/Utils/Abbreviations.js";
+import { describe, expect, test } from "vitest";
+import { Abbreviations } from "../../src/Utils/Abbreviations.js";
 import * as fs from "node:fs";
-import {KNHBFetcher} from "../../src/Fetchers/KNHBFetcher/KNHBFetcher.js";
-import {TMSFetcher} from "../../src/Fetchers/TMSFetcher/TMSFetcher.js";
+import { KNHBFetcher } from "../../src/Fetchers/KNHBFetcher/KNHBFetcher.js";
+import { TMSFetcher } from "../../src/Fetchers/TMSFetcher/TMSFetcher.js";
 
 describe("FIHAbbreviations tests", () => {
     test("getMatchType()", () => {
-        const items = fs.readFileSync("tests/includes/match-type-abbreviations.json", {encoding: "utf-8"});
+        const items = fs.readFileSync("tests/includes/match-type-abbreviations.json", { encoding: "utf-8" });
         const json = JSON.parse(items);
 
-        for (let test of json as Record<string,string>[]) {
+        for (const test of json as Record<string, string>[]) {
             const output = Abbreviations.getMatchType(test.in, "M", 1);
             expect(output).toBe(test.out);
         }
     });
 
     test("getCompetition()", () => {
-        const items = fs.readFileSync("tests/includes/competition-abbreviations.json", {encoding: "utf-8"});
+        const items = fs.readFileSync("tests/includes/competition-abbreviations.json", { encoding: "utf-8" });
         const json = JSON.parse(items);
 
-        for (let test of json as Record<string,string>[]) {
+        for (const test of json as Record<string, string>[]) {
             const output = Abbreviations.getCompetition(test.in);
             expect(output).toBe(test.out);
         }
@@ -41,11 +41,11 @@ describe("FIHAbbreviations tests", () => {
         const mensTest = {
             knhb: ["jongens", "heren", "(m)"],
             tms: ["mens"]
-        }
+        };
         const womensTest = {
             knhb: ["meisjes", "dames", "(w)"],
             tms: ["womens"]
-        }
+        };
 
         for (const item in mensTest.knhb) {
             expect(Abbreviations.getGender(item, fetcher1)).toBe("M");
