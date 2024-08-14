@@ -74,12 +74,12 @@ export class ICSCreator {
         }
 
         // Add each match to the correct clubs
-        for (let match of matches) {
+        for (const match of matches) {
             match.getIncludedClubs().forEach(val => addTeam(val, match));
         }
 
-        let promises = [];
-        for (let [clubID, clubData] of matchMap) {
+        const promises = [];
+        for (const [clubID, clubData] of matchMap) {
             const path = `clubs/${clubID}/${fileName}`;
             const fileTitle = `(${clubData.club.name}) ${title}`;
 

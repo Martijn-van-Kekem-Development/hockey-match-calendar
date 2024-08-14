@@ -15,6 +15,7 @@ export class ICS {
      * @param fetcher The fetcher to add.
      */
     public static addFetcher(club: Club | null, fetcher: Fetcher) {
+        // Create fetcher if not exists.
         if (!this.fetchers.has(fetcher.getID()))
             this.fetchers.set(fetcher.getID(), {
                 clubs: {},
@@ -39,7 +40,9 @@ export class ICS {
      * @param club The club to write for, or null if for all.
      * @param metadata Extra data to save.
      */
-    public static async writeToFile(fetcher: Fetcher, matches: Match[], title: string, fileName: string, club: Club | null, metadata: Metadata) {
+    public static async writeToFile(fetcher: Fetcher, matches: Match[], title: string, fileName: string,
+                                    club: Club | null, metadata: Metadata) {
+
         const outputFile = `docs/ics/${fetcher.getID()}/${fileName}.ics`;
         const outputFolder = outputFile.split("/").slice(0, -1).join("/");
         await fs.mkdir(outputFolder, {recursive: true});
@@ -97,7 +100,7 @@ export class ICS {
         content.push(`X-PUBLISHED-TTL:PT1H`);
         content.push(`METHOD:PUBLISH`);
 
-        for (let match of matches) {
+        for (const match of matches) {
             content.push(...ICS.matchToICS(match));
         }
 

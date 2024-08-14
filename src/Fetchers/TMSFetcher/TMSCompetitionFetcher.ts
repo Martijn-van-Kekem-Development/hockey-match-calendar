@@ -39,7 +39,7 @@ export class TMSCompetitionFetcher {
             if (rows.length === 1 && rows[0].innerText.trim() === "No results") break;
 
             // Create competition from every row.
-            for (let row of rows) {
+            for (const row of rows) {
                 const item = this.createCompetition(row, options.index++);
                 competitions.set(item.getID(), item);
             }

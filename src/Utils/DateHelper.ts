@@ -26,6 +26,6 @@ export class DateHelper {
     static toICS(date: Moment) {
         return (date.toISOString(false)
             .split(".")[0] + "Z")
-            .replaceAll(/[\-:]/g, "");
+            .replaceAll(/[-:]/g, "");
     }
 }

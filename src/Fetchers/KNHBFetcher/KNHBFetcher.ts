@@ -48,12 +48,12 @@ export class KNHBFetcher extends Fetcher {
     protected async fetch(): Promise<Competition[]> {
         this.log("info", `Fetching competitions.`);
         const competitions = await this.fetchCompetitions();
-        let promises = [];
+        const promises = [];
 
         this.log("info", `Found ${competitions.size} competitions.`);
         this.log("info", `Fetching matches and creating competition files.`);
 
-        for (let competition of competitions.values()) {
+        for (const competition of competitions.values()) {
             // Fetch match for every competition
             const result = await this.fetchMatches(competition);
             competition.getMatches().push(...result.values());

@@ -52,7 +52,7 @@ export class Main {
     private async saveFetchers() {
         const fetchers = this.fetchers();
         const output = {};
-        for (let fetcher of Object.values(fetchers)) {
+        for (const fetcher of Object.values(fetchers)) {
             output[fetcher.getID()] = {
                 id: fetcher.getID(),
                 name: fetcher.getName(),
@@ -73,7 +73,7 @@ export class Main {
 
         // Fetch all fetchers
         const promises = [];
-        for (let fetcher of Object.values(fetchers))
+        for (const fetcher of Object.values(fetchers))
             promises.push(fetcher.start());
 
         await Promise.all(promises);
@@ -93,7 +93,7 @@ export class Main {
         }
 
         const promises = [];
-        for (let fetcherID of fetchersToRun) {
+        for (const fetcherID of fetchersToRun) {
             promises.push(fetchers[fetcherID].start());
         }
 

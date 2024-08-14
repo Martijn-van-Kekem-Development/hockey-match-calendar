@@ -117,6 +117,10 @@ First, make sure all test cases are passing.
 ```sh
 npm test
 ```
+Secondly, verify that the linter returns no errors.
+```sh
+npm lint
+```
 
 After that, make sure an issue exists for the contribution you're making. If that's not the case, create one 
 first [here](https://github.com/Martijn-van-Kekem-Development/hockey-match-calendar/issues).
