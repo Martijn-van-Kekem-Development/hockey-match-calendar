@@ -83,9 +83,11 @@ async function addOriginButtons() {
     window.addEventListener("hashchange",
         () => selectOrigin(location.hash.substring(1), true));
 
-    if (location.hash.substring(1).length > 0)
+    if (fetchers[location.hash.substring(1)])
+        // Fetcher in URL exists, so open that.
         await selectOrigin(location.hash.substring(1));
     else
+        // Set default fetcher.
         location.hash = `#${originData[0].id}`;
 }
 
@@ -135,9 +137,11 @@ async function selectOrigin(origin, userClick) {
     if (userClick) {
         gtag('event', 'origin_select', {
             origin_id: origin,
-            origin_name: origins[origin].name
+            origin_name: fetchers[origin].name
         });
     }
+
+    document.title = `${fetchers[origin].name} calendars - Hockey Match Calendar | By Martijn van Kekem`;
 }
 
 /**
