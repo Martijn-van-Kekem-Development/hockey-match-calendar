@@ -135,9 +135,11 @@ async function selectOrigin(origin, userClick) {
     if (userClick) {
         gtag('event', 'origin_select', {
             origin_id: origin,
-            origin_name: origins[origin].name
+            origin_name: fetchers[origin].name
         });
     }
+
+    document.title = `${fetchers[origin].name} calendars - Hockey Match Calendar | By Martijn van Kekem`;
 }
 
 /**
