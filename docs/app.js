@@ -24,7 +24,7 @@ async function copyURL(evt, tableRow) {
     gtag('event', 'calendar_download', {
         cal_path: evt.target.getAttribute("href"),
         cal_url: evt.target.href,
-        origin_id: activeOrigin,
+        origin_id: location.hash.substring(1),
         cal_name: tableRow.firstChild.textContent
     });
 }
@@ -80,11 +80,13 @@ async function addOriginButtons() {
         container.append(listEl);
     }
 
-    window.addEventListener("hashchange", () => this.selectOrigin(location.hash.substring(1), true));
-    if (this.getOriginButton(location.hash.substring(1)))
-        await selectOrigin(location.hash.substring(1), false);
+    window.addEventListener("hashchange",
+        () => selectOrigin(location.hash.substring(1), true));
+
+    if (location.hash.substring(1).length > 0)
+        await selectOrigin(location.hash.substring(1));
     else
-        await selectOrigin(originData[0].id, false);
+        location.hash = `#${originData[0].id}`;
 }
 
 /**
@@ -104,7 +106,11 @@ function getOriginButton(origin) {
 async function selectOrigin(origin, userClick) {
     const activeButton = document.querySelector("#container_originButtons li.selected");
     const newOriginButton = getOriginButton(origin);
-    if (!newOriginButton) return; // Origin does not exist.
+    if (!newOriginButton) {
+        // New origin doesn't exist, so reset.
+        window.location.hash = `#${activeButton.getAttribute("data-id")}`;
+        return;
+    }
 
     if (activeButton) activeButton.classList.remove("selected");
     newOriginButton.classList.add("selected", "loading");
