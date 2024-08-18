@@ -175,6 +175,13 @@ export class Match {
     }
 
     /**
+     * Get the type for this match.
+     */
+    public getType() {
+        return this.type;
+    }
+
+    /**
      * Get the clubs that are included in this match.
      */
     public getIncludedClubs(): Club[] {
@@ -245,7 +252,7 @@ export class Match {
      * Get the location for this match.
      */
     public getLocation(): string {
-        if (!this.competition) return this.venue;
+        if (!this.competition) return this.venue ?? "";
         const venue = this.venue ?? "";
         const location = this.competition.getLocation() ?? "";
 

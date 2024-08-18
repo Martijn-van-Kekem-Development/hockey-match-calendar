@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { Countries } from "../../src/Utils/Countries.js";
+import { Countries } from "../../../src/Utils/Countries.js";
 
 describe("Countries tests", () => {
     test("Get by ISO - Netherlands", () => {

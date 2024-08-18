@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { Gender } from "../../src/Objects/Gender.js";
-import { ICSCreator } from "../../src/Utils/ICSCreator.js";
+import { Gender } from "../../../src/Objects/Gender.js";
+import { ICSCreator } from "../../../src/Utils/ICSCreator.js";
 
 describe("ICSCreator tests", () => {
     test("Valid title string for every gender", () => {

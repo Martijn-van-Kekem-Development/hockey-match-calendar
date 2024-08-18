@@ -124,11 +124,11 @@ export class KNHBMatchFetcher {
      * Get the club id by the supplied name.
      * @param clubName The club name
      */
-    protected static getClubId(clubName: string): string {
+    public static getClubId(clubName: string): string {
         return clubName
             .toLowerCase()
-            .replaceAll(" ", "-")
-            .replaceAll(/[^a-zA-Z]/g, "");
+            .replaceAll(/[^a-zA-Z- ]/g, "")
+            .replaceAll(/(\s|-)+/g, "-");
     }
 }
 

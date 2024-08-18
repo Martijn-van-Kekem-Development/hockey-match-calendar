@@ -55,7 +55,7 @@ export class TMSMatchFetcher {
 
         const link = row.querySelector("td:nth-child(3) a[href]");
         if (!link) throw new Error(`Can't fetch title from ${competition.getID()}`);
-        this.parseTitle(object, link.textContent.trim());
+        TMSMatchFetcher.parseTitle(object, link.textContent.trim());
 
         // Add match ID.
         const id = link.getAttribute("href").split("/").slice(-1)[0] ?? null;
@@ -94,7 +94,7 @@ export class TMSMatchFetcher {
      * @param object The match object.
      * @param title The title to parse
      */
-    parseTitle(object: Match, title: string) {
+    public static parseTitle(object: Match, title: string) {
         const result = title
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
