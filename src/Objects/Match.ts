@@ -175,6 +175,13 @@ export class Match {
     }
 
     /**
+     * Get the type for this match.
+     */
+    public getType() {
+        return this.type;
+    }
+
+    /**
      * Get the clubs that are included in this match.
      */
     public getIncludedClubs(): Club[] {
