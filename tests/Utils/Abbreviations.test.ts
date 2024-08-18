@@ -48,24 +48,24 @@ describe("FIHAbbreviations tests", () => {
             tms: ["womens"]
         };
 
-        for (const item in mensTest.knhb) {
-            expect(Abbreviations.getGender(item, fetcher1)).toBe("M");
-            expect(Abbreviations.getGender(item, fetcher2)).toThrowError();
+        for (const item of mensTest.knhb) {
+            expect(Abbreviations.getGender(item, fetcher1)).toBe(Gender.MEN);
+            expect(() => Abbreviations.getGender(item, fetcher2)).toThrowError();
         }
 
-        for (const item in mensTest.tms) {
-            expect(Abbreviations.getGender(item, fetcher2)).toBe("M");
-            expect(Abbreviations.getGender(item, fetcher1)).toThrowError();
+        for (const item of mensTest.tms) {
+            expect(Abbreviations.getGender(item, fetcher2)).toBe(Gender.MEN);
+            expect(() => Abbreviations.getGender(item, fetcher1)).toThrowError();
         }
 
-        for (const item in womensTest.knhb) {
-            expect(Abbreviations.getGender(item, fetcher1)).toBe("W");
-            expect(Abbreviations.getGender(item, fetcher2)).toThrowError();
+        for (const item of womensTest.knhb) {
+            expect(Abbreviations.getGender(item, fetcher1)).toBe(Gender.WOMEN);
+            expect(() => Abbreviations.getGender(item, fetcher2)).toThrowError();
         }
 
-        for (const item in womensTest.knhb) {
-            expect(Abbreviations.getGender(item, fetcher2)).toBe("W");
-            expect(Abbreviations.getGender(item, fetcher1)).toThrowError();
+        for (const item of womensTest.tms) {
+            expect(Abbreviations.getGender(item, fetcher2)).toBe(Gender.WOMEN);
+            expect(() => Abbreviations.getGender(item, fetcher1)).toThrowError();
         }
     });
 });
