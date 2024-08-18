@@ -40,7 +40,7 @@ where the competition title is specified as the `in` key, and the correct abbrev
 If no corresponding abbreviation is found, the first letter of each word will be used to abbreviate the competition.
 
 #### Match type abbreviations
-By default, a match will be denoted in the form of `MXX` or `WXX`, with `M` for Men's matches, and `W` for Women's matches.
+By default, a match will be denoted in the form of `MXX` or `WXX`, with `M` for Men's matches, `W` for Women's matches, `X` for Mixed matches.
 `XX` denotes the index of a match in the competition.
 
 Custom match type abbreviations can be specified in [`match-type-abbreviations.json`](./includes/match-type-abbreviations.json)
@@ -115,11 +115,11 @@ As soon as you have completed implementing your contributions, follow the steps 
 
 First, make sure all test cases are passing.
 ```sh
-npm test
+npm run test
 ```
 Secondly, verify that the linter returns no errors.
 ```sh
-npm lint
+npm run check-lint
 ```
 
 After that, make sure an issue exists for the contribution you're making. If that's not the case, create one 
