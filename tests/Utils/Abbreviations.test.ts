@@ -5,7 +5,7 @@ import { KNHBFetcher } from "../../src/Fetchers/KNHBFetcher/KNHBFetcher.js";
 import { TMSFetcher } from "../../src/Fetchers/TMSFetcher/TMSFetcher.js";
 import { Gender } from "../../src/Objects/Gender.js";
 
-describe("FIHAbbreviations tests", () => {
+describe("Abbreviations tests", () => {
     test("getMatchType()", () => {
         const items = fs.readFileSync("tests/includes/match-type-abbreviations.json", { encoding: "utf-8" });
         const json = JSON.parse(items);
