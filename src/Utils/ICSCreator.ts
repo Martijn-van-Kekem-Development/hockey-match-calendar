@@ -2,6 +2,7 @@ import { ICS, Metadata } from "../ICS.js";
 import { Competition } from "../Objects/Competition.js";
 import { Fetcher } from "../Fetchers/Fetcher.js";
 import { Club, Match } from "../Objects/Match.js";
+import { Gender } from "../Objects/Gender.js";
 
 export class ICSCreator {
     /**
@@ -35,12 +36,12 @@ export class ICSCreator {
      * @param clubsOnly Whether to only create the ICS files for the clubs.
      */
     public static async createGenderTotalICS(fetcher: Fetcher, competitions: Competition[],
-                                             gender: "M" | "W", clubsOnly: boolean = false) {
+                                             gender: Gender, clubsOnly: boolean = false) {
 
         let matches = competitions.map(e => e.getMatches()).flat();
         matches = matches.filter(m => m.getGender() === gender);
-        const path = `${gender === "M" ? "mens" : "womens"}-matches`;
-        const title = `All ${fetcher.getName()} ${gender === "M" ? "men's" : "women's"} matches`;
+        const path = `${this.genderToString(gender)}-matches`;
+        const title = `All ${fetcher.getName()} ${this.genderToString(gender)} matches`;
 
         const meta: Metadata = {
             type: "total",
@@ -52,6 +53,17 @@ export class ICSCreator {
             await ICS.writeToFile(fetcher, matches, title, path, null, meta);
 
         await ICSCreator.createClubICS(fetcher, matches, path, title, meta);
+    }
+
+    /**
+     * Convert a gender to a title-string.
+     * @param gender The gender.
+     * @protected
+     */
+    public static genderToString(gender: Gender) {
+        if (gender === Gender.MEN) return "mens's";
+        if (gender === Gender.WOMEN) return "women's";
+        throw new Error("genderToString(): invalid gender");
     }
 
     /**

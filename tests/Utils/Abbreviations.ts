@@ -3,6 +3,7 @@ import { Abbreviations } from "../../src/Utils/Abbreviations.js";
 import * as fs from "node:fs";
 import { KNHBFetcher } from "../../src/Fetchers/KNHBFetcher/KNHBFetcher.js";
 import { TMSFetcher } from "../../src/Fetchers/TMSFetcher/TMSFetcher.js";
+import { Gender } from "../../src/Objects/Gender.js";
 
 describe("FIHAbbreviations tests", () => {
     test("getMatchType()", () => {
@@ -10,7 +11,7 @@ describe("FIHAbbreviations tests", () => {
         const json = JSON.parse(items);
 
         for (const test of json as Record<string, string>[]) {
-            const output = Abbreviations.getMatchType(test.in, "M", 1);
+            const output = Abbreviations.getMatchType(test.in, Gender.MEN, 1);
             expect(output).toBe(test.out);
         }
     });
