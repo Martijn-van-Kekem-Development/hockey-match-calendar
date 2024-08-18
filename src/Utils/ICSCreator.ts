@@ -63,6 +63,7 @@ export class ICSCreator {
     public static genderToString(gender: Gender) {
         if (gender === Gender.MEN) return "mens's";
         if (gender === Gender.WOMEN) return "women's";
+        if (gender === Gender.MIXED) return "mixed";
         throw new Error("genderToString(): invalid gender");
     }
 

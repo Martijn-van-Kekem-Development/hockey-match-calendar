@@ -104,6 +104,7 @@ export class TMSFetcher extends Fetcher {
             ICSCreator.createTotalICS(this, competitionsArray),
             ICSCreator.createGenderTotalICS(this, competitionsArray, Gender.MEN),
             ICSCreator.createGenderTotalICS(this, competitionsArray, Gender.WOMEN),
+            ICSCreator.createGenderTotalICS(this, competitionsArray, Gender.MIXED),
         ]);
 
         this.log("info", `Finished.`);
