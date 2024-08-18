@@ -90,12 +90,13 @@ export class Abbreviations {
      * @param type The match type.
      * @param fetcher The fetcher that requests the gender
      */
-    public static getGender(type: string, fetcher: Fetcher): "M" | "W" {
+    public static getGender(type: string, fetcher: Fetcher): "M" | "W" | "X"{
         const str = type.toLowerCase();
 
         if (fetcher instanceof TMSFetcher) {
             if (str.includes("womens")) return "W";
             if (str.includes("mens")) return "M";
+            if (str.includes("mixed") || str.includes("coed")) return "X";
         } else if (fetcher instanceof KNHBFetcher) {
             if (str.includes("(w)") || str.includes("dames") || str.includes("meisjes")) return "W";
             if (str.includes("(m)") || str.includes("heren") || str.includes("jongens")) return "M";
