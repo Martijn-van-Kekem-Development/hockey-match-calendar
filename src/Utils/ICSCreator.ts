@@ -127,9 +127,7 @@ export class ICSCreator {
      */
     public static async createCompetitionICS(competition: Competition) {
         const competitionID = competition.getID().toLowerCase();
-        const competitionName = competition.getLowercaseName();
-        const path = "per-competition/" +
-            `${competitionID}-${competitionName}`;
+        const path = "per-competition/" + `${competitionID}`;
         const title = competition.getName();
 
         const meta: Metadata = {
