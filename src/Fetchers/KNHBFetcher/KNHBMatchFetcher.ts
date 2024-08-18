@@ -127,9 +127,8 @@ export class KNHBMatchFetcher {
     public static getClubId(clubName: string): string {
         return clubName
             .toLowerCase()
-            .replaceAll(/[^a-zA-Z ]/g, "")
-            .replaceAll(/\s+/g, " ")
-            .replaceAll(" ", "-");
+            .replaceAll(/[^a-zA-Z- ]/g, "")
+            .replaceAll(/(\s|-)+/g, "-");
     }
 }
 

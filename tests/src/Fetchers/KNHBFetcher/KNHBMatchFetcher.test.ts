@@ -10,6 +10,9 @@ describe('KNHBMatchFetcher tests', () => {
         test("With special characters", () => {
             expect(KNHBMatchFetcher.getClubId("Random! name 2024 - With characters"))
                 .toBe("random-name-with-characters");
+
+            expect(KNHBMatchFetcher.getClubId("KNHB-like competition: the real one."))
+                .toBe("knhb-like-competition-the-real-one");
         });
     });
 });
