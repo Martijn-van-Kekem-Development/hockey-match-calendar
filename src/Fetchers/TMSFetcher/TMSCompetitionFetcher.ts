@@ -22,21 +22,26 @@ export class TMSCompetitionFetcher {
      * @param type The type of competitions to get.
      * @param options The index to start the first match at
      */
-    public async fetch(type: "upcoming" | "previous" | "in-progress", options: { index: number }) {
+    public async fetch(type: "upcoming" | "previous" | "in-progress",
+                       options: { index: number }) {
+
         let page = 1;
         const competitions: Map<string, Competition> = new Map();
 
         while (true) {
             // Get data from TMS.
+            const baseURL = this.fetcher.getBaseURL();
             const data = await fetch(
                 type === "in-progress"
-                    ? `${this.fetcher.getBaseURL()}/competitions?page=${page}`
-                    : `${this.fetcher.getBaseURL()}/competitions?view=${type}&page=${page}`);
+                    ? `${baseURL}/competitions?page=${page}`
+                    : `${baseURL}/competitions?view=${type}&page=${page}`);
             const html = parse(await data.text());
-            const rows = html.querySelectorAll("#admin_list_of_competitions table tbody tr");
+            const rows = html.querySelectorAll(
+                "#admin_list_of_competitions table tbody tr");
 
             // Check no results
-            if (rows.length === 1 && rows[0].innerText.trim() === "No results") break;
+            if (rows.length === 1 && rows[0].innerText.trim() === "No results")
+                break;
 
             // Create competition from every row.
             for (const row of rows) {

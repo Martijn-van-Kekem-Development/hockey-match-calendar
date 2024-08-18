@@ -2,10 +2,14 @@ import { ICS } from "../../src/ICS.js";
 import { test, describe, expect } from "vitest";
 import { icsCalendarToObject } from "ts-ics";
 
-describe('ICS class', () => {
+describe("ICS class", () => {
     test("formatLines()", () => {
         const lines = [
-            "Very long description that is very long and longer than the max allowed characters. Very long description that is very long and longer than the max allowed characters",
+            "Very long description that is very long " +
+            "and longer than the max allowed characters. " +
+            "Very long description that is very long and " +
+            "longer than the max allowed characters",
+
             "Not so long"
         ];
 
@@ -22,7 +26,10 @@ describe('ICS class', () => {
     });
 
     test("Calendar details", async () => {
-        const calendar = icsCalendarToObject(ICS.calendarToICS("1", "2", []));
-        expect(calendar.prodId).toBe("-//mvk-development//hockey-match-calendar//2//EN");
+        const calendar = icsCalendarToObject(ICS.calendarToICS(
+            "1", "2", []));
+
+        expect(calendar.prodId)
+            .toBe("-//mvk-development//hockey-match-calendar//2//EN");
     });
 });

@@ -25,7 +25,9 @@ export class KNHBCompetitionFetcher {
         const json = await data.json();
         let index = 0;
 
-        if (json.status !== 200) throw new Error("Failed to fetch KNHB competitions.");
+        if (json.status !== 200)
+            throw new Error("Failed to fetch KNHB competitions.");
+
         for (const competition of json.data) {
             const item = this.createCompetition(competition, index++);
             competitions.set(item.getID(), item);

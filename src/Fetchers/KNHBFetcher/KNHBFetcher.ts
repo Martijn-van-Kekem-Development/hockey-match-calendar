@@ -47,12 +47,12 @@ export class KNHBFetcher extends Fetcher {
      * @override
      */
     protected async fetch(): Promise<Competition[]> {
-        this.log("info", `Fetching competitions.`);
+        this.log("info", "Fetching competitions.");
         const competitions = await this.fetchCompetitions();
         const promises = [];
 
         this.log("info", `Found ${competitions.size} competitions.`);
-        this.log("info", `Fetching matches and creating competition files.`);
+        this.log("info", "Fetching matches and creating competition files.");
 
         for (const competition of competitions.values()) {
             // Fetch match for every competition
@@ -68,11 +68,13 @@ export class KNHBFetcher extends Fetcher {
         // Create total calendar files.
         await Promise.all([
             ICSCreator.createTotalICS(this, competitionsArray, true),
-            ICSCreator.createGenderTotalICS(this, competitionsArray, Gender.MEN, true),
-            ICSCreator.createGenderTotalICS(this, competitionsArray, Gender.WOMEN, true),
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
+                Gender.MEN, true),
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
+                Gender.WOMEN, true),
         ]);
 
-        this.log("info", `Finished.`);
+        this.log("info", "Finished.");
         return competitionsArray;
     }
     /**
@@ -86,25 +88,37 @@ export class KNHBFetcher extends Fetcher {
      * @override
      */
     async fetchMatches(competition: Competition): Promise<Map<string, Match>> {
-        const upcomingMatches = await this.matchFetcher.fetch("upcoming", competition);
-        const officialMatches = await this.matchFetcher.fetch("official", competition);
+        const upcomingMatches =
+            await this.matchFetcher.fetch("upcoming", competition);
+        const officialMatches =
+            await this.matchFetcher.fetch("official", competition);
+
         return new Map([...upcomingMatches, ...officialMatches]);
     }
 
     /**
      * @override
      */
-    descriptionToAppend(competition: Competition, match: Match, html: boolean): string[] {
+    descriptionToAppend(competition: Competition, match: Match,
+                        html: boolean): string[] {
+
         const lines: string[] = [];
-        const KNHBUrl = "https://www.knhb.nl/match-center#";
+        const KNHBUrl: string = "https://www.knhb.nl/match-center#";
 
         // Add KNHB links
         if (html) {
-            if (match.getID()) lines.push(`<a href="${KNHBUrl}/matches/${match.getID()}">View match details</a>`);
-            if (competition.getID()) lines.push(`<a href="${KNHBUrl}/competitions/${competition.getID()}/program">View competition details</a>`);
+            if (match.getID())
+                lines.push(`<a href="${KNHBUrl}/matches/${
+                    match.getID()}">View match details</a>`);
+            if (competition.getID())
+                lines.push(`<a href="${KNHBUrl}/competitions/${
+                    competition.getID()}/program">View competition details</a>`);
         } else {
-            if (match.getID()) lines.push("Match link: " + `${KNHBUrl}/matches/${match.getID()}`);
-            if (competition.getID()) lines.push("Competition link: " + `${KNHBUrl}/competitions/${competition.getID()}/program`);
+            if (match.getID())
+                lines.push("Match link: " + `${KNHBUrl}/matches/${match.getID()}`);
+            if (competition.getID())
+                lines.push("Competition link: " + `${KNHBUrl}/competitions/${
+                    competition.getID()}/program`);
         }
 
         return lines;
