@@ -5,8 +5,11 @@
       "es2021",
       "dom"
     ],
+    "module": "NodeNext",
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "Node",
-    "target": "ES2021"
-  }
+    "moduleResolution": "NodeNext",
+    "target": "ES2021",
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules"]
 }
