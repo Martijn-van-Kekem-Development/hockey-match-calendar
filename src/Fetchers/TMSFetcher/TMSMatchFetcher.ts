@@ -28,12 +28,15 @@ export class TMSMatchFetcher {
         const matches: Map<string, Match> = new Map();
 
         // Get data from TMS.
-        const data = await fetch(`${this.fetcher.getBaseURL()}/competitions/${competition.getID()}/matches`);
+        const data =
+            await fetch(`${this.fetcher.getBaseURL()}/competitions/${
+                competition.getID()}/matches`);
         const html = parse(await data.text());
         const rows = html.querySelectorAll(".tab-content table tbody tr");
 
         // Check no results
-        if (rows.length === 1 && rows[0].innerText.trim() === "No results") return matches;
+        if (rows.length === 1 && rows[0].innerText.trim() === "No results")
+            return matches;
 
         // Create match from every row.
         for (const row of rows) {
@@ -54,12 +57,15 @@ export class TMSMatchFetcher {
         object.setCompetition(competition);
 
         const link = row.querySelector("td:nth-child(3) a[href]");
-        if (!link) throw new Error(`Can't fetch title from ${competition.getID()}`);
+        if (!link)
+            throw new Error(`Can't fetch title from ${competition.getID()}`);
         TMSMatchFetcher.parseTitle(object, link.textContent.trim());
 
         // Add match ID.
-        const id = link.getAttribute("href").split("/").slice(-1)[0] ?? null;
-        if (!id) throw new Error("Failed to get ID for match.");
+        const id =
+            link.getAttribute("href").split("/").slice(-1)[0] ?? null;
+        if (!id)
+            throw new Error("Failed to get ID for match.");
         else object.setID(id);
 
         // Add match index
@@ -67,12 +73,17 @@ export class TMSMatchFetcher {
         object.setIndex(Number(index.textContent.trim()));
 
         // Add gender
-        const gender = Abbreviations.getGender(competition.getType(), this.fetcher);
+        const gender =
+            Abbreviations.getGender(competition.getType(), this.fetcher);
         object.setGender(gender);
 
         // Add date and time
-        const dateString = row.querySelector("td:nth-child(2) span[data-timezone]");
-        object.setMatchDate(DateHelper.TMStoUTC(dateString.textContent, dateString.getAttribute("data-timezone")));
+        const dateString =
+            row.querySelector("td:nth-child(2) span[data-timezone]");
+        const timeZone = dateString.getAttribute("data-timezone");
+        const utcDate =
+            DateHelper.TMStoUTC(dateString.textContent, timeZone);
+        object.setMatchDate(utcDate);
 
         // Add completed state
         const status = row.querySelector("td:nth-child(5)");
@@ -100,7 +111,8 @@ export class TMSMatchFetcher {
             .replace(/[\u0300-\u036f]/g, "")
             .match(/([A-Za-z0-9/ -]+) v ([A-Za-z0-9/ -]+)(?: \((.+)\))?$/);
 
-        if (!result) throw new Error("Couldn't extract data from match title: " + title);
+        if (!result)
+            throw new Error("Couldn't extract data from match title: " + title);
 
         const [, home, away, matchType] = result;
         object.setHomeTeam(home.toLowerCase(), home);

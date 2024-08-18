@@ -2,12 +2,19 @@ import { test, describe, expect } from "vitest";
 import { TMSMatchFetcher } from "../../../../src/Fetchers/TMSFetcher/TMSMatchFetcher.js";
 import { Match } from "../../../../src/Objects/Match.js";
 
+interface parseTitleTest {
+    in: string,
+    home?: string,
+    away?: string,
+    type?: string
+}
+
 /**
  * Run the given tests on a match object.
  * @param test The test to run.
  * @param full Whether to return the full team names.
  */
-function runParseTitleTest(test: { in: string, home?: string, away?: string, type?: string }, full: boolean = false) {
+function runParseTitleTest(test: parseTitleTest, full: boolean = false) {
     const match = new Match();
     TMSMatchFetcher.parseTitle(match, test.in);
     if (test.home) expect(match.getHomeTeam(full)).toBe(test.home);
@@ -15,15 +22,22 @@ function runParseTitleTest(test: { in: string, home?: string, away?: string, typ
     if (test.type) expect(match.getType()).toBe(test.type);
 }
 
-describe('TMSMatchFetcher tests', () => {
+describe("TMSMatchFetcher tests", () => {
     describe("parseTitle()", () => {
         test("Normalizing string", () => {
-            runParseTitleTest({ in: "TéstCountry v LoremIpsum", home: "TestCountry" });
+            runParseTitleTest({
+                in: "TéstCountry v LoremIpsum",
+                home: "TestCountry"
+            });
         });
 
         describe("Extracting data", () => {
             test("Only teams", () => {
-                runParseTitleTest({ in: "Test1Country/ v Lor18emIpsum", home: "Test1Country/", away: "Lor18emIpsum" });
+                runParseTitleTest({
+                    in: "Test1Country/ v Lor18emIpsum",
+                    home: "Test1Country/",
+                    away: "Lor18emIpsum"
+                });
             });
 
             test("Teams including match type", () => {
@@ -36,7 +50,8 @@ describe('TMSMatchFetcher tests', () => {
             });
 
             test("Invalid input", () => {
-                expect(() => runParseTitleTest({ in: "Random string" })).toThrowError();
+                expect(() => runParseTitleTest({ in: "Random string" }))
+                    .toThrowError();
             });
         });
     });

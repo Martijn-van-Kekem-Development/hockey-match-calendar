@@ -84,7 +84,7 @@ export abstract class Fetcher {
      * @param message The message itself.
      * @protected
      */
-    public log(type: "error" | "log" | "info" | "warn" | "debug", message: string): void {
+    public log(type: "error" | "info" | "warn", message: string): void {
         console[type](`[Fetcher - ${this.getID()}] ${message}`);
     }
 
@@ -102,13 +102,16 @@ export abstract class Fetcher {
      * Fetch the matches by a competition.
      * @param competition The competition.
      */
-    protected abstract fetchMatches(competition: Competition): Promise<Map<string, Match>>;
+    protected abstract fetchMatches(competition: Competition):
+        Promise<Map<string, Match>>;
 
     /**
-     * Specifies what description to append to each match event when this fetcher is used.
+     * Specifies what description to append to each match
+     * event when this fetcher is used.
      * @param competition The competition object.
      * @param match The match object.
      * @param html Whether to add HTML.
      */
-    public abstract descriptionToAppend(competition: Competition, match: Match, html: boolean): string[];
+    public abstract descriptionToAppend(competition: Competition, match: Match,
+                                        html: boolean): string[];
 }

@@ -6,7 +6,8 @@ describe("ICSCreator tests", () => {
     test("Valid title string for every gender", () => {
         const genders = Object.keys(Gender).filter(g => isNaN(-g));
         for (const gender of genders) {
-            expect(() => ICSCreator.genderToString(Gender[gender])).not.toThrowError();
+            expect(() => ICSCreator.genderToString(Gender[gender]))
+                .not.toThrowError();
         }
     });
 });

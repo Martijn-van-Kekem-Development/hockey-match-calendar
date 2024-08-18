@@ -4,7 +4,7 @@ import moment from "moment";
 import { Gender } from "../../../src/Objects/Gender.js";
 import { Competition } from "../../../src/Objects/Competition.js";
 
-describe('Match tests', () => {
+describe("Match tests", () => {
     describe("Get- and set team names", () => {
         const match = new Match();
 
