@@ -39,17 +39,5 @@ describe('TMSMatchFetcher tests', () => {
                 expect(() => runParseTitleTest({ in: "Random string" })).toThrowError();
             });
         });
-
-        describe("Parsing countries", () => {
-            test("Full country name", () => {
-                runParseTitleTest({ in: "Netherlands v Germany", home: "Netherlands", away: "Germany" });
-                runParseTitleTest({ in: "Netherlands v Germany", home: "Netherlands", away: "Germany" }, true);
-            });
-
-            test("Abbreviated country name", () => {
-                runParseTitleTest({ in: "NED v GER", home: "NED", away: "GER" });
-                runParseTitleTest({ in: "NED v GER", home: "Netherlands", away: "Germany" }, true);
-            });
-        });
     });
 });

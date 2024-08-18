@@ -252,7 +252,7 @@ export class Match {
      * Get the location for this match.
      */
     public getLocation(): string {
-        if (!this.competition) return this.venue;
+        if (!this.competition) return this.venue ?? "";
         const venue = this.venue ?? "";
         const location = this.competition.getLocation() ?? "";
 
