@@ -57,7 +57,7 @@ export class Match {
      * The gender category for this match.
      * @private
      */
-    private gender: "M" | "W";
+    private gender: "M" | "W" | "X";
 
     /**
      * Whether this match has completed.
@@ -137,7 +137,7 @@ export class Match {
      * Set the match gender.
      * @param gender The gender.
      */
-    public setGender(gender: "M" | "W") {
+    public setGender(gender: "M" | "W" | "X" ) {
         this.gender = gender;
     }
 
@@ -264,7 +264,7 @@ export class Match {
     /**
      * Get the gender.
      */
-    public getGender(): "M" | "W" {
+    public getGender(): "M" | "W" | "X" {
         return this.gender;
     }
 

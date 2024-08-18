@@ -22,7 +22,7 @@ export class Abbreviations {
      * @param gender The match gender
      * @param index The match index in this competition
      */
-    public static getMatchType(type: string, gender: "M" | "W", index: number): string {
+    public static getMatchType(type: string, gender: "M" | "W" | "X", index: number): string {
         if (!this.MatchTypeAbbreviations) this.getMatchTypeAbbreviations();
 
         // Look for abbreviation.
@@ -90,7 +90,7 @@ export class Abbreviations {
      * @param type The match type.
      * @param fetcher The fetcher that requests the gender
      */
-    public static getGender(type: string, fetcher: Fetcher): "M" | "W" | "X"{
+    public static getGender(type: string, fetcher: Fetcher): "M" | "W" | "X" {
         const str = type.toLowerCase();
 
         if (fetcher instanceof TMSFetcher) {
