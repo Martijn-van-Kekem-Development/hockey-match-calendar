@@ -137,7 +137,7 @@ export class Match {
      * Set the match gender.
      * @param gender The gender.
      */
-    public setGender(gender: "M" | "W" | "X" ) {
+    public setGender(gender: "M" | "W" | "X") {
         this.gender = gender;
     }
 
