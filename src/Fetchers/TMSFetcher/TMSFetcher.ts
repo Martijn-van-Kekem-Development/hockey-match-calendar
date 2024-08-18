@@ -1,10 +1,10 @@
-import {Fetcher} from "../Fetcher.js";
-import {Competition} from "../../Objects/Competition.js";
-import {Match} from "../../Objects/Match.js";
-import {TMSCompetitionFetcher} from "./TMSCompetitionFetcher.js";
-import {TMSMatchFetcher} from "./TMSMatchFetcher.js";
-import {ICSCreator} from "../../Utils/ICSCreator.js";
-import {Gender} from "../../Objects/Gender.js";
+import { Fetcher } from "../Fetcher.js";
+import { Competition } from "../../Objects/Competition.js";
+import { Match } from "../../Objects/Match.js";
+import { TMSCompetitionFetcher } from "./TMSCompetitionFetcher.js";
+import { TMSMatchFetcher } from "./TMSMatchFetcher.js";
+import { ICSCreator } from "../../Utils/ICSCreator.js";
+import { Gender } from "../../Objects/Gender.js";
 
 export class TMSFetcher extends Fetcher {
     /**

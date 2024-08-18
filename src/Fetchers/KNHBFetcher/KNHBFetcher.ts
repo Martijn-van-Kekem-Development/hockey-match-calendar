@@ -4,7 +4,7 @@ import { Fetcher } from "../Fetcher.js";
 import { KNHBCompetitionFetcher } from "./KNHBCompetitionFetcher.js";
 import { KNHBMatchFetcher } from "./KNHBMatchFetcher.js";
 import { ICSCreator } from "../../Utils/ICSCreator.js";
-import {Gender} from "../../Objects/Gender.js";
+import { Gender } from "../../Objects/Gender.js";
 
 export class KNHBFetcher extends Fetcher {
     /**
