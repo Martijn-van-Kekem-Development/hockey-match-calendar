@@ -26,6 +26,10 @@ export class Main {
         fetchers[TMSFetcher.WMH_FETCHER_ID] =
             new TMSFetcher(TMSFetcher.WMH_FETCHER_ID, "WMH", 3, TMSFetcher.WMH_BASE_URL);
 
+        // EH
+        fetchers[TMSFetcher.EH_FETCHER_ID] =
+        new TMSFetcher(TMSFetcher.EH_FETCHER_ID, "EH", 4, TMSFetcher.EH_BASE_URL);
+
         return fetchers;
     }
 
