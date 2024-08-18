@@ -3,6 +3,7 @@ import { Countries, Country } from "../Utils/Countries.js";
 import { Abbreviations } from "../Utils/Abbreviations.js";
 import { DateHelper } from "../Utils/DateHelper.js";
 import { Moment } from "moment-timezone";
+import { Gender, getFullGender } from "./Gender.js";
 
 export class Match {
     /**
@@ -57,7 +58,7 @@ export class Match {
      * The gender category for this match.
      * @private
      */
-    private gender: "M" | "W" | "X";
+    private gender: Gender;
 
     /**
      * Whether this match has completed.
@@ -137,7 +138,7 @@ export class Match {
      * Set the match gender.
      * @param gender The gender.
      */
-    public setGender(gender: "M" | "W" | "X") {
+    public setGender(gender: Gender) {
         this.gender = gender;
     }
 
@@ -171,6 +172,13 @@ export class Match {
      */
     public setType(type: string) {
         this.type = type;
+    }
+
+    /**
+     * Get the type for this match.
+     */
+    public getType() {
+        return this.type;
     }
 
     /**
@@ -244,7 +252,7 @@ export class Match {
      * Get the location for this match.
      */
     public getLocation(): string {
-        if (!this.competition) return this.venue;
+        if (!this.competition) return this.venue ?? "";
         const venue = this.venue ?? "";
         const location = this.competition.getLocation() ?? "";
 
@@ -264,7 +272,7 @@ export class Match {
     /**
      * Get the gender.
      */
-    public getGender(): "M" | "W" | "X" {
+    public getGender(): Gender {
         return this.gender;
     }
 
@@ -292,7 +300,7 @@ export class Match {
         // Add match data.
         lines.push(`${this.getHomeTeam(true)} - ${this.getAwayTeam(true)}`);
         if (this.isCompleted) lines.push(`Final score: ${this.finalScore}`);
-        lines.push(`Gender: ${this.gender === "M" ? "Men" : "Women"}`);
+        lines.push(`Gender: ${getFullGender(this.gender)}`);
         if (this.competition) lines.push(`Event: ${this.competition.getName()}`);
         lines.push("");
 

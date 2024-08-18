@@ -2,6 +2,7 @@ import * as fs from "node:fs";
 import { Fetcher } from "../Fetchers/Fetcher.js";
 import { TMSFetcher } from "../Fetchers/TMSFetcher/TMSFetcher.js";
 import { KNHBFetcher } from "../Fetchers/KNHBFetcher/KNHBFetcher.js";
+import { Gender } from "../Objects/Gender.js";
 
 export class Abbreviations {
     /**
@@ -22,7 +23,7 @@ export class Abbreviations {
      * @param gender The match gender
      * @param index The match index in this competition
      */
-    public static getMatchType(type: string, gender: "M" | "W" | "X", index: number): string {
+    public static getMatchType(type: string, gender: Gender, index: number): string {
         if (!this.MatchTypeAbbreviations) this.getMatchTypeAbbreviations();
 
         // Look for abbreviation.
@@ -39,7 +40,7 @@ export class Abbreviations {
             }
 
             // Replace gender and index values.
-            return `${value} ${gender}${this.padStart(index)}`;
+            return `${value} ${gender.toString()}${this.padStart(index)}`;
         }
 
         // No match found
@@ -90,16 +91,17 @@ export class Abbreviations {
      * @param type The match type.
      * @param fetcher The fetcher that requests the gender
      */
-    public static getGender(type: string, fetcher: Fetcher): "M" | "W" | "X" {
+    public static getGender(type: string, fetcher: Fetcher): Gender {
         const str = type.toLowerCase();
 
         if (fetcher instanceof TMSFetcher) {
-            if (str.includes("womens")) return "W";
-            if (str.includes("mens")) return "M";
-            if (str.includes("mixed") || str.includes("coed")) return "X";
+            if (str.includes("womens")) return Gender.WOMEN;
+            if (str.includes("mens")) return Gender.MEN;
+            if (str.includes("mixed") || str.includes("coed")) return Gender.MIXED;
+
         } else if (fetcher instanceof KNHBFetcher) {
-            if (str.includes("(w)") || str.includes("dames") || str.includes("meisjes")) return "W";
-            if (str.includes("(m)") || str.includes("heren") || str.includes("jongens")) return "M";
+            if (str.includes("(w)") || str.includes("dames") || str.includes("meisjes")) return Gender.WOMEN;
+            if (str.includes("(m)") || str.includes("heren") || str.includes("jongens")) return Gender.MEN;
         }
 
         throw new Error("Couldn't fetch gender for " + type);
