@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { APIHelper } from "../../src/Utils/APIHelper.js";
+import { APIHelper } from "../../../src/Utils/APIHelper.js";
 
 describe("APIHelper tests", () => {
     test("Delay", async () => {

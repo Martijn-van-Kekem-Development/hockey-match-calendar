@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { Gender, getFullGender } from "../../src/Objects/Gender.js";
+import { Gender, getFullGender } from "../../../src/Objects/Gender.js";
 
 describe("Gender tests", () => {
     test("getFullGender()", () => {

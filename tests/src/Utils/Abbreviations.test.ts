@@ -1,9 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { Abbreviations } from "../../src/Utils/Abbreviations.js";
+import { Abbreviations } from "../../../src/Utils/Abbreviations.js";
 import * as fs from "node:fs";
-import { KNHBFetcher } from "../../src/Fetchers/KNHBFetcher/KNHBFetcher.js";
-import { TMSFetcher } from "../../src/Fetchers/TMSFetcher/TMSFetcher.js";
-import { Gender } from "../../src/Objects/Gender.js";
+import { KNHBFetcher } from "../../../src/Fetchers/KNHBFetcher/KNHBFetcher.js";
+import { TMSFetcher } from "../../../src/Fetchers/TMSFetcher/TMSFetcher.js";
+import { Gender } from "../../../src/Objects/Gender.js";
 
 describe("Abbreviations tests", () => {
     test("getMatchType()", () => {
