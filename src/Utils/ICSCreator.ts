@@ -46,9 +46,9 @@ export class ICSCreator {
         let matches = competitions.map(e => e.getMatches()).flat();
         matches = matches.filter(m => m.getGender() === gender);
 
-        const genderString = this.genderToString(gender);
-        const path = `${genderString}-matches`;
-        const title = `All ${fetcher.getName()} ${genderString} matches`;
+        const path = `${this.genderToString(gender, true)}-matches`;
+        const title = `All ${fetcher.getName()} ${this.genderToString(
+            gender, false)} matches`;
 
         const meta: Metadata = {
             type: "total",
@@ -65,11 +65,15 @@ export class ICSCreator {
     /**
      * Convert a gender to a title-string.
      * @param gender The gender.
+     * @param pathFriendly Whether to return a path friendly string.
      * @protected
      */
-    public static genderToString(gender: Gender) {
-        if (gender === Gender.MEN) return "mens's";
-        if (gender === Gender.WOMEN) return "women's";
+    public static genderToString(gender: Gender, pathFriendly: boolean) {
+        if (gender === Gender.MEN)
+            return pathFriendly ? "mens" : "mens's";
+        if (gender === Gender.WOMEN)
+            return pathFriendly ? "womens" : "women's";
+
         throw new Error("genderToString(): invalid gender");
     }
 
@@ -123,9 +127,7 @@ export class ICSCreator {
      */
     public static async createCompetitionICS(competition: Competition) {
         const competitionID = competition.getID().toLowerCase();
-        const competitionName = competition.getLowercaseName();
-        const path = "per-competition/" +
-            `${competitionID}-${competitionName}`;
+        const path = "per-competition/" + `${competitionID}`;
         const title = competition.getName();
 
         const meta: Metadata = {
