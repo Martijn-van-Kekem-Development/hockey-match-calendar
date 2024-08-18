@@ -4,6 +4,7 @@ import { Fetcher } from "../Fetcher.js";
 import { KNHBCompetitionFetcher } from "./KNHBCompetitionFetcher.js";
 import { KNHBMatchFetcher } from "./KNHBMatchFetcher.js";
 import { ICSCreator } from "../../Utils/ICSCreator.js";
+import {Gender} from "../../Objects/Gender.js";
 
 export class KNHBFetcher extends Fetcher {
     /**
@@ -67,8 +68,8 @@ export class KNHBFetcher extends Fetcher {
         // Create total calendar files.
         await Promise.all([
             ICSCreator.createTotalICS(this, competitionsArray, true),
-            ICSCreator.createGenderTotalICS(this, competitionsArray, "M", true),
-            ICSCreator.createGenderTotalICS(this, competitionsArray, "W", true),
+            ICSCreator.createGenderTotalICS(this, competitionsArray, Gender.MEN, true),
+            ICSCreator.createGenderTotalICS(this, competitionsArray, Gender.WOMEN, true),
         ]);
 
         this.log("info", `Finished.`);
