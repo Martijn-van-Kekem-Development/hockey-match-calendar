@@ -114,9 +114,9 @@ export class TMSMatchFetcher {
         if (!result)
             throw new Error("Couldn't extract data from match title: " + title);
 
-        const home = result[1]?.trim() || 'TBC';
-        const away = result[2]?.trim() || 'TBC';
-        const matchType = result[3] ?? '';
+        const home = result[1]?.trim() || "TBC";
+        const away = result[2]?.trim() || "TBC";
+        const matchType = result[3] ?? "";
 
         object.setHomeTeam(home.toLowerCase(), home);
         object.setAwayTeam(away.toLowerCase(), away);

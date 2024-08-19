@@ -102,7 +102,7 @@ export class TMSFetcher extends Fetcher {
         // Create total calendar files.
         await Promise.all([
             ICSCreator.createTotalICS(this, competitionsArray),
-            ICSCreator.createGenderTotalICS(this, competitionsArray, 
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
                 Gender.MEN),
             ICSCreator.createGenderTotalICS(this, competitionsArray,
                 Gender.WOMEN),

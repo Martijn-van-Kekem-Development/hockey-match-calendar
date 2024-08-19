@@ -99,7 +99,7 @@ export class Abbreviations {
         const str = type.toLowerCase();
 
         if (fetcher instanceof TMSFetcher) {
-            if (str.includes("womens")) 
+            if (str.includes("womens"))
                 return Gender.WOMEN;
             if (str.includes("mens"))
                 return Gender.MEN;
