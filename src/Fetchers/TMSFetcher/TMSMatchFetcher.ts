@@ -109,10 +109,12 @@ export class TMSMatchFetcher {
         const result = title
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
-            .match(/^(?:([A-Za-z0-9/& -]*) v )?([A-Za-z0-9/& -]*)(?: \((.+)\))?$/);
+            .match(
+                /^(?:([A-Za-z0-9/& -]+) )?v (?:([A-Za-z0-9/& -]+))?(?: \((.+)\))?$/);
 
-        if (!result)
-            throw new Error("Couldn't extract data from match title: " + title);
+            if (!result) {
+                throw new Error("Couldn't extract data from match title: " + title);
+            }
 
         const home = result[1]?.trim() || "TBC";
         const away = result[2]?.trim() || "TBC";
