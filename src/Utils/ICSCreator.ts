@@ -74,7 +74,7 @@ export class ICSCreator {
         if (gender === Gender.WOMEN)
             return pathFriendly ? "womens" : "women's";
         if (gender === Gender.MIXED)
-            return pathFriendly ? "mixed" : "mixed's";
+            return "mixed";
         throw new Error("genderToString(): invalid gender");
     }
 
