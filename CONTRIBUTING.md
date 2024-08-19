@@ -115,11 +115,11 @@ As soon as you have completed implementing your contributions, follow the steps 
 
 First, make sure all test cases are passing.
 ```sh
-npm run test
+npm test
 ```
-Secondly, verify that the linter returns no errors.
+Secondly, verify that the linter and typescript returns no errors.
 ```sh
-npm run check-lint
+npm run check
 ```
 
 After that, make sure an issue exists for the contribution you're making. If that's not the case, create one 
