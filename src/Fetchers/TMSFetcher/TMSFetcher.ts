@@ -77,12 +77,12 @@ export class TMSFetcher extends Fetcher {
      * Fetch the matches from TMS.
      */
     protected async fetch() {
-        this.log("info", `Fetching competitions.`);
+        this.log("info", "Fetching competitions.");
         const competitions = await this.fetchCompetitions();
         const promises = [];
 
         this.log("info", `Found ${competitions.size} competitions.`);
-        this.log("info", `Fetching matches and creating competition files.`);
+        this.log("info", "Fetching matches and creating competition files.");
 
         for (const competition of competitions.values()) {
             // Fetch match for every competition
@@ -102,12 +102,15 @@ export class TMSFetcher extends Fetcher {
         // Create total calendar files.
         await Promise.all([
             ICSCreator.createTotalICS(this, competitionsArray),
-            ICSCreator.createGenderTotalICS(this, competitionsArray, Gender.MEN),
-            ICSCreator.createGenderTotalICS(this, competitionsArray, Gender.WOMEN),
-            ICSCreator.createGenderTotalICS(this, competitionsArray, Gender.MIXED),
+            ICSCreator.createGenderTotalICS(this, competitionsArray, 
+                Gender.MEN),
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
+                Gender.WOMEN),
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
+                Gender.MIXED),
         ]);
 
-        this.log("info", `Finished.`);
+        this.log("info", "Finished.");
         return competitionsArray;
     }
 
@@ -116,9 +119,12 @@ export class TMSFetcher extends Fetcher {
      */
     async fetchCompetitions(): Promise<Map<string, Competition>> {
         const options = { index: 0 };
-        const upcoming = await this.competitionFetcher.fetch("upcoming", options);
-        const inProgress = await this.competitionFetcher.fetch("in-progress", options);
-        const previous = await this.competitionFetcher.fetch("previous", options);
+        const upcoming =
+            await this.competitionFetcher.fetch("upcoming", options);
+        const inProgress =
+            await this.competitionFetcher.fetch("in-progress", options);
+        const previous =
+            await this.competitionFetcher.fetch("previous", options);
 
         return new Map([...upcoming, ...inProgress, ...previous]);
     }
@@ -133,16 +139,26 @@ export class TMSFetcher extends Fetcher {
     /**
      * @override
      */
-    descriptionToAppend(competition: Competition, match: Match, html: boolean): string[] {
+    descriptionToAppend(competition: Competition, match: Match,
+                        html: boolean): string[] {
+
         const lines: string[] = [];
 
         // Add TMS links
         if (html) {
-            if (match.getID()) lines.push(`<a href="${this.getBaseURL()}/matches/${match.getID()}">View match details</a>`);
-            if (competition.getID()) lines.push(`<a href="${this.getBaseURL()}/competitions/${competition.getID()}">View competition details</a>`);
+            if (match.getID())
+                lines.push(`<a href="${this.getBaseURL()}/matches/${
+                    match.getID()}">View match details</a>`);
+            if (competition.getID())
+                lines.push(`<a href="${this.getBaseURL()}/competitions/${
+                    competition.getID()}">View competition details</a>`);
         } else {
-            if (match.getID()) lines.push("Match link: " + `${this.getBaseURL()}/matches/${match.getID()}`);
-            if (competition.getID()) lines.push("Competition link: " + `${this.getBaseURL()}/competitions/${competition.getID()}`);
+            if (match.getID())
+                lines.push("Match link: " +
+                    `${this.getBaseURL()}/matches/${match.getID()}`);
+            if (competition.getID())
+                lines.push("Competition link: " +
+                    `${this.getBaseURL()}/competitions/${competition.getID()}`);
         }
 
         return lines;

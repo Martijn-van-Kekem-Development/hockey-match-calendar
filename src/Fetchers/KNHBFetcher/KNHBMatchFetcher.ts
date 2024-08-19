@@ -53,7 +53,9 @@ export class KNHBMatchFetcher {
      * @param tryCount The amount of tries that have past.
      * @private
      */
-    private async makeRequest(type: "upcoming" | "official", page: number, competition: Competition, tryCount: number = 0) {
+    private async makeRequest(type: "upcoming" | "official", page: number,
+                              competition: Competition, tryCount: number = 0) {
+
         const data = await fetch(this.fetcher.getBaseURL() +
             `/competitions/${competition.getID()}/matches/${type}?page=${page}`);
 
@@ -61,12 +63,14 @@ export class KNHBMatchFetcher {
             // Request failed
             if (tryCount < 3) {
                 const delay = data.status === 429 ? 30 : 100;
-                this.fetcher.log("warn", `Request failed (${data.status}, URL: ${data.url}), retrying in ${delay} second(s).`);
+                this.fetcher.log("warn", `Request failed (${data.status}, URL: ${
+                    data.url}), retrying in ${delay} second(s).`);
+
                 await APIHelper.delay(delay * 1000);
                 return await this.makeRequest(type, page, competition, tryCount++);
             } else {
                 // Give up
-                this.fetcher.log("error", `Request failed after 3 tries. Aborting.`);
+                this.fetcher.log("error", "Request failed after 3 tries. Aborting.");
                 throw new Error();
             }
         }
@@ -80,7 +84,9 @@ export class KNHBMatchFetcher {
      * @param match
      * @param index
      */
-    public createMatch(competition: Competition, match: KNHBMatch, index: number): Match {
+    public createMatch(competition: Competition, match: KNHBMatch,
+                       index: number): Match {
+
         const object = new Match();
         object.setCompetition(competition);
         object.setID(match.id);
@@ -110,7 +116,8 @@ export class KNHBMatchFetcher {
             if (match.home_score && match.away_score) {
                 let scoreString = `${match.home_score} - ${match.away_score}`;
                 if (match.home_shootout && match.away_shootout) {
-                    scoreString += ` (${match.home_shootout} - ${match.away_shootout} SO)`;
+                    scoreString +=
+                        ` (${match.home_shootout} - ${match.away_shootout} SO)`;
                 }
 
                 object.setScore(scoreString);

@@ -83,7 +83,9 @@ export class Match {
             id,
             name: team,
             club,
-            country: Countries.getCountryByIOC(team) ?? Countries.getCountryByISO(team) ?? null
+            country:
+                Countries.getCountryByIOC(team) ??
+                Countries.getCountryByISO(team) ?? null
         };
     }
 
@@ -98,7 +100,9 @@ export class Match {
             id,
             name: team,
             club,
-            country: Countries.getCountryByIOC(team) ?? Countries.getCountryByISO(team) ?? null
+            country:
+                Countries.getCountryByIOC(team) ??
+                Countries.getCountryByISO(team) ?? null
         };
     }
 
@@ -210,31 +214,49 @@ export class Match {
      * Get the home team.
      */
     public getHomeTeam(full: boolean = false): string {
-        if (!full)
-            return this.homeTeam.country === null
-                ? this.homeTeam.name : (this.homeTeam.country.ioc ?? this.homeTeam.name);
-        else
-            return (this.homeTeam.country === null || this.homeTeam.country.full.length === 0)
-                ? this.getHomeTeam() : this.homeTeam.country.full;
+        if (!full) {
+            if (this.homeTeam.country === null || !this.homeTeam.country.ioc) {
+                return this.homeTeam.name;
+            } else {
+                return this.homeTeam.country.ioc;
+            }
+        } else {
+            if (this.homeTeam.country === null ||
+                this.homeTeam.country.full.length === 0) {
+                return this.getHomeTeam();
+            } else {
+                return this.homeTeam.country.full;
+            }
+        }
     }
 
     /**
      * Get the away team.
      */
     public getAwayTeam(full: boolean = false): string {
-        if (!full)
-            return this.awayTeam.country === null
-                ? this.awayTeam.name : (this.awayTeam.country.ioc ?? this.awayTeam.name);
-        else
-            return (this.awayTeam.country === null || this.awayTeam.country.full.length === 0)
-                ? this.getAwayTeam() : this.awayTeam.country.full;
+        if (!full) {
+            if (this.awayTeam.country === null || !this.awayTeam.country.ioc) {
+                return this.awayTeam.name;
+            } else {
+                return this.awayTeam.country.ioc;
+            }
+        } else {
+            if (this.awayTeam.country === null ||
+                this.awayTeam.country.full.length === 0) {
+                return this.getAwayTeam();
+            } else {
+                return this.awayTeam.country.full;
+            }
+        }
     }
 
     /**
      * Get the ICS attributes.
      */
     public getICSAttributes(): Record<string, string> {
-        const endDate = this.getMatchDate().clone().add(2, "hours");
+        const endDate =
+            this.getMatchDate().clone().add(2, "hours");
+
         return {
             UID: this.getMatchID(),
             DTSTAMP: DateHelper.toICS(this.getMatchDate()),
@@ -266,7 +288,8 @@ export class Match {
      * Get the match abbreviation.
      */
     public getAbbr(): string {
-        return Abbreviations.getMatchType(this.type, this.getGender(), this.matchIndex);
+        return Abbreviations.getMatchType(this.type, this.getGender(),
+            this.matchIndex);
     }
 
     /**
@@ -298,15 +321,24 @@ export class Match {
         const lines: string[] = [];
 
         // Add match data.
-        lines.push(`${this.getHomeTeam(true)} - ${this.getAwayTeam(true)}`);
-        if (this.isCompleted) lines.push(`Final score: ${this.finalScore}`);
+        const homeTeam = this.getHomeTeam(true);
+        const awayTeam = this.getAwayTeam(true);
+        lines.push(`${homeTeam} - ${awayTeam}`);
+
+        if (this.isCompleted)
+            lines.push(`Final score: ${this.finalScore}`);
+
         lines.push(`Gender: ${getFullGender(this.gender)}`);
-        if (this.competition) lines.push(`Event: ${this.competition.getName()}`);
+
+        if (this.competition)
+            lines.push(`Event: ${this.competition.getName()}`);
+
         lines.push("");
 
         // Append fetcher description
         if (this.competition && this.competition.getFetcher())
-            lines.push(...this.competition.getFetcher().descriptionToAppend(this.competition,  this, html));
+            lines.push(...this.competition.getFetcher()
+                .descriptionToAppend(this.competition,  this, html));
 
         return lines.join(html ? "<br>" : "\\n");
     }
@@ -316,9 +348,11 @@ export class Match {
      */
     public getMatchTitle(): string {
         const icon = this.isCompleted ? "✅" : "🏑";
-        const competitionAbbr = this.competition === null ? "" : ` ${this.competition.getAbbr()}`;
+        const competitionAbbr = this.competition === null ? ""
+            : ` ${this.competition.getAbbr()}`;
 
-        return `${icon}${competitionAbbr} ${this.getAbbr()} | ${this.getHomeTeam()} - ${this.getAwayTeam()}`;
+        return `${icon}${competitionAbbr} ${
+            this.getAbbr()} | ${this.getHomeTeam()} - ${this.getAwayTeam()}`;
     }
 
     /**

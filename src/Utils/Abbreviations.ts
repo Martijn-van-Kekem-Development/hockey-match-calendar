@@ -23,11 +23,14 @@ export class Abbreviations {
      * @param gender The match gender
      * @param index The match index in this competition
      */
-    public static getMatchType(type: string, gender: Gender, index: number): string {
+    public static getMatchType(type: string,
+                               gender: Gender, index: number): string {
+
         if (!this.MatchTypeAbbreviations) this.getMatchTypeAbbreviations();
 
         // Look for abbreviation.
-        for (let [regex, value] of Object.entries(this.MatchTypeAbbreviations)) {
+        const entries = Object.entries(this.MatchTypeAbbreviations);
+        for (let [regex, value] of entries) {
             const matches = RegExp(regex, "i").exec(type);
             if (!matches) continue;
 
@@ -68,7 +71,8 @@ export class Abbreviations {
         if (!this.CompetitionAbbreviations) this.getCompetitionAbbreviations();
 
         // Look for abbreviation.
-        for (let [regex, value] of Object.entries(this.CompetitionAbbreviations)) {
+        const entries = Object.entries(this.CompetitionAbbreviations);
+        for (let [regex, value] of entries) {
             const matches = name.match(RegExp(regex, "i"));
             if (matches) {
                 for (let i = 1; i < matches.length; i++) {
@@ -95,13 +99,23 @@ export class Abbreviations {
         const str = type.toLowerCase();
 
         if (fetcher instanceof TMSFetcher) {
-            if (str.includes("womens")) return Gender.WOMEN;
-            if (str.includes("mens")) return Gender.MEN;
-            if (str.includes("mixed") || str.includes("coed")) return Gender.MIXED;
+            if (str.includes("womens")) 
+                return Gender.WOMEN;
+            if (str.includes("mens"))
+                return Gender.MEN;
+            if (str.includes("mixed") || str.includes("coed"))
+                return Gender.MIXED;
 
         } else if (fetcher instanceof KNHBFetcher) {
-            if (str.includes("(w)") || str.includes("dames") || str.includes("meisjes")) return Gender.WOMEN;
-            if (str.includes("(m)") || str.includes("heren") || str.includes("jongens")) return Gender.MEN;
+            if (str.includes("(w)") ||
+                str.includes("dames") ||
+                str.includes("meisjes"))
+                return Gender.WOMEN;
+
+            if (str.includes("(m)") ||
+                str.includes("heren") ||
+                str.includes("jongens"))
+                return Gender.MEN;
         }
 
         throw new Error("Couldn't fetch gender for " + type);
@@ -111,7 +125,11 @@ export class Abbreviations {
      * Get the match type abbreviations.
      */
     public static getMatchTypeAbbreviations() {
-        const data = fs.readFileSync("includes/match-type-abbreviations.json", { encoding: "utf-8" });
+        const data = fs.readFileSync(
+            "includes/match-type-abbreviations.json",
+            { encoding: "utf-8" }
+        );
+
         this.MatchTypeAbbreviations = JSON.parse(data);
     }
 
@@ -119,7 +137,11 @@ export class Abbreviations {
      * Get the competition abbreviations
      */
     public static getCompetitionAbbreviations() {
-        const data = fs.readFileSync("includes/competition-abbreviations.json", { encoding: "utf-8" });
+        const data = fs.readFileSync(
+            "includes/competition-abbreviations.json",
+            { encoding: "utf-8" }
+        );
+
         this.CompetitionAbbreviations = JSON.parse(data);
     }
 }
