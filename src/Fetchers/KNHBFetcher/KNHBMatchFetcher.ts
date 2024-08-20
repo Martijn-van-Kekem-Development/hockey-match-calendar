@@ -4,6 +4,7 @@ import { KNHBFetcher } from "./KNHBFetcher.js";
 import { DateHelper } from "../../Utils/DateHelper.js";
 import { APIHelper } from "../../Utils/APIHelper.js";
 import { Abbreviations } from "../../Utils/Abbreviations.js";
+import { KNHBClub } from "./KNHBClubFetcher.js";
 
 export class KNHBMatchFetcher {
     /**
@@ -24,8 +25,10 @@ export class KNHBMatchFetcher {
      * Get the matches in a given competition.
      * @param type The type of matches to fetch.
      * @param competition The competition to get the matches for.
+     * @param clubs The available clubs.
      */
-    public async fetch(type: "upcoming" | "official", competition: Competition) {
+    public async fetch(type: "upcoming" | "official", competition: Competition,
+                       clubs: Map<string, KNHBClub>) {
         const matches: Map<string, Match> = new Map();
         let index = 1;
         let page = 1;
@@ -34,7 +37,8 @@ export class KNHBMatchFetcher {
             const json = await this.makeRequest(type, page, competition);
 
             for (const match of json.data) {
-                const item = this.createMatch(competition, match, index++);
+                const item =
+                    this.createMatch(competition, match, index++, clubs);
                 matches.set(item.getID(), item);
             }
 
@@ -83,9 +87,10 @@ export class KNHBMatchFetcher {
      * @param competition
      * @param match
      * @param index
+     * @param clubs
      */
     public createMatch(competition: Competition, match: KNHBMatch,
-                       index: number): Match {
+                       index: number, clubs: Map<string, KNHBClub>): Match {
 
         const object = new Match();
         object.setCompetition(competition);
@@ -96,11 +101,11 @@ export class KNHBMatchFetcher {
 
         // Add teams
         const homeClub: Club = match.home_team.club_name === null ? null : {
-            id: KNHBMatchFetcher.getClubId(match.home_team.club_name),
+            id: clubs.get(match.home_team.club_name).id.toLowerCase(),
             name: match.home_team.club_name
         };
         const awayClub: Club = match.away_team.club_name === null ? null : {
-            id: KNHBMatchFetcher.getClubId(match.away_team.club_name),
+            id: clubs.get(match.away_team.club_name).id.toLowerCase(),
             name: match.away_team.club_name
         };
         object.setHomeTeam(match.home_team.id, match.home_team.name, homeClub);
@@ -126,17 +131,6 @@ export class KNHBMatchFetcher {
 
         return object;
     }
-
-    /**
-     * Get the club id by the supplied name.
-     * @param clubName The club name
-     */
-    public static getClubId(clubName: string): string {
-        return clubName
-            .toLowerCase()
-            .replaceAll(/[^a-zA-Z- ]/g, "")
-            .replaceAll(/(\s|-)+/g, "-");
-    }
 }
 
 interface KNHBMatch {
@@ -160,7 +154,7 @@ interface KNHBLocation {
 }
 
 interface KNHBTeam {
-    club_name?: string,
+    club_name: string,
     id: string,
-    name: string
+    name: string,
 }
