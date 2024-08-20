@@ -79,7 +79,16 @@ export class KNHBMatchFetcher {
             }
         }
 
-        return await data.json();
+        const result = await data.json();
+        if (type === "official" && result.data) {
+            result.data = result.data.sort(
+                (a: { datetime: string }, b: { datetime: string }) =>
+                    // Sort in ascending order by datetime.
+                    (new Date(a.datetime).getTime()) -
+                    (new Date(b.datetime).getTime()
+                ));
+        }
+        return result;
     }
 
     /**
