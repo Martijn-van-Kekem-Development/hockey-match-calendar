@@ -5,6 +5,7 @@ import { KNHBCompetitionFetcher } from "./KNHBCompetitionFetcher.js";
 import { KNHBMatchFetcher } from "./KNHBMatchFetcher.js";
 import { ICSCreator } from "../../Utils/ICSCreator.js";
 import { Gender } from "../../Objects/Gender.js";
+import { KNHBClub, KNHBClubFetcher } from "./KNHBClubFetcher.js";
 
 export class KNHBFetcher extends Fetcher {
     /**
@@ -30,6 +31,12 @@ export class KNHBFetcher extends Fetcher {
     private matchFetcher: KNHBMatchFetcher;
 
     /**
+     * The club fetcher.
+     * @private
+     */
+    private clubFetcher: KNHBClubFetcher;
+
+    /**
      * Constructor for KNHBFetcher.
      * @param id The id of this fetcher.
      * @param name The name of this fetcher.
@@ -41,6 +48,7 @@ export class KNHBFetcher extends Fetcher {
 
         this.competitionFetcher = new KNHBCompetitionFetcher(this);
         this.matchFetcher = new KNHBMatchFetcher(this);
+        this.clubFetcher = new KNHBClubFetcher(this);
     }
 
     /**
@@ -88,12 +96,21 @@ export class KNHBFetcher extends Fetcher {
      * @override
      */
     async fetchMatches(competition: Competition): Promise<Map<string, Match>> {
+        const clubs = await this.fetchClubs();
+
         const upcomingMatches =
-            await this.matchFetcher.fetch("upcoming", competition);
+            await this.matchFetcher.fetch("upcoming", competition, clubs);
         const officialMatches =
-            await this.matchFetcher.fetch("official", competition);
+            await this.matchFetcher.fetch("official", competition, clubs);
 
         return new Map([...upcomingMatches, ...officialMatches]);
+    }
+
+    /**
+     * Fetch the available clubs, mapped by their name.
+     */
+    async fetchClubs(): Promise<Map<string, KNHBClub>> {
+        return await this.clubFetcher.fetch();
     }
 
     /**

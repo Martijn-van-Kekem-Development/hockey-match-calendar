@@ -69,8 +69,9 @@ export class TMSMatchFetcher {
         else object.setID(id);
 
         // Add match index
-        const index = row.querySelector("td:nth-child(1)");
-        object.setIndex(Number(index.textContent.trim()));
+        const indexEl = row.querySelector("td:nth-child(1)");
+        const indexVal = indexEl.textContent.replaceAll(/[^0-9]/g, "");
+        object.setIndex(Number(indexVal));
 
         // Add gender
         const gender =
