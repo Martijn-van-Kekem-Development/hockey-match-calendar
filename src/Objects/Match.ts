@@ -19,6 +19,12 @@ export class Match {
     private matchIndex: number = 0;
 
     /**
+     * Whether to include the index in the match title.
+     * @private
+     */
+    private includeIndex: boolean = true;
+
+    /**
      * The final score of this match if it's completed.
      * @private
      */
@@ -136,6 +142,14 @@ export class Match {
      */
     public setIndex(index: number) {
         this.matchIndex = index;
+    }
+
+    /**
+     * Set whether to include the index for this match.
+     * @param include
+     */
+    public setIncludeIndex(include: boolean) {
+        this.includeIndex = include;
     }
 
     /**
@@ -289,7 +303,7 @@ export class Match {
      */
     public getAbbr(): string {
         return Abbreviations.getMatchType(this.type, this.getGender(),
-            this.matchIndex);
+            this.includeIndex ? this.matchIndex : null);
     }
 
     /**

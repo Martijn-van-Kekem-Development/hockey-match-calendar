@@ -105,6 +105,7 @@ export class KNHBMatchFetcher {
         object.setCompetition(competition);
         object.setID(match.id);
         object.setIndex(index);
+        object.setIncludeIndex(false);
         object.setMatchDate(DateHelper.KNHBtoUTC(match.datetime));
         object.setVenue(match.location.description);
 
