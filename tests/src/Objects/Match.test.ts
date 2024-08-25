@@ -68,7 +68,7 @@ describe("Match tests", () => {
     test("getICSAttributes()", () => {
         const match = new Match();
         const date = moment("2024-08-18T19:30:45.767Z");
-        match.setMatchDate(date);
+        match.setMatchDate(date, true);
         match.setHomeTeam("home", "Home");
         match.setAwayTeam("away", "Away");
         match.setGender(Gender.MEN);

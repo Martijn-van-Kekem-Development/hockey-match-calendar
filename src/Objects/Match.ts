@@ -55,6 +55,12 @@ export class Match {
     private date: Moment;
 
     /**
+     * Whether the time is known for this match.
+     * @private
+     */
+    private timeKnown: boolean = true;
+
+    /**
      * The match location.
      * @private
      */
@@ -115,9 +121,11 @@ export class Match {
     /**
      * Set the date for this match.
      * @param date The date.
+     * @param timeKnown Whether the time is known for this match.
      */
-    public setMatchDate(date: Moment) {
+    public setMatchDate(date: Moment, timeKnown: boolean) {
         this.date = date;
+        this.timeKnown = timeKnown;
     }
 
     /**
@@ -268,20 +276,37 @@ export class Match {
      * Get the ICS attributes.
      */
     public getICSAttributes(): Record<string, string> {
-        const endDate =
-            this.getMatchDate().clone().add(2, "hours");
-
         return {
             UID: this.getMatchID(),
-            DTSTAMP: DateHelper.toICS(this.getMatchDate()),
-            DTSTART: DateHelper.toICS(this.getMatchDate()),
-            DTEND: DateHelper.toICS(endDate),
+            ...this.getDateICSAttributes(),
             SUMMARY: this.getMatchTitle(),
             LOCATION: this.getLocation(),
             TRANSP: "TRANSPARENT",
             DESCRIPTION: this.getMatchDescription(false),
             "X-ALT-DESC;FMTTYPE=text/html": this.getMatchDescription(true)
         };
+    }
+
+    /**
+     * Get the ICS attributes for the match date.
+     * @private
+     */
+    private getDateICSAttributes(): Record<string, string> {
+        if (this.timeKnown) {
+            const endDate =
+                this.getMatchDate().clone().add(2, "hours");
+
+            return {
+                DTSTAMP: DateHelper.toICS(this.getMatchDate()),
+                DTSTART: DateHelper.toICS(this.getMatchDate()),
+                DTEND: DateHelper.toICS(endDate),
+            };
+        } else {
+            return {
+                "DTSTART;VALUE=DATE": DateHelper.toICS(this.getMatchDate(), false),
+                "DTSTAMP;VALUE=DATE": DateHelper.toICS(this.getMatchDate(), false)
+            };
+        }
     }
 
     /**

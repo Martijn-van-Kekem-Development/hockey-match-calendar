@@ -84,7 +84,7 @@ export class TMSMatchFetcher {
         const timeZone = dateString.getAttribute("data-timezone");
         const utcDate =
             DateHelper.TMStoUTC(dateString.textContent, timeZone);
-        object.setMatchDate(utcDate);
+        object.setMatchDate(utcDate, true);
 
         // Add completed state
         const status = row.querySelector("td:nth-child(5)");
