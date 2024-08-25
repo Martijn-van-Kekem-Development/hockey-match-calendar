@@ -106,8 +106,16 @@ export class KNHBMatchFetcher {
         object.setID(match.id);
         object.setIndex(index);
         object.setIncludeIndex(false);
-        object.setMatchDate(DateHelper.KNHBtoUTC(match.datetime));
         object.setVenue(match.location.description);
+
+        // Add date
+        const utcDate = DateHelper.KNHBtoUTC(match.datetime);
+        const localDate = DateHelper.KNHBtoLocal(match.datetime);
+        if (localDate.hours() === 0 && localDate.minutes() === 0)
+            // Time unknown.
+            object.setMatchDate(utcDate, false);
+        else
+            object.setMatchDate(utcDate, true);
 
         // Add teams
         const homeClub: Club = match.home_team.club_name === null ? null : {
