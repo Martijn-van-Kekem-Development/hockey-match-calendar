@@ -162,6 +162,6 @@ describe("Match tests", () => {
                 match.setIncludeIndex(false);
                 expect(match.getMatchTitle()).toBe("🏑 RTC M | Home - Away");
             });
-        })
+        });
     });
 });
