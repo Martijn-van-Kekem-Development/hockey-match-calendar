@@ -142,5 +142,26 @@ describe("Match tests", () => {
                 expect(match.getMatchTitle().startsWith("🏑")).toBeTruthy();
             });
         });
+
+        describe("Check index occurrence", () => {
+            const competition = new Competition(null, 0);
+            competition.setName("Random Test Competition");
+            const match = new Match();
+            match.setHomeTeam("home", "Home");
+            match.setAwayTeam("away", "Away");
+            match.setCompetition(competition);
+            match.setGender(Gender.MEN);
+            match.setIndex(12);
+
+            test("With index", () => {
+                match.setIncludeIndex(true);
+                expect(match.getMatchTitle()).toBe("🏑 RTC M12 | Home - Away");
+            });
+
+            test("Without index", () => {
+                match.setIncludeIndex(false);
+                expect(match.getMatchTitle()).toBe("🏑 RTC M | Home - Away");
+            });
+        })
     });
 });
