@@ -1,6 +1,7 @@
 import { Competition } from "../../Objects/Competition.js";
 import { HTMLElement, parse } from "node-html-parser";
 import { TMSFetcher } from "./TMSFetcher.js";
+import { APIHelper } from "../../Utils/APIHelper";
 
 export class TMSCompetitionFetcher {
     /**
@@ -31,10 +32,12 @@ export class TMSCompetitionFetcher {
         while (true) {
             // Get data from TMS.
             const baseURL = this.fetcher.getBaseURL();
-            const data = await fetch(
+            const data = await APIHelper.fetch(
                 type === "in-progress"
                     ? `${baseURL}/competitions?page=${page}`
-                    : `${baseURL}/competitions?view=${type}&page=${page}`);
+                    : `${baseURL}/competitions?view=${type}&page=${page}`,
+                this.fetcher);
+
             const html = parse(await data.text());
             const rows = html.querySelectorAll(
                 "#admin_list_of_competitions table tbody tr");

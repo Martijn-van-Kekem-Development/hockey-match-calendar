@@ -1,4 +1,5 @@
 import { KNHBFetcher } from "./KNHBFetcher.js";
+import { APIHelper } from "../../Utils/APIHelper";
 
 export class KNHBClubFetcher {
     /**
@@ -20,11 +21,13 @@ export class KNHBClubFetcher {
      */
     public async fetch() {
         const clubs: Map<string, KNHBClub> = new Map();
-        const data = await fetch(this.fetcher.getBaseURL() + "/clubs");
-        const json = await data.json();
+        const data = await APIHelper.fetch(
+            this.fetcher.getBaseURL() + "/clubs", this.fetcher);
 
-        if (json.status !== 200)
+        if (data.status !== 200)
             throw new Error("Failed to fetch KNHB clubs.");
+
+        const json = await data.json();
 
         for (const club of json.data) {
             clubs.set(club.name, club);
