@@ -54,30 +54,14 @@ export class KNHBMatchFetcher {
      * @param type The type of matches to fetch.
      * @param page The page number to fetch.
      * @param competition The competition to fetch the matches for.
-     * @param tryCount The amount of tries that have past.
      * @private
      */
     private async makeRequest(type: "upcoming" | "official", page: number,
-                              competition: Competition, tryCount: number = 0) {
+                              competition: Competition) {
 
-        const data = await fetch(this.fetcher.getBaseURL() +
-            `/competitions/${competition.getID()}/matches/${type}?page=${page}`);
-
-        if (data.status !== 200) {
-            // Request failed
-            if (tryCount < 3) {
-                const delay = data.status === 429 ? 30 : 100;
-                this.fetcher.log("warn", `Request failed (${data.status}, URL: ${
-                    data.url}), retrying in ${delay} second(s).`);
-
-                await APIHelper.delay(delay * 1000);
-                return await this.makeRequest(type, page, competition, tryCount + 1);
-            } else {
-                // Give up
-                this.fetcher.log("error", "Request failed after 3 tries. Aborting.");
-                throw new Error();
-            }
-        }
+        const data = await APIHelper.fetch(this.fetcher.getBaseURL() +
+            `/competitions/${competition.getID()}/matches/${type}?page=${page}`,
+            this.fetcher);
 
         const result = await data.json();
         if (type === "official" && result.data) {

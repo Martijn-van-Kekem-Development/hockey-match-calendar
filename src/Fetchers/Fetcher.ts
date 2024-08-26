@@ -84,8 +84,8 @@ export abstract class Fetcher {
      * @param message The message itself.
      * @protected
      */
-    public log(type: "error" | "info" | "warn", message: string): void {
-        console[type](`[Fetcher - ${this.getID()}] ${message}`);
+    public log(type: "error" | "info" | "warn", ...message: string[]): void {
+        console[type](`[Fetcher - ${this.getID()}]`, ...message);
     }
 
     /**
