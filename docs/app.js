@@ -80,6 +80,9 @@ async function addOriginButtons() {
         container.append(listEl);
     }
 
+    // Remove loading spinner
+    document.getElementById("container_origin").classList.remove("loading");
+    
     window.addEventListener("hashchange",
         () => selectOrigin(location.hash.substring(1), true));
 
