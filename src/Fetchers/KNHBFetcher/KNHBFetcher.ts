@@ -1,6 +1,6 @@
 import { Competition } from "../../Objects/Competition.js";
 import { Match } from "../../Objects/Match.js";
-import { Fetcher } from "../Fetcher.js";
+import { Fetcher, FetcherOptions } from "../Fetcher.js";
 import { KNHBCompetitionFetcher } from "./KNHBCompetitionFetcher.js";
 import { KNHBMatchFetcher } from "./KNHBMatchFetcher.js";
 import { ICSCreator } from "../../Utils/ICSCreator.js";
@@ -37,14 +37,12 @@ export class KNHBFetcher extends Fetcher {
     private clubFetcher: KNHBClubFetcher;
 
     /**
-     * Constructor for KNHBFetcher.
-     * @param id The id of this fetcher.
-     * @param name The name of this fetcher.
-     * @param index The index of this fetcher.
-     * @param baseURL The base URL of the TMS system.
+     * Constructor for KNHBFetcher
+     * @param baseURL The base URL.
+     * @param options The options for this fetcher.
      */
-    constructor(id: string, name: string, index: number, baseURL: string) {
-        super(id, name, index, baseURL);
+    constructor(baseURL: string, options: FetcherOptions) {
+        super(baseURL, options);
 
         this.competitionFetcher = new KNHBCompetitionFetcher(this);
         this.matchFetcher = new KNHBMatchFetcher(this);
