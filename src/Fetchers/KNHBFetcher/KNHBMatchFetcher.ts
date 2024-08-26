@@ -71,7 +71,7 @@ export class KNHBMatchFetcher {
                     data.url}), retrying in ${delay} second(s).`);
 
                 await APIHelper.delay(delay * 1000);
-                return await this.makeRequest(type, page, competition, tryCount++);
+                return await this.makeRequest(type, page, competition, tryCount + 1);
             } else {
                 // Give up
                 this.fetcher.log("error", "Request failed after 3 tries. Aborting.");
