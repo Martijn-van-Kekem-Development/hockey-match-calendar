@@ -12,6 +12,10 @@
     }
 }
 
+html {
+    overflow-y: scroll;
+}
+
 html,body {
     margin: 0;
     padding: 0;
@@ -126,6 +130,7 @@ h2 {
 .origin-buttons {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     margin: 0 0 0.5rem 0;
     padding: 0;
     gap: 0.5rem;
@@ -143,6 +148,20 @@ h2 {
     color: inherit;
     display: block;
     font-size: 0.85rem;
+}
+
+.origin-container.select .origin-buttons {
+    flex-direction: column;
+}
+
+.origin-container.select .origin-options,
+.origin-container.select ~ table,
+.origin-container.select .origin-buttons li a .abbr {
+    display: none;
+}
+
+.origin-container:not(.select) .origin-buttons li a .full {
+    display: none;
 }
 
 .origin-buttons li.loading {

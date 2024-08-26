@@ -13,7 +13,12 @@ describe("APIHelper tests", () => {
 
     describe("Fetch tests", () => {
         const fetcher =
-            new TMSFetcher("test", "Test Fetch", 0, null);
+            new TMSFetcher(null, {
+                id: "test",
+                abbreviation: "TSTF",
+                name: "Test Fetcher",
+                index: 0
+            });
 
         test("Test fatal error on invalid host.", async () => {
             const func = async () =>
