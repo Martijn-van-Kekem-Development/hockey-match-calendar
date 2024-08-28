@@ -4,7 +4,6 @@ import { KNHBFetcher } from "./KNHBFetcher.js";
 import { DateHelper } from "../../Utils/DateHelper.js";
 import { APIHelper } from "../../Utils/APIHelper.js";
 import { Abbreviations } from "../../Utils/Abbreviations.js";
-import { KNHBClub } from "./KNHBClubFetcher.js";
 
 export class KNHBMatchFetcher {
     /**
@@ -25,10 +24,8 @@ export class KNHBMatchFetcher {
      * Get the matches in a given competition.
      * @param type The type of matches to fetch.
      * @param competition The competition to get the matches for.
-     * @param clubs The available clubs.
      */
-    public async fetch(type: "upcoming" | "official", competition: Competition,
-                       clubs: Map<string, KNHBClub>) {
+    public async fetch(type: "upcoming" | "official", competition: Competition) {
         const matches: Map<string, Match> = new Map();
         let index = 1;
         let page = 1;
@@ -38,7 +35,7 @@ export class KNHBMatchFetcher {
 
             for (const match of json.data) {
                 const item =
-                    this.createMatch(competition, match, index++, clubs);
+                    this.createMatch(competition, match, index++);
                 matches.set(item.getID(), item);
             }
 
@@ -63,7 +60,16 @@ export class KNHBMatchFetcher {
             `/competitions/${competition.getID()}/matches/${type}?page=${page}`,
             this.fetcher);
 
-        const result = await data.json();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let result: any;
+        try {
+            result = await data.json();
+        } catch {
+            this.fetcher.log("error", "Failed to parse JSON.");
+            this.fetcher.log("error", await data.text());
+            throw new Error();
+        }
+
         if (type === "official" && result.data) {
             result.data = result.data.sort(
                 (a: { datetime: string }, b: { datetime: string }) =>
@@ -80,10 +86,9 @@ export class KNHBMatchFetcher {
      * @param competition
      * @param match
      * @param index
-     * @param clubs
      */
     public createMatch(competition: Competition, match: KNHBMatch,
-                       index: number, clubs: Map<string, KNHBClub>): Match {
+                       index: number): Match {
 
         const object = new Match();
         object.setCompetition(competition);
@@ -102,6 +107,7 @@ export class KNHBMatchFetcher {
             object.setMatchDate(utcDate, true);
 
         // Add teams
+        const clubs = this.fetcher.getClubs();
         const homeClub: Club = match.home_team.club_name === null ? null : {
             id: clubs.get(match.home_team.club_name).id.toLowerCase(),
             name: match.home_team.club_name

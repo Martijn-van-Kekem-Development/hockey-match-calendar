@@ -37,6 +37,12 @@ export class KNHBFetcher extends Fetcher {
     private clubFetcher: KNHBClubFetcher;
 
     /**
+     * The available clubs.
+     * @private
+     */
+    private clubs: Map<string, KNHBClub>;
+
+    /**
      * Constructor for KNHBFetcher
      * @param baseURL The base URL.
      * @param options The options for this fetcher.
@@ -53,6 +59,8 @@ export class KNHBFetcher extends Fetcher {
      * @override
      */
     protected async fetch(): Promise<Competition[]> {
+        this.clubs = await this.fetchClubs();
+
         this.log("info", "Fetching competitions.");
         const competitions = await this.fetchCompetitions();
         const promises = [];
@@ -94,12 +102,10 @@ export class KNHBFetcher extends Fetcher {
      * @override
      */
     async fetchMatches(competition: Competition): Promise<Map<string, Match>> {
-        const clubs = await this.fetchClubs();
-
         const upcomingMatches =
-            await this.matchFetcher.fetch("upcoming", competition, clubs);
+            await this.matchFetcher.fetch("upcoming", competition);
         const officialMatches =
-            await this.matchFetcher.fetch("official", competition, clubs);
+            await this.matchFetcher.fetch("official", competition);
 
         return new Map([...upcomingMatches, ...officialMatches]);
     }
@@ -137,5 +143,12 @@ export class KNHBFetcher extends Fetcher {
         }
 
         return lines;
+    }
+
+    /**
+     * Get the fetched clubs.
+     */
+    public getClubs() {
+        return this.clubs;
     }
 }
