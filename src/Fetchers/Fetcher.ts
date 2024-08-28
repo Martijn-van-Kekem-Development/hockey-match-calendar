@@ -75,7 +75,8 @@ export abstract class Fetcher {
      * @param message The message itself.
      * @protected
      */
-    public log(type: "error" | "info" | "warn", ...message: string[]): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public log(type: "error" | "info" | "warn", ...message: any[]): void {
         console[type](`[Fetcher - ${this.getID()}]`, ...message);
     }
 

@@ -24,14 +24,16 @@ export class KNHBClubFetcher {
         const data = await APIHelper.fetch(
             this.fetcher.getBaseURL() + "/clubs", this.fetcher);
 
-        if (data.status !== 200)
-            throw new Error("Failed to fetch KNHB clubs.");
-
+        if (data.status !== 200) throw new Error("Failed to fetch KNHB clubs.");
         const json = await data.json();
+        if (json.status !== 200) throw new Error("Failed to fetch KNHB clubs.");
 
         for (const club of json.data) {
             clubs.set(club.name, club);
         }
+
+        this.fetcher.log("info", "Fetched clubs:");
+        this.fetcher.log("info", Object.fromEntries(clubs.entries()));
 
         return clubs;
     }
