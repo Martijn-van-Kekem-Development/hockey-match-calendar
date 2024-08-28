@@ -28,24 +28,33 @@ export class APIHelper {
             throw new Error();
         }
 
-        if (data.status !== 200) {
-            // Request failed
-            if (tryCount < 3) {
-                const delay = data.status === 429 ? 30 : 0;
-                fetcher.log("warn", `Request failed (${data.status}, URL: ${
-                    data.url}), retrying in ${delay} second(s).`);
+        if (data.status === 200) return data;
 
-                await APIHelper.delay(delay * 1000);
-                return await APIHelper.fetch(url, fetcher, options, tryCount + 1);
-            } else {
-                // Give up
-                fetcher.log("error", "Code", `${data.status}`);
-                fetcher.log("error", "Body", await data.text());
-                fetcher.log("error", "Request failed after 3 tries. Aborting.");
-                throw new Error();
+        // Request failed
+        if (data.status === 429) {
+            // Hit rate limit
+            const resetTimestamp = data.headers.get("x-ratelimit-reset");
+            let delay = 1;
+            if (resetTimestamp) {
+                // Calculate next attempt delay based on returned header.
+                const now = (new Date()).getTime();
+                const diff = Math.ceil(Number(resetTimestamp) - (now / 1000));
+                if (diff > 0) delay = diff;
             }
-        }
 
-        return data;
+            fetcher.log("warn", `Request failed (${data.status}, URL: ${
+                data.url}), retrying in ${delay} second(s).`);
+
+            await APIHelper.delay(delay * 1000);
+            return await APIHelper.fetch(url, fetcher, options, tryCount + 1);
+        } else if (tryCount < 3) {
+            return await APIHelper.fetch(url, fetcher, options, tryCount + 1);
+        } else {
+            // Give up
+            fetcher.log("error", "Code", `${data.status}`);
+            fetcher.log("error", "Body", await data.text());
+            fetcher.log("error", "Request failed after 3 tries. Aborting.");
+            throw new Error();
+        }
     }
 }

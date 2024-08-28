@@ -25,17 +25,25 @@ export class KNHBClubFetcher {
             this.fetcher.getBaseURL() + "/clubs", this.fetcher);
 
         if (data.status !== 200) throw new Error("Failed to fetch KNHB clubs.");
+
         const json = await data.json();
-        if (json.status !== 200) throw new Error("Failed to fetch KNHB clubs.");
 
         for (const club of json.data) {
-            clubs.set(club.name, club);
+            clubs.set(KNHBClubFetcher.simplifyString(club.name), club);
         }
 
-        this.fetcher.log("info", "Fetched clubs:");
-        this.fetcher.log("info", Object.fromEntries(clubs.entries()));
-
         return clubs;
+    }
+
+    /**
+     * Simplify the input string, used to match club names.
+     * @param input The club name.
+     * @protected
+     */
+    public static simplifyString(input: string) {
+        return input
+            .toLowerCase()
+            .replaceAll(/[^a-z]/g, "");
     }
 }
 

@@ -63,7 +63,6 @@ export class KNHBFetcher extends Fetcher {
 
         this.log("info", "Fetching competitions.");
         const competitions = await this.fetchCompetitions();
-        const promises = [];
 
         this.log("info", `Found ${competitions.size} competitions.`);
         this.log("info", "Fetching matches and creating competition files.");
@@ -76,7 +75,6 @@ export class KNHBFetcher extends Fetcher {
         }
 
         // Wait for all matches to fetch
-        await Promise.all(promises);
         const competitionsArray = Array.from(competitions.values());
 
         // Create total calendar files.
