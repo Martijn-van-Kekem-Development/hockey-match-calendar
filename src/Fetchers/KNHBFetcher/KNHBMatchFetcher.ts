@@ -4,6 +4,7 @@ import { KNHBFetcher } from "./KNHBFetcher.js";
 import { DateHelper } from "../../Utils/DateHelper.js";
 import { APIHelper } from "../../Utils/APIHelper.js";
 import { Abbreviations } from "../../Utils/Abbreviations.js";
+import { KNHBClubFetcher } from "./KNHBClubFetcher";
 
 export class KNHBMatchFetcher {
     /**
@@ -107,17 +108,7 @@ export class KNHBMatchFetcher {
             object.setMatchDate(utcDate, true);
 
         // Add teams
-        const clubs = this.fetcher.getClubs();
-        const homeClub: Club = match.home_team.club_name === null ? null : {
-            id: clubs.get(match.home_team.club_name).id.toLowerCase(),
-            name: match.home_team.club_name
-        };
-        const awayClub: Club = match.away_team.club_name === null ? null : {
-            id: clubs.get(match.away_team.club_name).id.toLowerCase(),
-            name: match.away_team.club_name
-        };
-        object.setHomeTeam(match.home_team.id, match.home_team.name, homeClub);
-        object.setAwayTeam(match.away_team.id, match.away_team.name, awayClub);
+        this.setTeams(match, object);
 
         // Add gender
         const gender = Abbreviations.getGender(competition.getName(), this.fetcher);
@@ -138,6 +129,34 @@ export class KNHBMatchFetcher {
         }
 
         return object;
+    }
+
+    /**
+     * Set the club for this match.
+     * @param matchToParse The match to parse
+     * @param match The match object.
+     * @protected
+     */
+    protected setTeams(matchToParse: KNHBMatch, match: Match) {
+        const clubs = this.fetcher.getClubs();
+        const homeKNHBClub = clubs.get(
+            KNHBClubFetcher.simplifyString(matchToParse.home_team.club_name));
+        const awayKNHBClub = clubs.get(
+            KNHBClubFetcher.simplifyString(matchToParse.away_team.club_name));
+
+        const homeClub: Club = homeKNHBClub ? {
+            id: homeKNHBClub.id.toLowerCase(),
+            name: matchToParse.home_team.club_name
+        } : null;
+        const awayClub: Club = awayKNHBClub ? {
+            id: awayKNHBClub.id.toLowerCase(),
+            name: matchToParse.away_team.club_name
+        } : null;
+
+        match.setHomeTeam(matchToParse.home_team.id,
+            matchToParse.home_team.name, homeClub);
+        match.setAwayTeam(matchToParse.away_team.id,
+            matchToParse.away_team.name, awayClub);
     }
 }
 
