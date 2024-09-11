@@ -1,4 +1,5 @@
 import { KNHBFetcher } from "./KNHBFetcher.js";
+import { APIHelper } from "../../Utils/APIHelper";
 
 export class KNHBClubFetcher {
     /**
@@ -20,17 +21,29 @@ export class KNHBClubFetcher {
      */
     public async fetch() {
         const clubs: Map<string, KNHBClub> = new Map();
-        const data = await fetch(this.fetcher.getBaseURL() + "/clubs");
+        const data = await APIHelper.fetch(
+            this.fetcher.getBaseURL() + "/clubs", this.fetcher);
+
+        if (data.status !== 200) throw new Error("Failed to fetch KNHB clubs.");
+
         const json = await data.json();
 
-        if (json.status !== 200)
-            throw new Error("Failed to fetch KNHB clubs.");
-
         for (const club of json.data) {
-            clubs.set(club.name, club);
+            clubs.set(KNHBClubFetcher.simplifyString(club.name), club);
         }
 
         return clubs;
+    }
+
+    /**
+     * Simplify the input string, used to match club names.
+     * @param input The club name.
+     * @protected
+     */
+    public static simplifyString(input: string) {
+        return input
+            .toLowerCase()
+            .replaceAll(/[^a-z]/g, "");
     }
 }
 

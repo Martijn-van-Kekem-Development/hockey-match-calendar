@@ -57,6 +57,20 @@ function createTableRow(data) {
 }
 
 /**
+ * When an origin is clicked.
+ * @param e
+ * @param origin
+ */
+function onOriginClick(e, origin) {
+    // Clear hash if button was already active
+    if (origin.id === window.location.hash.substring(1)) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.hash = "";
+    }
+}
+
+/**
  * Add the origin buttons to the DOM.
  */
 async function addOriginButtons() {
@@ -72,13 +86,25 @@ async function addOriginButtons() {
         const listEl = document.createElement("li");
         const linkEl = document.createElement("a");
 
+        const fullNameEl = document.createElement("span");
+        fullNameEl.classList.add("full");
+        const abbreviationEl = document.createElement("span");
+        abbreviationEl.classList.add("abbr");
+
+        fullNameEl.textContent = `${origin.name} (${origin.abbreviation})`;
+        abbreviationEl.textContent = origin.abbreviation;
+
         listEl.setAttribute("data-id", origin.id);
-        linkEl.textContent = origin.name;
+        linkEl.append(fullNameEl, abbreviationEl);
         linkEl.href = `#${origin.id}`;
+        linkEl.addEventListener("click", e => onOriginClick(e, origin))
 
         listEl.append(linkEl);
         container.append(listEl);
     }
+
+    // Remove loading spinner
+    document.getElementById("container_origin").classList.remove("loading");
 
     window.addEventListener("hashchange",
         () => selectOrigin(location.hash.substring(1), true));
@@ -88,7 +114,7 @@ async function addOriginButtons() {
         await selectOrigin(location.hash.substring(1));
     else
         // Set default fetcher.
-        location.hash = `#${originData[0].id}`;
+        await selectOrigin(null);
 }
 
 /**
@@ -106,13 +132,20 @@ function getOriginButton(origin) {
  * @param userClick Whether this was a user click action.
  */
 async function selectOrigin(origin, userClick) {
+    origin = origin ?? "";
     const activeButton = document.querySelector("#container_originButtons li.selected");
+
     const newOriginButton = getOriginButton(origin);
     if (!newOriginButton) {
         // New origin doesn't exist, so reset.
-        window.location.hash = `#${activeButton.getAttribute("data-id")}`;
+        window.location.hash = ``;
+        if (activeButton) activeButton.classList.remove("selected");
+        document.getElementById("container_origin").classList.add("select");
         return;
     }
+
+    // Remove full-screen select.
+    document.getElementById("container_origin").classList.remove("select");
 
     if (activeButton) activeButton.classList.remove("selected");
     newOriginButton.classList.add("selected", "loading");
@@ -137,7 +170,8 @@ async function selectOrigin(origin, userClick) {
     if (userClick) {
         gtag('event', 'origin_select', {
             origin_id: origin,
-            origin_name: fetchers[origin].name
+            origin_full_name: fetchers[origin].name,
+            origin_name: fetchers[origin].abbreviation
         });
     }
 
@@ -223,17 +257,9 @@ function prepareClubSelector() {
 }
 
 /**
- * Initialize the Google Analytics.
- */
-function initGA() {
-
-}
-
-/**
  * When the window has loaded.
  */
 window.addEventListener("DOMContentLoaded", async () => {
     await addOriginButtons();
     prepareClubSelector();
-    initGA();
 })

@@ -44,8 +44,14 @@ describe("Abbreviations tests", () => {
     });
 
     test("getGender", () => {
-        const fetcher1 = new KNHBFetcher("1", "2", 3, "");
-        const fetcher2 = new TMSFetcher("1", "2", 3, "");
+        const options = {
+            id: "test",
+            abbreviation: "TSTF",
+            name: "Test Fetcher",
+            index: 0
+        };
+        const fetcher1 = new KNHBFetcher(null, options);
+        const fetcher2 = new TMSFetcher(null, options);
         const mensTest = {
             knhb: ["jongens", "heren", "(m)"],
             tms: ["mens"]

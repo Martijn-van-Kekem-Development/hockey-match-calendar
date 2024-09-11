@@ -4,6 +4,7 @@ import { Competition } from "../../Objects/Competition.js";
 import { Abbreviations } from "../../Utils/Abbreviations.js";
 import { DateHelper } from "../../Utils/DateHelper.js";
 import { TMSFetcher } from "./TMSFetcher.js";
+import { APIHelper } from "../../Utils/APIHelper";
 
 export class TMSMatchFetcher {
     /**
@@ -29,8 +30,9 @@ export class TMSMatchFetcher {
 
         // Get data from TMS.
         const data =
-            await fetch(`${this.fetcher.getBaseURL()}/competitions/${
-                competition.getID()}/matches`);
+            await APIHelper.fetch(`${this.fetcher.getBaseURL()}/competitions/${
+                competition.getID()}/matches`,
+                this.fetcher);
         const html = parse(await data.text());
         const rows = html.querySelectorAll(".tab-content table tbody tr");
 
@@ -84,7 +86,7 @@ export class TMSMatchFetcher {
         const timeZone = dateString.getAttribute("data-timezone");
         const utcDate =
             DateHelper.TMStoUTC(dateString.textContent, timeZone);
-        object.setMatchDate(utcDate);
+        object.setMatchDate(utcDate, true);
 
         // Add completed state
         const status = row.querySelector("td:nth-child(5)");

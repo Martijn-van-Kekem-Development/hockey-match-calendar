@@ -17,7 +17,7 @@ export class ICSCreator {
 
         const matches = competitions.map(e => e.getMatches()).flat();
         const path = "all-matches";
-        const title = `All ${fetcher.getName()} matches`;
+        const title = `All ${fetcher.getAbbr()} matches`;
 
         const meta: Metadata = {
             type: "total",
@@ -47,7 +47,7 @@ export class ICSCreator {
         matches = matches.filter(m => m.getGender() === gender);
 
         const path = `${this.genderToString(gender, true)}-matches`;
-        const title = `All ${fetcher.getName()} ${this.genderToString(
+        const title = `All ${fetcher.getAbbr()} ${this.genderToString(
             gender, false)} matches`;
 
         const meta: Metadata = {

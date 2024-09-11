@@ -1,4 +1,4 @@
-import { Fetcher } from "../Fetcher.js";
+import { Fetcher, FetcherOptions } from "../Fetcher.js";
 import { Competition } from "../../Objects/Competition.js";
 import { Match } from "../../Objects/Match.js";
 import { TMSCompetitionFetcher } from "./TMSCompetitionFetcher.js";
@@ -60,14 +60,12 @@ export class TMSFetcher extends Fetcher {
     private matchFetcher: TMSMatchFetcher;
 
     /**
-     * Constructor for TMSFetcher.
-     * @param id The id of this fetcher.
-     * @param name The name of this fetcher.
-     * @param index The index of this fetcher.
-     * @param baseURL The base URL of the TMS system.
+     * Constructor for TMSFetcher
+     * @param baseURL The base URL.
+     * @param options The options for this fetcher.
      */
-    constructor(id: string, name: string, index: number, baseURL: string) {
-        super(id, name, index, baseURL);
+    constructor(baseURL: string, options: FetcherOptions) {
+        super(baseURL, options);
 
         this.competitionFetcher = new TMSCompetitionFetcher(this);
         this.matchFetcher = new TMSMatchFetcher(this);

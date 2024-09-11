@@ -21,12 +21,15 @@ export class Abbreviations {
      * Get the match type by the match type.
      * @param type The match type
      * @param gender The match gender
-     * @param index The match index in this competition
+     * @param index The match index in this competition, or null if the index
+     *              should be hidden.
      */
     public static getMatchType(type: string,
-                               gender: Gender, index: number): string {
+                               gender: Gender,
+                               index: number | null): string {
 
         if (!this.MatchTypeAbbreviations) this.getMatchTypeAbbreviations();
+        const indexStr = index === null ? "" : this.padStart(index);
 
         // Look for abbreviation.
         const entries = Object.entries(this.MatchTypeAbbreviations);
@@ -43,11 +46,11 @@ export class Abbreviations {
             }
 
             // Replace gender and index values.
-            return `${value} ${gender.toString()}${this.padStart(index)}`;
+            return `${value} ${gender.toString()}${indexStr}`;
         }
 
         // No match found
-        return `${gender}${this.padStart(index)}`;
+        return `${gender}${indexStr}`;
     }
 
     /**

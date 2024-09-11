@@ -13,31 +13,15 @@ export abstract class Fetcher {
      * The id of this fetcher.
      * @protected
      */
-    protected id: string;
+    protected options: FetcherOptions;
 
     /**
-     * The name of this fetcher.
-     * @protected
-     */
-    protected name: string;
-
-    /**
-     * The index of this fetcher.
-     * @protected
-     */
-    protected index: number = 0;
-
-    /**
-     * The base URL for this fetcher.
-     * @param id The id of this fetcher.
-     * @param name The name of this fetcher.
-     * @param index The index of this fetcher.
+     * Constructor for Fetcher
      * @param baseURL The base URL.
+     * @param options The options for this fetcher.
      */
-    protected constructor(id: string, name: string, index: number, baseURL: string) {
-        this.id = id;
-        this.name = name;
-        this.index = index;
+    protected constructor(baseURL: string, options: FetcherOptions) {
+        this.options = options;
         this.baseURL = baseURL;
     }
 
@@ -49,24 +33,31 @@ export abstract class Fetcher {
     }
 
     /**
-     * Get the name of this fetcher.
+     * Get the abbreviation of this fetcher.
      */
-    public getName(): string {
-        return this.name;
+    public getAbbr(): string {
+        return this.options.abbreviation;
+    }
+
+    /**
+     * Get the options of this fetcher.
+     */
+    public getOptions(): FetcherOptions {
+        return this.options;
     }
 
     /**
      * Get the index of this fetcher.
      */
     public getIndex(): number {
-        return this.index;
+        return this.options.index;
     }
 
     /**
      * Get the id of this fetcher.
      */
     public getID(): string {
-        return this.id;
+        return this.options.id;
     }
 
     /**
@@ -84,8 +75,9 @@ export abstract class Fetcher {
      * @param message The message itself.
      * @protected
      */
-    public log(type: "error" | "info" | "warn", message: string): void {
-        console[type](`[Fetcher - ${this.getID()}] ${message}`);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public log(type: "error" | "info" | "warn", ...message: any[]): void {
+        console[type](`[Fetcher - ${this.getID()}]`, ...message);
     }
 
     /**
@@ -114,4 +106,11 @@ export abstract class Fetcher {
      */
     public abstract descriptionToAppend(competition: Competition, match: Match,
                                         html: boolean): string[];
+}
+
+export interface FetcherOptions {
+    id: string,
+    abbreviation: string,
+    index: number,
+    name: string
 }

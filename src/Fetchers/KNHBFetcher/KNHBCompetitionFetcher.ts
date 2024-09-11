@@ -1,5 +1,6 @@
 import { KNHBFetcher } from "./KNHBFetcher.js";
 import { Competition } from "../../Objects/Competition.js";
+import { APIHelper } from "../../Utils/APIHelper";
 
 export class KNHBCompetitionFetcher {
     /**
@@ -21,12 +22,14 @@ export class KNHBCompetitionFetcher {
      */
     public async fetch() {
         const competitions: Map<string, Competition> = new Map();
-        const data = await fetch(this.fetcher.getBaseURL() + "/competitions");
+        const data = await APIHelper.fetch(
+            this.fetcher.getBaseURL() + "/competitions", this.fetcher);
+
+        if (data.status !== 200)
+            throw new Error("Failed to fetch KNHB competitions.");
+
         const json = await data.json();
         let index = 0;
-
-        if (json.status !== 200)
-            throw new Error("Failed to fetch KNHB competitions.");
 
         for (const competition of json.data) {
             const item = this.createCompetition(competition, index++);

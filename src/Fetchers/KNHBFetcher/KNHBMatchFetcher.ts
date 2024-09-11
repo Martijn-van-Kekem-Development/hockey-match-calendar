@@ -4,7 +4,7 @@ import { KNHBFetcher } from "./KNHBFetcher.js";
 import { DateHelper } from "../../Utils/DateHelper.js";
 import { APIHelper } from "../../Utils/APIHelper.js";
 import { Abbreviations } from "../../Utils/Abbreviations.js";
-import { KNHBClub } from "./KNHBClubFetcher.js";
+import { KNHBClubFetcher } from "./KNHBClubFetcher";
 
 export class KNHBMatchFetcher {
     /**
@@ -25,10 +25,8 @@ export class KNHBMatchFetcher {
      * Get the matches in a given competition.
      * @param type The type of matches to fetch.
      * @param competition The competition to get the matches for.
-     * @param clubs The available clubs.
      */
-    public async fetch(type: "upcoming" | "official", competition: Competition,
-                       clubs: Map<string, KNHBClub>) {
+    public async fetch(type: "upcoming" | "official", competition: Competition) {
         const matches: Map<string, Match> = new Map();
         let index = 1;
         let page = 1;
@@ -38,7 +36,7 @@ export class KNHBMatchFetcher {
 
             for (const match of json.data) {
                 const item =
-                    this.createMatch(competition, match, index++, clubs);
+                    this.createMatch(competition, match, index++);
                 matches.set(item.getID(), item);
             }
 
@@ -54,32 +52,25 @@ export class KNHBMatchFetcher {
      * @param type The type of matches to fetch.
      * @param page The page number to fetch.
      * @param competition The competition to fetch the matches for.
-     * @param tryCount The amount of tries that have past.
      * @private
      */
     private async makeRequest(type: "upcoming" | "official", page: number,
-                              competition: Competition, tryCount: number = 0) {
+                              competition: Competition) {
 
-        const data = await fetch(this.fetcher.getBaseURL() +
-            `/competitions/${competition.getID()}/matches/${type}?page=${page}`);
+        const data = await APIHelper.fetch(this.fetcher.getBaseURL() +
+            `/competitions/${competition.getID()}/matches/${type}?page=${page}`,
+            this.fetcher);
 
-        if (data.status !== 200) {
-            // Request failed
-            if (tryCount < 3) {
-                const delay = data.status === 429 ? 30 : 100;
-                this.fetcher.log("warn", `Request failed (${data.status}, URL: ${
-                    data.url}), retrying in ${delay} second(s).`);
-
-                await APIHelper.delay(delay * 1000);
-                return await this.makeRequest(type, page, competition, tryCount++);
-            } else {
-                // Give up
-                this.fetcher.log("error", "Request failed after 3 tries. Aborting.");
-                throw new Error();
-            }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let result: any;
+        try {
+            result = await data.json();
+        } catch {
+            this.fetcher.log("error", "Failed to parse JSON.");
+            this.fetcher.log("error", await data.text());
+            throw new Error();
         }
 
-        const result = await data.json();
         if (type === "official" && result.data) {
             result.data = result.data.sort(
                 (a: { datetime: string }, b: { datetime: string }) =>
@@ -96,29 +87,28 @@ export class KNHBMatchFetcher {
      * @param competition
      * @param match
      * @param index
-     * @param clubs
      */
     public createMatch(competition: Competition, match: KNHBMatch,
-                       index: number, clubs: Map<string, KNHBClub>): Match {
+                       index: number): Match {
 
         const object = new Match();
         object.setCompetition(competition);
         object.setID(match.id);
         object.setIndex(index);
-        object.setMatchDate(DateHelper.KNHBtoUTC(match.datetime));
+        object.setIncludeIndex(false);
         object.setVenue(match.location.description);
 
+        // Add date
+        const utcDate = DateHelper.KNHBtoUTC(match.datetime);
+        const localDate = DateHelper.KNHBtoLocal(match.datetime);
+        if (localDate.hours() === 0 && localDate.minutes() === 0)
+            // Time unknown.
+            object.setMatchDate(utcDate, false);
+        else
+            object.setMatchDate(utcDate, true);
+
         // Add teams
-        const homeClub: Club = match.home_team.club_name === null ? null : {
-            id: clubs.get(match.home_team.club_name).id.toLowerCase(),
-            name: match.home_team.club_name
-        };
-        const awayClub: Club = match.away_team.club_name === null ? null : {
-            id: clubs.get(match.away_team.club_name).id.toLowerCase(),
-            name: match.away_team.club_name
-        };
-        object.setHomeTeam(match.home_team.id, match.home_team.name, homeClub);
-        object.setAwayTeam(match.away_team.id, match.away_team.name, awayClub);
+        this.setTeams(match, object);
 
         // Add gender
         const gender = Abbreviations.getGender(competition.getName(), this.fetcher);
@@ -139,6 +129,34 @@ export class KNHBMatchFetcher {
         }
 
         return object;
+    }
+
+    /**
+     * Set the club for this match.
+     * @param matchToParse The match to parse
+     * @param match The match object.
+     * @protected
+     */
+    protected setTeams(matchToParse: KNHBMatch, match: Match) {
+        const clubs = this.fetcher.getClubs();
+        const homeKNHBClub = clubs.get(
+            KNHBClubFetcher.simplifyString(matchToParse.home_team.club_name));
+        const awayKNHBClub = clubs.get(
+            KNHBClubFetcher.simplifyString(matchToParse.away_team.club_name));
+
+        const homeClub: Club = homeKNHBClub ? {
+            id: homeKNHBClub.id.toLowerCase(),
+            name: matchToParse.home_team.club_name
+        } : null;
+        const awayClub: Club = awayKNHBClub ? {
+            id: awayKNHBClub.id.toLowerCase(),
+            name: matchToParse.away_team.club_name
+        } : null;
+
+        match.setHomeTeam(matchToParse.home_team.id,
+            matchToParse.home_team.name, homeClub);
+        match.setAwayTeam(matchToParse.away_team.id,
+            matchToParse.away_team.name, awayClub);
     }
 }
 

@@ -12,6 +12,10 @@
     }
 }
 
+html {
+    overflow-y: scroll;
+}
+
 html,body {
     margin: 0;
     padding: 0;
@@ -71,6 +75,19 @@ h2 {
     flex-wrap: wrap;
 }
 
+.origin-container.loading {
+    text-align: center;
+}
+
+.origin-container.loading > *:not(.loader) {
+    display: none;
+}
+
+.origin-container:not(.loading) > .loader {
+    display: none;
+}
+
+
 .origin-options {
     display: flex;
     width: 100%;
@@ -113,6 +130,7 @@ h2 {
 .origin-buttons {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     margin: 0 0 0.5rem 0;
     padding: 0;
     gap: 0.5rem;
@@ -132,8 +150,39 @@ h2 {
     font-size: 0.85rem;
 }
 
-.origin-buttons li.loading a {
-    animation: loading 1s infinite;
+.origin-container.select .origin-buttons {
+    flex-direction: column;
+}
+
+.origin-container.select .origin-options,
+.origin-container.select ~ table,
+.origin-container.select .origin-buttons li a .abbr {
+    display: none;
+}
+
+.origin-container:not(.select) .origin-buttons li a .full {
+    display: none;
+}
+
+.origin-buttons li.loading {
+    position: relative;
+    color: transparent;
+}
+
+.origin-buttons li.loading::after {
+    content: " ";
+    position: absolute;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    aspect-ratio: 1;
+    border: 2px solid #000;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: button-spinner 1s linear infinite;
 }
 
 .origin-buttons li.selected a {
@@ -182,4 +231,34 @@ table tr td:nth-child(3) {
     width: 0;
     text-align: center;
     white-space: nowrap;
+}
+
+.loader {
+    width: 1.6rem;
+    aspect-ratio: 1;
+    border: 4px solid rgb(63 81 181 / 35%);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: global-spinner 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes global-spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes button-spinner {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
