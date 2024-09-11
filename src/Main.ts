@@ -49,7 +49,12 @@ export class Main {
 
         // EH
         fetchers[TMSFetcher.EH_FETCHER_ID] =
-        new TMSFetcher(TMSFetcher.EH_FETCHER_ID, "EH", 4, TMSFetcher.EH_BASE_URL);
+            new TMSFetcher(TMSFetcher.EH_BASE_URL, {
+                id: TMSFetcher.EH_FETCHER_ID,
+                abbreviation: "EH",
+                name: "England Hockey",
+                index: 4
+            });
 
         return fetchers;
     }
