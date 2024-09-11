@@ -43,7 +43,7 @@ export class TMSFetcher extends Fetcher {
     public static readonly WMH_FETCHER_ID: string = "wmh";
 
     /**
-     * The World Masters Hockey fetcher id.
+     * The England Hockey fetcher id.
      */
     public static readonly EH_FETCHER_ID: string = "eh";
 
