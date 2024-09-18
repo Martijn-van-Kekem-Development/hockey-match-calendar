@@ -263,6 +263,7 @@ table tr td:nth-child(3) {
     }
 }
 
-.hidden {
-    display: none;
+#container_team.hidden {
+    visibility: hidden;
+    pointer-events: none;
 }
