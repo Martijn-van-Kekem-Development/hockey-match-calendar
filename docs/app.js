@@ -140,6 +140,7 @@ async function selectOrigin(origin, userClick) {
         // New origin doesn't exist, so reset.
         window.location.hash = ``;
         if (activeButton) activeButton.classList.remove("selected");
+        document.getElementById("warning_team").classList.add("hidden");
         document.getElementById("container_origin").classList.add("select");
         return;
     }
