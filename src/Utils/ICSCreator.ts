@@ -90,6 +90,9 @@ export class ICSCreator {
                                       fileName: string, title: string,
                                       metadata: Metadata) {
 
+        // Skip for EH fetcher.
+        if (fetcher.getID() === "eh") return;
+
         const matchMap: Map<string, {
             matches: Match[],
             club: Club
