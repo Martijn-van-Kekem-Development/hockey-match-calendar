@@ -104,9 +104,10 @@ export class Abbreviations {
         if (fetcher instanceof TMSFetcher) {
             if (str.includes("womens"))
                 return Gender.WOMEN;
-
             if (str.includes("mens"))
                 return Gender.MEN;
+            if (str.includes("mixed") || str.includes("coed"))
+                return Gender.MIXED;
 
         } else if (fetcher instanceof KNHBFetcher) {
             if (str.includes("(w)") ||

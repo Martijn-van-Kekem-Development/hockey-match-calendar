@@ -162,8 +162,17 @@ async function selectOrigin(origin, userClick) {
 
     // Update last update timestamp
     document.getElementById("label_last_update").textContent = parseDate(new Date(origins[origin].lastUpdate));
-    prepareClubs(origin);
-    clubChanged(origin, "null");
+    
+    // Hide or show the team selector based on the origin
+    const teamSelector = document.getElementById("team");
+    if (origin === "eh") {
+        teamSelector.classList.add("hidden");
+        clubChanged(origin, "null");
+    } else {
+        teamSelector.classList.remove("hidden");
+        prepareClubs(origin);
+        clubChanged(origin, "null");
+    }
 
     newOriginButton.classList.remove("loading");
 

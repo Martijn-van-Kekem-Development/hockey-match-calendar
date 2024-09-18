@@ -45,6 +45,9 @@ jobs:
       - name: Update WMH calendar
         if: ${{ success() || (!cancelled() && steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success') }}
         run: npm run fetch wmh
+      - name: Update EH calendar
+        if: ${{ success() || (!cancelled() && steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success') }}
+        run: npm run fetch eh        
       - name: Finalize update
         if: ${{ success() || (!cancelled() && steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success') }}
         uses: ./.github/workflows/post-update

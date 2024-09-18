@@ -1,6 +1,7 @@
 export enum Gender {
     MEN = "M",
-    WOMEN = "W"
+    WOMEN = "W",
+    MIXED = "X"
 }
 
 /**
@@ -10,5 +11,6 @@ export enum Gender {
 export function getFullGender(gender: Gender): string {
     if (gender === Gender.MEN) return "Men";
     if (gender === Gender.WOMEN) return "Women";
+    if (gender === Gender.MIXED) return "Mixed";
     throw new Error("getFullGender(): invalid gender specified");
 }

@@ -112,14 +112,19 @@ export class TMSMatchFetcher {
         const result = title
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
-            .match(/([A-Za-z0-9/ -]+) v ([A-Za-z0-9/ -]+)(?: \((.+)\))?$/);
+            .match(
+                /^(?:([A-Za-z0-9/& -]+) )?v (?:([A-Za-z0-9/& -]+))?(?: \((.+)\))?$/);
 
-        if (!result)
-            throw new Error("Couldn't extract data from match title: " + title);
+            if (!result) {
+                throw new Error("Couldn't extract data from match title: " + title);
+            }
 
-        const [, home, away, matchType] = result;
+        const home = result[1]?.trim() || "TBC";
+        const away = result[2]?.trim() || "TBC";
+        const matchType = result[3] ?? "";
+
         object.setHomeTeam(home.toLowerCase(), home);
         object.setAwayTeam(away.toLowerCase(), away);
-        object.setType(matchType ?? "");
+        object.setType(matchType);
     }
 }
