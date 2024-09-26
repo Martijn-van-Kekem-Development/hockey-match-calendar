@@ -95,15 +95,6 @@ export class Competition {
     }
 
     /**
-     * Get a lower-case name for this competition.
-     */
-    public getLowercaseName(): string {
-        return this.name.toLowerCase()
-            .replaceAll(" ", "-")
-            .replaceAll(/[^A-Za-z0-9-]/g, "");
-    }
-
-    /**
      * Get the competition abbreviation.
      */
     public getAbbr(): string {

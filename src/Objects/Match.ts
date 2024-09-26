@@ -3,6 +3,7 @@ import { Countries, Country } from "../Utils/Countries.js";
 import { Abbreviations } from "../Utils/Abbreviations.js";
 import { DateHelper } from "../Utils/DateHelper.js";
 import { Moment } from "moment-timezone";
+import { Gender, getFullGender } from "./Gender.js";
 
 export class Match {
     /**
@@ -16,6 +17,12 @@ export class Match {
      * @private
      */
     private matchIndex: number = 0;
+
+    /**
+     * Whether to include the index in the match title.
+     * @private
+     */
+    private includeIndex: boolean = true;
 
     /**
      * The final score of this match if it's completed.
@@ -48,6 +55,12 @@ export class Match {
     private date: Moment;
 
     /**
+     * Whether the time is known for this match.
+     * @private
+     */
+    private timeKnown: boolean = true;
+
+    /**
      * The match location.
      * @private
      */
@@ -57,7 +70,7 @@ export class Match {
      * The gender category for this match.
      * @private
      */
-    private gender: "M" | "W";
+    private gender: Gender;
 
     /**
      * Whether this match has completed.
@@ -82,7 +95,9 @@ export class Match {
             id,
             name: team,
             club,
-            country: Countries.getCountryByIOC(team) ?? Countries.getCountryByISO(team) ?? null
+            country:
+                Countries.getCountryByIOC(team) ??
+                Countries.getCountryByISO(team) ?? null
         };
     }
 
@@ -97,16 +112,20 @@ export class Match {
             id,
             name: team,
             club,
-            country: Countries.getCountryByIOC(team) ?? Countries.getCountryByISO(team) ?? null
+            country:
+                Countries.getCountryByIOC(team) ??
+                Countries.getCountryByISO(team) ?? null
         };
     }
 
     /**
      * Set the date for this match.
      * @param date The date.
+     * @param timeKnown Whether the time is known for this match.
      */
-    public setMatchDate(date: Moment) {
+    public setMatchDate(date: Moment, timeKnown: boolean) {
         this.date = date;
+        this.timeKnown = timeKnown;
     }
 
     /**
@@ -134,10 +153,18 @@ export class Match {
     }
 
     /**
+     * Set whether to include the index for this match.
+     * @param include
+     */
+    public setIncludeIndex(include: boolean) {
+        this.includeIndex = include;
+    }
+
+    /**
      * Set the match gender.
      * @param gender The gender.
      */
-    public setGender(gender: "M" | "W") {
+    public setGender(gender: Gender) {
         this.gender = gender;
     }
 
@@ -174,6 +201,13 @@ export class Match {
     }
 
     /**
+     * Get the type for this match.
+     */
+    public getType() {
+        return this.type;
+    }
+
+    /**
      * Get the clubs that are included in this match.
      */
     public getIncludedClubs(): Club[] {
@@ -202,36 +236,49 @@ export class Match {
      * Get the home team.
      */
     public getHomeTeam(full: boolean = false): string {
-        if (!full)
-            return this.homeTeam.country === null
-                ? this.homeTeam.name : (this.homeTeam.country.ioc ?? this.homeTeam.name);
-        else
-            return (this.homeTeam.country === null || this.homeTeam.country.full.length === 0)
-                ? this.getHomeTeam() : this.homeTeam.country.full;
+        if (!full) {
+            if (this.homeTeam.country === null || !this.homeTeam.country.ioc) {
+                return this.homeTeam.name;
+            } else {
+                return this.homeTeam.country.ioc;
+            }
+        } else {
+            if (this.homeTeam.country === null ||
+                this.homeTeam.country.full.length === 0) {
+                return this.getHomeTeam();
+            } else {
+                return this.homeTeam.country.full;
+            }
+        }
     }
 
     /**
      * Get the away team.
      */
     public getAwayTeam(full: boolean = false): string {
-        if (!full)
-            return this.awayTeam.country === null
-                ? this.awayTeam.name : (this.awayTeam.country.ioc ?? this.awayTeam.name);
-        else
-            return (this.awayTeam.country === null || this.awayTeam.country.full.length === 0)
-                ? this.getAwayTeam() : this.awayTeam.country.full;
+        if (!full) {
+            if (this.awayTeam.country === null || !this.awayTeam.country.ioc) {
+                return this.awayTeam.name;
+            } else {
+                return this.awayTeam.country.ioc;
+            }
+        } else {
+            if (this.awayTeam.country === null ||
+                this.awayTeam.country.full.length === 0) {
+                return this.getAwayTeam();
+            } else {
+                return this.awayTeam.country.full;
+            }
+        }
     }
 
     /**
      * Get the ICS attributes.
      */
     public getICSAttributes(): Record<string, string> {
-        const endDate = this.getMatchDate().clone().add(2, "hours");
         return {
             UID: this.getMatchID(),
-            DTSTAMP: DateHelper.toICS(this.getMatchDate()),
-            DTSTART: DateHelper.toICS(this.getMatchDate()),
-            DTEND: DateHelper.toICS(endDate),
+            ...this.getDateICSAttributes(),
             SUMMARY: this.getMatchTitle(),
             LOCATION: this.getLocation(),
             TRANSP: "TRANSPARENT",
@@ -241,10 +288,32 @@ export class Match {
     }
 
     /**
+     * Get the ICS attributes for the match date.
+     * @private
+     */
+    private getDateICSAttributes(): Record<string, string> {
+        if (this.timeKnown) {
+            const endDate =
+                this.getMatchDate().clone().add(2, "hours");
+
+            return {
+                DTSTAMP: DateHelper.toICS(this.getMatchDate()),
+                DTSTART: DateHelper.toICS(this.getMatchDate()),
+                DTEND: DateHelper.toICS(endDate),
+            };
+        } else {
+            return {
+                "DTSTART;VALUE=DATE": DateHelper.toICS(this.getMatchDate(), false),
+                "DTSTAMP;VALUE=DATE": DateHelper.toICS(this.getMatchDate(), false)
+            };
+        }
+    }
+
+    /**
      * Get the location for this match.
      */
     public getLocation(): string {
-        if (!this.competition) return this.venue;
+        if (!this.competition) return this.venue ?? "";
         const venue = this.venue ?? "";
         const location = this.competition.getLocation() ?? "";
 
@@ -258,13 +327,14 @@ export class Match {
      * Get the match abbreviation.
      */
     public getAbbr(): string {
-        return Abbreviations.getMatchType(this.type, this.getGender(), this.matchIndex);
+        return Abbreviations.getMatchType(this.type, this.getGender(),
+            this.includeIndex ? this.matchIndex : null);
     }
 
     /**
      * Get the gender.
      */
-    public getGender(): "M" | "W" {
+    public getGender(): Gender {
         return this.gender;
     }
 
@@ -290,15 +360,24 @@ export class Match {
         const lines: string[] = [];
 
         // Add match data.
-        lines.push(`${this.getHomeTeam(true)} - ${this.getAwayTeam(true)}`);
-        if (this.isCompleted) lines.push(`Final score: ${this.finalScore}`);
-        lines.push(`Gender: ${this.gender === "M" ? "Men" : "Women"}`);
-        if (this.competition) lines.push(`Event: ${this.competition.getName()}`);
+        const homeTeam = this.getHomeTeam(true);
+        const awayTeam = this.getAwayTeam(true);
+        lines.push(`${homeTeam} - ${awayTeam}`);
+
+        if (this.isCompleted)
+            lines.push(`Final score: ${this.finalScore}`);
+
+        lines.push(`Gender: ${getFullGender(this.gender)}`);
+
+        if (this.competition)
+            lines.push(`Event: ${this.competition.getName()}`);
+
         lines.push("");
 
         // Append fetcher description
         if (this.competition && this.competition.getFetcher())
-            lines.push(...this.competition.getFetcher().descriptionToAppend(this.competition,  this, html));
+            lines.push(...this.competition.getFetcher()
+                .descriptionToAppend(this.competition,  this, html));
 
         return lines.join(html ? "<br>" : "\\n");
     }
@@ -308,9 +387,11 @@ export class Match {
      */
     public getMatchTitle(): string {
         const icon = this.isCompleted ? "✅" : "🏑";
-        const competitionAbbr = this.competition === null ? "" : ` ${this.competition.getAbbr()}`;
+        const competitionAbbr = this.competition === null ? ""
+            : ` ${this.competition.getAbbr()}`;
 
-        return `${icon}${competitionAbbr} ${this.getAbbr()} | ${this.getHomeTeam()} - ${this.getAwayTeam()}`;
+        return `${icon}${competitionAbbr} ${
+            this.getAbbr()} | ${this.getHomeTeam()} - ${this.getAwayTeam()}`;
     }
 
     /**

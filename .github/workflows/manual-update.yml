@@ -14,6 +14,7 @@ on:
           - ehl
           - knhb
           - wmh
+          - eh
 
 concurrency:
   group: "update-calendar"

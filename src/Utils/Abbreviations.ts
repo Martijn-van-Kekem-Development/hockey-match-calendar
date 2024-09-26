@@ -2,6 +2,7 @@ import * as fs from "node:fs";
 import { Fetcher } from "../Fetchers/Fetcher.js";
 import { TMSFetcher } from "../Fetchers/TMSFetcher/TMSFetcher.js";
 import { KNHBFetcher } from "../Fetchers/KNHBFetcher/KNHBFetcher.js";
+import { Gender } from "../Objects/Gender.js";
 
 export class Abbreviations {
     /**
@@ -20,13 +21,19 @@ export class Abbreviations {
      * Get the match type by the match type.
      * @param type The match type
      * @param gender The match gender
-     * @param index The match index in this competition
+     * @param index The match index in this competition, or null if the index
+     *              should be hidden.
      */
-    public static getMatchType(type: string, gender: "M" | "W", index: number): string {
+    public static getMatchType(type: string,
+                               gender: Gender,
+                               index: number | null): string {
+
         if (!this.MatchTypeAbbreviations) this.getMatchTypeAbbreviations();
+        const indexStr = index === null ? "" : this.padStart(index);
 
         // Look for abbreviation.
-        for (let [regex, value] of Object.entries(this.MatchTypeAbbreviations)) {
+        const entries = Object.entries(this.MatchTypeAbbreviations);
+        for (let [regex, value] of entries) {
             const matches = RegExp(regex, "i").exec(type);
             if (!matches) continue;
 
@@ -39,11 +46,11 @@ export class Abbreviations {
             }
 
             // Replace gender and index values.
-            return `${value} ${gender}${this.padStart(index)}`;
+            return `${value} ${gender.toString()}${indexStr}`;
         }
 
         // No match found
-        return `${gender}${this.padStart(index)}`;
+        return `${gender}${indexStr}`;
     }
 
     /**
@@ -67,7 +74,8 @@ export class Abbreviations {
         if (!this.CompetitionAbbreviations) this.getCompetitionAbbreviations();
 
         // Look for abbreviation.
-        for (let [regex, value] of Object.entries(this.CompetitionAbbreviations)) {
+        const entries = Object.entries(this.CompetitionAbbreviations);
+        for (let [regex, value] of entries) {
             const matches = name.match(RegExp(regex, "i"));
             if (matches) {
                 for (let i = 1; i < matches.length; i++) {
@@ -90,15 +98,27 @@ export class Abbreviations {
      * @param type The match type.
      * @param fetcher The fetcher that requests the gender
      */
-    public static getGender(type: string, fetcher: Fetcher): "M" | "W" {
+    public static getGender(type: string, fetcher: Fetcher): Gender {
         const str = type.toLowerCase();
 
         if (fetcher instanceof TMSFetcher) {
-            if (str.includes("womens")) return "W";
-            if (str.includes("mens")) return "M";
+            if (str.includes("womens"))
+                return Gender.WOMEN;
+            if (str.includes("mens"))
+                return Gender.MEN;
+            if (str.includes("mixed") || str.includes("coed"))
+                return Gender.MIXED;
+
         } else if (fetcher instanceof KNHBFetcher) {
-            if (str.includes("(w)") || str.includes("dames") || str.includes("meisjes")) return "W";
-            if (str.includes("(m)") || str.includes("heren") || str.includes("jongens")) return "M";
+            if (str.includes("(w)") ||
+                str.includes("dames") ||
+                str.includes("meisjes"))
+                return Gender.WOMEN;
+
+            if (str.includes("(m)") ||
+                str.includes("heren") ||
+                str.includes("jongens"))
+                return Gender.MEN;
         }
 
         throw new Error("Couldn't fetch gender for " + type);
@@ -108,7 +128,11 @@ export class Abbreviations {
      * Get the match type abbreviations.
      */
     public static getMatchTypeAbbreviations() {
-        const data = fs.readFileSync("includes/match-type-abbreviations.json", { encoding: "utf-8" });
+        const data = fs.readFileSync(
+            "includes/match-type-abbreviations.json",
+            { encoding: "utf-8" }
+        );
+
         this.MatchTypeAbbreviations = JSON.parse(data);
     }
 
@@ -116,7 +140,11 @@ export class Abbreviations {
      * Get the competition abbreviations
      */
     public static getCompetitionAbbreviations() {
-        const data = fs.readFileSync("includes/competition-abbreviations.json", { encoding: "utf-8" });
+        const data = fs.readFileSync(
+            "includes/competition-abbreviations.json",
+            { encoding: "utf-8" }
+        );
+
         this.CompetitionAbbreviations = JSON.parse(data);
     }
 }

@@ -5,26 +5,56 @@ import * as fs from "node:fs";
 
 export class Main {
     /**
-     * The available fetchers. The record key corresponds to the command-line argument required to run that fetcher.
+     * The available fetchers. The record key corresponds to the
+     * command-line argument required to run that fetcher.
      */
     public fetchers(): Record<string, Fetcher> {
         const fetchers = {};
 
         // FIH
         fetchers[TMSFetcher.FIH_FETCHER_ID] =
-            new TMSFetcher(TMSFetcher.FIH_FETCHER_ID, "FIH", 0, TMSFetcher.FIH_BASE_URL);
+            new TMSFetcher(TMSFetcher.FIH_BASE_URL, {
+                id: TMSFetcher.FIH_FETCHER_ID,
+                abbreviation: "FIH",
+                name: "International Hockey Federation",
+                index: 0
+            });
 
         // EHL
         fetchers[TMSFetcher.EHL_FETCHER_ID] =
-            new TMSFetcher(TMSFetcher.EHL_FETCHER_ID, "EHL", 1, TMSFetcher.EHL_BASE_URL);
+            new TMSFetcher(TMSFetcher.EHL_BASE_URL, {
+                id: TMSFetcher.EHL_FETCHER_ID,
+                abbreviation: "EHL",
+                name: "Euro Hockey League",
+                index: 1
+            });
 
         // KNHB
         fetchers[KNHBFetcher.KNHB_FETCHER_ID] =
-            new KNHBFetcher(KNHBFetcher.KNHB_FETCHER_ID, "KNHB", 2, KNHBFetcher.KNHB_BASE_URL);
+            new KNHBFetcher(KNHBFetcher.KNHB_BASE_URL, {
+                id: KNHBFetcher.KNHB_FETCHER_ID,
+                abbreviation: "KNHB",
+                name: "Dutch Hockey Association",
+                index: 2
+            });
 
         // WMH
         fetchers[TMSFetcher.WMH_FETCHER_ID] =
-            new TMSFetcher(TMSFetcher.WMH_FETCHER_ID, "WMH", 3, TMSFetcher.WMH_BASE_URL);
+            new TMSFetcher(TMSFetcher.WMH_BASE_URL, {
+                id: TMSFetcher.WMH_FETCHER_ID,
+                abbreviation: "WMH",
+                name: "World Masters Hockey",
+                index: 3
+            });
+
+        // EH
+        fetchers[TMSFetcher.EH_FETCHER_ID] =
+            new TMSFetcher(TMSFetcher.EH_BASE_URL, {
+                id: TMSFetcher.EH_FETCHER_ID,
+                abbreviation: "EH",
+                name: "England Hockey",
+                index: 4
+            });
 
         return fetchers;
     }
@@ -53,15 +83,11 @@ export class Main {
         const fetchers = this.fetchers();
         const output = {};
         for (const fetcher of Object.values(fetchers)) {
-            output[fetcher.getID()] = {
-                id: fetcher.getID(),
-                name: fetcher.getName(),
-                index: fetcher.getIndex()
-            };
+            output[fetcher.getID()] = fetcher.getOptions();
         }
 
-        fs.mkdirSync(`docs/ics`, { recursive: true });
-        fs.writeFileSync(`docs/ics/fetchers.json`, JSON.stringify(output));
+        fs.mkdirSync("docs/ics", { recursive: true });
+        fs.writeFileSync("docs/ics/fetchers.json", JSON.stringify(output));
     }
 
     /**
@@ -85,7 +111,8 @@ export class Main {
      */
     private async fetch() {
         const fetchers = this.fetchers();
-        const fetchersToRun = Object.keys(fetchers).filter(i => process.argv.includes(i));
+        const fetchersToRun = Object.keys(fetchers)
+            .filter(i => process.argv.includes(i));
 
         if (fetchersToRun.length === 0) {
             console.error("No valid fetchers specified. Exiting...");

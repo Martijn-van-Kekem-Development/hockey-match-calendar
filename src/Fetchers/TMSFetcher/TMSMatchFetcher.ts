@@ -4,6 +4,7 @@ import { Competition } from "../../Objects/Competition.js";
 import { Abbreviations } from "../../Utils/Abbreviations.js";
 import { DateHelper } from "../../Utils/DateHelper.js";
 import { TMSFetcher } from "./TMSFetcher.js";
+import { APIHelper } from "../../Utils/APIHelper";
 
 export class TMSMatchFetcher {
     /**
@@ -28,12 +29,16 @@ export class TMSMatchFetcher {
         const matches: Map<string, Match> = new Map();
 
         // Get data from TMS.
-        const data = await fetch(`${this.fetcher.getBaseURL()}/competitions/${competition.getID()}/matches`);
+        const data =
+            await APIHelper.fetch(`${this.fetcher.getBaseURL()}/competitions/${
+                competition.getID()}/matches`,
+                this.fetcher);
         const html = parse(await data.text());
         const rows = html.querySelectorAll(".tab-content table tbody tr");
 
         // Check no results
-        if (rows.length === 1 && rows[0].innerText.trim() === "No results") return matches;
+        if (rows.length === 1 && rows[0].innerText.trim() === "No results")
+            return matches;
 
         // Create match from every row.
         for (const row of rows) {
@@ -54,25 +59,34 @@ export class TMSMatchFetcher {
         object.setCompetition(competition);
 
         const link = row.querySelector("td:nth-child(3) a[href]");
-        if (!link) throw new Error(`Can't fetch title from ${competition.getID()}`);
-        this.parseTitle(object, link.textContent.trim());
+        if (!link)
+            throw new Error(`Can't fetch title from ${competition.getID()}`);
+        TMSMatchFetcher.parseTitle(object, link.textContent.trim());
 
         // Add match ID.
-        const id = link.getAttribute("href").split("/").slice(-1)[0] ?? null;
-        if (!id) throw new Error("Failed to get ID for match.");
+        const id =
+            link.getAttribute("href").split("/").slice(-1)[0] ?? null;
+        if (!id)
+            throw new Error("Failed to get ID for match.");
         else object.setID(id);
 
         // Add match index
-        const index = row.querySelector("td:nth-child(1)");
-        object.setIndex(Number(index.textContent.trim()));
+        const indexEl = row.querySelector("td:nth-child(1)");
+        const indexVal = indexEl.textContent.replaceAll(/[^0-9]/g, "");
+        object.setIndex(Number(indexVal));
 
         // Add gender
-        const gender = Abbreviations.getGender(competition.getType(), this.fetcher);
+        const gender =
+            Abbreviations.getGender(competition.getType(), this.fetcher);
         object.setGender(gender);
 
         // Add date and time
-        const dateString = row.querySelector("td:nth-child(2) span[data-timezone]");
-        object.setMatchDate(DateHelper.TMStoUTC(dateString.textContent, dateString.getAttribute("data-timezone")));
+        const dateString =
+            row.querySelector("td:nth-child(2) span[data-timezone]");
+        const timeZone = dateString.getAttribute("data-timezone");
+        const utcDate =
+            DateHelper.TMStoUTC(dateString.textContent, timeZone);
+        object.setMatchDate(utcDate, true);
 
         // Add completed state
         const status = row.querySelector("td:nth-child(5)");
@@ -94,17 +108,23 @@ export class TMSMatchFetcher {
      * @param object The match object.
      * @param title The title to parse
      */
-    parseTitle(object: Match, title: string) {
+    public static parseTitle(object: Match, title: string) {
         const result = title
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
-            .match(/([A-Za-z0-9/ -]+) v ([A-Za-z0-9/ -]+)(?: \((.+)\))?$/);
+            .match(
+                /^(?:([A-Za-z0-9/& -]+) )?v (?:([A-Za-z0-9/& -]+))?(?: \((.+)\))?$/);
 
-        if (!result) throw new Error("Couldn't extract data from match title: " + title);
+            if (!result) {
+                throw new Error("Couldn't extract data from match title: " + title);
+            }
 
-        const [, home, away, matchType] = result;
+        const home = result[1]?.trim() || "TBC";
+        const away = result[2]?.trim() || "TBC";
+        const matchType = result[3] ?? "";
+
         object.setHomeTeam(home.toLowerCase(), home);
         object.setAwayTeam(away.toLowerCase(), away);
-        object.setType(matchType ?? "");
+        object.setType(matchType);
     }
 }

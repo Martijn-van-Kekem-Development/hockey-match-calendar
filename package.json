@@ -11,7 +11,9 @@
   "scripts": {
     "start": "node --import=tsx src/Main.ts",
     "test": "vitest --run",
-    "lint": "eslint",
+    "check-lint": "eslint",
+    "check-ts": "tsc --noemit",
+    "check": "npm run check-lint && npm run check-ts",
     "save-fetchers": "npm run start save",
     "fetch": "npm run start",
     "fetch-all": "npm run fetch all"
