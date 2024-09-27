@@ -128,7 +128,21 @@ export class ICS {
         const content: string[] = [];
 
         content.push("BEGIN:VEVENT");
-        content.push(...Object.entries(match.getICSAttributes()).map(
+        const attributes = match.getICSAttributes();
+
+        // Add officials to the description
+        const officialsDescription = match.getOfficials().map(official => {
+            const name = official.getName()
+                .replace(/\s*\([^)]*\)$/, "");
+            // Remove country code if present in name
+            return `${official.getRole()}: ${name} (${official.getCountry()})`;
+        }).join("\\n");
+
+        attributes.DESCRIPTION += "\\n\\nOfficials:\\n" + officialsDescription;
+        attributes["X-ALT-DESC;FMTTYPE=text/html"] +=
+            "<br><br>Officials:<br>" + officialsDescription.replace(/\\n/g, "<br>");
+
+        content.push(...Object.entries(attributes).map(
             ([key, val]) => `${key}:${val}`));
         content.push("END:VEVENT");
 
