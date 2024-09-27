@@ -131,16 +131,30 @@ export class ICS {
         const attributes = match.getICSAttributes();
 
         // Add officials to the description
-        const officialsDescription = match.getOfficials().map(official => {
-            const name = official.getName()
-                .replace(/\s*\([^)]*\)$/, "");
-            // Remove country code if present in name
-            return `${official.getRole()}: ${name} (${official.getCountry()})`;
-        }).join("\\n");
+        const officials = match.getOfficials();
+        const officialsDescription: string[] = [];
 
-        attributes.DESCRIPTION += "\\n\\nOfficials:\\n" + officialsDescription;
+        officials.forEach(official => {
+            if (official.getRole() === "Umpire") {
+                officialsDescription
+                .push(`Umpire: ${official.getName()}`);
+            } else if (official.getRole() === "Scoring/Timing Official") {
+                officialsDescription
+                    .push(`Scoring/Timing Official: ${official.getName()}`);
+            } else if (official.getRole() === "Technical Officer") {
+                officialsDescription
+                    .push(`Technical Official: ${official.getName()}`);
+            }
+        });
+
+        // Join the officials description, ensuring to skip empty roles
+        attributes.DESCRIPTION +=
+            `\n\nOfficials:\n${officialsDescription.join("\n")}`;
         attributes["X-ALT-DESC;FMTTYPE=text/html"] +=
-            "<br><br>Officials:<br>" + officialsDescription.replace(/\\n/g, "<br>");
+            `<br><br>Officials:<br>${officialsDescription.join("<br>")}`;
+
+        // Remove line breaks from DESCRIPTION
+        attributes.DESCRIPTION = attributes.DESCRIPTION.replace(/\n/g, " ");
 
         content.push(...Object.entries(attributes).map(
             ([key, val]) => `${key}:${val}`));
@@ -165,7 +179,7 @@ export class ICS {
 
             // Do for every line that is too long.
             while (line.length >= 75) {
-                parts.push(" "  + line.slice(0, 73));
+                parts.push(" " + line.slice(0, 73));
                 line = line.slice(73);
             }
 
@@ -197,5 +211,4 @@ export interface Metadata {
     index?: number,
     path?: string,
     count?: number
-
 }
