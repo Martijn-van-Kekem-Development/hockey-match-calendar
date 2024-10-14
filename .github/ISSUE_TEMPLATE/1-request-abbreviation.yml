@@ -1,0 +1,44 @@
+name: Add a competition abbreviation
+description: Propose a new calendar abbreviation for a competition (e.g. abbreviate
+  Pro League to PL).
+title: "[ABBREVIATION]: "
+labels: ["abbreviation request"]
+body:
+  - type: markdown
+    attributes:
+      value: Fill out this form in order to request a new abbreviation. |
+        This does not guarantee that your abbreviation will actually be added.
+
+  - type: dropdown
+    attributes:
+      label: Calendar origin
+      description: For which calendar origin would you like to add this abbreviation?
+      options:
+        - FIH
+        - EHL
+        - KNHB
+        - WMH
+        - EH
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Competition
+      description: What is the full-name of the competition you'd like to abbreviate?
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Proposed abbreviation.
+      description: Which abbreviation do you propose?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional info
+      description: If there is any additional information that's important for us to know, please report it here.
+    validations:
+      required: false
