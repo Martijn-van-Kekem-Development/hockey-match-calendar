@@ -1,6 +1,7 @@
 {
   "\\d{4} Olympic Games \\([M|W]\\)": "OG",
   "\\d{4} Test Matches .* \\([M|W]\\)": "TEST",
+  "\\d{4}-\\d{2} FIH Hockey Pro League \\([M|W]\\)": "PL",
   "EuroHockey U21 Championship.*": "U21C",
   "EuroHockey Championship Qualifier.*": "EHCQ",
   "FIH Indoor Hockey Women's World Cup.*": "IWC",
