@@ -102,6 +102,7 @@ h2 {
     color: #6c6c6c;
     font-size: 0.9rem;
     margin: 0;
+    padding-block: 0.4rem;
 }
 
 .pick-team {
@@ -264,6 +265,5 @@ table tr td:nth-child(3) {
 }
 
 #container_team.hidden {
-    visibility: hidden;
-    pointer-events: none;
+    display: none;
 }
