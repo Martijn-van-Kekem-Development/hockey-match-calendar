@@ -158,38 +158,70 @@ export class TMSMatchFetcher {
         const data = await APIHelper.fetch(url, this.fetcher);
         const html = parse(await data.text());
 
-        // Get all date tabs
-        const dateTabs = html.querySelectorAll(".appointments-content");
+        // Get all date sections (2024-05-31, 2024-06-01, etc.)
+        const dateSections = html.querySelectorAll(".tab-pane");
+        if (!dateSections || dateSections.length === 0) {
+            return officialsMap;
+        }
 
-        for (const tab of dateTabs) {
-            const rows = tab.querySelectorAll("tr");
+        for (const section of dateSections) {
+            // Get the appointments table in each date section
+            const table = section.querySelector("table");
+            if (!table) continue;
 
+            // Get headers for column mapping
+            const headers = table.querySelectorAll("th");
+            const roleIndices = new Map<string, number>();
+            headers.forEach((header, index) => {
+                const role = header.textContent.trim();
+                if (role) roleIndices.set(role, index);
+            });
+
+            // Get all rows from the table
+            const rows = table.querySelectorAll("tr:not(:first-child)");
             for (const row of rows) {
-                const matchId =
-                    row.querySelector("td:first-child")?.textContent.trim();
+                const cells = row.querySelectorAll("td");
+
+                // Get match ID from the Details cell link
+                const detailsCell = cells[roleIndices.get("Details")];
+                if (!detailsCell) continue;
+
+                const matchLink = detailsCell.querySelector("a[href]");
+                if (!matchLink) continue;
+
+                const matchId = matchLink
+                    .getAttribute("href")
+                    .split("/")
+                    .slice(-1)[0];
                 if (!matchId) continue;
 
                 const officials: Official[] = [];
-                const headers = html.querySelectorAll("th");
-                const cells = row.querySelectorAll("td");
 
-                // Skip match number, details, and reserve/video
-                for (let i = 3; i < cells.length; i++) {
-                    const role = headers[i]?.textContent.trim();
-                    if (!role) continue;
+                // Process officials from relevant columns
+                const officialColumns = [
+                    "Umpires",
+                    "Reserve/Video",
+                    "Scoring/Timing",
+                    "Technical Officer"
+                ];
+                for (const role of officialColumns) {
+                    const index = roleIndices.get(role);
+                    if (index === undefined) continue;
 
-                    const names = cells[i]?.textContent.trim();
-                    if (!names || names === "-") continue;
+                    const cell = cells[index];
+                    if (!cell) continue;
 
-                    // Split multiple officials and parse each one
-                    names.split("\n").forEach(official => {
-                        const match =
-                            official.trim().match(/^(.+?)(?: \(([A-Z]{3})\))?$/);
-                        if (match) {
+                    // Get all official links in the cell
+                    const officialLinks = cell.querySelectorAll("a");
+                    officialLinks.forEach(link => {
+                        const name = link.textContent.trim();
+                        const countryMatch = name.match(/\(([A-Z]{3})\)$/);
+                        if (name) {
                             officials.push({
                                 role,
-                                name: match[1].trim(),
-                                country: match[2]
+                                name: countryMatch ? name.replace(
+                                    countryMatch[0], "").trim() : name,
+                                country: countryMatch ? countryMatch[1] : undefined
                             });
                         }
                     });
