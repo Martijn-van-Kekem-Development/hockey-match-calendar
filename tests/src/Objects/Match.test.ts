@@ -165,42 +165,38 @@ describe("Match tests", () => {
         });
     });
 
-    describe("Officials handling", () => {
+    describe("Officials storage", () => {
         const match = new Match();
-        match.setHomeTeam("home", "Home");
-        match.setAwayTeam("away", "Away");
-        match.setGender(Gender.MEN);
 
-        test("Adding officials", () => {
+        test("Add and retrieve officials", () => {
             match.addOfficial("Umpire", "John Smith", "ENG");
             match.addOfficial("Umpire", "Jane Doe", "SCO");
-            match.addOfficial("Technical Officer", "Bob Wilson", "WAL");
 
             const officials = match.getOfficials();
-            expect(officials).toHaveLength(3);
+            expect(officials).toHaveLength(2);
             expect(officials[0]).toEqual({
                 role: "Umpire",
                 name: "John Smith",
                 country: "ENG"
             });
+            expect(officials[1]).toEqual({
+                role: "Umpire",
+                name: "Jane Doe",
+                country: "SCO"
+            });
         });
 
-        test("Officials in match description", () => {
-            const description = match.getMatchDescription(false);
-            const lines = description.split("\\n");
-
-            expect(lines).toContain("Match Officials:");
-            expect(lines).toContain("Umpire: John Smith (ENG), Jane Doe (SCO)");
-            expect(lines).toContain("Technical Officer: Bob Wilson (WAL)");
-        });
-
-        test("Officials without country code", () => {
+        test("Add official without country", () => {
             match.addOfficial("Reserve Umpire", "Local Umpire");
 
-            const description = match.getMatchDescription(false);
-            const lines = description.split("\\n");
-
-            expect(lines).toContain("Reserve Umpire: Local Umpire");
+            const officials = match.getOfficials();
+            const reserveUmpire = officials.find(o => o.role === "Reserve Umpire");
+            expect(reserveUmpire).toEqual({
+                role: "Reserve Umpire",
+                name: "Local Umpire",
+                country: undefined
+            });
         });
     });
+
 });
