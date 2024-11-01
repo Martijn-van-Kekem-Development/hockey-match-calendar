@@ -139,10 +139,12 @@ export class KNHBMatchFetcher {
      */
     protected setTeams(matchToParse: KNHBMatch, match: Match) {
         const clubs = this.fetcher.getClubs();
-        const homeKNHBClub = clubs.get(
-            KNHBClubFetcher.simplifyString(matchToParse.home_team.club_name));
-        const awayKNHBClub = clubs.get(
-            KNHBClubFetcher.simplifyString(matchToParse.away_team.club_name));
+        const homeKNHBClub = matchToParse.home_team?.club_name
+            ? clubs.get(KNHBClubFetcher.simplifyString(
+                matchToParse.home_team.club_name)) : null;
+        const awayKNHBClub = matchToParse.away_team?.club_name
+            ? clubs.get(KNHBClubFetcher.simplifyString(
+                matchToParse.away_team.club_name)) : null;
 
         const homeClub: Club = homeKNHBClub ? {
             id: homeKNHBClub.id.toLowerCase(),
