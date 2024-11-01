@@ -5,6 +5,12 @@ import { DateHelper } from "../Utils/DateHelper.js";
 import { Moment } from "moment-timezone";
 import { Gender, getFullGender } from "./Gender.js";
 
+export interface Official {
+    role: string;
+    name: string;
+    country?: string;
+}
+
 export class Match {
     /**
      * The competition name that this match belongs to.
@@ -83,6 +89,12 @@ export class Match {
      * @private
      */
     private id: string | null = null;
+
+    /**
+     * The match officials.
+     * @private
+     */
+    private officials: Official[] = [];
 
     /**
      * Set the home team for this match.
@@ -372,6 +384,25 @@ export class Match {
         if (this.competition)
             lines.push(`Event: ${this.competition.getName()}`);
 
+        // Add officials if present
+        if (this.officials.length > 0) {
+            lines.push("");
+            lines.push("Match Officials:");
+
+            // Group officials by role
+            const byRole = this.officials.reduce((acc, curr) => {
+                if (!acc[curr.role]) acc[curr.role] = [];
+                acc[curr.role].push(curr.country
+                    ? `${curr.name} (${curr.country})` : curr.name);
+                return acc;
+            }, {} as Record<string, string[]>);
+
+            // Add each role and officials
+            for (const [role, officials] of Object.entries(byRole)) {
+                lines.push(`${role}: ${officials.join(", ")}`);
+            }
+        }
+
         lines.push("");
 
         // Append fetcher description
@@ -399,6 +430,23 @@ export class Match {
      */
     public getMatchID(): string {
         return this.id;
+    }
+
+    /**
+     * Add an official to the match
+     * @param role The role of the official
+     * @param name The name of the official
+     * @param country Optional country code
+     */
+    public addOfficial(role: string, name: string, country?: string) {
+        this.officials.push({ role, name, country });
+    }
+
+    /**
+     * Get all officials for this match
+     */
+    public getOfficials(): Official[] {
+        return this.officials;
     }
 }
 

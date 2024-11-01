@@ -1,4 +1,4 @@
-import { Match } from "../../Objects/Match.js";
+import { Match, Official } from "../../Objects/Match.js";
 import { HTMLElement, parse } from "node-html-parser";
 import { Competition } from "../../Objects/Competition.js";
 import { Abbreviations } from "../../Utils/Abbreviations.js";
@@ -44,6 +44,23 @@ export class TMSMatchFetcher {
         for (const row of rows) {
             const item = this.createMatch(competition, row);
             matches.set(item.getID(), item);
+        }
+
+        // Fetch officials data
+        const officials = await this.fetchOfficials(competition);
+
+        // Add officials to matches
+        for (const [matchId, match] of matches) {
+            const matchOfficials = officials.get(matchId);
+            if (matchOfficials) {
+                matchOfficials.forEach(official => {
+                    match.addOfficial(
+                        official.role,
+                        official.name,
+                        official.country
+                    );
+                });
+            }
         }
 
         return matches;
@@ -126,5 +143,64 @@ export class TMSMatchFetcher {
         object.setHomeTeam(home.toLowerCase(), home);
         object.setAwayTeam(away.toLowerCase(), away);
         object.setType(matchType);
+    }
+
+    /**
+     * Fetch officials data for a competition
+     * @param competition The competition to fetch officials for
+     */
+    private async fetchOfficials(
+        competition: Competition): Promise<Map<string, Official[]>> {
+        const officialsMap = new Map<string, Official[]>();
+
+        const url = `${this.fetcher.getBaseURL()}/competitions/${
+            competition.getID()}/officials`;
+        const data = await APIHelper.fetch(url, this.fetcher);
+        const html = parse(await data.text());
+
+        // Get all date tabs
+        const dateTabs = html.querySelectorAll(".appointments-content");
+
+        for (const tab of dateTabs) {
+            const rows = tab.querySelectorAll("tr");
+
+            for (const row of rows) {
+                const matchId =
+                    row.querySelector("td:first-child")?.textContent.trim();
+                if (!matchId) continue;
+
+                const officials: Official[] = [];
+                const headers = html.querySelectorAll("th");
+                const cells = row.querySelectorAll("td");
+
+                // Skip match number, details, and reserve/video
+                for (let i = 3; i < cells.length; i++) {
+                    const role = headers[i]?.textContent.trim();
+                    if (!role) continue;
+
+                    const names = cells[i]?.textContent.trim();
+                    if (!names || names === "-") continue;
+
+                    // Split multiple officials and parse each one
+                    names.split("\n").forEach(official => {
+                        const match =
+                            official.trim().match(/^(.+?)(?: \(([A-Z]{3})\))?$/);
+                        if (match) {
+                            officials.push({
+                                role,
+                                name: match[1].trim(),
+                                country: match[2]
+                            });
+                        }
+                    });
+                }
+
+                if (officials.length > 0) {
+                    officialsMap.set(matchId, officials);
+                }
+            }
+        }
+
+        return officialsMap;
     }
 }
