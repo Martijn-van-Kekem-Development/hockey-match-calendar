@@ -75,41 +75,50 @@ export class TMSFetcher extends Fetcher {
      * Fetch the matches from TMS.
      */
     protected async fetch() {
-        this.log("info", "Fetching competitions.");
-        const competitions = await this.fetchCompetitions();
-        const promises = [];
+        try {
+            this.log("info", "Fetching competitions.");
+            const competitions = await this.fetchCompetitions();
+            const promises = [];
 
-        this.log("info", `Found ${competitions.size} competitions.`);
-        this.log("info", "Fetching matches and creating competition files.");
+            this.log("info", `Found ${competitions.size} competitions.`);
+            this.log("info", "Fetching matches and creating competition files.");
 
-        for (const competition of competitions.values()) {
-            // Fetch match for every competition
-            const matchPromise = this.fetchMatches(competition);
-            matchPromise.then(result => {
-                competition.getMatches().push(...result.values());
-                return ICSCreator.createCompetitionICS(competition);
-            });
+            for (const competition of competitions.values()) {
+                // Fetch matches for every competition and create ICS file
+                const promise = (async () => {
+                    try {
+                        const matches = await this.fetchMatches(competition);
+                        competition.getMatches().push(...matches.values());
+                        await ICSCreator.createCompetitionICS(competition);
+                    } catch (error) {
+                        this.log("error", `Failed to fetch matches for competition ${
+                            competition.getID()}: ${error.message}`);
+                    }
+                })();
+                promises.push(promise);
+            }
 
-            promises.push(matchPromise);
+            // Wait for all matches to fetch and ICS files to be created
+            await Promise.all(promises);
+            const competitionsArray = Array.from(competitions.values());
+
+            // Create total calendar files
+            await Promise.all([
+                ICSCreator.createTotalICS(this, competitionsArray),
+                ICSCreator.createGenderTotalICS(this, competitionsArray,
+                    Gender.MEN),
+                ICSCreator.createGenderTotalICS(this, competitionsArray,
+                    Gender.WOMEN),
+                ICSCreator.createGenderTotalICS(this, competitionsArray,
+                    Gender.MIXED),
+            ]);
+
+            this.log("info", "Finished.");
+            return competitionsArray;
+        } catch (error) {
+            this.log("error", `Fatal error in fetch: ${error.message}`);
+            return [];
         }
-
-        // Wait for all matches to fetch
-        await Promise.all(promises);
-        const competitionsArray = Array.from(competitions.values());
-
-        // Create total calendar files.
-        await Promise.all([
-            ICSCreator.createTotalICS(this, competitionsArray),
-            ICSCreator.createGenderTotalICS(this, competitionsArray,
-                Gender.MEN),
-            ICSCreator.createGenderTotalICS(this, competitionsArray,
-                Gender.WOMEN),
-            ICSCreator.createGenderTotalICS(this, competitionsArray,
-                Gender.MIXED),
-        ]);
-
-        this.log("info", "Finished.");
-        return competitionsArray;
     }
 
     /**
@@ -139,8 +148,28 @@ export class TMSFetcher extends Fetcher {
      */
     descriptionToAppend(competition: Competition, match: Match,
                         html: boolean): string[] {
-
         const lines: string[] = [];
+
+        // Add officials if present
+        const officials = match.getOfficials();
+        if (officials.length > 0) {
+            lines.push("");
+            lines.push("Match Officials:");
+
+            // Group officials by role
+            const byRole = officials.reduce((acc, curr) => {
+                if (!acc[curr.role]) acc[curr.role] = [];
+                acc[curr.role].push(curr.country
+                    ? `${curr.name} (${curr.country})` : curr.name);
+                return acc;
+            }, {} as Record<string, string[]>);
+
+            // Add each role and officials
+            for (const [role, names] of Object.entries(byRole)) {
+                lines.push(`${role}: ${names.join(", ")}`);
+            }
+            lines.push("");
+        }
 
         // Add TMS links
         if (html) {

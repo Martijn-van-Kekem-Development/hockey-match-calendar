@@ -1,6 +1,9 @@
 import { test, describe, expect } from "vitest";
 import { TMSMatchFetcher } from "../../../../src/Fetchers/TMSFetcher/TMSMatchFetcher.js";
+import { TMSFetcher } from "../../../../src/Fetchers/TMSFetcher/TMSFetcher.js";
 import { Match } from "../../../../src/Objects/Match.js";
+import { Competition } from "../../../../src/Objects/Competition.js";
+import { Gender } from "../../../../src/Objects/Gender.js";
 
 interface parseTitleTest {
     in: string,
@@ -53,6 +56,54 @@ describe("TMSMatchFetcher tests", () => {
                 expect(() => runParseTitleTest({ in: "Random string" }))
                     .toThrowError();
             });
+        });
+    });
+
+    describe("Officials handling", () => {
+        const fetcher = new TMSFetcher("https://test.com", {
+            id: "test",
+            abbreviation: "TEST",
+            name: "Test Fetcher",
+            index: 0
+        });
+        const match = new Match();
+        const competition = new Competition(fetcher, 0);
+        match.setHomeTeam("home", "Home");
+        match.setAwayTeam("away", "Away");
+        match.setGender(Gender.MEN);
+        match.setID("test-match-123");
+
+        test("Officials in description", () => {
+            match.addOfficial("Umpire", "John Smith", "ENG");
+            match.addOfficial("Umpire", "Jane Doe", "SCO");
+            match.addOfficial("Technical Officer", "Bob Wilson", "WAL");
+
+            const description = fetcher.descriptionToAppend(
+                competition, match, false);
+            expect(description).toContain(
+                "Match Officials:");
+            expect(description).toContain(
+                "Umpire: John Smith (ENG), Jane Doe (SCO)");
+            expect(description).toContain(
+                "Technical Officer: Bob Wilson (WAL)");
+        });
+
+        test("Officials without country code", () => {
+            match.addOfficial("Reserve Umpire", "Local Umpire");
+
+            const description = fetcher.descriptionToAppend(
+                competition, match, false);
+            expect(description).toContain(
+                "Reserve Umpire: Local Umpire");
+        });
+
+        test("HTML formatting", () => {
+            const description = fetcher.descriptionToAppend(
+                competition, match, true);
+            expect(description.some(
+                line => line.includes("<br>"))).toBeFalsy();
+            expect(description.some(
+                line => line.includes("<a href=\"https://test.com/matches/"))).toBeTruthy();
         });
     });
 });

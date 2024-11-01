@@ -366,12 +366,12 @@ export class Match {
 
     /**
      * Get the match description.
-     * @param html Whether to return HTML.
+     * @param includeHTML Whether to include HTML formatting for links.
      */
-    public getMatchDescription(html: boolean): string {
+    public getMatchDescription(includeHTML: boolean = true): string {
         const lines: string[] = [];
 
-        // Add match data.
+        // Add match data
         const homeTeam = this.getHomeTeam(true);
         const awayTeam = this.getAwayTeam(true);
         lines.push(`${homeTeam} - ${awayTeam}`);
@@ -384,33 +384,19 @@ export class Match {
         if (this.competition)
             lines.push(`Event: ${this.competition.getName()}`);
 
-        // Add officials if present
-        if (this.officials.length > 0) {
-            lines.push("");
-            lines.push("Match Officials:");
-
-            // Group officials by role
-            const byRole = this.officials.reduce((acc, curr) => {
-                if (!acc[curr.role]) acc[curr.role] = [];
-                acc[curr.role].push(curr.country
-                    ? `${curr.name} (${curr.country})` : curr.name);
-                return acc;
-            }, {} as Record<string, string[]>);
-
-            // Add each role and officials
-            for (const [role, officials] of Object.entries(byRole)) {
-                lines.push(`${role}: ${officials.join(", ")}`);
-            }
+        // Add match link if HTML is enabled
+        if (includeHTML && this.id) {
+            const baseUrl = "https://test.com/matches/";
+            lines.push(`<a href="${baseUrl}${this.id}">View match details</a>`);
         }
 
-        lines.push("");
-
-        // Append fetcher description
-        if (this.competition && this.competition.getFetcher())
+        // Append fetcher description (for links and any fetcher-specific data)
+        if (this.competition && this.competition.getFetcher()) {
             lines.push(...this.competition.getFetcher()
-                .descriptionToAppend(this.competition,  this, html));
+                .descriptionToAppend(this.competition, this, includeHTML));
+        }
 
-        return lines.join(html ? "<br>" : "\\n");
+        return lines.join("\\n");
     }
 
     /**
