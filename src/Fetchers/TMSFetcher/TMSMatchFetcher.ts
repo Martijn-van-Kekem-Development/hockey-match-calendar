@@ -153,7 +153,8 @@ export class TMSMatchFetcher {
         competition: Competition
     ): Promise<Map<string, Official[]>> {
         const officialsMap = new Map<string, Official[]>();
-        const url = `${this.fetcher.getBaseURL()}/competitions/${competition.getID()}/officials`;
+        const baseUrl = this.fetcher.getBaseURL();
+        const url = `${baseUrl}/competitions/${competition.getID()}/officials`;
         const data = await APIHelper.fetch(url, this.fetcher);
         const html = parse(await data.text());
 

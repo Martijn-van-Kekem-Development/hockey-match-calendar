@@ -124,16 +124,38 @@ describe("TMSMatchFetcher tests", () => {
                         </tr>
                         <tr>
                             <td rowspan="2">07</td>
-                            <td rowspan="2"><a href="/matches/4205">ENG v AUS (75M A)</a><br>08:15:00</td>
-                            <td><a href="/competitions/337/matchofficial/11029">ISAACS Allan (RSA)</a></td>
+                            <td rowspan="2">
+                            <a href="/matches/4205">ENG v AUS (75M A)</a>
+                            <br>08:15:00</td>
+                            <td>
+                                <a href="/competitions/337/matchofficial/11029">
+                                    ISAACS Allan (RSA)
+                                </a>
+                            </td>
                             <td></td>
-                            <td><a href="/competitions/337/matchofficial/15597">AZZAKANI Yusra (RSA)</a></td>
-                            <td><a href="/competitions/337/matchofficial/15147">KACHELHOFFER Andries (RSA)</a></td>
+                            <td>
+                                <a href="/competitions/337/matchofficial/15597">
+                                    AZZAKANI Yusra (RSA)
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/competitions/337/matchofficial/15147">
+                                    KACHELHOFFER Andries (RSA)
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td><a href="/competitions/337/matchofficial/6971">WILLIAMS Neal (AUS)</a></td>
+                            <td>
+                                <a href="/competitions/337/matchofficial/6971">
+                                    WILLIAMS Neal (AUS)
+                                </a>
+                            </td>
                             <td></td>
-                            <td><a href="/competitions/337/matchofficial/2131">FOURIE Charlene (RSA)</a></td>
+                            <td>
+                                <a href="/competitions/337/matchofficial/2131">
+                                    FOURIE Charlene (RSA)
+                                </a>
+                            </td>
                             <td></td>
                         </tr>
                     </table>
