@@ -164,15 +164,7 @@ async function selectOrigin(origin, userClick) {
     // Update last update timestamp
     document.getElementById("label_last_update").textContent = parseDate(new Date(origins[origin].lastUpdate));
 
-    // Hide or show the team selector based on the origin
-    const teamSelector = document.getElementById("container_team");
-    if (origin === "eh") {
-        teamSelector.classList.add("hidden");
-    } else {
-        teamSelector.classList.remove("hidden");
-        prepareClubs(origin);
-    }
-
+    prepareClubs(origin);
     clubChanged(origin, "null");
     newOriginButton.classList.remove("loading");
 
@@ -228,6 +220,9 @@ function prepareClubs(origin) {
         optionEl.value = club.id;
         selectContainer.append(optionEl);
     }
+
+    const teamSelector = document.getElementById("container_team");
+    teamSelector.classList.toggle("hidden", selectContainer.children.length <= 1);
 }
 
 /**

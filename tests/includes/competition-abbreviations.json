@@ -1,4 +1,6 @@
 [
+  {"in": "2024-25 FIH Hockey Pro League (M)", "out": "PL"},
+  {"in": "2024-25 FIH Hockey Pro League (W)", "out": "PL"},
   {"in": "1234 Olympic Games (M)", "out": "OG"},
   {"in": "1234 Test matches sadf (W)", "out": "TEST"},
   {"in": "EuroHockey U21 Championship", "out": "U21C"},
