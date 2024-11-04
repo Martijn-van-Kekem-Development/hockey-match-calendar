@@ -385,9 +385,15 @@ export class Match {
             lines.push(`Event: ${this.competition.getName()}`);
 
         // Add match link if HTML is enabled
-        if (includeHTML && this.id) {
-            const baseUrl = "https://test.com/matches/";
-            lines.push(`<a href="${baseUrl}${this.id}">View match details</a>`);
+        if (includeHTML &&
+                this.id &&
+                this.competition &&
+                this.competition.getFetcher()) {
+            const fetcher = this.competition.getFetcher();
+            lines.push(
+                `<a href="${fetcher.getBaseURL()}/matches/${this.id}">` +
+                "View match details</a>"
+            );
         }
 
         // Append fetcher description (for links and any fetcher-specific data)
