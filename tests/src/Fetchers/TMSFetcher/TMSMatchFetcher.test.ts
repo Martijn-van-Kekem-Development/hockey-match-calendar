@@ -168,8 +168,6 @@ describe("TMSMatchFetcher tests", () => {
             const officials = await fetcher.fetchOfficials(competition);
             const matchOfficials = officials.get("4205");
 
-            console.log("Found officials:", matchOfficials);
-
             expect(matchOfficials).toHaveLength(5);
             expect(matchOfficials).toContainEqual({
                 role: "Umpire",
