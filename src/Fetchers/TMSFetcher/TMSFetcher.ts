@@ -1,6 +1,6 @@
 import { Fetcher, FetcherOptions } from "../Fetcher.js";
 import { Competition } from "../../Objects/Competition.js";
-import { Match } from "../../Objects/Match.js";
+import { Match, Official } from "../../Objects/Match.js";
 import { TMSCompetitionFetcher } from "./TMSCompetitionFetcher.js";
 import { TMSMatchFetcher } from "./TMSMatchFetcher.js";
 import { ICSCreator } from "../../Utils/ICSCreator.js";
@@ -156,17 +156,27 @@ export class TMSFetcher extends Fetcher {
             lines.push("");
             lines.push("Match Officials:");
 
-            // Group officials by role
-            const byRole = officials.reduce((acc, curr) => {
-                if (!acc[curr.role]) acc[curr.role] = [];
-                acc[curr.role].push(curr.country
-                    ? `${curr.name} (${curr.country})` : curr.name);
-                return acc;
-            }, {} as Record<string, string[]>);
+            // Define role order based on table columns
+            const roleOrder = [
+                "Umpire",
+                "Reserve/Video",
+                "Scoring/Timing",
+                "Technical Officer"
+            ];
 
-            // Add each role and officials
-            for (const [role, names] of Object.entries(byRole)) {
-                lines.push(`${role}: ${names.join(", ")}`);
+            // Sort officials by predefined role order
+            const sortedOfficials = [...officials].sort((a, b) => {
+                const indexA = roleOrder.indexOf(a.role);
+                const indexB = roleOrder.indexOf(b.role);
+                return indexA - indexB;
+            });
+
+            // Add each official on their own line
+            for (const official of sortedOfficials) {
+                const officialStr = official.country
+                    ? `${official.name} (${official.country})`
+                    : official.name;
+                lines.push(`${official.role}: ${officialStr}`);
             }
             lines.push("");
         }
@@ -189,5 +199,16 @@ export class TMSFetcher extends Fetcher {
         }
 
         return lines;
+    }
+
+    /**
+     * Fetch officials for a competition
+     * @param competition The competition to fetch officials for
+     */
+    public async fetchOfficials(
+        competition: Competition
+    ): Promise<Map<string, Official[]>> {
+        const matchFetcher = new TMSMatchFetcher(this);
+        return matchFetcher.fetchOfficials(competition);
     }
 }

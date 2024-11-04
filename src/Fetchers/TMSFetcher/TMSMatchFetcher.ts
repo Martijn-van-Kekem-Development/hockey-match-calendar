@@ -149,87 +149,83 @@ export class TMSMatchFetcher {
      * Fetch officials data for a competition
      * @param competition The competition to fetch officials for
      */
-    private async fetchOfficials(
-        competition: Competition): Promise<Map<string, Official[]>> {
+    public async fetchOfficials(
+        competition: Competition
+    ): Promise<Map<string, Official[]>> {
         const officialsMap = new Map<string, Official[]>();
-
-        const url = `${this.fetcher.getBaseURL()}/competitions/${
-            competition.getID()}/officials`;
+        const url = `${this.fetcher.getBaseURL()}/competitions/${competition.getID()}/officials`;
         const data = await APIHelper.fetch(url, this.fetcher);
         const html = parse(await data.text());
 
-        // Get all date sections (2024-05-31, 2024-06-01, etc.)
-        const dateSections = html.querySelectorAll(".tab-pane");
-        if (!dateSections || dateSections.length === 0) {
-            return officialsMap;
-        }
+        const datePanes = html.querySelectorAll(".tab-pane");
+        if (!datePanes || datePanes.length === 0) return officialsMap;
 
-        for (const section of dateSections) {
-            // Get the appointments table in each date section
-            const table = section.querySelector("table");
+        for (const pane of datePanes) {
+            const table = pane.querySelector("table");
             if (!table) continue;
 
-            // Get headers for column mapping
-            const headers = table.querySelectorAll("th");
+            const headers = table.querySelectorAll("tr:first-child th");
             const roleIndices = new Map<string, number>();
             headers.forEach((header, index) => {
                 const role = header.textContent.trim();
                 if (role) roleIndices.set(role, index);
             });
 
-            // Get all rows from the table
             const rows = table.querySelectorAll("tr:not(:first-child)");
-            for (const row of rows) {
+            let currentMatchId: string | null = null;
+            let officials: Official[] = [];
+
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
                 const cells = row.querySelectorAll("td");
 
-                // Get match ID from the Details cell link
-                const detailsCell = cells[roleIndices.get("Details")];
-                if (!detailsCell) continue;
+                // Check for new match
+                const matchCell = row.querySelector("td[rowspan=\"2\"] a[href]");
+                if (matchCell) {
+                    if (currentMatchId && officials.length > 0) {
+                        officialsMap.set(currentMatchId, [...officials]);
+                    }
+                    currentMatchId = matchCell.getAttribute("href").split("/").pop();
+                    officials = [];
+                }
 
-                const matchLink = detailsCell.querySelector("a[href]");
-                if (!matchLink) continue;
+                if (!currentMatchId) continue;
 
-                const matchId = matchLink
-                    .getAttribute("href")
-                    .split("/")
-                    .slice(-1)[0];
-                if (!matchId) continue;
+                // Process officials in this row
+                const roleColumns = new Map([
+                    ["Umpires", "Umpire"],
+                    ["Reserve/Video", "Reserve/Video"],
+                    ["Scoring/Timing", "Scoring/Timing"],
+                    ["Technical Officer", "Technical Officer"]
+                ]);
 
-                const officials: Official[] = [];
-
-                // Process officials from relevant columns
-                const officialColumns = [
-                    "Umpires",
-                    "Reserve/Video",
-                    "Scoring/Timing",
-                    "Technical Officer"
-                ];
-                for (const role of officialColumns) {
-                    const index = roleIndices.get(role);
+                for (const [columnHeader, officialRole] of roleColumns) {
+                    const index = roleIndices.get(columnHeader);
                     if (index === undefined) continue;
 
-                    const cell = cells[index];
+                    // Account for rowspan offset in second row
+                    const cellIndex = matchCell ? index : index - 2;
+                    const cell = cells[cellIndex];
                     if (!cell) continue;
 
-                    // Get all official links in the cell
-                    const officialLinks = cell.querySelectorAll("a");
-                    officialLinks.forEach(link => {
-                        const name = link.textContent.trim();
-                        const countryMatch = name.match(/\(([A-Z]{3})\)$/);
-                        if (name) {
-                            officials.push({
-                                role,
-                                name: countryMatch ? name.replace(
-                                    countryMatch[0], "").trim() : name,
-                                country: countryMatch ? countryMatch[1] : undefined
-                            });
-                        }
+                    const officialLink = cell.querySelector("a");
+                    if (!officialLink?.textContent?.trim()) continue;
+
+                    const content = officialLink.textContent.trim();
+                    const countryMatch = content.match(/\(([A-Z]{3})\)$/);
+                    officials.push({
+                        role: officialRole,
+                        name: countryMatch
+                            ? content.substring(0, content.lastIndexOf("(")).trim()
+                            : content,
+                        country: countryMatch ? countryMatch[1] : undefined
                     });
                 }
+            }
 
-                if (officials.length > 0) {
-                    officialsMap.set(matchId, officials);
-                }
+            // Save the last match's officials
+            if (currentMatchId && officials.length > 0) {
+                officialsMap.set(currentMatchId, [...officials]);
             }
         }
 

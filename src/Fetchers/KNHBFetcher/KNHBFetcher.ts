@@ -1,5 +1,5 @@
 import { Competition } from "../../Objects/Competition.js";
-import { Match } from "../../Objects/Match.js";
+import { Match, Official } from "../../Objects/Match.js";
 import { Fetcher, FetcherOptions } from "../Fetcher.js";
 import { KNHBCompetitionFetcher } from "./KNHBCompetitionFetcher.js";
 import { KNHBMatchFetcher } from "./KNHBMatchFetcher.js";
@@ -148,5 +148,13 @@ export class KNHBFetcher extends Fetcher {
      */
     public getClubs() {
         return this.clubs;
+    }
+
+    /**
+     * Fetch officials for a competition
+     * @returns Empty map as KNHB does not support officials
+     */
+    public async fetchOfficials(): Promise<Map<string, Official[]>> {
+        return new Map();
     }
 }
