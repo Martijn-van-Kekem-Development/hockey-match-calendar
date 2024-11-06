@@ -36,17 +36,14 @@ export class KNHBClubFetcher {
     }
 
     /**
-     * Simplify a string for comparison.
-     * @param input The input string.
+     * Simplify the input string, used to match club names.
+     * @param input The club name.
+     * @protected
      */
-    public static simplifyString(input: string | null): string {
-        if (!input) return "";
-
+    public static simplifyString(input: string) {
         return input
             .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^a-z0-9]/g, "");
+            .replaceAll(/[^a-z]/g, "");
     }
 }
 
