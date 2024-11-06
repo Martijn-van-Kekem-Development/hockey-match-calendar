@@ -75,7 +75,6 @@ export class TMSFetcher extends Fetcher {
      * Fetch the matches from TMS.
      */
     protected async fetch() {
-        try {
             this.log("info", "Fetching competitions.");
             const competitions = await this.fetchCompetitions();
             const promises = [];
@@ -115,10 +114,6 @@ export class TMSFetcher extends Fetcher {
 
             this.log("info", "Finished.");
             return competitionsArray;
-        } catch (error) {
-            this.log("error", `Fatal error in fetch: ${error.message}`);
-            return [];
-        }
     }
 
     /**
@@ -166,8 +161,8 @@ export class TMSFetcher extends Fetcher {
 
             // Sort officials by predefined role order
             const sortedOfficials = [...officials].sort((a, b) => {
-                const indexA = roleOrder.indexOf(a.role);
-                const indexB = roleOrder.indexOf(b.role);
+                const indexA = roleOrder.indexOf(a.role) ?? 0;
+                const indexB = roleOrder.indexOf(b.role) ?? 0;
                 return indexA - indexB;
             });
 
