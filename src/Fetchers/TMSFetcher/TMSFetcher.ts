@@ -156,18 +156,18 @@ export class TMSFetcher extends Fetcher {
             lines.push("");
             lines.push("Match Officials:");
 
-            // Define role order based on table columns
-            const roleOrder = [
-                "Umpire",
-                "Reserve/Video",
-                "Scoring/Timing",
-                "Technical Officer"
-            ];
+            // Define role order based on table columns with O(1) lookup
+            const roleOrder: Record<string, number> = {
+                "Umpire": 0,
+                "Reserve/Video": 1,
+                "Scoring/Timing": 2,
+                "Technical Officer": 3
+            };
 
             // Sort officials by predefined role order
             const sortedOfficials = [...officials].sort((a, b) => {
-                const indexA = roleOrder.indexOf(a.role) ?? 0;
-                const indexB = roleOrder.indexOf(b.role) ?? 0;
+                const indexA = roleOrder[a.role] ?? Number.MAX_SAFE_INTEGER;
+                const indexB = roleOrder[b.role] ?? Number.MAX_SAFE_INTEGER;
                 return indexA - indexB;
             });
 
