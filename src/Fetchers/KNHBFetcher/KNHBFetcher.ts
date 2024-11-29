@@ -1,5 +1,6 @@
 import { Competition } from "../../Objects/Competition.js";
-import { Match, Official } from "../../Objects/Match.js";
+import { Match } from "../../Objects/Match.js";
+import { Official } from "../../Objects/Official.js";
 import { Fetcher, FetcherOptions } from "../Fetcher.js";
 import { KNHBCompetitionFetcher } from "./KNHBCompetitionFetcher.js";
 import { KNHBMatchFetcher } from "./KNHBMatchFetcher.js";

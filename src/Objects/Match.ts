@@ -4,12 +4,7 @@ import { Abbreviations } from "../Utils/Abbreviations.js";
 import { DateHelper } from "../Utils/DateHelper.js";
 import { Moment } from "moment-timezone";
 import { Gender, getFullGender } from "./Gender.js";
-
-export interface Official {
-    role: string;
-    name: string;
-    country?: string;
-}
+import { Official } from "./Official.js";
 
 export class Match {
     /**

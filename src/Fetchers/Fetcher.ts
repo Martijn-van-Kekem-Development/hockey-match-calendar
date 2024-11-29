@@ -1,5 +1,6 @@
 import { Competition } from "../Objects/Competition.js";
-import { Match, Official } from "../Objects/Match.js";
+import { Match } from "../Objects/Match.js";
+import { Official } from "../Objects/Official.js";
 import { ICS } from "../ICS.js";
 
 export abstract class Fetcher {

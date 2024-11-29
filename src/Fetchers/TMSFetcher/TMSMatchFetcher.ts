@@ -1,10 +1,11 @@
-import { Match, Official } from "../../Objects/Match.js";
+import { Match } from "../../Objects/Match.js";
 import { HTMLElement, parse } from "node-html-parser";
 import { Competition } from "../../Objects/Competition.js";
 import { Abbreviations } from "../../Utils/Abbreviations.js";
 import { DateHelper } from "../../Utils/DateHelper.js";
 import { TMSFetcher } from "./TMSFetcher.js";
 import { APIHelper } from "../../Utils/APIHelper";
+import { Official } from "../../Objects/Official.js";
 
 export class TMSMatchFetcher {
     /**
@@ -152,84 +153,6 @@ export class TMSMatchFetcher {
     public async fetchOfficials(
         competition: Competition
     ): Promise<Map<string, Official[]>> {
-        const officialsMap = new Map<string, Official[]>();
-        const baseUrl = this.fetcher.getBaseURL();
-        const url = `${baseUrl}/competitions/${competition.getID()}/officials`;
-        const data = await APIHelper.fetch(url, this.fetcher);
-        const html = parse(await data.text());
-
-        const datePanes = html.querySelectorAll(".tab-pane");
-        if (!datePanes || datePanes.length === 0) return officialsMap;
-
-        for (const pane of datePanes) {
-            const table = pane.querySelector("table");
-            if (!table) continue;
-
-            const headers = table.querySelectorAll("tr:first-child th");
-            const roleIndices = new Map<string, number>();
-            headers.forEach((header, index) => {
-                const role = header.textContent.trim();
-                if (role) roleIndices.set(role, index);
-            });
-
-            const rows = table.querySelectorAll("tr:not(:first-child)");
-            let currentMatchId: string | null = null;
-            let officials: Official[] = [];
-
-            for (let i = 0; i < rows.length; i++) {
-                const row = rows[i];
-                const cells = row.querySelectorAll("td");
-
-                // Check for new match
-                const matchCell = row.querySelector("td[rowspan=\"2\"] a[href]");
-                if (matchCell) {
-                    if (currentMatchId && officials.length > 0) {
-                        officialsMap.set(currentMatchId, [...officials]);
-                    }
-                    currentMatchId = matchCell.getAttribute("href").split("/").pop();
-                    officials = [];
-                }
-
-                if (!currentMatchId) continue;
-
-                // Process officials in this row
-                const roleColumns = new Map([
-                    ["Umpires", "Umpire"],
-                    ["Reserve/Video", "Reserve/Video"],
-                    ["Scoring/Timing", "Scoring/Timing"],
-                    ["Technical Officer", "Technical Officer"]
-                ]);
-
-                for (const [columnHeader, officialRole] of roleColumns) {
-                    const index = roleIndices.get(columnHeader);
-                    if (index === undefined) continue;
-
-                    // Account for rowspan offset in second row
-                    const cellIndex = matchCell ? index : index - 2;
-                    const cell = cells[cellIndex];
-                    if (!cell) continue;
-
-                    const officialLink = cell.querySelector("a");
-                    if (!officialLink?.textContent?.trim()) continue;
-
-                    const content = officialLink.textContent.trim();
-                    const countryMatch = content.match(/\(([A-Z]{3})\)$/);
-                    officials.push({
-                        role: officialRole,
-                        name: countryMatch
-                            ? content.substring(0, content.lastIndexOf("(")).trim()
-                            : content,
-                        country: countryMatch ? countryMatch[1] : undefined
-                    });
-                }
-            }
-
-            // Save the last match's officials
-            if (currentMatchId && officials.length > 0) {
-                officialsMap.set(currentMatchId, [...officials]);
-            }
-        }
-
-        return officialsMap;
+        return this.fetcher.fetchOfficials(competition);
     }
 }

@@ -1,10 +1,12 @@
 import { Fetcher, FetcherOptions } from "../Fetcher.js";
 import { Competition } from "../../Objects/Competition.js";
-import { Match, Official } from "../../Objects/Match.js";
+import { Match } from "../../Objects/Match.js";
 import { TMSCompetitionFetcher } from "./TMSCompetitionFetcher.js";
 import { TMSMatchFetcher } from "./TMSMatchFetcher.js";
 import { ICSCreator } from "../../Utils/ICSCreator.js";
 import { Gender } from "../../Objects/Gender.js";
+import { TMSOfficialFetcher } from "./TMSOfficialFetcher.js";
+import { Official } from "../../Objects/Official.js";
 
 export class TMSFetcher extends Fetcher {
     /**
@@ -60,6 +62,12 @@ export class TMSFetcher extends Fetcher {
     private matchFetcher: TMSMatchFetcher;
 
     /**
+     * The official fetcher.
+     * @private
+     */
+    private officialFetcher: TMSOfficialFetcher;
+
+    /**
      * Constructor for TMSFetcher
      * @param baseURL The base URL.
      * @param options The options for this fetcher.
@@ -69,6 +77,7 @@ export class TMSFetcher extends Fetcher {
 
         this.competitionFetcher = new TMSCompetitionFetcher(this);
         this.matchFetcher = new TMSMatchFetcher(this);
+        this.officialFetcher = new TMSOfficialFetcher(this);
     }
 
     /**
@@ -203,7 +212,6 @@ export class TMSFetcher extends Fetcher {
     public async fetchOfficials(
         competition: Competition
     ): Promise<Map<string, Official[]>> {
-        const matchFetcher = new TMSMatchFetcher(this);
-        return matchFetcher.fetchOfficials(competition);
+        return this.officialFetcher.fetch(competition);
     }
 }
