@@ -358,15 +358,14 @@ export class Match {
     public getMatchDate(): Moment {
         return this.date;
     }
-
     /**
      * Get the match description.
-     * @param includeHTML Whether to include HTML formatting for links.
+     * @param html Whether to return HTML.
      */
-    public getMatchDescription(includeHTML: boolean = true): string {
+    public getMatchDescription(html: boolean): string {
         const lines: string[] = [];
 
-        // Add match data
+        // Add match data.
         const homeTeam = this.getHomeTeam(true);
         const awayTeam = this.getAwayTeam(true);
         lines.push(`${homeTeam} - ${awayTeam}`);
@@ -379,19 +378,18 @@ export class Match {
         if (this.competition)
             lines.push(`Event: ${this.competition.getName()}`);
 
-        // Add match link if HTML is enabled
-        if (includeHTML &&
-                this.id &&
-                this.competition &&
-                this.competition.getFetcher()) {
-            const fetcher = this.competition.getFetcher();
-            lines.push(
-                `<a href="${fetcher.getBaseURL()}/matches/${this.id}">` +
-                "View match details</a>"
-            );
-        }
+        lines.push("");
 
-        // Append fetcher description (for links and any fetcher-specific data)
+        // Append fetcher description
+        if (this.competition && this.competition.getFetcher())
+            lines.push(...this.competition.getFetcher()
+                .descriptionToAppend(this.competition,  this, html));
+
+        return lines.join(html ? "<br>" : "\\n");
+    }
+
+    // Append fetcher description (for links and any fetcher-specific data)
+    private appendFetcherDescription(lines: string[], includeHTML: boolean) {
         if (this.competition && this.competition.getFetcher()) {
             lines.push(...this.competition.getFetcher()
                 .descriptionToAppend(this.competition, this, includeHTML));

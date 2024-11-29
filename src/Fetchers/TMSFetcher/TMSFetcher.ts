@@ -80,49 +80,45 @@ export class TMSFetcher extends Fetcher {
         this.officialFetcher = new TMSOfficialFetcher(this);
     }
 
-    /**
+      /**
      * Fetch the matches from TMS.
      */
-    protected async fetch() {
-            this.log("info", "Fetching competitions.");
-            const competitions = await this.fetchCompetitions();
-            const promises = [];
+      protected async fetch() {
+        this.log("info", "Fetching competitions.");
+        const competitions = await this.fetchCompetitions();
+        const promises = [];
 
-            this.log("info", `Found ${competitions.size} competitions.`);
-            this.log("info", "Fetching matches and creating competition files.");
+        this.log("info", `Found ${competitions.size} competitions.`);
+        this.log("info", "Fetching matches and creating competition files.");
 
-            for (const competition of competitions.values()) {
-                // Fetch matches for every competition and create ICS file
-                const promise = (async () => {
-                    try {
-                        const matches = await this.fetchMatches(competition);
-                        competition.getMatches().push(...matches.values());
-                        await ICSCreator.createCompetitionICS(competition);
-                    } catch (error) {
-                        this.log("error", `Failed to fetch matches for competition ${
-                            competition.getID()}: ${error.message}`);
-                    }
-                })();
-                promises.push(promise);
-            }
+        for (const competition of competitions.values()) {
+            // Fetch match for every competition
+            const matchPromise = this.fetchMatches(competition);
+            matchPromise.then(result => {
+                competition.getMatches().push(...result.values());
+                return ICSCreator.createCompetitionICS(competition);
+            });
 
-            // Wait for all matches to fetch and ICS files to be created
-            await Promise.all(promises);
-            const competitionsArray = Array.from(competitions.values());
+            promises.push(matchPromise);
+        }
 
-            // Create total calendar files
-            await Promise.all([
-                ICSCreator.createTotalICS(this, competitionsArray),
-                ICSCreator.createGenderTotalICS(this, competitionsArray,
-                    Gender.MEN),
-                ICSCreator.createGenderTotalICS(this, competitionsArray,
-                    Gender.WOMEN),
-                ICSCreator.createGenderTotalICS(this, competitionsArray,
-                    Gender.MIXED),
-            ]);
+        // Wait for all matches to fetch
+        await Promise.all(promises);
+        const competitionsArray = Array.from(competitions.values());
 
-            this.log("info", "Finished.");
-            return competitionsArray;
+        // Create total calendar files.
+        await Promise.all([
+            ICSCreator.createTotalICS(this, competitionsArray),
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
+                Gender.MEN),
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
+                Gender.WOMEN),
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
+                Gender.MIXED),
+        ]);
+
+        this.log("info", "Finished.");
+        return competitionsArray;
     }
 
     /**
