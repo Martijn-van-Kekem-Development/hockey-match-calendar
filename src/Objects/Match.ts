@@ -4,6 +4,7 @@ import { Abbreviations } from "../Utils/Abbreviations.js";
 import { DateHelper } from "../Utils/DateHelper.js";
 import { Moment } from "moment-timezone";
 import { Gender, getFullGender } from "./Gender.js";
+import { Official } from "./Official.js";
 
 export class Match {
     /**
@@ -83,6 +84,12 @@ export class Match {
      * @private
      */
     private id: string | null = null;
+
+    /**
+     * The match officials.
+     * @private
+     */
+    private officials: Official[] = [];
 
     /**
      * Set the home team for this match.
@@ -351,7 +358,6 @@ export class Match {
     public getMatchDate(): Moment {
         return this.date;
     }
-
     /**
      * Get the match description.
      * @param html Whether to return HTML.
@@ -382,6 +388,16 @@ export class Match {
         return lines.join(html ? "<br>" : "\\n");
     }
 
+    // Append fetcher description (for links and any fetcher-specific data)
+    private appendFetcherDescription(lines: string[], includeHTML: boolean) {
+        if (this.competition && this.competition.getFetcher()) {
+            lines.push(...this.competition.getFetcher()
+                .descriptionToAppend(this.competition, this, includeHTML));
+        }
+
+        return lines.join("\\n");
+    }
+
     /**
      * Get the title for this match.
      */
@@ -399,6 +415,23 @@ export class Match {
      */
     public getMatchID(): string {
         return this.id;
+    }
+
+    /**
+     * Add an official to the match
+     * @param role The role of the official
+     * @param name The name of the official
+     * @param country Optional country code
+     */
+    public addOfficial(role: string, name: string, country?: string) {
+        this.officials.push({ role, name, country });
+    }
+
+    /**
+     * Get all officials for this match
+     */
+    public getOfficials(): Official[] {
+        return this.officials;
     }
 }
 

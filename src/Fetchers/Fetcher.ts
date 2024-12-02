@@ -1,5 +1,6 @@
 import { Competition } from "../Objects/Competition.js";
 import { Match } from "../Objects/Match.js";
+import { Official } from "../Objects/Official.js";
 import { ICS } from "../ICS.js";
 
 export abstract class Fetcher {
@@ -106,6 +107,14 @@ export abstract class Fetcher {
      */
     public abstract descriptionToAppend(competition: Competition, match: Match,
                                         html: boolean): string[];
+
+    /**
+     * Fetch officials for a competition
+     * @param competition The competition to fetch officials for
+     */
+    public abstract fetchOfficials(
+        competition: Competition
+    ): Promise<Map<string, Official[]>>;
 }
 
 export interface FetcherOptions {

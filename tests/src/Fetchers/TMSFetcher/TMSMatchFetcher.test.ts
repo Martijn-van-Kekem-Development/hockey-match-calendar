@@ -23,6 +23,7 @@ function runParseTitleTest(test: parseTitleTest, full: boolean = false) {
 }
 
 describe("TMSMatchFetcher tests", () => {
+
     describe("parseTitle()", () => {
         test("Normalizing string", () => {
             runParseTitleTest({
