@@ -168,6 +168,10 @@ async function selectOrigin(origin, userClick) {
     clubChanged(origin, "null");
     newOriginButton.classList.remove("loading");
 
+    prepareOfficials(origin);
+    prepareClubSelector();
+    prepareOfficialSelector();
+
     if (userClick) {
         gtag('event', 'origin_select', {
             origin_id: origin,
@@ -257,6 +261,85 @@ function prepareClubSelector() {
     const selectContainer = document.getElementById("team");
     selectContainer.addEventListener("change", () => {
         clubChanged(selectContainer.getAttribute("data-origin"), selectContainer.value)
+    });
+}
+
+/**
+ * Prepare the officials picker.
+ */
+function prepareOfficials(origin) {
+    const selectContainer = document.getElementById("official");
+    selectContainer.querySelectorAll(`option:not([value="null"])`).forEach(e => e.remove());
+    selectContainer.setAttribute("data-origin", origin);
+
+    // Only show officials selector for TMS-based fetchers
+    const officialSelector = document.getElementById("container_official");
+    if (!origins[origin].officials || origins[origin].officials.length === 0) {
+        officialSelector.classList.add("hidden");
+        return;
+    }
+
+    officialSelector.classList.remove("hidden");
+
+    // Add officials to list
+    const officials = origins[origin].officials
+        .sort((a,b) => a.name.localeCompare(b.name));
+
+    for (let official of officials) {
+        const optionEl = document.createElement("option");
+        optionEl.textContent = official.country ? 
+            `${official.name} (${official.country})` : 
+            official.name;
+        optionEl.value = `${official.name}${official.country ? `-${official.country}` : ''}`;
+        selectContainer.append(optionEl);
+    }
+}
+
+/**
+ * Select a new official.
+ * @param origin The origin.
+ * @param newOfficial The new official
+ */
+function officialChanged(origin, newOfficial) {
+    // Clear club selection
+    document.getElementById("team").value = "null";
+    clubChanged(origin, "null");
+
+    if (newOfficial === "null") {
+        document.getElementById("warning_official").classList.add("hidden");
+        return;
+    }
+
+    // Find official data
+    const official = origins[origin].officials.find(o => 
+        `${o.name}${o.country ? `-${o.country}` : ''}` === newOfficial
+    );
+
+    // Update table with official's calendar
+    const container = document.getElementById("specific_body");
+    container.innerHTML = "";
+    
+    const path = `officials/${newOfficial}/all-matches`;
+    container.append(createTableRow({
+        name: `${official.name}${official.country ? ` (${official.country})` : ''} - All Matches`,
+        path,
+        count: official.count
+    }));
+
+    // Show warning
+    const warningNotification = document.getElementById("warning_official");
+    warningNotification.classList.remove("hidden");
+    document.getElementById("official_selected").textContent = 
+        official.country ? `${official.name} (${official.country})` : official.name;
+}
+
+/**
+ * Prepare the official selector.
+ */
+function prepareOfficialSelector() {
+    const selectContainer = document.getElementById("official");
+    selectContainer.addEventListener("change", () => {
+        officialChanged(selectContainer.getAttribute("data-origin"), selectContainer.value)
     });
 }
 

@@ -3,6 +3,7 @@ import { Competition } from "../Objects/Competition.js";
 import { Fetcher } from "../Fetchers/Fetcher.js";
 import { Club, Match } from "../Objects/Match.js";
 import { Gender } from "../Objects/Gender.js";
+import { Official } from "../Objects/Official.js";
 
 export class ICSCreator {
     /**
@@ -145,5 +146,64 @@ export class ICSCreator {
 
         await ICSCreator.createClubICS(competition.getFetcher(),
             competition.getMatches(), path, title, meta);
+    }
+
+    /**
+     * Create ICS files for each official's matches
+     * @param fetcher The fetcher
+     * @param competitions All competitions to include
+     */
+    public static async createOfficialICS(
+        fetcher: Fetcher,
+        competitions: Competition[]
+    ) {
+        const matches = competitions.map(e => e.getMatches()).flat();
+        const officialsMap = new Map<string, {
+            matches: Match[],
+            official: Official
+        }>();
+
+        // Group matches by official
+        for (const match of matches) {
+            for (const official of match.getOfficials()) {
+                const officialKey = `${official.name}${
+                    official.country ? `-${official.country}` : ""
+                }`;
+
+                if (!officialsMap.has(officialKey)) {
+                    officialsMap.set(officialKey, {
+                        matches: [],
+                        official
+                    });
+                }
+
+                officialsMap.get(officialKey).matches.push(match);
+            }
+        }
+
+        // Create calendar file for each official
+        const promises = [];
+        for (const [officialKey, data] of officialsMap) {
+            const path = `officials/${officialKey}/all-matches`;
+            const title = `${data.official.name}${
+                data.official.country ? ` (${data.official.country})` : ""
+            } - All Matches`;
+
+            promises.push(ICS.writeToFile(
+                fetcher,
+                data.matches,
+                title,
+                path,
+                null,
+                {
+                    type: "official",
+                    count: data.matches.length,
+                    name: data.official.name,
+                    country: data.official.country
+                }
+            ));
+        }
+
+        await Promise.all(promises);
     }
 }
