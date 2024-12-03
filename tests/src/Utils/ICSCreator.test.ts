@@ -10,5 +10,4 @@ describe("ICSCreator tests", () => {
                 .not.toThrowError();
         }
     });
-
 });
