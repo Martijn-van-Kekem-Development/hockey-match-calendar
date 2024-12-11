@@ -5,6 +5,7 @@ import { Abbreviations } from "../../Utils/Abbreviations.js";
 import { DateHelper } from "../../Utils/DateHelper.js";
 import { TMSFetcher } from "./TMSFetcher.js";
 import { APIHelper } from "../../Utils/APIHelper";
+import { Official } from "../../Objects/Official.js";
 
 export class TMSMatchFetcher {
     /**
@@ -44,6 +45,23 @@ export class TMSMatchFetcher {
         for (const row of rows) {
             const item = this.createMatch(competition, row);
             matches.set(item.getID(), item);
+        }
+
+        // Fetch officials data
+        const officials = await this.fetchOfficials(competition);
+
+        // Add officials to matches
+        for (const [matchId, match] of matches) {
+            const matchOfficials = officials.get(matchId);
+            if (matchOfficials) {
+                matchOfficials.forEach(official => {
+                    match.addOfficial(
+                        official.role,
+                        official.name,
+                        official.country
+                    );
+                });
+            }
         }
 
         return matches;
@@ -128,5 +146,15 @@ export class TMSMatchFetcher {
         object.setHomeTeam(home.toLowerCase(), home);
         object.setAwayTeam(away.toLowerCase(), away);
         object.setType(matchType);
+    }
+
+    /**
+     * Fetch officials data for a competition
+     * @param competition The competition to fetch officials for
+     */
+    public async fetchOfficials(
+        competition: Competition
+    ): Promise<Map<string, Official[]>> {
+        return this.fetcher.fetchOfficials(competition);
     }
 }

@@ -164,4 +164,39 @@ describe("Match tests", () => {
             });
         });
     });
+
+    describe("Officials storage", () => {
+        const match = new Match();
+
+        test("Add and retrieve officials", () => {
+            match.addOfficial("Umpire", "John Smith", "ENG");
+            match.addOfficial("Umpire", "Jane Doe", "SCO");
+
+            const officials = match.getOfficials();
+            expect(officials).toHaveLength(2);
+            expect(officials[0]).toEqual({
+                role: "Umpire",
+                name: "John Smith",
+                country: "ENG"
+            });
+            expect(officials[1]).toEqual({
+                role: "Umpire",
+                name: "Jane Doe",
+                country: "SCO"
+            });
+        });
+
+        test("Add official without country", () => {
+            match.addOfficial("Reserve Umpire", "Local Umpire");
+
+            const officials = match.getOfficials();
+            const reserveUmpire = officials.find(o => o.role === "Reserve Umpire");
+            expect(reserveUmpire).toEqual({
+                role: "Reserve Umpire",
+                name: "Local Umpire",
+                country: undefined
+            });
+        });
+    });
+
 });

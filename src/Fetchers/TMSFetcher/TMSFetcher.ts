@@ -5,6 +5,8 @@ import { TMSCompetitionFetcher } from "./TMSCompetitionFetcher.js";
 import { TMSMatchFetcher } from "./TMSMatchFetcher.js";
 import { ICSCreator } from "../../Utils/ICSCreator.js";
 import { Gender } from "../../Objects/Gender.js";
+import { TMSOfficialFetcher } from "./TMSOfficialFetcher.js";
+import { Official } from "../../Objects/Official.js";
 
 export class TMSFetcher extends Fetcher {
     /**
@@ -60,6 +62,12 @@ export class TMSFetcher extends Fetcher {
     private matchFetcher: TMSMatchFetcher;
 
     /**
+     * The official fetcher.
+     * @private
+     */
+    private officialFetcher: TMSOfficialFetcher;
+
+    /**
      * Constructor for TMSFetcher
      * @param baseURL The base URL.
      * @param options The options for this fetcher.
@@ -69,12 +77,13 @@ export class TMSFetcher extends Fetcher {
 
         this.competitionFetcher = new TMSCompetitionFetcher(this);
         this.matchFetcher = new TMSMatchFetcher(this);
+        this.officialFetcher = new TMSOfficialFetcher(this);
     }
 
-    /**
+      /**
      * Fetch the matches from TMS.
      */
-    protected async fetch() {
+      protected async fetch() {
         this.log("info", "Fetching competitions.");
         const competitions = await this.fetchCompetitions();
         const promises = [];
@@ -139,8 +148,38 @@ export class TMSFetcher extends Fetcher {
      */
     descriptionToAppend(competition: Competition, match: Match,
                         html: boolean): string[] {
-
         const lines: string[] = [];
+
+        // Add officials if present
+        const officials = match.getOfficials();
+        if (officials.length > 0) {
+            lines.push("");
+            lines.push("Match Officials:");
+
+            // Define role order based on table columns with O(1) lookup
+            const roleOrder: Record<string, number> = {
+                "Umpire": 0,
+                "Reserve/Video": 1,
+                "Scoring/Timing": 2,
+                "Technical Officer": 3
+            };
+
+            // Sort officials by predefined role order
+            const sortedOfficials = [...officials].sort((a, b) => {
+                const indexA = roleOrder[a.role] ?? Number.MAX_SAFE_INTEGER;
+                const indexB = roleOrder[b.role] ?? Number.MAX_SAFE_INTEGER;
+                return indexA - indexB;
+            });
+
+            // Add each official on their own line
+            for (const official of sortedOfficials) {
+                const officialStr = official.country
+                    ? `${official.name} (${official.country})`
+                    : official.name;
+                lines.push(`${official.role}: ${officialStr}`);
+            }
+            lines.push("");
+        }
 
         // Add TMS links
         if (html) {
@@ -160,5 +199,15 @@ export class TMSFetcher extends Fetcher {
         }
 
         return lines;
+    }
+
+    /**
+     * Fetch officials for a competition
+     * @param competition The competition to fetch officials for
+     */
+    public async fetchOfficials(
+        competition: Competition
+    ): Promise<Map<string, Official[]>> {
+        return this.officialFetcher.fetch(competition);
     }
 }
