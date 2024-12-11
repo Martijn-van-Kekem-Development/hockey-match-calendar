@@ -1,13 +1,22 @@
 import { Moment, tz } from "moment-timezone";
 import moment from "moment";
+import locationTimezone from "node-location-timezone";
 
 export class DateHelper {
     /**
      * Convert a date in the given timezone to UTC.
      * @param date The date
      * @param timeZone The time zone.
+     * @param venue The venue location
      */
-    static TMStoUTC(date: string, timeZone: string) {
+    static TMStoUTC(date: string, timeZone: string, venue: string | null = null) {
+        if (venue) {
+            // Attempt to convert venue to timezone.
+            const inputVenue = venue.split(",")[0].trim();
+            const tz = locationTimezone.findTimezoneByCityName(inputVenue);
+            if (tz) timeZone = tz;
+        }
+
         return tz(date, "D MMM YYYY HH:mm", timeZone).clone().utc(false);
     }
 
