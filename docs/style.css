@@ -93,30 +93,31 @@ h2 {
     width: 100%;
     margin-top: 0.7rem;
     margin-bottom: 0.3rem;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.origin-options .selectors {
+    display: flex;
+    gap: 2rem;
     flex-wrap: wrap;
-    gap: 0.5rem 2rem;
 }
 
-.origin-options p.last-update {
-    color: #6c6c6c;
-    font-size: 0.9rem;
-    margin: 0;
-    padding-block: 0.4rem;
-}
-
-.pick-team {
+.pick-team,
+.pick-official {
     flex: 1;
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.pick-team label {
+.pick-team label,
+.pick-official label {
     flex-shrink: 0;
 }
 
-.pick-team select {
+.pick-team select,
+.pick-official select {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -127,6 +128,10 @@ h2 {
     padding: 0.4rem 0.6rem;
 }
 
+.pick-team.hidden,
+.pick-official.hidden {
+    display: none;
+}
 
 .origin-buttons {
     list-style: none;

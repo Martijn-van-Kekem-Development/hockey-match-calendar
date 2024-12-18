@@ -141,6 +141,7 @@ async function selectOrigin(origin, userClick) {
         window.location.hash = ``;
         if (activeButton) activeButton.classList.remove("selected");
         document.getElementById("warning_team").classList.add("hidden");
+        document.getElementById("warning_official").classList.add("hidden");
         document.getElementById("container_origin").classList.add("select");
         return;
     }
@@ -164,9 +165,17 @@ async function selectOrigin(origin, userClick) {
     // Update last update timestamp
     document.getElementById("label_last_update").textContent = parseDate(new Date(origins[origin].lastUpdate));
 
+    // Filter out official paths from the main list
+    origins[origin].mainPaths = origins[origin].paths.filter(path => !path.type || path.type !== 'official');
+
+    // Prepare dropdowns and show initial paths
     prepareClubs(origin);
-    clubChanged(origin, "null");
+    prepareOfficials(origin);
+    showMainPaths(origin);
+    
     newOriginButton.classList.remove("loading");
+    prepareClubSelector();
+    prepareOfficialSelector();
 
     if (userClick) {
         gtag('event', 'origin_select', {
@@ -177,6 +186,23 @@ async function selectOrigin(origin, userClick) {
     }
 
     document.title = `${fetchers[origin].name} calendars - Hockey Match Calendar | By Martijn van Kekem`;
+}
+
+/**
+ * Show the main paths for an origin
+ * @param origin The origin to show paths for
+ */
+function showMainPaths(origin) {
+    const container = document.getElementById("specific_body");
+    container.innerHTML = "";
+    
+    // Sort and display main paths
+    const paths = origins[origin].mainPaths.sort((a, b) => 
+        ((a.index ?? 0) - (b.index ?? 0)) || a.name.toString().localeCompare(b.name));
+    
+    for (let row of paths) {
+        container.append(createTableRow(row));
+    }
 }
 
 /**
@@ -261,9 +287,101 @@ function prepareClubSelector() {
 }
 
 /**
+ * Prepare the officials picker.
+ */
+function prepareOfficials(origin) {
+    const selectContainer = document.getElementById("official");
+    selectContainer.querySelectorAll(`option:not([value="null"])`).forEach(e => e.remove());
+    selectContainer.setAttribute("data-origin", origin);
+
+    // Get officials from paths
+    const officials = origins[origin].paths
+        .filter(path => path.type === 'official')
+        .map(path => {
+            const nameParts = path.name.split(' - ')[0].match(/^(.*?)(?:\s*\((.*?)\))?$/);
+            return {
+                name: nameParts[1],
+                country: nameParts[2] || '',
+                count: path.count
+            };
+        })
+        .sort((a,b) => a.name.localeCompare(b.name));
+
+    // Only show officials selector if we have officials
+    const officialSelector = document.getElementById("container_official");
+    if (!officials || officials.length === 0) {
+        officialSelector.classList.add("hidden");
+        return;
+    }
+
+    officialSelector.classList.remove("hidden");
+
+    // Add officials to dropdown
+    for (let official of officials) {
+        const optionEl = document.createElement("option");
+        optionEl.textContent = official.country ? 
+            `${official.name} (${official.country})` : 
+            official.name;
+        optionEl.value = `${official.name}${official.country ? `-${official.country}` : ''}`;
+        selectContainer.append(optionEl);
+    }
+}
+
+/**
+ * Select a new official.
+ * @param origin The origin.
+ * @param newOfficial The new official
+ */
+function officialChanged(origin, newOfficial) {
+    // Clear club selection
+    document.getElementById("team").value = "null";
+
+    // Empty current container
+    const container = document.getElementById("specific_body");
+    container.innerHTML = "";
+
+    if (newOfficial === "null") {
+        // Show all paths when "All officials" is selected
+        showMainPaths(origin);
+        document.getElementById("warning_official").classList.add("hidden");
+        return;
+    }
+
+    // Find official data from the paths
+    const officialPath = origins[origin].paths
+        .find(path => path.type === 'official' && 
+            path.name.split(' - ')[0] === newOfficial);
+
+    if (!officialPath) return;
+
+    // Show only this official's calendar
+    container.append(createTableRow({
+        name: "All matches",
+        path: officialPath.path,
+        count: officialPath.count
+    }));
+
+    // Show warning
+    const warningNotification = document.getElementById("warning_official");
+    warningNotification.classList.remove("hidden");
+    document.getElementById("official_selected").textContent = officialPath.name;
+}
+
+/**
+ * Prepare the official selector.
+ */
+function prepareOfficialSelector() {
+    const selectContainer = document.getElementById("official");
+    selectContainer.addEventListener("change", () => {
+        officialChanged(selectContainer.getAttribute("data-origin"), selectContainer.value)
+    });
+}
+
+/**
  * When the window has loaded.
  */
 window.addEventListener("DOMContentLoaded", async () => {
     await addOriginButtons();
     prepareClubSelector();
+    prepareOfficialSelector();
 })
