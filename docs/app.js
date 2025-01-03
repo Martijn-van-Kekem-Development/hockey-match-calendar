@@ -1,228 +1,219 @@
-let fetchers = {};
+// Store fetcher data
+const fetchers = {};
 const origins = {};
-let activeOrigin = null;
+let officialsMode = false;
 
-/**
- * When the copy URL link is clicked
- * @param evt The event that fired
- * @param tableRow The table row where the link was clicked in.
- * @returns {Promise<void>}
- */
-async function copyURL(evt, tableRow) {
-    evt.preventDefault();
-    await navigator.clipboard.writeText(evt.target.href);
-
-    // Temporarily change text to a check mark to indicate success.
-    const currentText = evt.target.textContent;
-    evt.target.textContent = "Copied!";
-    evt.target.classList.add("copied");
-    setTimeout(() => {
-        evt.target.textContent = currentText
-        evt.target.classList.remove("copied");
-    }, 1500);
-
-    gtag('event', 'calendar_download', {
-        cal_path: evt.target.getAttribute("href"),
-        cal_url: evt.target.href,
-        origin_id: location.hash.substring(1),
-        cal_name: tableRow.firstChild.textContent
-    });
-}
-
-/**
- * Create a new table row.
- * @param data The row data.
- * @returns {HTMLTableRowElement}
- */
-function createTableRow(data) {
-    let tableRow = document.createElement("tr");
-
-    let nameCol = document.createElement("td");
-    nameCol.textContent = data.name ?? "";
-    tableRow.append(nameCol);
-
-    let matchesCol = document.createElement("td");
-    matchesCol.innerHTML = `${data.count}`;
-    tableRow.append(matchesCol);
-
-    let urlCol = document.createElement("td");
-    let copyEl = document.createElement("a");
-    copyEl.href = `${data.path}`;
-    copyEl.addEventListener("click", e => copyURL(e, tableRow));
-    copyEl.textContent = "Copy URL";
-    urlCol.append(copyEl);
-    tableRow.append(urlCol);
-
-    return tableRow;
-}
-
-/**
- * When an origin is clicked.
- * @param e
- * @param origin
- */
-function onOriginClick(e, origin) {
-    // Clear hash if button was already active
-    if (origin.id === window.location.hash.substring(1)) {
-        e.preventDefault();
-        e.stopPropagation();
-        window.location.hash = "";
+// Load fetchers data
+async function loadFetchers() {
+    const response = await fetch('ics/fetchers.json');
+    if (!response.ok) return;
+    const data = await response.json();
+    
+    for (const [id, fetcher] of Object.entries(data)) {
+        fetchers[id] = fetcher.name;
     }
 }
 
 /**
- * Add the origin buttons to the DOM.
+ * Create a table row for a path.
+ * @param row The row data.
+ */
+function createTableRow(row) {
+    const tr = document.createElement("tr");
+    
+    const nameCell = document.createElement("td");
+    nameCell.textContent = row.name;
+    tr.append(nameCell);
+
+    const countCell = document.createElement("td");
+    countCell.textContent = row.count;
+    tr.append(countCell);
+
+    const linkCell = document.createElement("td");
+    const link = document.createElement("a");
+    link.href = row.path;
+    link.textContent = "Download";
+    linkCell.append(link);
+    tr.append(linkCell);
+
+    return tr;
+}
+
+/**
+ * Add origin buttons.
  */
 async function addOriginButtons() {
-    fetchers = await (await fetch("ics/fetchers.json")).json();
-
+    await loadFetchers();
     const container = document.getElementById("container_originButtons");
     container.innerHTML = "";
 
-    let originData = Object.values(fetchers).sort((a,b) =>
-        (a.index ?? 0) - (b.index ?? 0) || a.name.localeCompare(b.name));
+    // Create ul element for origin buttons
+    const ul = document.createElement("ul");
+    ul.classList.add("origin-buttons");
+    container.append(ul);
 
-    for (let origin of originData) {
-        const listEl = document.createElement("li");
-        const linkEl = document.createElement("a");
+    // Load origins
+    for (const origin of Object.keys(fetchers)) {
+        const response = await fetch(`ics/${origin}/paths.json`);
+        if (!response.ok) continue;
+        origins[origin] = await response.json();
 
-        const fullNameEl = document.createElement("span");
-        fullNameEl.classList.add("full");
-        const abbreviationEl = document.createElement("span");
-        abbreviationEl.classList.add("abbr");
-
-        fullNameEl.textContent = `${origin.name} (${origin.abbreviation})`;
-        abbreviationEl.textContent = origin.abbreviation;
-
-        listEl.setAttribute("data-id", origin.id);
-        linkEl.append(fullNameEl, abbreviationEl);
-        linkEl.href = `#${origin.id}`;
-        linkEl.addEventListener("click", e => onOriginClick(e, origin))
-
-        listEl.append(linkEl);
-        container.append(listEl);
+        const li = document.createElement("li");
+        const button = document.createElement("a");
+        button.setAttribute("data-id", origin);
+        button.textContent = fetchers[origin];
+        button.href = "#" + origin;
+        button.addEventListener("click", (e) => {
+            e.preventDefault();
+            selectOrigin(origin);
+            window.location.hash = origin;
+        });
+        li.append(button);
+        ul.append(li);
     }
 
-    // Remove loading spinner
+    // Select origin from URL or first available
+    const urlOrigin = window.location.hash.substring(1);
+    if (urlOrigin && origins[urlOrigin]) {
+        await selectOrigin(urlOrigin);
+    } else {
+        const firstOrigin = Object.keys(origins)[0];
+        if (firstOrigin) {
+            await selectOrigin(firstOrigin);
+            window.location.hash = firstOrigin;
+        }
+    }
+
     document.getElementById("container_origin").classList.remove("loading");
-
-    window.addEventListener("hashchange",
-        () => selectOrigin(location.hash.substring(1), true));
-
-    if (fetchers[location.hash.substring(1)])
-        // Fetcher in URL exists, so open that.
-        await selectOrigin(location.hash.substring(1));
-    else
-        // Set default fetcher.
-        await selectOrigin(null);
 }
 
 /**
- * Get the origin button belonging to the given origin.
- * @param origin The origin to get the button for.
- * @returns {Element}
+ * Select a new origin.
+ * @param origin The origin to select.
  */
-function getOriginButton(origin) {
-    return document.querySelector(`#container_originButtons li[data-id="${origin}"]`);
-}
-
-/**
- * Select an origin for the specific calendars.
- * @param origin The origin
- * @param userClick Whether this was a user click action.
- */
-async function selectOrigin(origin, userClick) {
-    origin = origin ?? "";
-    const activeButton = document.querySelector("#container_originButtons li.selected");
-
-    const newOriginButton = getOriginButton(origin);
-    if (!newOriginButton) {
-        // New origin doesn't exist, so reset.
-        window.location.hash = ``;
-        if (activeButton) activeButton.classList.remove("selected");
-        document.getElementById("warning_team").classList.add("hidden");
-        document.getElementById("container_origin").classList.add("select");
-        return;
+async function selectOrigin(origin) {
+    // Update selected origin
+    const items = document.querySelectorAll(".origin-buttons li");
+    items.forEach(e => e.classList.remove("selected"));
+    
+    const selectedItem = document.querySelector(`.origin-buttons li a[data-id="${origin}"]`)?.parentElement;
+    if (selectedItem) {
+        selectedItem.classList.add("selected");
     }
 
-    // Remove full-screen select.
-    document.getElementById("container_origin").classList.remove("select");
+    // Hide any active warnings
+    document.getElementById("warning_official").classList.add("hidden");
+    document.getElementById("warning_team").classList.add("hidden");
 
-    if (activeButton) activeButton.classList.remove("selected");
-    newOriginButton.classList.add("selected", "loading");
-    activeOrigin = origin;
+    // Show paths for this origin
+    showMainPaths(origin);
 
-    // Empty current container
+    // Prepare the officials picker
+    prepareOfficials(origin);
+
+    // Prepare the team picker
+    prepareClubs(origin);
+
+    // Update last update time if available
+    if (origins[origin].lastUpdate) {
+        const lastUpdate = new Date(origins[origin].lastUpdate);
+        document.getElementById("label_last_update").textContent = 
+            lastUpdate.toLocaleString();
+    }
+
+    // Add this line to reset officials mode
+    toggleOfficialsMode(false);
+}
+
+/**
+ * Show the main paths for an origin.
+ * @param origin The origin.
+ */
+function showMainPaths(origin) {
     const container = document.getElementById("specific_body");
     container.innerHTML = "";
 
-    // Fetch origin if necessary
-    if (!origins[origin]) {
-        origins[origin] = await (await fetch(`ics/${origin}/paths.json`, {cache: "no-store"})).json();
+    if (!origins[origin] || !origins[origin].competitions) {
+        console.error("No competitions found for origin:", origin);
+        return;
     }
 
-    // Update last update timestamp
-    document.getElementById("label_last_update").textContent = parseDate(new Date(origins[origin].lastUpdate));
-
-    prepareClubs(origin);
-    clubChanged(origin, "null");
-    newOriginButton.classList.remove("loading");
-
-    if (userClick) {
-        gtag('event', 'origin_select', {
-            origin_id: origin,
-            origin_full_name: fetchers[origin].name,
-            origin_name: fetchers[origin].abbreviation
-        });
+    // Sort and display competition paths
+    const paths = origins[origin].competitions
+        .sort((a, b) => ((a.index ?? 0) - (b.index ?? 0)) || 
+            a.name.toString().localeCompare(b.name));
+    
+    for (let row of paths) {
+        container.append(createTableRow(row));
     }
-
-    document.title = `${fetchers[origin].name} calendars - Hockey Match Calendar | By Martijn van Kekem`;
 }
 
 /**
- * Pad a string with zeroes at the start.
- * @param input The input string.
- * @returns {string | string}
- */
-function padStart(input) {
-    input = String(input);
-    while(input.length < 2)
-        input = `0${input}`;
-
-    return input;
-}
-
-/**
- * Parse the date object to a string.
- * @param date The date to parse.
- * @returns {string}
- */
-function parseDate(date) {
-    return `${padStart(date.getDate())}-${padStart(date.getMonth() + 1)}-${
-        date.getFullYear()} ${padStart(date.getHours())}:${padStart(date.getMinutes())}`;
-}
-
-/**
- * Prepare the team picker.
+ * Prepare the clubs picker.
  */
 function prepareClubs(origin) {
     const selectContainer = document.getElementById("team");
     selectContainer.querySelectorAll(`option:not([value="null"])`).forEach(e => e.remove());
     selectContainer.setAttribute("data-origin", origin);
 
-    // Add clubs to list.
+    // Get clubs
     const clubs = Object.values(origins[origin].clubs)
-        .sort((a,b) => a.name.localeCompare(b.name));
+        .sort((a, b) => a.name.localeCompare(b.name));
 
+    // Only show team selector if we have teams
+    const teamContainer = document.getElementById("container_team");
+    if (!clubs || clubs.length === 0) {
+        teamContainer.classList.add("hidden");
+        return;
+    }
+
+    teamContainer.classList.remove("hidden");
+
+    // Add clubs to dropdown
     for (let club of clubs) {
         const optionEl = document.createElement("option");
         optionEl.textContent = club.name;
         optionEl.value = club.id;
         selectContainer.append(optionEl);
     }
+}
 
-    const teamSelector = document.getElementById("container_team");
-    teamSelector.classList.toggle("hidden", selectContainer.children.length <= 1);
+/**
+ * Prepare the officials picker.
+ */
+function prepareOfficials(origin) {
+    const selectContainer = document.getElementById("official");
+    const officialsToggle = document.getElementById("container_officials_toggle");
+    
+    selectContainer.querySelectorAll(`option:not([value="null"])`).forEach(e => e.remove());
+    selectContainer.setAttribute("data-origin", origin);
+
+    // Hide toggle by default
+    officialsToggle.classList.add("hidden");
+
+    // Check if officials exist and have content
+    if (!origins[origin]?.officials?.length) {
+        return;
+    }
+
+    // Show toggle since we have officials
+    officialsToggle.classList.remove("hidden");
+
+    // Add officials to dropdown
+    const officials = origins[origin].officials
+        .map(path => ({
+            name: path.name,
+            country: path.country,
+            pathKey: path.path.split('/officials/')[1].split('/')[0]
+        }))
+        .sort((a,b) => a.name.localeCompare(b.name));
+
+    for (let official of officials) {
+        const optionEl = document.createElement("option");
+        optionEl.textContent = official.name;
+        optionEl.value = official.pathKey;
+        selectContainer.append(optionEl);
+    }
 }
 
 /**
@@ -231,23 +222,62 @@ function prepareClubs(origin) {
  * @param newClub The new club
  */
 function clubChanged(origin, newClub) {
-    // Sort paths
-    let paths = newClub === "null" ? origins[origin].paths : origins[origin].clubs[newClub].paths;
-    paths = paths.sort((a, b) => ((a.index ?? 0) - (b.index ?? 0)) || a.name.toString().localeCompare(b.name));
-
-    // Empty current container
+    document.getElementById("official").value = "null";
     const container = document.getElementById("specific_body");
     container.innerHTML = "";
 
+    // Get paths based on club selection
+    let paths = newClub === "null" 
+        ? origins[origin].competitions 
+        : origins[origin].clubs[newClub].paths;
+        
+    paths = paths.sort((a, b) => 
+        ((a.index ?? 0) - (b.index ?? 0)) || a.name.toString().localeCompare(b.name));
+
     // Load content into table
     for (let row of paths) {
-        container.append(this.createTableRow(row));
+        container.append(createTableRow(row));
     }
 
     const warningNotification = document.getElementById("warning_team");
     warningNotification.classList.toggle("hidden", newClub === "null");
-    if (newClub !== "null")
-        document.getElementById("team_selected").textContent = origins[origin].clubs[newClub].name;
+    if (newClub !== "null") {
+        document.getElementById("team_selected").textContent = 
+            origins[origin].clubs[newClub].name;
+    }
+}
+
+/**
+ * Select a new official.
+ * @param origin The origin.
+ * @param newOfficial The new official
+ */
+function officialChanged(origin, newOfficial) {
+    document.getElementById("team").value = "null";
+    const container = document.getElementById("specific_body");
+    container.innerHTML = "";
+
+    if (newOfficial === "null") {
+        showMainPaths(origin);
+        document.getElementById("warning_official").classList.add("hidden");
+        return;
+    }
+
+    // Find official data from the officials array
+    const officialPath = origins[origin].officials
+        .find(path => path.path.includes(`/officials/${newOfficial}/`));
+
+    if (!officialPath) return;
+
+    container.append(createTableRow({
+        name: "All matches",
+        path: officialPath.path,
+        count: officialPath.count
+    }));
+
+    const warningNotification = document.getElementById("warning_official");
+    warningNotification.classList.remove("hidden");
+    document.getElementById("official_selected").textContent = officialPath.name;
 }
 
 /**
@@ -261,9 +291,54 @@ function prepareClubSelector() {
 }
 
 /**
+ * Prepare the official selector.
+ */
+function prepareOfficialSelector() {
+    const selectContainer = document.getElementById("official");
+    selectContainer.addEventListener("change", () => {
+        officialChanged(selectContainer.getAttribute("data-origin"), selectContainer.value)
+    });
+}
+
+/**
+ * Toggle officials mode.
+ * @param enabled Whether to enable or disable officials mode.
+ */
+function toggleOfficialsMode(enabled) {
+    officialsMode = enabled;
+    const toggle = document.getElementById("officials-mode");
+    toggle.setAttribute("aria-checked", enabled);
+    
+    const officialSelector = document.getElementById("container_official");
+    const origin = document.querySelector("#team").getAttribute("data-origin");
+    
+    // Only show selector if officials exist for this origin
+    if (enabled && origins[origin] && origins[origin].officials && origins[origin].officials.length > 0) {
+        officialSelector.classList.remove("hidden");
+    } else {
+        officialSelector.classList.add("hidden");
+        document.getElementById("official").value = "null";
+        document.getElementById("warning_official").classList.add("hidden");
+        showMainPaths(origin);
+    }
+}
+
+/**
+ * Prepare the officials toggle.
+ */
+function prepareOfficialsToggle() {
+    const toggle = document.getElementById("officials-mode");
+    toggle.addEventListener("click", () => {
+        toggleOfficialsMode(!officialsMode);
+    });
+}
+
+/**
  * When the window has loaded.
  */
 window.addEventListener("DOMContentLoaded", async () => {
     await addOriginButtons();
     prepareClubSelector();
-})
+    prepareOfficialSelector();
+    prepareOfficialsToggle();
+});

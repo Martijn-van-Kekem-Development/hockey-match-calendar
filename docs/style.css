@@ -91,32 +91,37 @@ h2 {
 .origin-options {
     display: flex;
     width: 100%;
-    margin-top: 0.7rem;
+    margin-top: 0.3rem;
     margin-bottom: 0.3rem;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.origin-options .selectors {
+    display: flex;
+    gap: 2rem;
     flex-wrap: wrap;
-    gap: 0.5rem 2rem;
 }
 
-.origin-options p.last-update {
-    color: #6c6c6c;
-    font-size: 0.9rem;
-    margin: 0;
-    padding-block: 0.4rem;
+.origin-options .selectors:has(+ .officials-toggle:not(.hidden)) {
+    padding-bottom: 0;
 }
 
-.pick-team {
+.pick-team,
+.pick-official {
     flex: 1;
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.pick-team label {
+.pick-team label,
+.pick-official label {
     flex-shrink: 0;
 }
 
-.pick-team select {
+.pick-team select,
+.pick-official select {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -127,12 +132,16 @@ h2 {
     padding: 0.4rem 0.6rem;
 }
 
+.pick-team.hidden,
+.pick-official.hidden {
+    display: none;
+}
 
 .origin-buttons {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.3rem 0;
     padding: 0;
     gap: 0.5rem;
 }
@@ -266,4 +275,99 @@ table tr td:nth-child(3) {
 
 #container_team.hidden {
     display: none;
+}
+
+.officials-toggle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.officials-toggle.hidden {
+    display: none;
+}
+
+.officials-toggle label {
+    font-size: 0.9rem;
+    line-height: 1.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 3rem;
+    height: 1.4rem;
+    background: #ccc;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.toggle-switch[aria-checked="true"] {
+    background: rgb(63 81 181);
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 0.2rem;
+    left: 0.2rem;
+    width: 1rem;
+    height: 1rem;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.toggle-switch[aria-checked="true"] .toggle-slider {
+    transform: translateX(1.6rem);
+}
+
+.pick-official {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+.pick-official label {
+    flex-shrink: 0;
+}
+
+.pick-official select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    min-width: 8rem;
+    flex: 1 1 100%;
+    padding: 0.4rem 0.6rem;
+}
+
+.pick-official.hidden {
+    display: none;
+}
+
+/* Adjust margins to remove unwanted gaps */
+.origin-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;  /* Consistent small gap between elements */
+}
+
+.last-update {
+    margin: 0;  /* Remove default paragraph margins */
+}
+
+/* Ensure table headers have no extra space */
+.calendar-name {
+    margin: 0;
+    padding-top: 1rem;  /* Add some space before the table starts */
 }
