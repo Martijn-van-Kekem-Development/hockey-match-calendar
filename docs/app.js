@@ -1,6 +1,7 @@
 // Store fetcher data
 const fetchers = {};
 const origins = {};
+let officialsMode = false;
 
 // Load fetchers data
 async function loadFetchers() {
@@ -119,6 +120,9 @@ async function selectOrigin(origin) {
         document.getElementById("label_last_update").textContent = 
             lastUpdate.toLocaleString();
     }
+
+    // Add this line to reset officials mode
+    toggleOfficialsMode(false);
 }
 
 /**
@@ -179,10 +183,23 @@ function prepareClubs(origin) {
  */
 function prepareOfficials(origin) {
     const selectContainer = document.getElementById("official");
+    const officialsToggle = document.getElementById("container_officials_toggle");
+    
     selectContainer.querySelectorAll(`option:not([value="null"])`).forEach(e => e.remove());
     selectContainer.setAttribute("data-origin", origin);
 
-    // Get officials directly from officials array
+    // Hide toggle by default
+    officialsToggle.classList.add("hidden");
+
+    // Check if officials exist and have content
+    if (!origins[origin]?.officials?.length) {
+        return;
+    }
+
+    // Show toggle since we have officials
+    officialsToggle.classList.remove("hidden");
+
+    // Add officials to dropdown
     const officials = origins[origin].officials
         .map(path => ({
             name: path.name,
@@ -191,16 +208,6 @@ function prepareOfficials(origin) {
         }))
         .sort((a,b) => a.name.localeCompare(b.name));
 
-    // Only show officials selector if we have officials
-    const officialSelector = document.getElementById("container_official");
-    if (!officials || officials.length === 0) {
-        officialSelector.classList.add("hidden");
-        return;
-    }
-
-    officialSelector.classList.remove("hidden");
-
-    // Add officials to dropdown
     for (let official of officials) {
         const optionEl = document.createElement("option");
         optionEl.textContent = official.name;
@@ -294,10 +301,44 @@ function prepareOfficialSelector() {
 }
 
 /**
+ * Toggle officials mode.
+ * @param enabled Whether to enable or disable officials mode.
+ */
+function toggleOfficialsMode(enabled) {
+    officialsMode = enabled;
+    const toggle = document.getElementById("officials-mode");
+    toggle.setAttribute("aria-checked", enabled);
+    
+    const officialSelector = document.getElementById("container_official");
+    const origin = document.querySelector("#team").getAttribute("data-origin");
+    
+    // Only show selector if officials exist for this origin
+    if (enabled && origins[origin] && origins[origin].officials && origins[origin].officials.length > 0) {
+        officialSelector.classList.remove("hidden");
+    } else {
+        officialSelector.classList.add("hidden");
+        document.getElementById("official").value = "null";
+        document.getElementById("warning_official").classList.add("hidden");
+        showMainPaths(origin);
+    }
+}
+
+/**
+ * Prepare the officials toggle.
+ */
+function prepareOfficialsToggle() {
+    const toggle = document.getElementById("officials-mode");
+    toggle.addEventListener("click", () => {
+        toggleOfficialsMode(!officialsMode);
+    });
+}
+
+/**
  * When the window has loaded.
  */
 window.addEventListener("DOMContentLoaded", async () => {
     await addOriginButtons();
     prepareClubSelector();
     prepareOfficialSelector();
+    prepareOfficialsToggle();
 });

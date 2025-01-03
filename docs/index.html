@@ -40,6 +40,12 @@
             <ul class="origin-buttons" id="container_originButtons">
             </ul>
             <div class="origin-options">
+                <div class="officials-toggle hidden" id="container_officials_toggle">
+                    <label for="officials-mode">Officials mode:</label>
+                    <button id="officials-mode" class="toggle-switch" role="switch" aria-checked="false">
+                        <span class="toggle-slider"></span>
+                    </button>
+                </div>
                 <div class="selectors">
                     <div class="pick-team" id="container_team">
                         <label for="team">Country / club:</label>
@@ -47,12 +53,12 @@
                             <option value="null">All countries/clubs</option>
                         </select>
                     </div>
-                    <div class="pick-official" id="container_official">
-                        <label for="official">Official:</label>
-                        <select id="official">
-                            <option value="null">All officials</option>
-                        </select>
-                    </div>
+                </div>
+                <div class="pick-official hidden" id="container_official">
+                    <label for="official">Official:</label>
+                    <select id="official">
+                        <option value="null">All officials</option>
+                    </select>
                 </div>
                 <p class="last-update">Last update: <span id="label_last_update"></span></p>
             </div>
