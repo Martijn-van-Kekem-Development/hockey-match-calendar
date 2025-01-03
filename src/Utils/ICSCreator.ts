@@ -168,7 +168,13 @@ export class ICSCreator {
             for (const official of match.getOfficials()) {
                 const officialKey = `${official.name}${
                     official.country ? `-${official.country}` : ""
-                }`;
+                }`
+                    .replace(/\s+/g, "-")  // Replace spaces with hyphens
+                    .normalize("NFD")       // Normalize unicode characters
+                    .replace(/[\u0300-\u036f]/g, "")  // Remove diacritics
+                    .replace(/[^a-zA-Z0-9-]/g, "")    // Remove any non-alphanumeric
+                    .replace(/-+/g, "-")   // Replace multiple hyphens
+                    .trim();
 
                 if (!officialsMap.has(officialKey)) {
                     officialsMap.set(officialKey, {
