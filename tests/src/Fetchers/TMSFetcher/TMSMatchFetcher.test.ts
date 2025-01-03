@@ -50,6 +50,15 @@ describe("TMSMatchFetcher tests", () => {
                 });
             });
 
+            test("Teams including accents", () => {
+                runParseTitleTest({
+                    in: "B'ham v LoremIpsum (With MT)",
+                    home: "B'ham",
+                    away: "LoremIpsum",
+                    type: "With MT"
+                });
+            });
+
             test("Invalid input", () => {
                 expect(() => runParseTitleTest({ in: "Random string" }))
                     .toThrowError();
