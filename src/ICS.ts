@@ -19,7 +19,8 @@ export class ICS {
         if (!this.fetchers.has(fetcher.getID()))
             this.fetchers.set(fetcher.getID(), {
                 clubs: {},
-                paths: []
+                competitions: [],
+                officials: []
             });
 
         // Create club if not exists.
@@ -44,27 +45,28 @@ export class ICS {
     public static async writeToFile(fetcher: Fetcher, matches: Match[],
                                     title: string, fileName: string,
                                     club: Club | null, metadata: Metadata) {
-
         const outputFile = `docs/ics/${fetcher.getID()}/${fileName}.ics`;
-        const outputFolder =
-            outputFile.split("/").slice(0, -1).join("/");
+        const outputFolder = outputFile.split("/").slice(0, -1).join("/");
         const icsString = ICS.calendarToICS(title, fileName, matches);
 
         await fs.mkdir(outputFolder, { recursive: true });
         await fs.writeFile(outputFile, icsString, { flag: "w+" });
         this.addFetcher(club, fetcher);
 
-        // Add path to correct club
-        const pathArray =
-            club === null
-            ? this.fetchers.get(fetcher.getID()).paths
-            : this.fetchers.get(fetcher.getID()).clubs[club.id].paths;
-
-        pathArray.push({
+        const pathData = {
             name: title,
             path: outputFile.split("/").slice(1).join("/"),
             ...metadata
-        });
+        };
+
+        // Add path to correct array based on type
+        if (club !== null) {
+            this.fetchers.get(fetcher.getID()).clubs[club.id].paths.push(pathData);
+        } else if (metadata.type === "official") {
+            this.fetchers.get(fetcher.getID()).officials.push(pathData);
+        } else {
+            this.fetchers.get(fetcher.getID()).competitions.push(pathData);
+        }
     }
 
     /**
@@ -164,10 +166,19 @@ export class ICS {
 
         return parsed.join("\r\n");
     }
+
+    /**
+     * Get the fetcher data for a specific fetcher.
+     * @param fetcherId The fetcher ID to get data for.
+     */
+    public static getFetcherData(fetcherId: string): FetcherData {
+        return this.fetchers.get(fetcherId);
+    }
 }
 
 export interface FetcherData {
-    paths: Metadata[],
+    competitions: Metadata[],
+    officials: Metadata[],
     clubs: Record<string, FetcherClub>
 }
 
