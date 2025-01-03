@@ -135,13 +135,19 @@ async function selectOrigin(origin, userClick) {
     origin = origin ?? "";
     const activeButton = document.querySelector("#container_originButtons li.selected");
 
+    // Clear both warning banners
+    document.getElementById("warning_team").classList.add("hidden");
+    document.getElementById("warning_official").classList.add("hidden");
+
+    // Reset both dropdowns
+    document.getElementById("team").value = "null";
+    document.getElementById("official").value = "null";
+
     const newOriginButton = getOriginButton(origin);
     if (!newOriginButton) {
         // New origin doesn't exist, so reset.
         window.location.hash = ``;
         if (activeButton) activeButton.classList.remove("selected");
-        document.getElementById("warning_team").classList.add("hidden");
-        document.getElementById("warning_official").classList.add("hidden");
         document.getElementById("container_origin").classList.add("select");
         return;
     }
@@ -297,14 +303,11 @@ function prepareOfficials(origin) {
     // Get officials from paths
     const officials = origins[origin].paths
         .filter(path => path.type === 'official')
-        .map(path => {
-            const nameParts = path.name.split(' - ')[0].match(/^(.*?)(?:\s*\((.*?)\))?$/);
-            return {
-                name: nameParts[1],
-                country: nameParts[2] || '',
-                count: path.count
-            };
-        })
+        .map(path => ({
+            name: path.name,
+            country: path.country,
+            pathKey: path.path.split('/officials/')[1].split('/')[0] // Extract official key from path
+        }))
         .sort((a,b) => a.name.localeCompare(b.name));
 
     // Only show officials selector if we have officials
@@ -319,10 +322,8 @@ function prepareOfficials(origin) {
     // Add officials to dropdown
     for (let official of officials) {
         const optionEl = document.createElement("option");
-        optionEl.textContent = official.country ? 
-            `${official.name} (${official.country})` : 
-            official.name;
-        optionEl.value = `${official.name}${official.country ? `-${official.country}` : ''}`;
+        optionEl.textContent = official.name;
+        optionEl.value = official.pathKey;
         selectContainer.append(optionEl);
     }
 }
@@ -349,8 +350,11 @@ function officialChanged(origin, newOfficial) {
 
     // Find official data from the paths
     const officialPath = origins[origin].paths
-        .find(path => path.type === 'official' && 
-            path.name.split(' - ')[0] === newOfficial);
+        .find(path => {
+            if (path.type !== 'official') return false;
+            // Get the ICS path from the path property
+            return path.path === `ics/${origin}/officials/${newOfficial}/all-matches.ics`;
+        });
 
     if (!officialPath) return;
 
@@ -361,10 +365,12 @@ function officialChanged(origin, newOfficial) {
         count: officialPath.count
     }));
 
-    // Show warning
+    // Show warning with display name
     const warningNotification = document.getElementById("warning_official");
     warningNotification.classList.remove("hidden");
-    document.getElementById("official_selected").textContent = officialPath.name;
+    // Get the display name from the original name property
+    const displayName = officialPath.name;
+    document.getElementById("official_selected").textContent = displayName;
 }
 
 /**
