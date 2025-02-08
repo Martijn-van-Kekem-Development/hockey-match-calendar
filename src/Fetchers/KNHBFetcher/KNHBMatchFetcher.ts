@@ -99,8 +99,8 @@ export class KNHBMatchFetcher {
         object.setVenue(match.location.description);
 
         // Add date
-        const utcDate = DateHelper.KNHBtoUTC(match.datetime);
-        const localDate = DateHelper.KNHBtoLocal(match.datetime);
+        const utcDate = DateHelper.StringToUTC(match.datetime);
+        const localDate = DateHelper.StringToLocal(match.datetime);
         if (localDate.hours() === 0 && localDate.minutes() === 0)
             // Time unknown.
             object.setMatchDate(utcDate, false);
