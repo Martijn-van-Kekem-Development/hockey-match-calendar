@@ -75,15 +75,15 @@ export class FIHMatchFetcher {
 
         const homeTeam = row.participants[0] ?? {
             id: "tbd",
-            name: "TBD"
+            short_name: "TBD"
         };
-        object.setHomeTeam(homeTeam.id, homeTeam.name);
+        object.setHomeTeam(homeTeam.id, homeTeam.short_name);
 
         const awayTeam = row.participants[1] ?? {
             id: "tbd",
-            name: "TBD"
+            short_name: "TBD"
         };
-        object.setAwayTeam(awayTeam.id, awayTeam.name);
+        object.setAwayTeam(awayTeam.id, awayTeam.short_name);
 
         // Add match ID.
         const id = row.game_id;
