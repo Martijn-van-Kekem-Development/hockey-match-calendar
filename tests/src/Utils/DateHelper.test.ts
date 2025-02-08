@@ -45,7 +45,7 @@ describe("DateHelper tests", () => {
     describe("Convert KNHB date", () => {
         test("To UTC", () => {
             const output =
-                DateHelper.KNHBtoUTC("2024-09-15T12:45:00.000000Z");
+                DateHelper.StringToUTC("2024-09-15T12:45:00.000000Z");
             expect(output.toISOString()).toBe("2024-09-15T12:45:00.000Z");
             expect(output.hours()).toBe(12);
             expect(output.minutes()).toBe(45);
@@ -53,7 +53,7 @@ describe("DateHelper tests", () => {
 
         test("To local", () => {
             const output =
-                DateHelper.KNHBtoLocal("2024-09-15T12:45:00.000000Z");
+                DateHelper.StringToLocal("2024-09-15T12:45:00.000000Z");
             expect(output.format()).toBe("2024-09-15T14:45:00+02:00");
             expect(output.hours()).toBe(14);
             expect(output.minutes()).toBe(45);
