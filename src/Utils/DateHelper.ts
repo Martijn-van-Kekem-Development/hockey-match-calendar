@@ -24,7 +24,7 @@ export class DateHelper {
      * Convert a date in the given timezone to UTC.
      * @param date The date
      */
-    static KNHBtoUTC(date: string) {
+    static StringToUTC(date: string) {
         return moment(date).utc(false);
     }
 
@@ -32,7 +32,7 @@ export class DateHelper {
      * Convert a date in the given timezone to UTC.
      * @param date The date
      */
-    static KNHBtoLocal(date: string) {
+    static StringToLocal(date: string) {
         return moment(date).tz("Europe/Amsterdam", false);
     }
 

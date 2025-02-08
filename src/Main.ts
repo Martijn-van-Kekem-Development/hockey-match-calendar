@@ -2,6 +2,7 @@ import { TMSFetcher } from "./Fetchers/TMSFetcher/TMSFetcher.js";
 import { KNHBFetcher } from "./Fetchers/KNHBFetcher/KNHBFetcher.js";
 import { Fetcher } from "./Fetchers/Fetcher.js";
 import * as fs from "node:fs";
+import { FIHFetcher } from "./Fetchers/FIHFetcher/FIHFetcher.js";
 
 export class Main {
     /**
@@ -12,9 +13,9 @@ export class Main {
         const fetchers = {};
 
         // FIH
-        fetchers[TMSFetcher.FIH_FETCHER_ID] =
-            new TMSFetcher(TMSFetcher.FIH_BASE_URL, {
-                id: TMSFetcher.FIH_FETCHER_ID,
+        fetchers[FIHFetcher.FIH_FETCHER_ID] =
+            new FIHFetcher(FIHFetcher.FIH_BASE_URL, {
+                id: FIHFetcher.FIH_FETCHER_ID,
                 abbreviation: "FIH",
                 name: "International Hockey Federation",
                 index: 0

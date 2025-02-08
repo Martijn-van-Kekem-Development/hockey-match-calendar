@@ -12,20 +12,26 @@ export class APIHelper {
      * Make a fetch request
      * @param url The url to fetch.
      * @param fetcher The fetcher making this network request.
-     * @param options The fetch options.
+     * @param onRedirect What to do on redirect.
      * @param tryCount The amount of tries that have passed.
      */
     public static async fetch(url: string,
                               fetcher: Fetcher,
-                              options: Record<string, string> = {},
+                              onRedirect: (data: Response) => string = null,
                               tryCount: number = 0) {
 
         let data = null;
         try {
-            data = await fetch(url);
+            data = await fetch(url, { redirect: onRedirect ? "manual" : "follow" });
         } catch {
             fetcher.log("error", `Fatal fetch error (URL: ${url})`);
             throw new Error();
+        }
+
+        if (onRedirect && data.status >= 300 && data.status < 310) {
+            // Redirected
+            const newURL = onRedirect(data);
+            return this.fetch(newURL, fetcher, onRedirect, tryCount);
         }
 
         if (data.status === 200) return data;
@@ -46,9 +52,9 @@ export class APIHelper {
                 data.url}), retrying in ${delay} second(s).`);
 
             await APIHelper.delay(delay * 1000);
-            return await APIHelper.fetch(url, fetcher, options, tryCount + 1);
+            return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1);
         } else if (tryCount < 3) {
-            return await APIHelper.fetch(url, fetcher, options, tryCount + 1);
+            return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1);
         } else {
             // Give up
             fetcher.log("error", "Code", `${data.status}`);
