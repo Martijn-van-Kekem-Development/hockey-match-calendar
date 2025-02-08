@@ -10,11 +10,6 @@ import { Official } from "../../Objects/Official.js";
 
 export class TMSFetcher extends Fetcher {
     /**
-     * The FIH TMS url.
-     */
-    public static readonly FIH_BASE_URL: string = "https://tms.fih.ch";
-
-    /**
      * The EHL TMS url
      */
     public static readonly EHL_BASE_URL: string = "https://eurohockey.altiusrt.com";
@@ -28,11 +23,6 @@ export class TMSFetcher extends Fetcher {
      * The England Hockey TMS url.
     */
     public static readonly EH_BASE_URL: string = "https://englandhockey.altiusrt.com";
-
-    /**
-     * The FIH fetcher id.
-     */
-    public static readonly FIH_FETCHER_ID: string = "fih";
 
     /**
      * The EHL fetcher id.
