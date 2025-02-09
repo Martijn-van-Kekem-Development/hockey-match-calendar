@@ -1,11 +1,16 @@
 [
   {"in": "Pool A", "out": "POOL A M01"},
-  {"in": "Final", "out": "GF M01"},
+  {"in": "Final", "out": "GOLD M01"},
   {"in": "Semi-final (2)", "out": "SF2 M01"},
   {"in": "Semi-final 1", "out": "SF1 M01"},
   {"in": "Semi-final", "out": "SF M01"},
   {"in": "3th-4th", "out": "3v4 M01"},
+  {"in": "9th/10th", "out": "9v10 M01"},
   {"in": "SF1 (M1)", "out": "SF1 M01"},
   {"in": "QF2", "out": "QF2 M01"},
+  {"in": "Quarter Final", "out": "QF M01"},
+  {"in": "Semi Final", "out": "SF M01"},
+  {"in": "Bronze medal", "out": "BRONZE M01"},
+  {"in": "Gold medal", "out": "GOLD M01"},
   {"in": "Something unknown", "out": "M01"}
 ]

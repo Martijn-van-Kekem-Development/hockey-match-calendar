@@ -1,8 +1,11 @@
 {
   "Pool ([A-Z]{1})": "POOL %1",
-  "^Final$": "GF",
+  "^Final$": "GOLD",
   "Semi-final (?:\\()?(\\d)(?:\\))?": "SF%1",
-  "Semi-final$": "SF",
-  "(?:(\\d)(?:nd|th|rd)?)(?:\\/|-)(?:(\\d)(?:nd|th|rd)?)( place.*)?$": "%1v%2",
+  "Semi(-| )final$": "SF",
+  "Quarter(-| )final$": "QF",
+  "Gold(-| )medal": "GOLD",
+  "Bronze(-| )medal": "BRONZE",
+  "(?:(\\d+)(?:nd|th|rd)?)(?:\\/|-)(?:(\\d+)(?:nd|th|rd)?)( place.*)?$": "%1v%2",
   "(?:((?:Q|S)F)(\\d))(?: \\(.*\\))?$": "%1%2"
 }

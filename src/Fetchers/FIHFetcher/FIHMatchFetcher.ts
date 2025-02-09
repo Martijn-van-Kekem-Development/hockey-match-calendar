@@ -32,7 +32,7 @@ export class FIHMatchFetcher {
 
         // Get data from FIH.
         const data = await APIHelper.fetch(`${this.fetcher.getBaseURL()}/${
-                this.getCompetitionPath(competition)}`, this.fetcher, data => {
+                this.getMatchesPath(competition)}`, this.fetcher, data => {
             // On redirect, append schedules path if not the case.
             const url = new URL(data.url);
             const newPath = data.headers.get("location");
@@ -69,7 +69,7 @@ export class FIHMatchFetcher {
                        index: number): Match {
         const object = new Match();
         object.setCompetition(competition);
-        object.setType("");
+        object.setType(row.event_stage ?? "");
         object.setIndex(index);
         object.setVenue(row.venue_name);
 
@@ -139,7 +139,7 @@ export class FIHMatchFetcher {
      * @param competition The competition to fetch for.
      * @private
      */
-    private getCompetitionPath(competition: Competition) {
+    private getMatchesPath(competition: Competition) {
         const title = competition.getName().toLowerCase()
             .replace(/ /g, "-").replace(/[^a-z0-9-]/g, "");
 
@@ -160,6 +160,7 @@ interface FIHCompetitionMatch {
     gender: string;
     game_id: string;
     event_state: string;
+    event_stage: string;
     venue_name: string;
     participants: FIHMatchParticipant[]
 }
