@@ -1,5 +1,5 @@
 import { test, describe, expect } from "vitest";
-import { TMSMatchFetcher } from "../../../../src/Fetchers/TMSFetcher/TMSMatchFetcher.js";
+import { AltiusMatchFetcher } from "../../../../src/Fetchers/AltiusFetcher/AltiusMatchFetcher.js";
 import { Match } from "../../../../src/Objects/Match.js";
 
 interface parseTitleTest {
@@ -16,7 +16,7 @@ interface parseTitleTest {
  */
 function runParseTitleTest(test: parseTitleTest, full: boolean = false) {
     const match = new Match();
-    TMSMatchFetcher.parseTitle(match, test.in);
+    AltiusMatchFetcher.parseTitle(match, test.in);
     if (test.home) expect(match.getHomeTeam(full)).toBe(test.home);
     if (test.away) expect(match.getAwayTeam(full)).toBe(test.away);
     if (test.type) expect(match.getType()).toBe(test.type);

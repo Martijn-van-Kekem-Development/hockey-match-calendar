@@ -1,20 +1,20 @@
 import { Competition } from "../../Objects/Competition.js";
 import { HTMLElement, parse } from "node-html-parser";
-import { TMSFetcher } from "./TMSFetcher.js";
+import { AltiusFetcher } from "./AltiusFetcher.js";
 import { APIHelper } from "../../Utils/APIHelper";
 
-export class TMSCompetitionFetcher {
+export class AltiusCompetitionFetcher {
     /**
-     * The TMS fetcher class.
+     * The Altius fetcher class.
      * @protected
      */
-    protected fetcher: TMSFetcher;
+    protected fetcher: AltiusFetcher;
 
     /**
-     * Constructor for TMSCompetitionFetcher.
+     * Constructor for AltiusCompetitionFetcher.
      * @param fetcher
      */
-    constructor(fetcher: TMSFetcher) {
+    constructor(fetcher: AltiusFetcher) {
         this.fetcher = fetcher;
     }
 
@@ -30,7 +30,7 @@ export class TMSCompetitionFetcher {
         const competitions: Map<string, Competition> = new Map();
 
         while (true) {
-            // Get data from TMS.
+            // Get data from Altius.
             const baseURL = this.fetcher.getBaseURL();
             const data = await APIHelper.fetch(
                 type === "in-progress"

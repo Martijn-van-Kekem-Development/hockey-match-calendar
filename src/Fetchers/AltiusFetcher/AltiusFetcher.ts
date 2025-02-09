@@ -1,26 +1,26 @@
 import { Fetcher, FetcherOptions } from "../Fetcher.js";
 import { Competition } from "../../Objects/Competition.js";
 import { Match } from "../../Objects/Match.js";
-import { TMSCompetitionFetcher } from "./TMSCompetitionFetcher.js";
-import { TMSMatchFetcher } from "./TMSMatchFetcher.js";
+import { AltiusCompetitionFetcher } from "./AltiusCompetitionFetcher.js";
+import { AltiusMatchFetcher } from "./AltiusMatchFetcher.js";
 import { ICSCreator } from "../../Utils/ICSCreator.js";
 import { Gender } from "../../Objects/Gender.js";
-import { TMSOfficialFetcher } from "./TMSOfficialFetcher.js";
+import { AltiusOfficialFetcher } from "./AltiusOfficialFetcher.js";
 import { Official } from "../../Objects/Official.js";
 
-export class TMSFetcher extends Fetcher {
+export class AltiusFetcher extends Fetcher {
     /**
-     * The EHL TMS url
+     * The EHL Altius url
      */
     public static readonly EHL_BASE_URL: string = "https://eurohockey.altiusrt.com";
 
     /**
-     * The World Masters Hockey TMS url.
+     * The World Masters Hockey Altius url.
     */
     public static readonly WMH_BASE_URL: string = "https://masters.altiusrt.com";
 
     /**
-     * The England Hockey TMS url.
+     * The England Hockey Altius url.
     */
     public static readonly EH_BASE_URL: string = "https://englandhockey.altiusrt.com";
 
@@ -43,35 +43,35 @@ export class TMSFetcher extends Fetcher {
      * The competition fetcher.
      * @private
      */
-    private competitionFetcher: TMSCompetitionFetcher;
+    private competitionFetcher: AltiusCompetitionFetcher;
 
     /**
      * The match fetcher.
      * @private
      */
-    private matchFetcher: TMSMatchFetcher;
+    private matchFetcher: AltiusMatchFetcher;
 
     /**
      * The official fetcher.
      * @private
      */
-    private officialFetcher: TMSOfficialFetcher;
+    private officialFetcher: AltiusOfficialFetcher;
 
     /**
-     * Constructor for TMSFetcher
+     * Constructor for AltiusFetcher
      * @param baseURL The base URL.
      * @param options The options for this fetcher.
      */
     constructor(baseURL: string, options: FetcherOptions) {
         super(baseURL, options);
 
-        this.competitionFetcher = new TMSCompetitionFetcher(this);
-        this.matchFetcher = new TMSMatchFetcher(this);
-        this.officialFetcher = new TMSOfficialFetcher(this);
+        this.competitionFetcher = new AltiusCompetitionFetcher(this);
+        this.matchFetcher = new AltiusMatchFetcher(this);
+        this.officialFetcher = new AltiusOfficialFetcher(this);
     }
 
       /**
-     * Fetch the matches from TMS.
+     * Fetch the matches from Altius.
      */
       protected async fetch() {
         this.log("info", "Fetching competitions.");
@@ -171,7 +171,7 @@ export class TMSFetcher extends Fetcher {
             lines.push("");
         }
 
-        // Add TMS links
+        // Add Altius links
         if (html) {
             if (match.getID())
                 lines.push(`<a href="${this.getBaseURL()}/matches/${

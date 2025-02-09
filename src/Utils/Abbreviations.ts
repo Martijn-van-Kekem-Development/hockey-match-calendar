@@ -1,6 +1,6 @@
 import * as fs from "node:fs";
 import { Fetcher } from "../Fetchers/Fetcher.js";
-import { TMSFetcher } from "../Fetchers/TMSFetcher/TMSFetcher.js";
+import { AltiusFetcher } from "../Fetchers/AltiusFetcher/AltiusFetcher.js";
 import { KNHBFetcher } from "../Fetchers/KNHBFetcher/KNHBFetcher.js";
 import { Gender } from "../Objects/Gender.js";
 import { FIHFetcher } from "../Fetchers/FIHFetcher/FIHFetcher.js";
@@ -102,7 +102,7 @@ export class Abbreviations {
     public static getGender(type: string, fetcher: Fetcher): Gender {
         let str = type.toLowerCase();
 
-        if (fetcher instanceof TMSFetcher || fetcher instanceof FIHFetcher) {
+        if (fetcher instanceof AltiusFetcher || fetcher instanceof FIHFetcher) {
             str = str.replace(/[^a-z0-9]/g, "");
             if (str.includes("womens"))
                 return Gender.WOMEN;

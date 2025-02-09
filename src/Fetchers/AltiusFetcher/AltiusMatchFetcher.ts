@@ -3,22 +3,22 @@ import { HTMLElement, parse } from "node-html-parser";
 import { Competition } from "../../Objects/Competition.js";
 import { Abbreviations } from "../../Utils/Abbreviations.js";
 import { DateHelper } from "../../Utils/DateHelper.js";
-import { TMSFetcher } from "./TMSFetcher.js";
+import { AltiusFetcher } from "./AltiusFetcher.js";
 import { APIHelper } from "../../Utils/APIHelper";
 import { Official } from "../../Objects/Official.js";
 
-export class TMSMatchFetcher {
+export class AltiusMatchFetcher {
     /**
-     * The TMS fetcher class.
+     * The Altius fetcher class.
      * @protected
      */
-    protected fetcher: TMSFetcher;
+    protected fetcher: AltiusFetcher;
 
     /**
-     * Constructor for TMSCompetitionFetcher.
+     * Constructor for AltiusCompetitionFetcher.
      * @param fetcher
      */
-    constructor(fetcher: TMSFetcher) {
+    constructor(fetcher: AltiusFetcher) {
         this.fetcher = fetcher;
     }
 
@@ -29,7 +29,7 @@ export class TMSMatchFetcher {
     public async fetch(competition: Competition) {
         const matches: Map<string, Match> = new Map();
 
-        // Get data from TMS.
+        // Get data from Altius.
         const data =
             await APIHelper.fetch(`${this.fetcher.getBaseURL()}/competitions/${
                 competition.getID()}/matches`,
@@ -79,7 +79,7 @@ export class TMSMatchFetcher {
         const link = row.querySelector("td:nth-child(3) a[href]");
         if (!link)
             throw new Error(`Can't fetch title from ${competition.getID()}`);
-        TMSMatchFetcher.parseTitle(object, link.textContent.trim());
+        AltiusMatchFetcher.parseTitle(object, link.textContent.trim());
 
         // Add match ID.
         const id =
@@ -105,7 +105,7 @@ export class TMSMatchFetcher {
             row.querySelector("td:nth-child(6)").textContent;
         const timeZone = dateString.getAttribute("data-timezone");
         const utcDate =
-            DateHelper.TMStoUTC(dateString.textContent, timeZone, venueString);
+            DateHelper.AltiusToUTC(dateString.textContent, timeZone, venueString);
         object.setMatchDate(utcDate, true);
 
         // Add completed state

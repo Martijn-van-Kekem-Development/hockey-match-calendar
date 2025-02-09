@@ -9,7 +9,7 @@ export class DateHelper {
      * @param timeZone The time zone.
      * @param venue The venue location
      */
-    static TMStoUTC(date: string, timeZone: string, venue: string | null = null) {
+    static AltiusToUTC(date: string, timeZone: string, venue: string | null = null) {
         if (venue) {
             // Attempt to convert venue to timezone.
             const inputVenue = venue.split(",")[0].trim();

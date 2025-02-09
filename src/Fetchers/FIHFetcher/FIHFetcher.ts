@@ -9,7 +9,7 @@ import { FIHMatchFetcher } from "./FIHMatchFetcher.js";
 
 export class FIHFetcher extends Fetcher {
     /**
-     * The FIH TMS url.
+     * The FIH base url.
      */
     public static readonly FIH_BASE_URL: string = "https://www.fih.hockey";
 
@@ -31,7 +31,7 @@ export class FIHFetcher extends Fetcher {
     private matchFetcher: FIHMatchFetcher;
 
     /**
-     * Constructor for TMSFetcher
+     * Constructor for FIHFetcher
      * @param baseURL The base URL.
      * @param options The options for this fetcher.
      */
@@ -112,7 +112,7 @@ export class FIHFetcher extends Fetcher {
         lines.push("Stage: " + match.getType());
         lines.push();
 
-        // Add TMS links
+        // Add links
         const url = FIHCompetitionFetcher.getCompetitionPath(competition);
         const matchUrl = FIHMatchFetcher.getMatchPath(competition, match);
         if (html) {

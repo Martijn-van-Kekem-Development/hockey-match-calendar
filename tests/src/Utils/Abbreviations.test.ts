@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import { Abbreviations } from "../../../src/Utils/Abbreviations.js";
 import * as fs from "node:fs";
 import { KNHBFetcher } from "../../../src/Fetchers/KNHBFetcher/KNHBFetcher.js";
-import { TMSFetcher } from "../../../src/Fetchers/TMSFetcher/TMSFetcher.js";
+import { AltiusFetcher } from "../../../src/Fetchers/AltiusFetcher/AltiusFetcher.js";
 import { Gender } from "../../../src/Objects/Gender.js";
 
 describe("Abbreviations tests", () => {
@@ -51,7 +51,7 @@ describe("Abbreviations tests", () => {
             index: 0
         };
         const fetcher1 = new KNHBFetcher(null, options);
-        const fetcher2 = new TMSFetcher(null, options);
+        const fetcher2 = new AltiusFetcher(null, options);
         const mensTest = {
             knhb: ["jongens", "heren", "(m)"],
             tms: ["mens"]
