@@ -1,6 +1,6 @@
 import { describe, expect, test, vitest } from "vitest";
 import { APIHelper } from "../../../src/Utils/APIHelper.js";
-import { TMSFetcher } from "../../../src/Fetchers/TMSFetcher/TMSFetcher";
+import { AltiusFetcher } from "../../../src/Fetchers/AltiusFetcher/AltiusFetcher.js";
 
 describe("APIHelper tests", () => {
     test("Delay", async () => {
@@ -13,7 +13,7 @@ describe("APIHelper tests", () => {
 
     describe("Fetch tests", () => {
         const fetcher =
-            new TMSFetcher(null, {
+            new AltiusFetcher(null, {
                 id: "test",
                 abbreviation: "TSTF",
                 name: "Test Fetcher",

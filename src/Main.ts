@@ -1,4 +1,4 @@
-import { TMSFetcher } from "./Fetchers/TMSFetcher/TMSFetcher.js";
+import { AltiusFetcher } from "./Fetchers/AltiusFetcher/AltiusFetcher.js";
 import { KNHBFetcher } from "./Fetchers/KNHBFetcher/KNHBFetcher.js";
 import { Fetcher } from "./Fetchers/Fetcher.js";
 import * as fs from "node:fs";
@@ -22,9 +22,9 @@ export class Main {
             });
 
         // EHL
-        fetchers[TMSFetcher.EHL_FETCHER_ID] =
-            new TMSFetcher(TMSFetcher.EHL_BASE_URL, {
-                id: TMSFetcher.EHL_FETCHER_ID,
+        fetchers[AltiusFetcher.EHL_FETCHER_ID] =
+            new AltiusFetcher(AltiusFetcher.EHL_BASE_URL, {
+                id: AltiusFetcher.EHL_FETCHER_ID,
                 abbreviation: "EHL",
                 name: "Euro Hockey League",
                 index: 1
@@ -40,18 +40,18 @@ export class Main {
             });
 
         // WMH
-        fetchers[TMSFetcher.WMH_FETCHER_ID] =
-            new TMSFetcher(TMSFetcher.WMH_BASE_URL, {
-                id: TMSFetcher.WMH_FETCHER_ID,
+        fetchers[AltiusFetcher.WMH_FETCHER_ID] =
+            new AltiusFetcher(AltiusFetcher.WMH_BASE_URL, {
+                id: AltiusFetcher.WMH_FETCHER_ID,
                 abbreviation: "WMH",
                 name: "World Masters Hockey",
                 index: 3
             });
 
         // EH
-        fetchers[TMSFetcher.EH_FETCHER_ID] =
-            new TMSFetcher(TMSFetcher.EH_BASE_URL, {
-                id: TMSFetcher.EH_FETCHER_ID,
+        fetchers[AltiusFetcher.EH_FETCHER_ID] =
+            new AltiusFetcher(AltiusFetcher.EH_BASE_URL, {
+                id: AltiusFetcher.EH_FETCHER_ID,
                 abbreviation: "EH",
                 name: "England Hockey",
                 index: 4

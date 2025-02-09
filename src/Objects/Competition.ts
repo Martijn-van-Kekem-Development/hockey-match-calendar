@@ -22,7 +22,7 @@ export class Competition {
     private name: string;
 
     /**
-     * The TMS id for this match event.
+     * The id for this match event.
      * @private
      */
     private id: string;

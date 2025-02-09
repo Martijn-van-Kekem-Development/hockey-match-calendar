@@ -1,11 +1,11 @@
 import { test, describe, expect, vi } from "vitest";
-import { TMSOfficialFetcher } from "../../../../src/Fetchers/TMSFetcher/TMSOfficialFetcher.js";
+import { AltiusOfficialFetcher } from "../../../../src/Fetchers/AltiusFetcher/AltiusOfficialFetcher.js";
 import { Competition } from "../../../../src/Objects/Competition.js";
-import { TMSFetcher } from "../../../../src/Fetchers/TMSFetcher/TMSFetcher.js";
+import { AltiusFetcher } from "../../../../src/Fetchers/AltiusFetcher/AltiusFetcher.js";
 import { APIHelper } from "../../../../src/Utils/APIHelper.js";
 
 describe("TMSOfficialFetcher tests", () => {
-    const fetcher = new TMSFetcher("https://test.com", {
+    const fetcher = new AltiusFetcher("https://test.com", {
         id: "test",
         abbreviation: "TEST",
         name: "Test Fetcher",
@@ -13,7 +13,7 @@ describe("TMSOfficialFetcher tests", () => {
     });
 
     const competition = new Competition(fetcher, 0);
-    const officialFetcher = new TMSOfficialFetcher(fetcher);
+    const officialFetcher = new AltiusOfficialFetcher(fetcher);
 
     test("Parsing officials data", async () => {
         const html = `

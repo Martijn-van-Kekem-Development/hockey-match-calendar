@@ -2,20 +2,20 @@ import { Official } from "../../Objects/Official.js";
 import { Competition } from "../../Objects/Competition.js";
 import { HTMLElement, parse } from "node-html-parser";
 import { APIHelper } from "../../Utils/APIHelper.js";
-import { TMSFetcher } from "./TMSFetcher.js";
+import { AltiusFetcher } from "./AltiusFetcher.js";
 
-export class TMSOfficialFetcher {
+export class AltiusOfficialFetcher {
     /**
-     * The TMS fetcher class.
+     * The Altius fetcher class.
      * @protected
      */
-    protected fetcher: TMSFetcher;
+    protected fetcher: AltiusFetcher;
 
     /**
-     * Constructor for TMSOfficialFetcher.
-     * @param fetcher The TMS fetcher instance
+     * Constructor for AltiusOfficialFetcher.
+     * @param fetcher The Altius fetcher instance
      */
-    constructor(fetcher: TMSFetcher) {
+    constructor(fetcher: AltiusFetcher) {
         this.fetcher = fetcher;
     }
 
