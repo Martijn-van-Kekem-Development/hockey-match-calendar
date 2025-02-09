@@ -148,7 +148,8 @@ export class FIHMatchFetcher {
 
         const matchCenterID = match.getMetadata("sr_game_id") ?? "";
         const title = `${match.getHomeTeam(true)}-vs-${
-            match.getAwayTeam(true)}-${match.getID()}`.toLowerCase();
+            match.getAwayTeam(true)}-${match.getID()}`.toLowerCase()
+            .replace(/ /g, "-").replace(/[^a-z0-9-]/g, "");
 
         return `${baseUrl}/live-scores/${title}?matchcenter=${matchCenterID}`;
     }
