@@ -1,6 +1,8 @@
 import { Competition } from "../../Objects/Competition.js";
 import { APIHelper } from "../../Utils/APIHelper";
 import { FIHFetcher } from "./FIHFetcher.js";
+import { Abbreviations } from "../../Utils/Abbreviations.js";
+import { Gender } from "../../Objects/Gender.js";
 
 export class FIHCompetitionFetcher {
     /**
@@ -89,6 +91,26 @@ export class FIHCompetitionFetcher {
         object.setType(type.trim());
 
         return object;
+    }
+
+    /**
+     * Get the URL to fetch the matches from.
+     * @param competition The competition to fetch for.
+     * @private
+     */
+    public static getCompetitionPath(competition: Competition) {
+        const title = competition.getName().toLowerCase()
+            .replace(/ /g, "-").replace(/[^a-z0-9-]/g, "");
+
+        const gender =
+            Abbreviations.getGender(competition.getType(), competition.getFetcher());
+
+        let genderString = "other";
+        if (gender == Gender.MEN) genderString = "men";
+        else if (gender == Gender.WOMEN) genderString = "women";
+
+        return `${FIHFetcher.FIH_BASE_URL}/events/others/${genderString}/${
+            title}-${competition.getID()}`;
     }
 }
 
