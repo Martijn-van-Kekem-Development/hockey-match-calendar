@@ -106,9 +106,23 @@ export class FIHFetcher extends Fetcher {
     /**
      * @override
      */
-    descriptionToAppend(competition: Competition, match: Match): string[] {
+    descriptionToAppend(competition: Competition, match: Match,
+                        html: boolean): string[] {
         const lines: string[] = [];
         lines.push("Stage: " + match.getType());
+        lines.push();
+
+        // Add TMS links
+        const url = FIHCompetitionFetcher.getCompetitionPath(competition);
+        const matchUrl = FIHMatchFetcher.getMatchPath(competition, match);
+        if (html) {
+            lines.push(`<a href="${matchUrl}">View match details</a>`);
+            lines.push(`<a href="${url}">View competition details</a>`);
+        } else {
+            lines.push(`Match link: ${matchUrl}`);
+            lines.push(`Competition link: ${url}`);
+        }
+
         return lines;
     }
 

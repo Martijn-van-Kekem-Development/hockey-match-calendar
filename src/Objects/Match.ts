@@ -86,6 +86,12 @@ export class Match {
     private id: string | null = null;
 
     /**
+     * The metadata for this match.
+     * @private
+     */
+    private metadata: Record<string, string> = {};
+
+    /**
      * The match officials.
      * @private
      */
@@ -192,6 +198,15 @@ export class Match {
     }
 
     /**
+     * Set a metadata item.
+     * @param key The key to set.
+     * @param value The value to set.
+     */
+    public setMetadata(key: string, value: string) {
+        this.metadata[key] = value;
+    }
+
+    /**
      * Set the match competition.
      * @param event The match competition.
      */
@@ -284,7 +299,7 @@ export class Match {
      */
     public getICSAttributes(): Record<string, string> {
         return {
-            UID: this.getMatchID(),
+            UID: this.getID(),
             ...this.getDateICSAttributes(),
             SUMMARY: this.getMatchTitle(),
             LOCATION: this.getLocation(),
@@ -328,6 +343,14 @@ export class Match {
         else if (venue.length > 0 && location.length === 0) return venue;
         else if (venue.length === 0 && location.length > 0) return location;
         else return `${venue} | ${location}`;
+    }
+
+    /**
+     * Get a metadata item.
+     * @param key The key to retrieve.
+     */
+    public getMetadata(key: string): string {
+        return this.metadata[key];
     }
 
     /**
@@ -388,16 +411,6 @@ export class Match {
         return lines.join(html ? "<br>" : "\\n");
     }
 
-    // Append fetcher description (for links and any fetcher-specific data)
-    private appendFetcherDescription(lines: string[], includeHTML: boolean) {
-        if (this.competition && this.competition.getFetcher()) {
-            lines.push(...this.competition.getFetcher()
-                .descriptionToAppend(this.competition, this, includeHTML));
-        }
-
-        return lines.join("\\n");
-    }
-
     /**
      * Get the title for this match.
      */
@@ -408,13 +421,6 @@ export class Match {
 
         return `${icon}${competitionAbbr} ${
             this.getAbbr()} | ${this.getHomeTeam()} - ${this.getAwayTeam()}`;
-    }
-
-    /**
-     * Get the match ID.
-     */
-    public getMatchID(): string {
-        return this.id;
     }
 
     /**

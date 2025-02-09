@@ -5,7 +5,7 @@ import { Abbreviations } from "../../Utils/Abbreviations.js";
 import { DateHelper } from "../../Utils/DateHelper.js";
 import { APIHelper } from "../../Utils/APIHelper";
 import { FIHFetcher } from "./FIHFetcher.js";
-import { Gender } from "../../Objects/Gender.js";
+import { FIHCompetitionFetcher } from "./FIHCompetitionFetcher.js";
 
 export class FIHMatchFetcher {
     /**
@@ -31,8 +31,10 @@ export class FIHMatchFetcher {
         let index = 1;
 
         // Get data from FIH.
-        const data = await APIHelper.fetch(`${this.fetcher.getBaseURL()}/${
-                this.getMatchesPath(competition)}`, this.fetcher, data => {
+        const data = await APIHelper.fetch(`${FIHCompetitionFetcher
+            .getCompetitionPath(competition)}/schedule-fixtures-results`,
+            this.fetcher, data => {
+
             // On redirect, append schedules path if not the case.
             const url = new URL(data.url);
             const newPath = data.headers.get("location");
@@ -72,6 +74,7 @@ export class FIHMatchFetcher {
         object.setType(row.event_stage ?? "");
         object.setIndex(index);
         object.setVenue(row.venue_name);
+        object.setMetadata("sr_game_id", row.sr_game_id);
 
         const homeTeam = row.participants[0] ?? {
             id: "tbd",
@@ -135,23 +138,19 @@ export class FIHMatchFetcher {
     }
 
     /**
-     * Get the URL to fetch the matches from.
-     * @param competition The competition to fetch for.
+     * Get the URL of a given match.
+     * @param competition The competition.
+     * @param match The match.
      * @private
      */
-    private getMatchesPath(competition: Competition) {
-        const title = competition.getName().toLowerCase()
-            .replace(/ /g, "-").replace(/[^a-z0-9-]/g, "");
+    public static getMatchPath(competition: Competition, match: Match) {
+        const baseUrl = FIHCompetitionFetcher.getCompetitionPath(competition);
 
-        const gender =
-            Abbreviations.getGender(competition.getType(), this.fetcher);
+        const matchCenterID = match.getMetadata("sr_game_id") ?? "";
+        const title = `${match.getHomeTeam(true)}-vs-${
+            match.getAwayTeam(true)}-${match.getID()}`.toLowerCase();
 
-        let genderString = "other";
-        if (gender == Gender.MEN) genderString = "men";
-        else if (gender == Gender.WOMEN) genderString = "women";
-
-        return `events/others/${genderString}/${
-            title}-${competition.getID()}/schedule-fixtures-results`;
+        return `${baseUrl}/live-scores/${title}?matchcenter=${matchCenterID}`;
     }
 }
 
@@ -160,6 +159,7 @@ interface FIHCompetitionMatch {
     gender: string;
     game_id: string;
     event_state: string;
+    sr_game_id: string;
     event_stage: string;
     venue_name: string;
     participants: FIHMatchParticipant[]
