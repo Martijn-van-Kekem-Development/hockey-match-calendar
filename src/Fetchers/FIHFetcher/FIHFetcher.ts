@@ -106,8 +106,10 @@ export class FIHFetcher extends Fetcher {
     /**
      * @override
      */
-    descriptionToAppend(): string[] {
-        return [];
+    descriptionToAppend(competition: Competition, match: Match): string[] {
+        const lines: string[] = [];
+        lines.push("Stage: " + match.getType());
+        return lines;
     }
 
     /**
