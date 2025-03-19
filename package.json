@@ -32,7 +32,7 @@
     "@vitest/ui": "^3.0.5",
     "eslint": "^9.9.0",
     "globals": "^16.0.0",
-    "ts-ics": "^1.4.2",
+    "ts-ics": "^2.0.0",
     "tsx": "^4.17.0",
     "typescript-eslint": "^8.1.0",
     "vitest": "^3.0.5"
