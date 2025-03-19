@@ -1,6 +1,6 @@
 import { ICS } from "../../src/ICS.js";
 import { test, describe, expect } from "vitest";
-import { icsCalendarToObject } from "ts-ics";
+import { parseIcsCalendar } from "@ts-ics/schema-zod";
 
 describe("ICS class", () => {
     test("formatLines()", () => {
@@ -26,7 +26,7 @@ describe("ICS class", () => {
     });
 
     test("Calendar details", async () => {
-        const calendar = icsCalendarToObject(ICS.calendarToICS(
+        const calendar = parseIcsCalendar(ICS.calendarToICS(
             "1", "2", []));
 
         expect(calendar.prodId)
