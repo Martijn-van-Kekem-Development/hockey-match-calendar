@@ -66,7 +66,16 @@ describe("TMSMatchFetcher tests", () => {
                     away: "WGS(2)",
                     type: "Pool A"
                 })
-            })
+            });
+
+            test("No teams", () => {
+                runParseTitleTest({
+                    in: "v  (Final)",
+                    home: "TBC",
+                    away: "TBC",
+                    type: "Final"
+                })
+            });
 
             test("Invalid input", () => {
                 expect(() => runParseTitleTest({ in: "Random string" }))

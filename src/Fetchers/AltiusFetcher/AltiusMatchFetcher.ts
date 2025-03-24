@@ -129,20 +129,18 @@ export class AltiusMatchFetcher {
      * @param title The title to parse
      */
     public static parseTitle(object: Match, title: string) {
-        const str = title
+        const string = title
             .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[\u0300-\u036f]/g, "");
 
-        // Capture result with match type.
-        let result =
-            str.match(/(.*(?= v)) v (.*(?= \()) \((.*)\)/);
+        let result = string.match(
+            /^(?:([A-Za-z0-9\/&'() -]+) )?v ([A-Za-z0-9\/&'() -]+)? \((.+)\)$/);
 
         if (!result) {
-            // Failed, capture result without match type.
-            result = str.match(/(.*(?= v)) v (.*)$/)
+            result = string.match(
+                /^(?:([A-Za-z0-9/&'() -]+) )?v ([A-Za-z0-9/&'() -]+)?$/);
 
             if (!result) {
-                // Still failed, error.
                 throw new Error("Couldn't extract data from match title: " + title);
             }
         }
