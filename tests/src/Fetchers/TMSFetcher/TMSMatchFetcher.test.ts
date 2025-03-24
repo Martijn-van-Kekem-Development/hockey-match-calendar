@@ -59,6 +59,24 @@ describe("TMSMatchFetcher tests", () => {
                 });
             });
 
+            test("Teams with bad formatting", () => {
+                runParseTitleTest({
+                    in: "BS v WGS(2) (Pool A)",
+                    home: "BS",
+                    away: "WGS(2)",
+                    type: "Pool A"
+                });
+            });
+
+            test("No teams", () => {
+                runParseTitleTest({
+                    in: "v  (Final)",
+                    home: "TBC",
+                    away: "TBC",
+                    type: "Final"
+                });
+            });
+
             test("Invalid input", () => {
                 expect(() => runParseTitleTest({ in: "Random string" }))
                     .toThrowError();
