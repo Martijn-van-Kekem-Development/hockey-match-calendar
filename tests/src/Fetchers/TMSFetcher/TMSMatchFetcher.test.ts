@@ -65,7 +65,7 @@ describe("TMSMatchFetcher tests", () => {
                     home: "BS",
                     away: "WGS(2)",
                     type: "Pool A"
-                })
+                });
             });
 
             test("No teams", () => {
@@ -74,7 +74,7 @@ describe("TMSMatchFetcher tests", () => {
                     home: "TBC",
                     away: "TBC",
                     type: "Final"
-                })
+                });
             });
 
             test("Invalid input", () => {

@@ -134,7 +134,7 @@ export class AltiusMatchFetcher {
             .replace(/[\u0300-\u036f]/g, "");
 
         let result = string.match(
-            /^(?:([A-Za-z0-9\/&'() -]+) )?v ([A-Za-z0-9\/&'() -]+)? \((.+)\)$/);
+            /^(?:([A-Za-z0-9/&'() -]+) )?v ([A-Za-z0-9/&'() -]+)? \((.+)\)$/);
 
         if (!result) {
             result = string.match(
