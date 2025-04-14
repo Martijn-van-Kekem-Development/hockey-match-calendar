@@ -85,6 +85,8 @@ export class KNHBFetcher extends Fetcher {
                 Gender.MEN, true),
             ICSCreator.createGenderTotalICS(this, competitionsArray,
                 Gender.WOMEN, true),
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
+                Gender.MIXED, true),
         ]);
 
         this.log("info", "Finished.");
