@@ -59,7 +59,7 @@ describe("Abbreviations tests", () => {
         const mixedTest = {
             knhb: ["randomstringbla"],
             tms: ["mixed", "coed"]
-        }
+        };
         const womensTest = {
             knhb: ["meisjes", "dames", "(w)"],
             tms: ["womens"]
