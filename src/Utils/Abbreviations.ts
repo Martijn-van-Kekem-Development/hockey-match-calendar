@@ -121,6 +121,9 @@ export class Abbreviations {
                 str.includes("heren") ||
                 str.includes("jongens"))
                 return Gender.MEN;
+
+            // If not either, it's a mixed competition
+            return Gender.MIXED;
         }
 
         throw new Error("Couldn't fetch gender for " + type);
