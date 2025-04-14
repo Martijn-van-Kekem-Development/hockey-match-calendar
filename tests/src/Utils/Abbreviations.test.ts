@@ -56,6 +56,10 @@ describe("Abbreviations tests", () => {
             knhb: ["jongens", "heren", "(m)"],
             tms: ["mens"]
         };
+        const mixedTest = {
+            knhb: ["randomstringbla"],
+            tms: ["mixed", "coed"]
+        }
         const womensTest = {
             knhb: ["meisjes", "dames", "(w)"],
             tms: ["womens"]
@@ -69,8 +73,6 @@ describe("Abbreviations tests", () => {
 
         for (const item of mensTest.tms) {
             expect(Abbreviations.getGender(item, fetcher2)).toBe(Gender.MEN);
-            expect(() => Abbreviations.getGender(item, fetcher1))
-                .toThrowError();
         }
 
         for (const item of womensTest.knhb) {
@@ -81,7 +83,15 @@ describe("Abbreviations tests", () => {
 
         for (const item of womensTest.tms) {
             expect(Abbreviations.getGender(item, fetcher2)).toBe(Gender.WOMEN);
-            expect(() => Abbreviations.getGender(item, fetcher1))
+        }
+
+        for (const item of mixedTest.tms) {
+            expect(Abbreviations.getGender(item, fetcher2)).toBe(Gender.MIXED);
+        }
+
+        for (const item of mixedTest.knhb) {
+            expect(Abbreviations.getGender(item, fetcher1)).toBe(Gender.MIXED);
+            expect(() => Abbreviations.getGender(item, fetcher2))
                 .toThrowError();
         }
     });
