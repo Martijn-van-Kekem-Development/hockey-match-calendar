@@ -111,6 +111,11 @@ export class FIHCompetitionFetcher {
         const gender =
             Abbreviations.getGender(competition.getType(), competition.getFetcher());
 
+        if (!gender) competition.getFetcher().log(
+            "error", "Failed to get gender, links might be broken.", {
+                "competition": competition.getID()
+            });
+
         let genderString = "other";
         if (gender == Gender.MEN) genderString = "men";
         else if (gender == Gender.WOMEN) genderString = "women";
