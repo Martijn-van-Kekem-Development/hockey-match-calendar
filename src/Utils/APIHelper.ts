@@ -57,9 +57,10 @@ export class APIHelper {
             return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1);
         } else {
             // Give up
-            fetcher.log("error", "Code", `${data.status}`);
-            fetcher.log("error", "Body", await data.text());
-            fetcher.log("error", "Request failed after 3 tries. Aborting.");
+            fetcher.log("error", "Request failed after 3 tries. Aborting", {
+                "code": `${data.status}`,
+                "body": await data.text()
+            });
             throw new Error();
         }
     }

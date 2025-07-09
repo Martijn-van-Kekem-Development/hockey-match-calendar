@@ -2,6 +2,7 @@ import { Competition } from "../Objects/Competition.js";
 import { Match } from "../Objects/Match.js";
 import { Official } from "../Objects/Official.js";
 import { ICS } from "../ICS.js";
+import { ObjectHelper } from "../Utils/ObjectHelper.js";
 
 export abstract class Fetcher {
     /**
@@ -105,11 +106,18 @@ export abstract class Fetcher {
      * Send a log message from this fetcher.
      * @param type The type of message to log.
      * @param message The message itself.
+     * @param metadata The metadata to include in the log message.
      * @protected
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public log(type: "error" | "info" | "warn", ...message: any[]): void {
-        console[type](`[Fetcher - ${this.getID()}]`, ...message);
+     public log(type: "error" | "info" | "warn",
+               message: string,
+               metadata: Record<string, string> = {}): null {
+
+        // Print message to console
+        let metaString = ObjectHelper.recordToString(metadata);
+        metaString = metaString.length > 0 ? `\n${metaString}` : "";
+        console[type](`[Fetcher - ${this.getAbbr()}] (${type})`,
+            message, metaString);
 
         // Update error level
         this.errorLevel = Math.max(this.errorLevel, {
@@ -117,6 +125,8 @@ export abstract class Fetcher {
             "warn": 1,
             "error": 2,
         }[type]);
+
+        return null;
     }
 
     /**
