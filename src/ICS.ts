@@ -73,7 +73,9 @@ export class ICS {
      */
     public static async storeFilePaths(fetcher: Fetcher) {
         if (!this.fetchers.has(fetcher.getID())) {
-            fetcher.log("warn", "No file paths to store.");
+            fetcher.log("warn", "No file paths to store.", {
+                "fetcher": fetcher.getID()
+            });
             return;
         }
 

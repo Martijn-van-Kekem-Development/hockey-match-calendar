@@ -24,7 +24,9 @@ export class APIHelper {
         try {
             data = await fetch(url, { redirect: onRedirect ? "manual" : "follow" });
         } catch {
-            fetcher.log("error", `Fatal fetch error (URL: ${url})`);
+            fetcher.log("error", `Fatal fetch error`, {
+                "url": url
+            });
             throw new Error();
         }
 
@@ -48,8 +50,11 @@ export class APIHelper {
                 if (diff > 0) delay = diff;
             }
 
-            fetcher.log("warn", `Request failed (${data.status}, URL: ${
-                data.url}), retrying in ${delay} second(s).`);
+            fetcher.log("warn", "Request failed", {
+                "status": `${data.status}`,
+                "url": `${data.url}`,
+                "retrying in": `${delay} seconds`
+            });
 
             await APIHelper.delay(delay * 1000);
             return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1);
