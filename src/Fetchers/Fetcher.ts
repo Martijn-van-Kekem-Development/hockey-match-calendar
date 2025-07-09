@@ -93,9 +93,7 @@ export abstract class Fetcher {
         const errorLevel = this.getErrorLevel();
         if (errorLevel == 0) {
             this.log("info", "Completed without errors.");
-        } else if (errorLevel == 1) {
-            this.log("info", "Completed with warnings.");
-        } else if (errorLevel >= 2) {
+        } else if (errorLevel >= 1) {
             this.log("info", "Completed with errors.");
         }
 
