@@ -61,7 +61,7 @@ export default [
                 overrides: { ":": "before", "?": "before" }
             }],
             "@stylistic/object-property-newline": ["error", {
-                allowMultiplePropertiesPerLine: true
+                allowAllPropertiesOnSameLine: true
             }],
             "@stylistic/no-whitespace-before-property": "error",
             "@stylistic/max-statements-per-line": ["error", { max: 1 }],
