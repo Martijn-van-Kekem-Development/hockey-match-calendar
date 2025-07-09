@@ -49,7 +49,8 @@ export class AltiusCompetitionFetcher {
             // Create competition from every row.
             for (const row of rows) {
                 const item = this.createCompetition(row, options.index++);
-                competitions.set(item.getID(), item);
+                if (item)
+                    competitions.set(item.getID(), item);
             }
 
             // Continue with next page.
@@ -70,13 +71,20 @@ export class AltiusCompetitionFetcher {
 
         // Add competition ID.
         const id = link.getAttribute("href").split("/").slice(-1)[0] ?? null;
-        if (!id) throw new Error("Failed to get ID for competition.");
-        else object.setID(id);
+        if (!id) return this.fetcher.log(
+            "error", "Skipping competition, failed to get ID", {
+                "index": `${index}`,
+            });
+        object.setID(id);
 
         // Add competition name.
         const name = link.textContent ?? null;
-        if (!name) throw new Error("Failed to get name for competition.");
-        else object.setName(name.trim());
+        if (!name) return this.fetcher.log(
+            "error", "Skipping competition, failed to get name", {
+                "id": id,
+                "index": `${index}`,
+            });
+        object.setName(name.trim());
 
         // Add competition location
         const location = row.querySelector("td:nth-child(4)");

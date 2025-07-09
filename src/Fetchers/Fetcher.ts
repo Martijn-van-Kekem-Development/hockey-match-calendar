@@ -2,6 +2,7 @@ import { Competition } from "../Objects/Competition.js";
 import { Match } from "../Objects/Match.js";
 import { Official } from "../Objects/Official.js";
 import { ICS } from "../ICS.js";
+import { ObjectHelper } from "../Utils/ObjectHelper.js";
 
 export abstract class Fetcher {
     /**
@@ -15,6 +16,13 @@ export abstract class Fetcher {
      * @protected
      */
     protected options: FetcherOptions;
+
+    /**
+     * The error level for this fetcher.
+     * 0 = no error, 1 = warning, 2 = error.
+     * @protected
+     */
+    protected errorLevel: number = 0;
 
     /**
      * Constructor for Fetcher
@@ -71,14 +79,54 @@ export abstract class Fetcher {
     }
 
     /**
+     * Get the error level for this fetcher.
+     */
+    protected getErrorLevel(): number {
+        return this.errorLevel;
+    }
+
+    /**
+     * Finish fetching.
+     * @private
+     */
+    public finish(): number {
+        const errorLevel = this.getErrorLevel();
+        if (errorLevel == 0) {
+            this.log("info", "Completed without errors.");
+        } else if (errorLevel == 1) {
+            this.log("info", "Completed with warnings.");
+        } else if (errorLevel >= 2) {
+            this.log("info", "Completed with errors.");
+        }
+
+        return errorLevel;
+    }
+
+    /**
      * Send a log message from this fetcher.
      * @param type The type of message to log.
      * @param message The message itself.
+     * @param metadata The metadata to include in the log message.
      * @protected
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public log(type: "error" | "info" | "warn", ...message: any[]): void {
-        console[type](`[Fetcher - ${this.getID()}]`, ...message);
+     public log(type: "error" | "info" | "warn",
+               message: string,
+               metadata: Record<string, string> = {}): null {
+
+        // Print message to console
+        let metaString = ObjectHelper.recordToString(metadata);
+        metaString = metaString.length > 0 ? `\n${metaString}` : "";
+        console[type](`[Fetcher - ${this.getAbbr()}] (${type})`,
+            message, metaString);
+
+        // Update error level
+        this.errorLevel = Math.max(this.errorLevel, {
+            "info": 0,
+            "warn": 1,
+            "error": 2,
+        }[type]);
+
+        return null;
     }
 
     /**

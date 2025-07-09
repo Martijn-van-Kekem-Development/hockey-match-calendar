@@ -23,9 +23,11 @@ export class APIHelper {
         let data = null;
         try {
             data = await fetch(url, { redirect: onRedirect ? "manual" : "follow" });
-        } catch {
-            fetcher.log("error", `Fatal fetch error (URL: ${url})`);
-            throw new Error();
+        } catch (e) {
+            return fetcher.log("error", "Fatal fetch error", {
+                "url": url,
+                "error": e.toString()
+            });
         }
 
         if (onRedirect && data.status >= 300 && data.status < 310) {
@@ -48,8 +50,11 @@ export class APIHelper {
                 if (diff > 0) delay = diff;
             }
 
-            fetcher.log("warn", `Request failed (${data.status}, URL: ${
-                data.url}), retrying in ${delay} second(s).`);
+            fetcher.log("warn", "Request failed", {
+                "status": `${data.status}`,
+                "url": `${data.url}`,
+                "retrying in": `${delay} seconds`
+            });
 
             await APIHelper.delay(delay * 1000);
             return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1);
@@ -57,10 +62,11 @@ export class APIHelper {
             return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1);
         } else {
             // Give up
-            fetcher.log("error", "Code", `${data.status}`);
-            fetcher.log("error", "Body", await data.text());
-            fetcher.log("error", "Request failed after 3 tries. Aborting.");
-            throw new Error();
+            return fetcher.log("error", "Request failed after 3 tries. Aborting", {
+                "code": `${data.status}`,
+                "url": `${data.url}`,
+                "body": (await data.text()).slice(0, 40)
+            });
         }
     }
 }

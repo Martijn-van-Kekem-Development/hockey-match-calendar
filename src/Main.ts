@@ -126,6 +126,14 @@ export class Main {
         }
 
         await Promise.all(promises);
+
+        // All fetchers have finished
+        let errorLevel = 0;
+        for (const fetcherID of fetchersToRun) {
+            const fetcherLevel = fetchers[fetcherID].finish();
+            errorLevel = Math.max(errorLevel, fetcherLevel);
+        }
+        process.exit(errorLevel);
     }
 }
 

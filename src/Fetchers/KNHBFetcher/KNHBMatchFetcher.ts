@@ -33,11 +33,14 @@ export class KNHBMatchFetcher {
 
         while (true) {
             const json = await this.makeRequest(type, page, competition);
+            if (!json) break;
 
             for (const match of json.data) {
                 const item =
                     this.createMatch(competition, match, index++);
-                matches.set(item.getID(), item);
+
+                if (item)
+                    matches.set(item.getID(), item);
             }
 
             if (json.links.next) page++;
@@ -66,9 +69,11 @@ export class KNHBMatchFetcher {
         try {
             result = await data.json();
         } catch {
-            this.fetcher.log("error", "Failed to parse JSON.");
-            this.fetcher.log("error", await data.text());
-            throw new Error();
+            this.fetcher.log("error", "Failed to parse JSON.", {
+                "json": await data.text()
+            });
+
+            return false;
         }
 
         if (type === "official" && result.data) {
@@ -112,6 +117,11 @@ export class KNHBMatchFetcher {
 
         // Add gender
         const gender = Abbreviations.getGender(competition.getName(), this.fetcher);
+        if (!gender) return this.fetcher.log(
+            "error", "Skipping match, failed to get gender", {
+                "id": `${match.id}`,
+                "competition": competition.getID()
+            });
         object.setGender(gender);
 
         // Add completed state
