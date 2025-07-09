@@ -17,6 +17,13 @@ export abstract class Fetcher {
     protected options: FetcherOptions;
 
     /**
+     * The error level for this fetcher.
+     * 0 = no error, 1 = warning, 2 = error.
+     * @protected
+     */
+    protected errorLevel: number = 0;
+
+    /**
      * Constructor for Fetcher
      * @param baseURL The base URL.
      * @param options The options for this fetcher.
@@ -71,6 +78,30 @@ export abstract class Fetcher {
     }
 
     /**
+     * Get the error level for this fetcher.
+     */
+    protected getErrorLevel(): number {
+        return this.errorLevel;
+    }
+
+    /**
+     * Finish fetching.
+     * @private
+     */
+    public finish(): number {
+        const errorLevel = this.getErrorLevel();
+        if (errorLevel == 0) {
+            this.log("info", "Completed without errors.");
+        } else if (errorLevel == 1) {
+            this.log("info", "Completed with warnings.");
+        } else if (errorLevel >= 2) {
+            this.log("info", "Completed with errors.");
+        }
+
+        return errorLevel;
+    }
+
+    /**
      * Send a log message from this fetcher.
      * @param type The type of message to log.
      * @param message The message itself.
@@ -79,6 +110,13 @@ export abstract class Fetcher {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public log(type: "error" | "info" | "warn", ...message: any[]): void {
         console[type](`[Fetcher - ${this.getID()}]`, ...message);
+
+        // Update error level
+        this.errorLevel = Math.max(this.errorLevel, {
+            "info": 0,
+            "warn": 1,
+            "error": 2,
+        }[type]);
     }
 
     /**
