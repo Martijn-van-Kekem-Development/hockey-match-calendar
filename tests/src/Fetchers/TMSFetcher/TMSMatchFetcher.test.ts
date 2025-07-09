@@ -16,10 +16,11 @@ interface parseTitleTest {
  */
 function runParseTitleTest(test: parseTitleTest, full: boolean = false) {
     const match = new Match();
-    AltiusMatchFetcher.parseTitle(match, test.in);
+    const result = AltiusMatchFetcher.parseTitle(match, test.in);
     if (test.home) expect(match.getHomeTeam(full)).toBe(test.home);
     if (test.away) expect(match.getAwayTeam(full)).toBe(test.away);
     if (test.type) expect(match.getType()).toBe(test.type);
+    return result;
 }
 
 describe("TMSMatchFetcher tests", () => {
@@ -78,8 +79,7 @@ describe("TMSMatchFetcher tests", () => {
             });
 
             test("Invalid input", () => {
-                expect(() => runParseTitleTest({ in: "Random string" }))
-                    .toThrowError();
+                expect(runParseTitleTest({ in: "Random string" })).toBe(false);
             });
         });
     });

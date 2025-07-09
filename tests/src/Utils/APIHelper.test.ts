@@ -21,20 +21,19 @@ describe("APIHelper tests", () => {
             });
 
         test("Test fatal error on invalid host.", async () => {
-            const func = async () =>
+            const result =
                 await APIHelper.fetch("http://randomurl404blabla.com", fetcher);
 
-            await expect(func).rejects.toThrow();
+            expect(result).toBe(null);
         });
 
         test("Test retry on error response.", async () => {
             const spy = vitest.spyOn(fetcher, "log");
-
-            const func = async () => await APIHelper.fetch(
+            const result = await APIHelper.fetch(
                 "https://publicaties.hockeyweerelt.nl/mcbla", fetcher);
 
-            await expect(func).rejects.toThrow();
-            expect(spy).toBeCalledTimes(3);
+            expect(result).toBe(null);
+            expect(spy).toBeCalledTimes(1);
         });
     });
 });

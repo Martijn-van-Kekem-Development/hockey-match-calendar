@@ -99,7 +99,7 @@ export class Abbreviations {
      * @param type The match type.
      * @param fetcher The fetcher that requests the gender
      */
-    public static getGender(type: string, fetcher: Fetcher): Gender {
+    public static getGender(type: string, fetcher: Fetcher): Gender | false {
         let str = type.toLowerCase();
 
         if (fetcher instanceof AltiusFetcher || fetcher instanceof FIHFetcher) {
@@ -126,7 +126,7 @@ export class Abbreviations {
             return Gender.MIXED;
         }
 
-        throw new Error("Couldn't fetch gender for " + type);
+        return false;
     }
 
     /**
