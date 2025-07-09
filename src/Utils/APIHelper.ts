@@ -23,11 +23,11 @@ export class APIHelper {
         let data = null;
         try {
             data = await fetch(url, { redirect: onRedirect ? "manual" : "follow" });
-        } catch {
-            fetcher.log("error", `Fatal fetch error`, {
-                "url": url
+        } catch (e) {
+            return fetcher.log("error", "Fatal fetch error", {
+                "url": url,
+                "error": e.toString()
             });
-            throw new Error();
         }
 
         if (onRedirect && data.status >= 300 && data.status < 310) {
@@ -62,11 +62,11 @@ export class APIHelper {
             return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1);
         } else {
             // Give up
-            fetcher.log("error", "Request failed after 3 tries. Aborting", {
+            return fetcher.log("error", "Request failed after 3 tries. Aborting", {
                 "code": `${data.status}`,
-                "body": await data.text()
+                "url": `${data.url}`,
+                "body": (await data.text()).slice(0, 40)
             });
-            throw new Error();
         }
     }
 }

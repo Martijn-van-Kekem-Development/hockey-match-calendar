@@ -34,7 +34,7 @@ describe("APIHelper tests", () => {
                 "https://publicaties.hockeyweerelt.nl/mcbla", fetcher);
 
             await expect(func).rejects.toThrow();
-            expect(spy).toBeCalledTimes(3);
+            expect(spy).toBeCalledTimes(1);
         });
     });
 });

@@ -46,16 +46,30 @@ export class FIHMatchFetcher {
             return url.toString();
         });
 
+        if (!data) {
+            this.fetcher.log("error", "Fetching matches failed.", {
+                "competition": competition.getID()
+            });
+
+            return matches;
+        }
+
         const html = parse(await data.text());
 
         // Get match JSON.
         const json = this.extractJSONFromHTML(html);
-        if (!json) return matches;
+        if (!json) {
+            this.fetcher.log("error", "Couldn't get matches for competition.", {
+                "competition": competition.getID(),
+            });
+            return matches;
+        }
 
         // Create match from every row.
         for (const row of json.matches) {
             const item = this.createMatch(competition, row, index++);
-            matches.set(item.getID(), item);
+            if (item)
+                matches.set(item.getID(), item);
         }
 
         return matches;
@@ -90,12 +104,21 @@ export class FIHMatchFetcher {
 
         // Add match ID.
         const id = row.game_id;
-        if (!id) throw new Error("Failed to get ID for match.");
-        else object.setID(id);
+        if (!id) return this.fetcher.log(
+            "error", "Skipping match, failed to get ID", {
+                "index": `${index}`,
+                "competition": competition.getID()
+            });
+        object.setID(id);
 
         // Add gender
         const gender =
             Abbreviations.getGender(competition.getType(), this.fetcher);
+        if (!gender) return this.fetcher.log(
+            "error", "Skipping match, failed to get gender", {
+                "index": `${index}`,
+                "competition": competition.getID()
+            });
         object.setGender(gender);
 
         // Add date and time
@@ -133,7 +156,6 @@ export class FIHMatchFetcher {
             return JSON.parse(text);
         }
 
-        this.fetcher.log("error", "Couldn't get matches for competition. Skipping.");
         return null;
     }
 

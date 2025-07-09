@@ -44,7 +44,8 @@ export class AltiusMatchFetcher {
         // Create match from every row.
         for (const row of rows) {
             const item = this.createMatch(competition, row);
-            matches.set(item.getID(), item);
+            if (item)
+                matches.set(item.getID(), item);
         }
 
         // Fetch officials data
@@ -68,7 +69,7 @@ export class AltiusMatchFetcher {
     }
 
     /**
-     * Create a match object from an FIH row.
+     * Create a match object from an altius row.
      * @param competition
      * @param row
      */
@@ -77,16 +78,28 @@ export class AltiusMatchFetcher {
         object.setCompetition(competition);
 
         const link = row.querySelector("td:nth-child(3) a[href]");
-        if (!link)
-            throw new Error(`Can't fetch title from ${competition.getID()}`);
-        AltiusMatchFetcher.parseTitle(object, link.textContent.trim());
+        if (!link) return this.fetcher.log(
+            "error", "Skipping match, failed to get title", {
+                "competition": `${competition.getID()}`,
+            });
+
+        // Parse the teams and level from the title.
+        if (!AltiusMatchFetcher.parseTitle(object, link.textContent.trim())) {
+            return this.fetcher.log(
+                "error", "Skipping match, failed to parse teams from title", {
+                    "competition": `${competition.getID()}`,
+                    "title": link.textContent.trim()
+                });
+        }
 
         // Add match ID.
         const id =
             link.getAttribute("href").split("/").slice(-1)[0] ?? null;
-        if (!id)
-            throw new Error("Failed to get ID for match.");
-        else object.setID(id);
+        if (!link) return this.fetcher.log(
+            "error", "Skipping match, failed to get ID", {
+                "competition": `${competition.getID()}`,
+            });
+        object.setID(id);
 
         // Add match index
         const indexEl = row.querySelector("td:nth-child(1)");
@@ -96,6 +109,11 @@ export class AltiusMatchFetcher {
         // Add gender
         const gender =
             Abbreviations.getGender(competition.getType(), this.fetcher);
+        if (!gender) return this.fetcher.log(
+            "error", "Skipping match, failed to get gender", {
+                "id": `${id}`,
+                "competition": competition.getID()
+            });
         object.setGender(gender);
 
         // Add date and time
@@ -128,7 +146,7 @@ export class AltiusMatchFetcher {
      * @param object The match object.
      * @param title The title to parse
      */
-    public static parseTitle(object: Match, title: string) {
+    public static parseTitle(object: Match, title: string): boolean {
         const string = title
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "");
@@ -140,9 +158,7 @@ export class AltiusMatchFetcher {
             result = string.match(
                 /^(?:([A-Za-z0-9/&'() -]+) )?v ([A-Za-z0-9/&'() -]+)?$/);
 
-            if (!result) {
-                throw new Error("Couldn't extract data from match title: " + title);
-            }
+            if (!result) return false;
         }
 
         const home = result[1]?.trim() || "TBC";
@@ -152,6 +168,8 @@ export class AltiusMatchFetcher {
         object.setHomeTeam(home.toLowerCase(), home);
         object.setAwayTeam(away.toLowerCase(), away);
         object.setType(matchType);
+
+        return true;
     }
 
     /**

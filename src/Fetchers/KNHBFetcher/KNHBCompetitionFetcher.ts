@@ -26,7 +26,9 @@ export class KNHBCompetitionFetcher {
             this.fetcher.getBaseURL() + "/competitions", this.fetcher);
 
         if (data.status !== 200)
-            throw new Error("Failed to fetch KNHB competitions.");
+            return this.fetcher.log("error", "Failed to fetch KNHB competitions.", {
+                "status": `${data.status}`
+            });
 
         const json = await data.json();
         let index = 0;

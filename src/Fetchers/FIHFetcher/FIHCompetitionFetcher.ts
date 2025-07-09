@@ -72,13 +72,19 @@ export class FIHCompetitionFetcher {
 
         // Add competition ID.
         const id = row.series_id;
-        if (!id) throw new Error("Failed to get ID for competition.");
-        else object.setID(id.toString());
+        if (!id) return this.fetcher.log(
+            "error", "Skipping competition, failed to get ID", {
+                "index": `${index}`,
+            });
+        object.setID(id.toString());
 
         // Add competition name.
         const name = row.series;
-        if (!name) throw new Error("Failed to get name for competition.");
-        else object.setName(name.trim());
+        if (!name) return this.fetcher.log(
+            "error", "Skipping competition, failed to get name", {
+                "id": `${id}`,
+            });
+        object.setName(name.trim());
 
         // Add competition location
         if (row.venues && row.venues.length > 0) {
