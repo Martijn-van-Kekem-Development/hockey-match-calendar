@@ -122,8 +122,8 @@ export abstract class Fetcher {
         // Update error level
         this.errorLevel = Math.max(this.errorLevel, {
             "info": 0,
-            "warn": 0,
-            "error": 1,
+            "warn": 1,
+            "error": 2,
         }[type]);
 
         return null;
