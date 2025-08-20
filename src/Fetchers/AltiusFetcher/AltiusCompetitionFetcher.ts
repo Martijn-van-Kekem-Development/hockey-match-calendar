@@ -67,7 +67,7 @@ export class AltiusCompetitionFetcher {
      */
     public createCompetition(row: HTMLElement, index: number): Competition {
         const object = new Competition(this.fetcher, index);
-        const link = row.querySelector("td:nth-child(2) a[href]");
+        const link = row.querySelector("td:nth-child(1) a[href]");
 
         // Add competition ID.
         const id = link.getAttribute("href").split("/").slice(-1)[0] ?? null;
@@ -87,11 +87,11 @@ export class AltiusCompetitionFetcher {
         object.setName(name.trim());
 
         // Add competition location
-        const location = row.querySelector("td:nth-child(4)");
+        const location = row.querySelector("td:nth-child(3)");
         object.setLocation(location.textContent.trim());
 
         // Add competition type
-        const type = row.querySelector("td:nth-child(5)");
+        const type = row.querySelector("td:nth-child(4)");
         object.setType(type.textContent.trim());
 
         return object;
