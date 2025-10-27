@@ -25,8 +25,8 @@ export class Main {
         fetchers[AltiusFetcher.EHL_FETCHER_ID] =
             new AltiusFetcher(AltiusFetcher.EHL_BASE_URL, {
                 id: AltiusFetcher.EHL_FETCHER_ID,
-                abbreviation: "EHL",
-                name: "Euro Hockey League",
+                abbreviation: "EURO",
+                name: "EuroHockey",
                 index: 1
             });
 
@@ -52,7 +52,7 @@ export class Main {
         fetchers[AltiusFetcher.EH_FETCHER_ID] =
             new AltiusFetcher(AltiusFetcher.EH_BASE_URL, {
                 id: AltiusFetcher.EH_FETCHER_ID,
-                abbreviation: "EH",
+                abbreviation: "ENG",
                 name: "England Hockey",
                 index: 4
             });
