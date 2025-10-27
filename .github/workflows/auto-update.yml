@@ -36,7 +36,7 @@ jobs:
         if: ${{ success() || (!cancelled() && steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success') }}
         continue-on-error: true
         run: npm run fetch fih
-      - name: Update EHL calendar
+      - name: Update EUR calendar
         if: ${{ success() || (!cancelled() && steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success') }}
         run: npm run fetch ehl
       - name: Update KNHB calendar
@@ -45,7 +45,7 @@ jobs:
       - name: Update WMH calendar
         if: ${{ success() || (!cancelled() && steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success') }}
         run: npm run fetch wmh
-      - name: Update EH calendar
+      - name: Update ENG calendar
         if: ${{ success() || (!cancelled() && steps.checkout.outcome == 'success' && steps.prepare.outcome == 'success') }}
         run: npm run fetch eh        
       - name: Finalize update

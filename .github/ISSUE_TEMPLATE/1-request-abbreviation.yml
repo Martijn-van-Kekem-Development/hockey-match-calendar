@@ -15,10 +15,10 @@ body:
       description: For which calendar origin would you like to add this abbreviation?
       options:
         - FIH
-        - EHL
+        - EUR
         - KNHB
         - WMH
-        - EH
+        - ENG
     validations:
       required: true
 

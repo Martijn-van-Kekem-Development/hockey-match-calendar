@@ -21,11 +21,11 @@ export class Main {
                 index: 0
             });
 
-        // EHL
+        // EuroHockey
         fetchers[AltiusFetcher.EHL_FETCHER_ID] =
             new AltiusFetcher(AltiusFetcher.EHL_BASE_URL, {
                 id: AltiusFetcher.EHL_FETCHER_ID,
-                abbreviation: "EURO",
+                abbreviation: "EUR",
                 name: "EuroHockey",
                 index: 1
             });
@@ -48,7 +48,7 @@ export class Main {
                 index: 3
             });
 
-        // EH
+        // England Hockey
         fetchers[AltiusFetcher.EH_FETCHER_ID] =
             new AltiusFetcher(AltiusFetcher.EH_BASE_URL, {
                 id: AltiusFetcher.EH_FETCHER_ID,
