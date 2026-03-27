@@ -57,7 +57,6 @@ export class Main {
                 index: 4
             }, "The KNHB has discontinued their API for public viewing purposes.");
 
-
         return fetchers;
     }
 
