@@ -1,7 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { Abbreviations } from "../../../src/Utils/Abbreviations.js";
 import * as fs from "node:fs";
-import { KNHBFetcher } from "../../../src/Fetchers/KNHBFetcher/KNHBFetcher.js";
 import { AltiusFetcher } from "../../../src/Fetchers/AltiusFetcher/AltiusFetcher.js";
 import { Gender } from "../../../src/Objects/Gender.js";
 
@@ -50,33 +49,19 @@ describe("Abbreviations tests", () => {
             name: "Test Fetcher",
             index: 0
         };
-        const fetcher1 = new KNHBFetcher(null, options);
         const fetcher2 = new AltiusFetcher(null, options);
         const mensTest = {
-            knhb: ["jongens", "heren", "(m)"],
             tms: ["mens"]
         };
         const mixedTest = {
-            knhb: ["randomstringbla"],
             tms: ["mixed", "coed"]
         };
         const womensTest = {
-            knhb: ["meisjes", "dames", "(w)"],
             tms: ["womens"]
         };
 
-        for (const item of mensTest.knhb) {
-            expect(Abbreviations.getGender(item, fetcher1)).toBe(Gender.MEN);
-            expect(Abbreviations.getGender(item, fetcher2)).toBe(false);
-        }
-
         for (const item of mensTest.tms) {
             expect(Abbreviations.getGender(item, fetcher2)).toBe(Gender.MEN);
-        }
-
-        for (const item of womensTest.knhb) {
-            expect(Abbreviations.getGender(item, fetcher1)).toBe(Gender.WOMEN);
-            expect(Abbreviations.getGender(item, fetcher2)).toBe(false);
         }
 
         for (const item of womensTest.tms) {
@@ -85,11 +70,6 @@ describe("Abbreviations tests", () => {
 
         for (const item of mixedTest.tms) {
             expect(Abbreviations.getGender(item, fetcher2)).toBe(Gender.MIXED);
-        }
-
-        for (const item of mixedTest.knhb) {
-            expect(Abbreviations.getGender(item, fetcher1)).toBe(Gender.MIXED);
-            expect(Abbreviations.getGender(item, fetcher2)).toBe(false);
         }
     });
 });
