@@ -1,5 +1,5 @@
 import { AltiusFetcher } from "./Fetchers/AltiusFetcher/AltiusFetcher.js";
-import { KNHBFetcher } from "./Fetchers/KNHBFetcher/KNHBFetcher.js";
+import { DiscontinuedFetcher } from "./Fetchers/DiscontinuedFetcher/DiscontinuedFetcher";
 import { Fetcher } from "./Fetchers/Fetcher.js";
 import * as fs from "node:fs";
 import { FIHFetcher } from "./Fetchers/FIHFetcher/FIHFetcher.js";
@@ -30,22 +30,13 @@ export class Main {
                 index: 1
             });
 
-        // KNHB
-        fetchers[KNHBFetcher.KNHB_FETCHER_ID] =
-            new KNHBFetcher(KNHBFetcher.KNHB_BASE_URL, {
-                id: KNHBFetcher.KNHB_FETCHER_ID,
-                abbreviation: "KNHB",
-                name: "Dutch Hockey Association",
-                index: 2
-            });
-
         // WMH
         fetchers[AltiusFetcher.WMH_FETCHER_ID] =
             new AltiusFetcher(AltiusFetcher.WMH_BASE_URL, {
                 id: AltiusFetcher.WMH_FETCHER_ID,
                 abbreviation: "WMH",
                 name: "World Masters Hockey",
-                index: 3
+                index: 2
             });
 
         // England Hockey
@@ -54,8 +45,18 @@ export class Main {
                 id: AltiusFetcher.EH_FETCHER_ID,
                 abbreviation: "ENG",
                 name: "England Hockey",
-                index: 4
+                index: 3
             });
+
+        // KNHB
+        fetchers[DiscontinuedFetcher.KNHB_FETCHER_ID] =
+            new DiscontinuedFetcher({
+                id: DiscontinuedFetcher.KNHB_FETCHER_ID,
+                abbreviation: "KNHB",
+                name: "Dutch Hockey Association",
+                index: 4
+            }, "The KNHB has discontinued their API for public viewing purposes.");
+
 
         return fetchers;
     }

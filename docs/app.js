@@ -99,6 +99,9 @@ async function addOriginButtons() {
         linkEl.href = `#${origin.id}`;
         linkEl.addEventListener("click", e => onOriginClick(e, origin))
 
+        if (fetchers[origin.id].discontinued) {
+            listEl.classList.add("discontinued");
+        }
         listEl.append(linkEl);
         container.append(listEl);
     }
@@ -142,6 +145,7 @@ async function selectOrigin(origin, userClick) {
         if (activeButton) activeButton.classList.remove("selected");
         document.getElementById("warning_team").classList.add("hidden");
         document.getElementById("container_origin").classList.add("select");
+        document.getElementById("discontinue_warning").classList.add("hidden");
         return;
     }
 
@@ -163,6 +167,13 @@ async function selectOrigin(origin, userClick) {
 
     // Update last update timestamp
     document.getElementById("label_last_update").textContent = parseDate(new Date(origins[origin].lastUpdate));
+
+    if (fetchers[origin].discontinued) {
+        document.getElementById("discontinue_warning").classList.remove("hidden");
+        document.getElementById("discontinue_reason").innerText = fetchers[origin].reason;
+    } else {
+        document.getElementById("discontinue_warning").classList.add("hidden");
+    }
 
     prepareClubs(origin);
     clubChanged(origin, "null");
