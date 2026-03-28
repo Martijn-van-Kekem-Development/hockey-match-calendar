@@ -156,7 +156,7 @@ export class AltiusMatchFetcher {
 
         if (!result) {
             result = string.match(
-                /^(?:([A-Za-z0-9/&'() -]+) )?v ([A-Za-z0-9/&'() -]+)?$/);
+                /^(?:([A-Za-z0-9/&'() -]+) )?v( [A-Za-z0-9/&'() -]+)?$/);
 
             if (!result) return false;
         }

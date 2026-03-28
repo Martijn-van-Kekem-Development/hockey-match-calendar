@@ -78,6 +78,15 @@ describe("TMSMatchFetcher tests", () => {
                 });
             });
 
+            test("No teams, no match type", () => {
+                runParseTitleTest({
+                    in: "v",
+                    home: "TBC",
+                    away: "TBC",
+                    type: ""
+                });
+            });
+
             test("Invalid input", () => {
                 expect(runParseTitleTest({ in: "Random string" })).toBe(false);
             });
