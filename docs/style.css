@@ -45,25 +45,42 @@ h2 {
     margin-bottom: 0.8rem;
 }
 
-.warning {
+.warning, .error {
     display: flex;
     padding: 0.8rem 1rem;
     align-items: center;
     border-radius: 0.5rem;
     margin-block: 0.5rem;
     gap: 1rem;
+}
+
+.warning {
     background: rgb(254 252 232);
     color: rgb(161 98 7);
 }
 
-.warning.hidden {
+.error {
+    background: rgb(254, 232, 232);
+    color: rgb(161, 7, 7);
+}
+
+.warning.hidden,
+.error.hidden {
     display: none;
 }
 
-.warning svg {
+.warning svg,
+.error svg{
     max-width: 1.5rem;
     aspect-ratio: 1;
+}
+
+.warning svg {
     fill: rgb(250 204 21);
+}
+
+.error svg {
+    fill: rgb(161, 7, 7);
 }
 
 .links {
@@ -145,10 +162,27 @@ h2 {
     border: none;
     padding: 0.5rem 0.6rem;
     border-radius: 0.3rem;
+    vertical-align: middle;
     cursor: pointer;
     color: inherit;
     display: block;
     font-size: 0.85rem;
+}
+
+.origin-buttons li a span {
+    vertical-align: middle;
+}
+
+.origin-buttons li.discontinued a {
+    background: rgba(181, 63, 63, 0.1);
+}
+
+.origin-buttons li.discontinued a::after {
+    content: "DISCONTINUED";
+    margin-left: 0.5rem;
+    color: #dd0000;
+    font-size: 0.85em;
+    vertical-align: middle;
 }
 
 .origin-container.select .origin-buttons {
