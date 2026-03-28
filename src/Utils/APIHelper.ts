@@ -20,7 +20,8 @@ export class APIHelper {
                               onRedirect: (data: Response) => string = null,
                               tryCount: number = 0) {
 
-        let data = null;
+        let data: Response;
+
         try {
             data = await fetch(url, { redirect: onRedirect ? "manual" : "follow" });
         } catch (e) {
