@@ -174,10 +174,10 @@ h2 {
 }
 
 .origin-buttons li.discontinued a {
-    background: rgba(181, 63, 63, 0.1);
+    background: rgb(254, 232, 232);
 }
 
-.origin-buttons li.discontinued a::after {
+.origin-buttons li.discontinued a .full::after {
     content: "DISCONTINUED";
     margin-left: 0.5rem;
     color: #dd0000;
@@ -222,6 +222,10 @@ h2 {
 
 .origin-buttons li.selected a {
     background: rgb(63 81 181 / 35%)
+}
+
+.origin-buttons li.discontinued.selected a {
+    background: rgb(231 84 84 / 35%)
 }
 
 a {
