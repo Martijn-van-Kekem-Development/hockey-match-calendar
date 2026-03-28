@@ -12,7 +12,7 @@ runs:
       run: echo "today=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
       shell: bash
     - name: Pushing files to 'live' branch
-      uses: stefanzweifel/git-auto-commit-action@v5
+      uses: stefanzweifel/git-auto-commit-action@v7
       with:
         commit_message: "Calendar update (${{ env.today }} UTC)"
         branch: 'live'
@@ -23,11 +23,11 @@ runs:
         push_options: '-f'
         create_branch: true
     - name: Setup pages
-      uses: actions/configure-pages@v5
+      uses: actions/configure-pages@v6
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v4
       with:
         path: './docs'
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@v5
