@@ -167,5 +167,7 @@ export interface FetcherOptions {
     id: string,
     abbreviation: string,
     index: number,
-    name: string
+    name: string,
+    discontinued?: boolean,
+    reason?: string
 }
