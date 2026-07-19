@@ -12,5 +12,5 @@ runs:
       with:
         node-version: 25
     - name: Install dependencies
-      run: npm install
+      run: npm ci
       shell: bash

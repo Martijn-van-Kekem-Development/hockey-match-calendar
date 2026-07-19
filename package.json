@@ -28,7 +28,7 @@
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@ts-ics/schema-zod": "^2.4.3",
-    "@types/node": "^25.5.0",
+    "@types/node": "^26.1.1",
     "@vitest/coverage-v8": "^4.1.2",
     "@vitest/ui": "^4.1.2",
     "eslint": "^10.1.0",
@@ -41,7 +41,7 @@
   "dependencies": {
     "country-to-iso": "^1.6.3",
     "moment-timezone": "^0.6.1",
-    "node-html-parser": "^7.1.0",
+    "node-html-parser": "^9.0.0",
     "node-location-timezone": "^1.1.0"
   }
 }
