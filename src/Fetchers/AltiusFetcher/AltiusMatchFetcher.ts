@@ -152,11 +152,11 @@ export class AltiusMatchFetcher {
             .replace(/[\u0300-\u036f]/g, "");
 
         let result = string.match(
-            /^(?:([A-Za-z0-9/&'() -]+) )?v ([A-Za-z0-9/&'() -]+)? \((.+)\)$/);
+            /^(?:([A-Za-z0-9/_&'() -]+) )?v ([A-Za-z0-9/_&'() -]+)? \((.+)\)$/);
 
         if (!result) {
             result = string.match(
-                /^(?:([A-Za-z0-9/&'() -]+) )?v( [A-Za-z0-9/&'() -]+)?$/);
+                /^(?:([A-Za-z0-9/_&'() -]+) )?v( [A-Za-z0-9/_&'() -]+)?$/);
 
             if (!result) return false;
         }
@@ -164,6 +164,8 @@ export class AltiusMatchFetcher {
         const home = result[1]?.trim() || "TBC";
         const away = result[2]?.trim() || "TBC";
         const matchType = result[3] ?? "";
+
+        console.log(home, away, matchType);
 
         object.setHomeTeam(home.toLowerCase(), home);
         object.setAwayTeam(away.toLowerCase(), away);

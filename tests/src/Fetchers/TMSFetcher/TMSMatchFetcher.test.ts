@@ -69,6 +69,15 @@ describe("TMSMatchFetcher tests", () => {
                 });
             });
 
+            test("Teams with position", () => {
+                runParseTitleTest({
+                    in: "40M_IMC v 35M_IMC 2nd (Friendly 35/40M)",
+                    home: "40M_IMC",
+                    away: "35M_IMC 2nd",
+                    type: "Friendly 35/40M"
+                });
+            });
+
             test("No teams", () => {
                 runParseTitleTest({
                     in: "v  (Final)",
