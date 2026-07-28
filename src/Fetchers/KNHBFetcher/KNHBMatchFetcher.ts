@@ -27,8 +27,8 @@ export class KNHBMatchFetcher {
         const matches: Map<string, Match> = new Map();
 
         const response = await this.fetcher.apiFetch(
-            `/competitions/national/${competition.getID()}`)
-            .then(data => data?.json());
+            `/competitions/national/${competition.getID()}`,
+            data => data.json());
 
         let index = 1;
         for (const poule of response.data.poules) {

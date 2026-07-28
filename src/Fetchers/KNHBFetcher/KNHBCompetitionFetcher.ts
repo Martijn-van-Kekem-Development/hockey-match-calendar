@@ -22,8 +22,8 @@ export class KNHBCompetitionFetcher {
     public async fetch() {
         const competitions: Map<string, Competition> = new Map();
 
-        const response = await this.fetcher.apiFetch("/competitions/national")
-            .then(data => data?.json());
+        const response = await this.fetcher.apiFetch("/competitions/national",
+                data => data.json());
 
         for (const competition of response.data) {
             const item = this.createCompetition(competition);

@@ -125,16 +125,19 @@ export class KNHBFetcher extends Fetcher {
     /**
      * API fetch wrapper to include the HAPI signature.
      * @param path The path to fetch.
+     * @param parseData Function to parse the incoming data.
      * @param onRedirect What to do on redirect.
      * @param tryCount The amount of tries that have past.
      * @param options Any additional fetch options.
      */
     public apiFetch(path: string,
-                 onRedirect?: (data: Response) => string,
-                 tryCount: number = 0,
-                 options?: Record<string, string>) {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    parseData: (data: Response) => Promise<any>,
+                    onRedirect?: (data: Response) => string,
+                    tryCount: number = 0,
+                    options?: Record<string, string>) {
 
-        return APIHelper.fetch(`${this.getBaseURL()}${path}`, this,
+        return APIHelper.fetch(`${this.getBaseURL()}${path}`, this, parseData,
             onRedirect, tryCount, {
             ...options,
             headers: this.getAPIHeaders(path)
@@ -160,8 +163,8 @@ export class KNHBFetcher extends Fetcher {
      */
     async fetchClubs() {
         this.log("info", "Fetching clubs.");
-        const response = await this.apiFetch("/clubs")
-            .then(data => data?.json());
+        const response = await this.apiFetch("/clubs",
+            data => data.json());
 
         for (const club of response.data) {
             this.clubs.set(club.federation_reference_id, {

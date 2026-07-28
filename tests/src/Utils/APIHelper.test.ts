@@ -23,7 +23,8 @@ describe("APIHelper tests", () => {
 
         test("Test fatal error on invalid host.", async () => {
             const result =
-                await APIHelper.fetch("http://randomurl404blabla.com", fetcher);
+                await APIHelper.fetch("http://randomurl404blabla.com", fetcher,
+                    data => data.json());
 
             expect(result).toBe(null);
         });
@@ -31,7 +32,8 @@ describe("APIHelper tests", () => {
         test("Test retry on error response.", async () => {
             const spy = vitest.spyOn(fetcher, "log");
             const result = await APIHelper.fetch(
-                "https://publicaties.hockeyweerelt.nl/mcbla", fetcher);
+                "https://publicaties.hockeyweerelt.nl/mcbla", fetcher,
+                    data => data.json());
 
             expect(result).toBe(null);
             expect(spy).toBeCalledTimes(1);

@@ -28,7 +28,8 @@ export class AltiusOfficialFetcher {
         const competitionId = competition.getID();
         const url = `${baseUrl}/competitions/${competitionId}/officials`;
 
-        const data = await APIHelper.fetch(url, this.fetcher);
+        const data = await APIHelper.fetch(url, this.fetcher,
+                data => data.text());
 
         if (!data) {
             this.fetcher.log("error", "Failed to fetch officials for competition", {
@@ -37,7 +38,7 @@ export class AltiusOfficialFetcher {
             return new Map();
         }
 
-        const html = parse(await data.text());
+        const html = parse(data);
         return this.parseOfficialsHTML(html);
     }
 

@@ -36,14 +36,14 @@ export class AltiusCompetitionFetcher {
                 type === "in-progress"
                     ? `${baseURL}/competitions?page=${page}`
                     : `${baseURL}/competitions?view=${type}&page=${page}`,
-                this.fetcher);
+                this.fetcher, data => data.text());
 
             if (!data) {
                 this.fetcher.log("error", "Failed to fetch matches for competition");
                 return competitions;
             }
 
-            const html = parse(await data.text());
+            const html = parse(data);
             const rows = html.querySelectorAll(
                 "#admin_list_of_competitions table tbody tr");
 

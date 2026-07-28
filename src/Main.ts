@@ -1,7 +1,6 @@
 import { AltiusFetcher } from "./Fetchers/AltiusFetcher/AltiusFetcher";
 import { Fetcher, FetcherOptions } from "./Fetchers/Fetcher";
 import * as fs from "node:fs";
-import { FIHFetcher } from "./Fetchers/FIHFetcher/FIHFetcher";
 import { KNHBFetcher } from "./Fetchers/KNHBFetcher/KNHBFetcher";
 
 export class Main {
@@ -13,9 +12,9 @@ export class Main {
         const fetchers: Record<string, Fetcher> = {};
 
         // FIH
-        fetchers[FIHFetcher.FIH_FETCHER_ID] =
-            new FIHFetcher(FIHFetcher.FIH_BASE_URL, {
-                id: FIHFetcher.FIH_FETCHER_ID,
+        fetchers[AltiusFetcher.FIH_FETCHER_ID] =
+            new AltiusFetcher(AltiusFetcher.FIH_BASE_URL, {
+                id: AltiusFetcher.FIH_FETCHER_ID,
                 abbreviation: "FIH",
                 name: "International Hockey Federation",
                 index: 0

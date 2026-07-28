@@ -10,6 +10,11 @@ export class AltiusFetcher extends Fetcher {
     /**
      * The EHL Altius url
      */
+    public static readonly FIH_BASE_URL: string = "https://fih.altiusrt.com";
+
+    /**
+     * The EHL Altius url
+     */
     public static readonly EHL_BASE_URL: string = "https://eurohockey.altiusrt.com";
 
     /**
@@ -21,6 +26,11 @@ export class AltiusFetcher extends Fetcher {
      * The England Hockey Altius url.
     */
     public static readonly EH_BASE_URL: string = "https://englandhockey.altiusrt.com";
+
+    /**
+     * The EHL fetcher id.
+     */
+    public static readonly FIH_FETCHER_ID: string = "fih";
 
     /**
      * The EHL fetcher id.
