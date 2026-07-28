@@ -210,7 +210,10 @@ export class KNHBFetcher extends Fetcher {
     /**
      * @override
      */
-    descriptionToAppend(competition: Competition, match: Match, html: boolean): string[] {
+    descriptionToAppend(competition: Competition,
+                        match: Match,
+                        html: boolean): string[] {
+
         const lines = [];
 
         // Add KNHB links
