@@ -184,10 +184,27 @@ export class KNHBFetcher extends Fetcher {
     /**
      * @override
      */
-    descriptionToAppend(): string[] {
+    descriptionToAppend(competition: Competition, match: Match, html: boolean): string[] {
+        const lines = [];
 
-        const lines: string[] = [];
-        lines.push("This fetcher has been discontinued.");
+        // Add KNHB links
+        const linkBaseUrl = "https://www.knhb.nl/match-center#";
+        if (html) {
+            if (match.getID())
+                lines.push(`<a href="${linkBaseUrl}/match/${
+                    match.getID()}">View match details</a>`);
+            if (competition.getID())
+                lines.push(`<a href="${linkBaseUrl}/competitions/${
+                    competition.getID()}">View competition details</a>`);
+        } else {
+            if (match.getID())
+                lines.push("Match link: " +
+                    `${linkBaseUrl}/match/${match.getID()}`);
+            if (competition.getID())
+                lines.push("Competition link: " +
+                    `${linkBaseUrl}/competitions/${competition.getID()}`);
+        }
+
         return lines;
     }
 
