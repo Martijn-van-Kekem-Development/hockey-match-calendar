@@ -4,8 +4,6 @@ import { Official } from "../../Objects/Official";
 import { Fetcher, FetcherOptions } from "../Fetcher";
 import { KNHBCompetitionFetcher } from "./KNHBCompetitionFetcher";
 import { KNHBMatchFetcher } from "./KNHBMatchFetcher";
-import { Gender } from "../../Objects/Gender";
-import { ICSCreator } from "../../Utils/ICSCreator";
 import crypto from "crypto";
 import { APIHelper } from "../../Utils/APIHelper";
 
@@ -65,47 +63,15 @@ export class KNHBFetcher extends Fetcher {
         this.matchFetcher = new KNHBMatchFetcher(this);
     }
 
+    /**
+     * @override
+     */
     protected async fetch(): Promise<Competition[]> {
         if (!(await this.registerDevice()))
             return [];
 
         await this.fetchClubs();
-
-        this.log("info", "Fetching competitions.");
-        const competitions = await this.fetchCompetitions();
-        const promises = [];
-
-        this.log("info", `Found ${competitions.size} competitions.`);
-        this.log("info", "Fetching matches and creating competition files.");
-
-        for (const competition of competitions.values()) {
-            // Fetch match for every competition
-            const matchPromise = this.fetchMatches(competition);
-            matchPromise.then(result => {
-                competition.getMatches().push(...result.values());
-                return ICSCreator.createCompetitionICS(competition);
-            });
-
-            promises.push(matchPromise);
-        }
-
-        // Wait for all matches to fetch
-        await Promise.all(promises);
-        const competitionsArray = Array.from(competitions.values());
-
-        // Create total calendar files.
-        await Promise.all([
-            ICSCreator.createTotalICS(this, competitionsArray),
-            ICSCreator.createGenderTotalICS(this, competitionsArray,
-                Gender.MEN),
-            ICSCreator.createGenderTotalICS(this, competitionsArray,
-                Gender.WOMEN),
-            ICSCreator.createGenderTotalICS(this, competitionsArray,
-                Gender.MIXED),
-        ]);
-
-        this.log("info", "Finished.");
-        return competitionsArray;
+        return super.fetch();
     }
 
     /**

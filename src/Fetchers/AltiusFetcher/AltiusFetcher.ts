@@ -3,8 +3,6 @@ import { Competition } from "../../Objects/Competition.js";
 import { Match } from "../../Objects/Match.js";
 import { AltiusCompetitionFetcher } from "./AltiusCompetitionFetcher.js";
 import { AltiusMatchFetcher } from "./AltiusMatchFetcher.js";
-import { ICSCreator } from "../../Utils/ICSCreator.js";
-import { Gender } from "../../Objects/Gender.js";
 import { AltiusOfficialFetcher } from "./AltiusOfficialFetcher.js";
 import { Official } from "../../Objects/Official.js";
 
@@ -68,47 +66,6 @@ export class AltiusFetcher extends Fetcher {
         this.competitionFetcher = new AltiusCompetitionFetcher(this);
         this.matchFetcher = new AltiusMatchFetcher(this);
         this.officialFetcher = new AltiusOfficialFetcher(this);
-    }
-
-      /**
-     * Fetch the matches from Altius.
-     */
-      protected async fetch() {
-        this.log("info", "Fetching competitions.");
-        const competitions = await this.fetchCompetitions();
-        const promises = [];
-
-        this.log("info", `Found ${competitions.size} competitions.`);
-        this.log("info", "Fetching matches and creating competition files.");
-
-        for (const competition of competitions.values()) {
-            // Fetch match for every competition
-            const matchPromise = this.fetchMatches(competition);
-            matchPromise.then(result => {
-                competition.getMatches().push(...result.values());
-                return ICSCreator.createCompetitionICS(competition);
-            });
-
-            promises.push(matchPromise);
-        }
-
-        // Wait for all matches to fetch
-        await Promise.all(promises);
-        const competitionsArray = Array.from(competitions.values());
-
-        // Create total calendar files.
-        await Promise.all([
-            ICSCreator.createTotalICS(this, competitionsArray),
-            ICSCreator.createGenderTotalICS(this, competitionsArray,
-                Gender.MEN),
-            ICSCreator.createGenderTotalICS(this, competitionsArray,
-                Gender.WOMEN),
-            ICSCreator.createGenderTotalICS(this, competitionsArray,
-                Gender.MIXED),
-        ]);
-
-        this.log("info", "Finished.");
-        return competitionsArray;
     }
 
     /**
