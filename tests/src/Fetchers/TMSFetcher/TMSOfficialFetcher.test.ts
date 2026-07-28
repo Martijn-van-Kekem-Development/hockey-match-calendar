@@ -52,9 +52,7 @@ describe("TMSOfficialFetcher tests", () => {
                 </table>
             </div>`;
 
-        vi.spyOn(APIHelper, "fetch").mockResolvedValue({
-            text: () => Promise.resolve(html)
-        } as Response);
+        vi.spyOn(APIHelper, "fetch").mockResolvedValue(html);
 
         const officials = await officialFetcher.fetch(competition);
         const matchOfficials = officials.get("4205");

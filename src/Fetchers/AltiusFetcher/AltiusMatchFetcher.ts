@@ -33,7 +33,7 @@ export class AltiusMatchFetcher {
         const data =
             await APIHelper.fetch(`${this.fetcher.getBaseURL()}/competitions/${
                 competition.getID()}/matches`,
-                this.fetcher);
+                this.fetcher, data => data.text());
 
         if (!data) {
             this.fetcher.log("error", "Failed to fetch matches for competition", {
@@ -42,7 +42,7 @@ export class AltiusMatchFetcher {
             return matches;
         }
 
-        const html = parse(await data.text());
+        const html = parse(data);
         const rows = html.querySelectorAll(".tab-content table tbody tr");
 
         // Check no results

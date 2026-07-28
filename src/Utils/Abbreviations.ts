@@ -2,7 +2,6 @@ import * as fs from "node:fs";
 import { Fetcher } from "../Fetchers/Fetcher.js";
 import { AltiusFetcher } from "../Fetchers/AltiusFetcher/AltiusFetcher.js";
 import { Gender } from "../Objects/Gender.js";
-import { FIHFetcher } from "../Fetchers/FIHFetcher/FIHFetcher.js";
 import { KNHBFetcher } from "../Fetchers/KNHBFetcher/KNHBFetcher";
 
 export class Abbreviations {
@@ -102,7 +101,7 @@ export class Abbreviations {
     public static getGender(type: string, fetcher: Fetcher): Gender | false {
         let str = type.toLowerCase();
 
-        if (fetcher instanceof AltiusFetcher || fetcher instanceof FIHFetcher) {
+        if (fetcher instanceof AltiusFetcher) {
             str = str.replace(/[^a-z0-9]/g, "");
             if (str.includes("womens"))
                 return Gender.WOMEN;

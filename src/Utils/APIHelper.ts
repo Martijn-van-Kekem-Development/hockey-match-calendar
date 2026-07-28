@@ -12,23 +12,36 @@ export class APIHelper {
      * Make a fetch request
      * @param url The url to fetch.
      * @param fetcher The fetcher making this network request.
+     * @param parseData What to do with the data.
      * @param onRedirect What to do on redirect.
      * @param tryCount The amount of tries that have passed.
      * @param options The extra fetch options to supply
      */
+
     public static async fetch(url: string,
                               fetcher: Fetcher,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              parseData: (data: Response) => Promise<any>,
                               onRedirect?: (data: Response) => string,
                               tryCount: number = 0,
-                              options?: RequestInit): Promise<Response | null> {
-
-        let data: Response;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              options?: RequestInit): Promise<any | null> {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let data: any;
+        let response: Response;
 
         try {
-            data = await fetch(url, {
+            const resData = await fetch(url, {
                 ...options,
                 redirect: onRedirect ? "manual" : "follow",
             });
+
+            /**
+             * Response body must be consumed to avoid socket error.
+             * https://github.com/nodejs/undici/issues/583#issuecomment-855384858
+             */
+            response = resData.clone();
+            data = await parseData(response);
         } catch (e) {
             const error = e as Error;
             return fetcher.log("error", "Fatal fetch error", {
@@ -37,18 +50,19 @@ export class APIHelper {
             });
         }
 
-        if (onRedirect && data.status >= 300 && data.status < 310) {
+        if (onRedirect && response.status >= 300 && response.status < 310) {
             // Redirected
-            const newURL = onRedirect(data);
-            return this.fetch(newURL, fetcher, onRedirect, tryCount, options);
+            const newURL = onRedirect(response);
+            return APIHelper.fetch(newURL, fetcher, parseData, onRedirect,
+                tryCount, options);
         }
 
-        if (data.status === 200) return data;
+        if (response.status === 200) return data;
 
         // Request failed
-        if (data.status === 429) {
+        if (response.status === 429) {
             // Hit rate limit
-            const resetTimestamp = data.headers.get("x-ratelimit-reset");
+            const resetTimestamp = response.headers.get("x-ratelimit-reset");
             let delay = 1;
             if (resetTimestamp) {
                 // Calculate next attempt delay based on returned header.
@@ -58,23 +72,23 @@ export class APIHelper {
             }
 
             fetcher.log("warn", "Request failed", {
-                "status": `${data.status}`,
-                "url": `${data.url}`,
+                "status": `${response.status}`,
+                "url": `${response.url}`,
                 "retrying in": `${delay} seconds`
             });
 
             await APIHelper.delay(delay * 1000);
-            return await APIHelper.fetch(url, fetcher, onRedirect,
+            return await APIHelper.fetch(url, fetcher, parseData, onRedirect,
                 tryCount + 1, options);
         } else if (tryCount < 3) {
-            return await APIHelper.fetch(url, fetcher, onRedirect,
+            return await APIHelper.fetch(url, fetcher, parseData, onRedirect,
                 tryCount + 1, options);
         } else {
             // Give up
             return fetcher.log("error", "Request failed after 3 tries. Aborting", {
-                "code": `${data.status}`,
-                "url": `${data.url}`,
-                "body": (await data.text()).slice(0, 40)
+                "code": `${response.status}`,
+                "url": `${response.url}`,
+                "body": String(data).slice(0, 40)
             });
         }
     }
