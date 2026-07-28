@@ -29,8 +29,15 @@ export class AltiusOfficialFetcher {
         const url = `${baseUrl}/competitions/${competitionId}/officials`;
 
         const data = await APIHelper.fetch(url, this.fetcher);
-        const html = parse(await data.text());
 
+        if (!data) {
+            this.fetcher.log("error", "Failed to fetch officials for competition", {
+                id: competitionId,
+            });
+            return new Map();
+        }
+
+        const html = parse(await data.text());
         return this.parseOfficialsHTML(html);
     }
 
@@ -67,7 +74,7 @@ export class AltiusOfficialFetcher {
         const roleIndices = this.getRoleIndices(headers);
         const rows = table.querySelectorAll("tr:not(:first-child)");
 
-        let currentMatchId: string | null = null;
+        let currentMatchId: string | undefined;
         let officials: Official[] = [];
 
         for (let i = 0; i < rows.length; i++) {
@@ -78,7 +85,7 @@ export class AltiusOfficialFetcher {
                 if (currentMatchId && officials.length > 0) {
                     officialsMap.set(currentMatchId, [...officials]);
                 }
-                currentMatchId = matchCell.getAttribute("href").split("/").pop();
+                currentMatchId = matchCell.getAttribute("href")?.split("/").pop();
                 officials = [];
             }
 

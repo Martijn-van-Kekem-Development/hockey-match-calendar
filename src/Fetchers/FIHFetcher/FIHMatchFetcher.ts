@@ -37,7 +37,7 @@ export class FIHMatchFetcher {
 
             // On redirect, append schedules path if not the case.
             const url = new URL(data.url);
-            const newPath = data.headers.get("location");
+            const newPath = data.headers.get("location") ?? "";
             if (!newPath.endsWith("schedule-fixtures-results"))
                 url.pathname = `${newPath}/schedule-fixtures-results`;
             else
@@ -82,7 +82,7 @@ export class FIHMatchFetcher {
      * @param index
      */
     public createMatch(competition: Competition, row: FIHCompetitionMatch,
-                       index: number): Match {
+                       index: number): Match | null {
         const object = new Match();
         object.setCompetition(competition);
         object.setType(row.event_stage ?? "");

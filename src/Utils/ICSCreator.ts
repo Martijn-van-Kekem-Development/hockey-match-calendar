@@ -103,7 +103,7 @@ export class ICSCreator {
             if (!matchMap.has(club.id))
                 matchMap.set(club.id, { matches: [], club });
 
-            matchMap.get(club.id).matches.push(match);
+            matchMap.get(club.id)!.matches.push(match);
         };
 
         // Add each match to the correct clubs
