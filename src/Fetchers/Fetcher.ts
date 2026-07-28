@@ -3,6 +3,8 @@ import { Match } from "../Objects/Match.js";
 import { Official } from "../Objects/Official.js";
 import { ICS } from "../ICS.js";
 import { ObjectHelper } from "../Utils/ObjectHelper.js";
+import { Gender } from "../Objects/Gender";
+import { ICSCreator } from "../Utils/ICSCreator";
 
 export abstract class Fetcher {
     /**
@@ -128,9 +130,45 @@ export abstract class Fetcher {
     }
 
     /**
-     * Run this fetcher.
+     * Fetch the matches for this fetcher.
      */
-    protected abstract fetch(): Promise<Competition[]>;
+    protected async fetch() {
+        this.log("info", "Fetching competitions.");
+        const competitions = await this.fetchCompetitions();
+        const promises = [];
+
+        this.log("info", `Found ${competitions.size} competitions.`);
+        this.log("info", "Fetching matches and creating competition files.");
+
+        for (const competition of competitions.values()) {
+            // Fetch match for every competition
+            const matchPromise = this.fetchMatches(competition);
+            matchPromise.then(result => {
+                competition.getMatches().push(...result.values());
+                return ICSCreator.createCompetitionICS(competition);
+            });
+
+            promises.push(matchPromise);
+        }
+
+        // Wait for all matches to fetch
+        await Promise.all(promises);
+        const competitionsArray = Array.from(competitions.values());
+
+        // Create total calendar files.
+        await Promise.all([
+            ICSCreator.createTotalICS(this, competitionsArray),
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
+                Gender.MEN),
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
+                Gender.WOMEN),
+            ICSCreator.createGenderTotalICS(this, competitionsArray,
+                Gender.MIXED),
+        ]);
+
+        this.log("info", "Finished.");
+        return competitionsArray;
+    }
 
     /**
      * Fetch the competitions and map them by their ID.

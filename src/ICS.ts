@@ -23,9 +23,9 @@ export class ICS {
             });
 
         // Create club if not exists.
-        const fetcherData = this.fetchers.get(fetcher.getID());
+        const fetcherData = this.fetchers.get(fetcher.getID())!;
         if (club && typeof fetcherData.clubs[club.id] === "undefined")
-            this.fetchers.get(fetcher.getID()).clubs[club.id] = {
+            fetcherData.clubs[club.id] = {
                 id: club.id,
                 name: club.name,
                 paths: []
@@ -57,8 +57,8 @@ export class ICS {
         // Add path to correct club
         const pathArray =
             club === null
-            ? this.fetchers.get(fetcher.getID()).paths
-            : this.fetchers.get(fetcher.getID()).clubs[club.id].paths;
+            ? this.fetchers.get(fetcher.getID())!.paths
+            : this.fetchers.get(fetcher.getID())!.clubs[club.id].paths;
 
         pathArray.push({
             name: title,

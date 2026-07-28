@@ -38,6 +38,11 @@ export class AltiusCompetitionFetcher {
                     : `${baseURL}/competitions?view=${type}&page=${page}`,
                 this.fetcher);
 
+            if (!data) {
+                this.fetcher.log("error", "Failed to fetch matches for competition");
+                return competitions;
+            }
+
             const html = parse(await data.text());
             const rows = html.querySelectorAll(
                 "#admin_list_of_competitions table tbody tr");
@@ -65,12 +70,12 @@ export class AltiusCompetitionFetcher {
      * @param row
      * @param index
      */
-    public createCompetition(row: HTMLElement, index: number): Competition {
+    public createCompetition(row: HTMLElement, index: number): Competition | null {
         const object = new Competition(this.fetcher, index);
         const link = row.querySelector("td:nth-child(1) a[href]");
 
         // Add competition ID.
-        const id = link.getAttribute("href").split("/").slice(-1)[0] ?? null;
+        const id = link?.getAttribute("href")?.split("/").slice(-1)[0] ?? null;
         if (!id) return this.fetcher.log(
             "error", "Skipping competition, failed to get ID", {
                 "index": `${index}`,
@@ -78,7 +83,7 @@ export class AltiusCompetitionFetcher {
         object.setID(id);
 
         // Add competition name.
-        const name = link.textContent ?? null;
+        const name = link?.textContent ?? null;
         if (!name) return this.fetcher.log(
             "error", "Skipping competition, failed to get name", {
                 "id": id,
@@ -88,11 +93,11 @@ export class AltiusCompetitionFetcher {
 
         // Add competition location
         const location = row.querySelector("td:nth-child(3)");
-        object.setLocation(location.textContent.trim());
+        object.setLocation(location?.textContent.trim() ?? "unknown");
 
         // Add competition type
         const type = row.querySelector("td:nth-child(4)");
-        object.setType(type.textContent.trim());
+        object.setType(type?.textContent.trim() ?? "unknown");
 
         return object;
     }

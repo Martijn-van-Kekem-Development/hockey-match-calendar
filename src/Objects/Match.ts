@@ -11,7 +11,7 @@ export class Match {
      * The competition name that this match belongs to.
      * @private
      */
-    private competition: Competition = null;
+    private competition!: Competition;
 
     /**
      * The index of this match in the competition.
@@ -29,31 +29,31 @@ export class Match {
      * The final score of this match if it's completed.
      * @private
      */
-    private finalScore: string;
+    private finalScore!: string;
 
     /**
      * The type of match.
      * @private
      */
-    private type: string;
+    private type!: string;
 
     /**
      * The home team for this match.
      * @private
      */
-    private homeTeam: Team;
+    private homeTeam!: Team;
 
     /**
      * The away team for this match.
      * @private
      */
-    private awayTeam: Team;
+    private awayTeam!: Team;
 
     /**
      * The date and time this match takes place
      * @private
      */
-    private date: Moment;
+    private date!: Moment;
 
     /**
      * Whether the time is known for this match.
@@ -65,13 +65,13 @@ export class Match {
      * The match location.
      * @private
      */
-    private venue: string;
+    private venue!: string;
 
     /**
      * The gender category for this match.
      * @private
      */
-    private gender: Gender;
+    private gender!: Gender;
 
     /**
      * Whether this match has completed.
@@ -83,7 +83,7 @@ export class Match {
      * The match id, or null if no match ID exists.
      * @private
      */
-    private id: string | null = null;
+    private id!: string;
 
     /**
      * The metadata for this match.
@@ -103,7 +103,7 @@ export class Match {
      * @param team The home team.
      * @param club The club this team is playing for.
      */
-    public setHomeTeam(id: string, team: string, club: Club = null) {
+    public setHomeTeam(id: string, team: string, club?: Club) {
         this.homeTeam = {
             id,
             name: team,
@@ -120,7 +120,7 @@ export class Match {
      * @param team The away team.
      * @param club The club this team is playing for.
      */
-    public setAwayTeam(id: string, team: string, club: Club = null) {
+    public setAwayTeam(id: string, team: string, club?: Club) {
         this.awayTeam = {
             id,
             name: team,
@@ -153,7 +153,7 @@ export class Match {
      * Set the match ID.
      * @param id The match ID, or null to reset.
      */
-    public setID(id: string | null) {
+    public setID(id: string) {
         this.id = id;
     }
 
@@ -416,7 +416,7 @@ export class Match {
      */
     public getMatchTitle(): string {
         const icon = this.isCompleted ? "✅" : "🏑";
-        const competitionAbbr = this.competition === null ? ""
+        const competitionAbbr = !this.competition ? ""
             : ` ${this.competition.getAbbr()}`;
 
         return `${icon}${competitionAbbr} ${
@@ -444,7 +444,7 @@ export class Match {
 export interface Team {
     id: string,
     name: string,
-    club: Club | null,
+    club?: Club,
     country: Country | null
 }
 

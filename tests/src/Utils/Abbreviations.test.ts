@@ -49,7 +49,7 @@ describe("Abbreviations tests", () => {
             name: "Test Fetcher",
             index: 0
         };
-        const fetcher2 = new AltiusFetcher(null, options);
+        const fetcher2 = new AltiusFetcher("", options);
         const mensTest = {
             tms: ["mens"]
         };

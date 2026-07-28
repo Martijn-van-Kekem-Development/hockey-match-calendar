@@ -3,9 +3,9 @@ import { Gender, getFullGender } from "../../../src/Objects/Gender.js";
 
 describe("Gender tests", () => {
     test("getFullGender()", () => {
-        const genders = Object.keys(Gender).filter(g => isNaN(-g));
+        const genders = Object.values(Gender);
         for (const gender of genders) {
-            expect(() => getFullGender(Gender[gender])).not.toThrowError();
+            expect(() => getFullGender(gender)).not.toThrow();
         }
     });
 });

@@ -43,16 +43,18 @@ export class FIHCompetitionFetcher {
             const data = await APIHelper.fetch(`${
                 baseURL}/data-api/static/sr/series?${requestOptions}`, this.fetcher);
 
-            const json = await data.json();
+            const json = await data?.json();
 
             // Check no results
-            if (json.data.value.length === 0)
+            if (!json || json.data.value.length === 0)
                 break;
 
             // Create competition from every row.
             for (const row of json.data.value) {
                 const item = this.createCompetition(row, options.index++);
-                competitions.set(item.getID(), item);
+
+                if (item)
+                    competitions.set(item.getID(), item);
             }
 
             // Continue with next page.
@@ -67,7 +69,8 @@ export class FIHCompetitionFetcher {
      * @param row
      * @param index
      */
-    public createCompetition(row: FIHCompetition, index: number): Competition {
+    public createCompetition(row: FIHCompetition,
+                             index: number): Competition | null {
         const object = new Competition(this.fetcher, index);
 
         // Add competition ID.

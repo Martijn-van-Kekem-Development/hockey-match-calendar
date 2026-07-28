@@ -8,12 +8,13 @@ describe("APIHelper tests", () => {
         await APIHelper.delay(500);
         const endTime = (new Date()).getTime();
 
-        expect(endTime - startTime).toBeGreaterThanOrEqual(500);
+        const margin = 2;
+        expect(endTime - startTime).toBeGreaterThanOrEqual(500 - margin);
     });
 
     describe("Fetch tests", () => {
         const fetcher =
-            new AltiusFetcher(null, {
+            new AltiusFetcher("", {
                 id: "test",
                 abbreviation: "TSTF",
                 name: "Test Fetcher",

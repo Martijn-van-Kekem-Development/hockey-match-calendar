@@ -19,25 +19,25 @@ export class Competition {
      * The name of this event.
      * @private
      */
-    private name: string;
+    private name!: string;
 
     /**
      * The id for this match event.
      * @private
      */
-    private id: string;
+    private id!: string;
 
     /**
      * The competition type.
      * @private
      */
-    private type: string;
+    private type!: string;
 
     /**
      * The location for this competition.
      * @private
      */
-    private location: string;
+    private location: string | null = null;
 
     /**
      * The matches belonging to this competition.
@@ -104,7 +104,7 @@ export class Competition {
     /**
      * Get the location for this competition.
      */
-    public getLocation(): string {
+    public getLocation(): string | null {
         return this.location;
     }
 

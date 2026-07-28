@@ -46,6 +46,8 @@ export class ICSCreator {
         let matches = competitions.map(e => e.getMatches()).flat();
         matches = matches.filter(m => m.getGender() === gender);
 
+        if (matches.length === 0) return;
+
         const path = `${this.genderToString(gender, true)}-matches`;
         const title = `All ${fetcher.getAbbr()} ${this.genderToString(
             gender, false)} matches`;
@@ -103,7 +105,7 @@ export class ICSCreator {
             if (!matchMap.has(club.id))
                 matchMap.set(club.id, { matches: [], club });
 
-            matchMap.get(club.id).matches.push(match);
+            matchMap.get(club.id)!.matches.push(match);
         };
 
         // Add each match to the correct clubs

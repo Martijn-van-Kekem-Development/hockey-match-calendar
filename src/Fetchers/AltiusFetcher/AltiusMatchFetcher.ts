@@ -34,6 +34,14 @@ export class AltiusMatchFetcher {
             await APIHelper.fetch(`${this.fetcher.getBaseURL()}/competitions/${
                 competition.getID()}/matches`,
                 this.fetcher);
+
+        if (!data) {
+            this.fetcher.log("error", "Failed to fetch matches for competition", {
+                id: competition.getID(),
+            });
+            return matches;
+        }
+
         const html = parse(await data.text());
         const rows = html.querySelectorAll(".tab-content table tbody tr");
 
@@ -73,7 +81,7 @@ export class AltiusMatchFetcher {
      * @param competition
      * @param row
      */
-    public createMatch(competition: Competition, row: HTMLElement): Match {
+    public createMatch(competition: Competition, row: HTMLElement): Match | null {
         const object = new Match();
         object.setCompetition(competition);
 
@@ -94,8 +102,8 @@ export class AltiusMatchFetcher {
 
         // Add match ID.
         const id =
-            link.getAttribute("href").split("/").slice(-1)[0] ?? null;
-        if (!link) return this.fetcher.log(
+            link.getAttribute("href")?.split("/").slice(-1)[0] ?? null;
+        if (!id) return this.fetcher.log(
             "error", "Skipping match, failed to get ID", {
                 "competition": `${competition.getID()}`,
             });
@@ -103,7 +111,7 @@ export class AltiusMatchFetcher {
 
         // Add match index
         const indexEl = row.querySelector("td:nth-child(1)");
-        const indexVal = indexEl.textContent.replaceAll(/[^0-9]/g, "");
+        const indexVal = indexEl?.textContent.replaceAll(/[^0-9]/g, "");
         object.setIndex(Number(indexVal));
 
         // Add gender
@@ -120,23 +128,30 @@ export class AltiusMatchFetcher {
         const dateString =
             row.querySelector("td:nth-child(2) span[data-timezone]");
         const venueString =
-            row.querySelector("td:nth-child(6)").textContent;
-        const timeZone = dateString.getAttribute("data-timezone");
+            row.querySelector("td:nth-child(6)")?.textContent;
+        const timeZone = dateString?.getAttribute("data-timezone");
+
+        if (!timeZone || !dateString) return this.fetcher.log(
+            "error", "Skipping match, failed to get date", {
+                "id": `${id}`,
+                "competition": competition.getID()
+            });
+
         const utcDate =
             DateHelper.AltiusToUTC(dateString.textContent, timeZone, venueString);
         object.setMatchDate(utcDate, true);
 
         // Add completed state
         const status = row.querySelector("td:nth-child(5)");
-        if (status.textContent.toLowerCase().trim() === "official") {
+        if (status?.textContent.toLowerCase().trim() === "official") {
             object.setCompleted(true);
             const score = row.querySelector("td:nth-child(4)");
-            object.setScore(score.textContent.trim());
+            object.setScore(score?.textContent.trim() ?? "unknown");
         }
 
         // Add venue
         const venue = row.querySelector("td:nth-child(6)");
-        object.setVenue(venue.textContent.trim());
+        object.setVenue(venue?.textContent.trim() ?? "unknown");
 
         return object;
     }
@@ -164,8 +179,6 @@ export class AltiusMatchFetcher {
         const home = result[1]?.trim() || "TBC";
         const away = result[2]?.trim() || "TBC";
         const matchType = result[3] ?? "";
-
-        console.log(home, away, matchType);
 
         object.setHomeTeam(home.toLowerCase(), home);
         object.setAwayTeam(away.toLowerCase(), away);
