@@ -1,6 +1,4 @@
 import { Competition } from "../../Objects/Competition";
-import { Abbreviations } from "../../Utils/Abbreviations";
-import { Gender } from "../../Objects/Gender";
 import { KNHBFetcher } from "./KNHBFetcher";
 
 export class KNHBCompetitionFetcher {
@@ -67,8 +65,4 @@ interface KNHBCompetition {
     poule_id: number;
     name: string;
     sort: number;
-}
-
-interface FIHCompetitionVenue {
-    venue_name: string;
 }

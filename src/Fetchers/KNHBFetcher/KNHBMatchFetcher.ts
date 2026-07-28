@@ -1,11 +1,8 @@
 import { Match } from "../../Objects/Match";
-import { HTMLElement, parse } from "node-html-parser";
 import { Competition } from "../../Objects/Competition";
 import { Abbreviations } from "../../Utils/Abbreviations";
 import { DateHelper } from "../../Utils/DateHelper";
-import { APIHelper } from "../../Utils/APIHelper";
 import { KNHBFetcher } from "./KNHBFetcher";
-import { KNHBCompetitionFetcher } from "./KNHBCompetitionFetcher";
 
 export class KNHBMatchFetcher {
     /**
@@ -29,7 +26,8 @@ export class KNHBMatchFetcher {
     public async fetch(competition: Competition) {
         const matches: Map<string, Match> = new Map();
 
-        const response = await this.fetcher.apiFetch(`/competitions/national/${competition.getID()}`)
+        const response = await this.fetcher.apiFetch(
+            `/competitions/national/${competition.getID()}`)
             .then(data => data?.json());
 
         let index = 1;

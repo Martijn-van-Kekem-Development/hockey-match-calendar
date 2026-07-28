@@ -106,7 +106,7 @@ export class KNHBFetcher extends Fetcher {
      */
     private async registerDevice() {
         this.deviceUUID = crypto.randomUUID();
-        const headers = this.getAPIHeaders(`/device/register`);
+        const headers = this.getAPIHeaders("/device/register");
 
         const result = await fetch(`${this.getBaseURL()}/device/register`, {
             headers,
@@ -145,7 +145,7 @@ export class KNHBFetcher extends Fetcher {
             ...this.apiHeaders,
             "X-HAPI-Signature": signature,
             "X-HAPI-Timestamp": `${time}`
-        }
+        };
     }
 
     /**
@@ -160,10 +160,11 @@ export class KNHBFetcher extends Fetcher {
                  tryCount: number = 0,
                  options?: Record<string, string>) {
 
-        return APIHelper.fetch(`${this.getBaseURL()}${path}`, this, onRedirect, tryCount, {
+        return APIHelper.fetch(`${this.getBaseURL()}${path}`, this,
+            onRedirect, tryCount, {
             ...options,
             headers: this.getAPIHeaders(path)
-        })
+        });
     }
 
     /**

@@ -64,9 +64,11 @@ export class APIHelper {
             });
 
             await APIHelper.delay(delay * 1000);
-            return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1, options);
+            return await APIHelper.fetch(url, fetcher, onRedirect,
+                tryCount + 1, options);
         } else if (tryCount < 3) {
-            return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1, options);
+            return await APIHelper.fetch(url, fetcher, onRedirect,
+                tryCount + 1, options);
         } else {
             // Give up
             return fetcher.log("error", "Request failed after 3 tries. Aborting", {
