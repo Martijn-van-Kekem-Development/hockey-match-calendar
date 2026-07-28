@@ -55,8 +55,10 @@ export class KNHBMatchFetcher {
         object.setIndex(index);
         object.setVenue(row.location.facility.address);
 
-        object.setHomeTeam(String(row.home.id), row.home.name);
-        object.setAwayTeam(String(row.away.id), row.away.name);
+        object.setHomeTeam(String(row.home.id), row.home.name,
+            this.fetcher.getClubs().get(row.home.federation_reference_id));
+        object.setAwayTeam(String(row.away.id), row.away.name,
+            this.fetcher.getClubs().get(row.away.federation_reference_id));
 
         // Add match ID.
         const id = String(row.id);
@@ -114,7 +116,8 @@ interface KNHBMatchFacility {
 
 interface KNHBMatchTeam {
     id: number;
-    name: string
+    name: string,
+    federation_reference_id: string
 }
 
 interface KNHBMatchResult {

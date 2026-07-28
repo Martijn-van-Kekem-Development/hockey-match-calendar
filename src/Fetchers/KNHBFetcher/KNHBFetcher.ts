@@ -1,5 +1,5 @@
 import { Competition } from "../../Objects/Competition";
-import { Match } from "../../Objects/Match";
+import { Club, Match } from "../../Objects/Match";
 import { Official } from "../../Objects/Official";
 import { Fetcher, FetcherOptions } from "../Fetcher";
 import { KNHBCompetitionFetcher } from "./KNHBCompetitionFetcher";
@@ -39,6 +39,12 @@ export class KNHBFetcher extends Fetcher {
     private deviceUUID?: string;
 
     /**
+     * All KNHB clubs mapped by their federation ID.
+     * @private
+     */
+    private clubs: Map<string, Club> = new Map();
+
+    /**
      * The API headers to provide
      * @private
      */
@@ -62,6 +68,8 @@ export class KNHBFetcher extends Fetcher {
     protected async fetch(): Promise<Competition[]> {
         if (!(await this.registerDevice()))
             return [];
+
+        await this.fetchClubs();
 
         this.log("info", "Fetching competitions.");
         const competitions = await this.fetchCompetitions();
@@ -182,6 +190,24 @@ export class KNHBFetcher extends Fetcher {
     }
 
     /**
+     * Fetch all KNHB clubs.
+     */
+    async fetchClubs() {
+        this.log("info", "Fetching clubs.");
+        const response = await this.apiFetch("/clubs")
+            .then(data => data?.json());
+
+        for (const club of response.data) {
+            this.clubs.set(club.federation_reference_id, {
+                id: club.federation_reference_id,
+                name: club.friendly_name
+            });
+        }
+
+        this.log("info", `Found ${response.data.length} clubs.`);
+    }
+
+    /**
      * @override
      */
     descriptionToAppend(competition: Competition, match: Match, html: boolean): string[] {
@@ -214,5 +240,12 @@ export class KNHBFetcher extends Fetcher {
      */
     public async fetchOfficials(): Promise<Map<string, Official[]>> {
         return new Map();
+    }
+
+    /**
+     * Get all KNHB clubs.
+     */
+    public getClubs(): Map<string, Club> {
+        return this.clubs;
     }
 }
