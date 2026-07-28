@@ -1,9 +1,9 @@
 import * as fs from "node:fs";
 import { Fetcher } from "../Fetchers/Fetcher.js";
 import { AltiusFetcher } from "../Fetchers/AltiusFetcher/AltiusFetcher.js";
-import { DiscontinuedFetcher } from "../Fetchers/DiscontinuedFetcher/DiscontinuedFetcher";
 import { Gender } from "../Objects/Gender.js";
 import { FIHFetcher } from "../Fetchers/FIHFetcher/FIHFetcher.js";
+import { KNHBFetcher } from "../Fetchers/KNHBFetcher/KNHBFetcher";
 
 export class Abbreviations {
     /**
@@ -111,7 +111,7 @@ export class Abbreviations {
             if (str.includes("mixed") || str.includes("coed"))
                 return Gender.MIXED;
 
-        } else if (fetcher instanceof DiscontinuedFetcher) {
+        } else if (fetcher instanceof KNHBFetcher) {
             if (str.includes("(w)") ||
                 str.includes("dames") ||
                 str.includes("meisjes"))

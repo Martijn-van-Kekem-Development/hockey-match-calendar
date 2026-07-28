@@ -5,6 +5,7 @@
       "es2021",
       "dom"
     ],
+    "types": ["node"],
     "module": "NodeNext",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "NodeNext",
