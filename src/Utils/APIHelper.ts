@@ -14,27 +14,33 @@ export class APIHelper {
      * @param fetcher The fetcher making this network request.
      * @param onRedirect What to do on redirect.
      * @param tryCount The amount of tries that have passed.
+     * @param options The extra fetch options to supply
      */
     public static async fetch(url: string,
                               fetcher: Fetcher,
-                              onRedirect: (data: Response) => string = null,
-                              tryCount: number = 0) {
+                              onRedirect?: (data: Response) => string,
+                              tryCount: number = 0,
+                              options?: RequestInit): Promise<Response | null> {
 
         let data: Response;
 
         try {
-            data = await fetch(url, { redirect: onRedirect ? "manual" : "follow" });
+            data = await fetch(url, {
+                ...options,
+                redirect: onRedirect ? "manual" : "follow",
+            });
         } catch (e) {
+            const error = e as Error;
             return fetcher.log("error", "Fatal fetch error", {
                 "url": url,
-                "error": e.toString()
+                "error": error.toString()
             });
         }
 
         if (onRedirect && data.status >= 300 && data.status < 310) {
             // Redirected
             const newURL = onRedirect(data);
-            return this.fetch(newURL, fetcher, onRedirect, tryCount);
+            return this.fetch(newURL, fetcher, onRedirect, tryCount, options);
         }
 
         if (data.status === 200) return data;
@@ -58,9 +64,9 @@ export class APIHelper {
             });
 
             await APIHelper.delay(delay * 1000);
-            return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1);
+            return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1, options);
         } else if (tryCount < 3) {
-            return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1);
+            return await APIHelper.fetch(url, fetcher, onRedirect, tryCount + 1, options);
         } else {
             // Give up
             return fetcher.log("error", "Request failed after 3 tries. Aborting", {

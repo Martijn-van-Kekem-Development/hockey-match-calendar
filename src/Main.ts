@@ -1,8 +1,8 @@
-import { AltiusFetcher } from "./Fetchers/AltiusFetcher/AltiusFetcher.js";
-import { DiscontinuedFetcher } from "./Fetchers/DiscontinuedFetcher/DiscontinuedFetcher";
-import { Fetcher } from "./Fetchers/Fetcher.js";
+import { AltiusFetcher } from "./Fetchers/AltiusFetcher/AltiusFetcher";
+import { Fetcher, FetcherOptions } from "./Fetchers/Fetcher";
 import * as fs from "node:fs";
-import { FIHFetcher } from "./Fetchers/FIHFetcher/FIHFetcher.js";
+import { FIHFetcher } from "./Fetchers/FIHFetcher/FIHFetcher";
+import { KNHBFetcher } from "./Fetchers/KNHBFetcher/KNHBFetcher";
 
 export class Main {
     /**
@@ -10,7 +10,7 @@ export class Main {
      * command-line argument required to run that fetcher.
      */
     public fetchers(): Record<string, Fetcher> {
-        const fetchers = {};
+        const fetchers: Record<string, Fetcher> = {};
 
         // FIH
         fetchers[FIHFetcher.FIH_FETCHER_ID] =
@@ -49,13 +49,13 @@ export class Main {
             });
 
         // KNHB
-        fetchers[DiscontinuedFetcher.KNHB_FETCHER_ID] =
-            new DiscontinuedFetcher({
-                id: DiscontinuedFetcher.KNHB_FETCHER_ID,
+        fetchers[KNHBFetcher.KNHB_FETCHER_ID] =
+            new KNHBFetcher(KNHBFetcher.KNHB_BASE_URL, {
+                id: KNHBFetcher.KNHB_FETCHER_ID,
                 abbreviation: "KNHB",
                 name: "Dutch Hockey Association",
                 index: 4
-            }, "The KNHB has discontinued their API for public viewing purposes.");
+            });
 
         return fetchers;
     }
@@ -82,7 +82,7 @@ export class Main {
      */
     private async saveFetchers() {
         const fetchers = this.fetchers();
-        const output = {};
+        const output: Record<string, FetcherOptions> = {};
         for (const fetcher of Object.values(fetchers)) {
             output[fetcher.getID()] = fetcher.getOptions();
         }
