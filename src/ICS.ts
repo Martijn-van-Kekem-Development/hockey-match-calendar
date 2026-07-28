@@ -49,7 +49,7 @@ export class ICS {
         const outputFolder =
             outputFile.split("/").slice(0, -1).join("/");
 
-        const path = outputFile.split("/").slice(1).join("/")
+        const path = outputFile.split("/").slice(1).join("/");
         const icsString = ICS.calendarToICS(title, path, matches);
 
         await fs.mkdir(outputFolder, { recursive: true });
