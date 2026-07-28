@@ -84,6 +84,7 @@ describe("Match tests", () => {
             const match = new Match();
 
             test("Without venue", () => {
+                // @ts-expect-error null value in non-nullable input.
                 match.setVenue(null);
                 expect(match.getLocation()).toBe("");
             });
@@ -97,16 +98,20 @@ describe("Match tests", () => {
 
         describe("With competition", () => {
             const match = new Match();
+            // @ts-expect-error null value in non-nullable input.
             const competition = new Competition(null, null);
             match.setCompetition(competition);
 
             test("No location, without venue", () => {
+                // @ts-expect-error null value in non-nullable input.
                 competition.setLocation(null);
+                // @ts-expect-error null value in non-nullable input.
                 match.setVenue(null);
                 expect(match.getLocation()).toBe("");
             });
 
             test("No location, with venue", () => {
+                // @ts-expect-error null value in non-nullable input.
                 competition.setLocation(null);
                 match.setVenue("Venue");
                 expect(match.getLocation()).toBe("Venue");
@@ -114,6 +119,7 @@ describe("Match tests", () => {
 
             test("With location, no venue", () => {
                 competition.setLocation("Location");
+                // @ts-expect-error null value in non-nullable input.
                 match.setVenue(null);
                 expect(match.getLocation()).toBe("Location");
             });
@@ -144,6 +150,7 @@ describe("Match tests", () => {
         });
 
         describe("Check index occurrence", () => {
+            // @ts-expect-error null value in non-nullable input.
             const competition = new Competition(null, 0);
             competition.setName("Random Test Competition");
             const match = new Match();
