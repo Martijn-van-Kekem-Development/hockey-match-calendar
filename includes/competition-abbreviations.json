@@ -7,6 +7,7 @@
   "FIH Indoor Hockey Women's World Cup.*": "IWC",
   "FIH Indoor Hockey Men's World Cup.*": "IWC",
   "Central-South Africa Qualifier.*": "CSAQ",
+  "FIH Hockey World Cup Belgium & Netherlands 2026 \\([M|W]\\)": "WC",
   ".*Hoofdklasse (Heren|Dames)": "HK",
   "Promotieklasse (Heren|Dames)": "PK",
   "Overgangsklasse (Heren|Dames)": "OVK",
