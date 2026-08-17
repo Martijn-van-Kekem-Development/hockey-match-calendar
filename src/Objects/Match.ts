@@ -408,7 +408,19 @@ export class Match {
         // Append fetcher description
         if (this.competition && this.competition.getFetcher())
             lines.push(...this.competition.getFetcher()
-                .descriptionToAppend(this.competition,  this, html));
+                .descriptionToAppend(this.competition, this, html));
+
+        lines.push("");
+
+        // Add disclaimer
+        const discord = html
+            ? `<a href="https://discord.com/invite/qTfzFs447y">Discord</a>`
+            : "Discord: https://discord.com/invite/qTfzFs447y";
+
+        lines.push("Did you notice missing or incorrect data for this match?");
+        lines.push("Or do you know a better abbreviation for this competition " +
+            `than "${this.competition.getAbbr()}"? Contact us via ${discord}`)
+
 
         return lines.join(html ? "<br>" : "\\n");
     }
