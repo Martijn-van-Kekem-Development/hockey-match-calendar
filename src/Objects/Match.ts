@@ -286,7 +286,7 @@ export class Match {
         let fetcherID, competitionID;
         if (this.competition && this.competition.getFetcher()) {
             fetcherID = this.competition.getFetcher().getID();
-            competitionID = this.competition.getID()
+            competitionID = this.competition.getID();
         } else {
             fetcherID = "unknown";
             competitionID = "unknown";

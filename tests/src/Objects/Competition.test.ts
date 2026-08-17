@@ -24,4 +24,4 @@ describe("Competition tests", () => {
             }
         });
     });
-})
+});
