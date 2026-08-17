@@ -86,12 +86,6 @@ export class Match {
     private id!: string;
 
     /**
-     * The metadata for this match.
-     * @private
-     */
-    private metadata: Record<string, string> = {};
-
-    /**
      * The match officials.
      * @private
      */
@@ -152,9 +146,10 @@ export class Match {
     /**
      * Set the match ID.
      * @param id The match ID, or null to reset.
+     * @param competition The competition that this match is part of.
      */
-    public setID(id: string) {
-        this.id = id;
+    public setID(id: string, competition: Competition) {
+        this.id = `${competition.getFetcher().getID()}_${competition.getID()}_${id}`;
     }
 
     /**
@@ -195,15 +190,6 @@ export class Match {
      */
     public setScore(score: string) {
         this.finalScore = score;
-    }
-
-    /**
-     * Set a metadata item.
-     * @param key The key to set.
-     * @param value The value to set.
-     */
-    public setMetadata(key: string, value: string) {
-        this.metadata[key] = value;
     }
 
     /**
@@ -346,14 +332,6 @@ export class Match {
     }
 
     /**
-     * Get a metadata item.
-     * @param key The key to retrieve.
-     */
-    public getMetadata(key: string): string {
-        return this.metadata[key];
-    }
-
-    /**
      * Get the match abbreviation.
      */
     public getAbbr(): string {
@@ -406,7 +384,20 @@ export class Match {
         // Append fetcher description
         if (this.competition && this.competition.getFetcher())
             lines.push(...this.competition.getFetcher()
-                .descriptionToAppend(this.competition,  this, html));
+                .descriptionToAppend(this.competition, this, html));
+
+        lines.push("");
+
+        // Add disclaimer
+        const discord = html
+            ? "<a href=\"https://discord.com/invite/qTfzFs447y\">Discord</a>"
+            : "Discord: https://discord.com/invite/qTfzFs447y";
+
+        lines.push("Did you notice missing or incorrect data for this match?");
+        if (this.competition)
+            lines.push("Or do you know a better abbreviation for this competition " +
+                `than "${this.competition.getAbbr()}"?`);
+        lines.push(`Contact us via ${discord}`);
 
         return lines.join(html ? "<br>" : "\\n");
     }
