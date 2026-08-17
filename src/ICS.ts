@@ -103,8 +103,7 @@ export class ICS {
 
         content.push("BEGIN:VCALENDAR");
         content.push("VERSION:2.0");
-        content.push("PRODID:-//mvk-development//" +
-            `hockey-match-calendar//EN`);
+        content.push("PRODID:-//mvk-development//hockey-match-calendar//EN");
         content.push(`URL:https://hockeycal.vankekem.com/${path}`);
         content.push(`NAME:${title} | Hockey Match Calendar`);
         content.push(`X-WR-CALNAME:${title} | Hockey Match Calendar`);

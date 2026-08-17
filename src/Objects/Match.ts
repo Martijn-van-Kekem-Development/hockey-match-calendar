@@ -5,7 +5,6 @@ import { DateHelper } from "../Utils/DateHelper.js";
 import { Moment } from "moment-timezone";
 import { Gender, getFullGender } from "./Gender.js";
 import { Official } from "./Official.js";
-import { Fetcher } from "../Fetchers/Fetcher";
 
 export class Match {
     /**
@@ -85,12 +84,6 @@ export class Match {
      * @private
      */
     private id!: string;
-
-    /**
-     * The metadata for this match.
-     * @private
-     */
-    private metadata: Record<string, string> = {};
 
     /**
      * The match officials.
@@ -197,15 +190,6 @@ export class Match {
      */
     public setScore(score: string) {
         this.finalScore = score;
-    }
-
-    /**
-     * Set a metadata item.
-     * @param key The key to set.
-     * @param value The value to set.
-     */
-    public setMetadata(key: string, value: string) {
-        this.metadata[key] = value;
     }
 
     /**
@@ -348,14 +332,6 @@ export class Match {
     }
 
     /**
-     * Get a metadata item.
-     * @param key The key to retrieve.
-     */
-    public getMetadata(key: string): string {
-        return this.metadata[key];
-    }
-
-    /**
      * Get the match abbreviation.
      */
     public getAbbr(): string {
@@ -414,7 +390,7 @@ export class Match {
 
         // Add disclaimer
         const discord = html
-            ? `<a href="https://discord.com/invite/qTfzFs447y">Discord</a>`
+            ? "<a href=\"https://discord.com/invite/qTfzFs447y\">Discord</a>"
             : "Discord: https://discord.com/invite/qTfzFs447y";
 
         lines.push("Did you notice missing or incorrect data for this match?");
@@ -422,7 +398,6 @@ export class Match {
             lines.push("Or do you know a better abbreviation for this competition " +
                 `than "${this.competition.getAbbr()}"?`);
         lines.push(`Contact us via ${discord}`);
-
 
         return lines.join(html ? "<br>" : "\\n");
     }
