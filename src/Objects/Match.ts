@@ -5,6 +5,7 @@ import { DateHelper } from "../Utils/DateHelper.js";
 import { Moment } from "moment-timezone";
 import { Gender, getFullGender } from "./Gender.js";
 import { Official } from "./Official.js";
+import { Fetcher } from "../Fetchers/Fetcher";
 
 export class Match {
     /**
@@ -152,9 +153,10 @@ export class Match {
     /**
      * Set the match ID.
      * @param id The match ID, or null to reset.
+     * @param competition The competition that this match is part of.
      */
-    public setID(id: string) {
-        this.id = id;
+    public setID(id: string, competition: Competition) {
+        this.id = `${competition.getFetcher().getID()}_${competition.getID()}_${id}`;
     }
 
     /**

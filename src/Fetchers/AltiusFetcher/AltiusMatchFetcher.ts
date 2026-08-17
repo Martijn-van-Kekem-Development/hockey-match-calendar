@@ -107,7 +107,7 @@ export class AltiusMatchFetcher {
             "error", "Skipping match, failed to get ID", {
                 "competition": `${competition.getID()}`,
             });
-        object.setID(id);
+        object.setID(id, competition);
 
         // Add match index
         const indexEl = row.querySelector("td:nth-child(1)");
