@@ -52,7 +52,7 @@ jobs:
         uses: ./.github/workflows/post-update
       - name: Notify in case of failure
         if: failure()
-        uses: dothq/actions-status-discord@v1.0.4
+        uses: dothq/actions-status-discord@v1.8.3
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           nofail: false
