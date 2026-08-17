@@ -30,6 +30,6 @@ describe("ICS class", () => {
             "1", "2", []));
 
         expect(calendar.prodId)
-            .toBe("-//mvk-development//hockey-match-calendar//2//EN");
+            .toBe("-//mvk-development//hockey-match-calendar//EN");
     });
 });

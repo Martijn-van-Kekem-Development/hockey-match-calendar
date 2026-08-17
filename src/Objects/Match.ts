@@ -418,8 +418,10 @@ export class Match {
             : "Discord: https://discord.com/invite/qTfzFs447y";
 
         lines.push("Did you notice missing or incorrect data for this match?");
-        lines.push("Or do you know a better abbreviation for this competition " +
-            `than "${this.competition.getAbbr()}"? Contact us via ${discord}`)
+        if (this.competition)
+            lines.push("Or do you know a better abbreviation for this competition " +
+                `than "${this.competition.getAbbr()}"?`);
+        lines.push(`Contact us via ${discord}`);
 
 
         return lines.join(html ? "<br>" : "\\n");
