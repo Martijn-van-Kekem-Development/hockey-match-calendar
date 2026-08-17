@@ -18,7 +18,7 @@ describe("Abbreviations tests", () => {
         }
     });
 
-    test("getCompetition()", () => {
+    test("parseAbbreviation()", () => {
         const items = fs.readFileSync(
             "tests/includes/competition-abbreviations.json",
             { encoding: "utf-8" }
@@ -27,7 +27,7 @@ describe("Abbreviations tests", () => {
         const json = JSON.parse(items);
 
         for (const test of json as Record<string, string>[]) {
-            const output = Abbreviations.getCompetition(test.in);
+            const output = Abbreviations.parseAbbreviation(test.in);
             expect(output).toBe(test.out);
         }
     });

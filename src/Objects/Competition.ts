@@ -22,6 +22,12 @@ export class Competition {
     private name!: string;
 
     /**
+     * The abbreviation for this competition.
+     * @private
+     */
+    private abbreviation?: string;
+
+    /**
      * The id for this match event.
      * @private
      */
@@ -60,6 +66,11 @@ export class Competition {
      * @param name The name.
      */
     public setName(name: string) {
+        const abbr = Abbreviations.parseAbbreviation(name);
+        if (abbr) {
+            this.abbreviation = abbr;
+        }
+
         this.name = name;
     }
 
@@ -98,7 +109,22 @@ export class Competition {
      * Get the competition abbreviation.
      */
     public getAbbr(): string {
-        return Abbreviations.getCompetition(this.name);
+        return this.abbreviation
+            // Return custom abbreviation
+            ? this.abbreviation
+            // Return first initial of every word
+            : this.name
+                .replaceAll(/[^A-Za-z ]/g, "")
+                .split(" ")
+                .map(v => v.slice(0, 1))
+                .join("").toUpperCase();
+    }
+
+    /**
+     * Whether this match has a custom abbreviation.
+     */
+    public hasCustomAbbreviation(): boolean {
+        return this.abbreviation !== undefined;
     }
 
     /**

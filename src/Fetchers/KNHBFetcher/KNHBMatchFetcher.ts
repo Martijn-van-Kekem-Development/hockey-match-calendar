@@ -67,7 +67,7 @@ export class KNHBMatchFetcher {
                 "index": `${index}`,
                 "competition": competition.getID()
             });
-        object.setID(id, competition);
+        object.setID(id);
 
         // Add gender
         const gender =

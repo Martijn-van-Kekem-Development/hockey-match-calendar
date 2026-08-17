@@ -146,10 +146,9 @@ export class Match {
     /**
      * Set the match ID.
      * @param id The match ID, or null to reset.
-     * @param competition The competition that this match is part of.
      */
-    public setID(id: string, competition: Competition) {
-        this.id = `${competition.getFetcher().getID()}_${competition.getID()}_${id}`;
+    public setID(id: string) {
+        this.id = id;
     }
 
     /**
@@ -284,8 +283,16 @@ export class Match {
      * Get the ICS attributes.
      */
     public getICSAttributes(): Record<string, string> {
+        let fetcherID, competitionID;
+        if (this.competition && this.competition.getFetcher()) {
+            fetcherID = this.competition.getFetcher().getID();
+            competitionID = this.competition.getID()
+        } else {
+            fetcherID = "unknown";
+            competitionID = "unknown";
+        }
         return {
-            UID: this.getID(),
+            UID: `${fetcherID}_${competitionID}_${this.getID()}`,
             ...this.getDateICSAttributes(),
             SUMMARY: this.getMatchTitle(),
             LOCATION: this.getLocation(),
@@ -389,15 +396,17 @@ export class Match {
         lines.push("");
 
         // Add disclaimer
-        const discord = html
+        const discordLink = html
             ? "<a href=\"https://discord.com/invite/qTfzFs447y\">Discord</a>"
             : "Discord: https://discord.com/invite/qTfzFs447y";
+        const discord = `Contact us via ${discordLink}`;
 
         lines.push("Did you notice missing or incorrect data for this match?");
-        if (this.competition)
+        if (this.competition && !this.competition.hasCustomAbbreviation())
             lines.push("Or do you know a better abbreviation for this competition " +
-                `than "${this.competition.getAbbr()}"?`);
-        lines.push(`Contact us via ${discord}`);
+                `than "${this.competition.getAbbr()}"? ${discord}`);
+        else
+            lines.push(discord);
 
         return lines.join(html ? "<br>" : "\\n");
     }

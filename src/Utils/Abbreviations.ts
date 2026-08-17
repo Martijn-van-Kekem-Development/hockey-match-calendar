@@ -70,7 +70,7 @@ export class Abbreviations {
      * Get the match type by the match name.
      * @param name The match name
      */
-    public static getCompetition(name: string): string {
+    public static parseAbbreviation(name: string): string | null {
         if (!this.CompetitionAbbreviations) this.getCompetitionAbbreviations();
 
         // Look for abbreviation.
@@ -86,11 +86,7 @@ export class Abbreviations {
         }
 
         // No match found
-        return name
-            .replaceAll(/[^A-Za-z ]/g, "")
-            .split(" ")
-            .map(v => v.slice(0, 1))
-            .join("").toUpperCase();
+        return null;
     }
 
     /**
