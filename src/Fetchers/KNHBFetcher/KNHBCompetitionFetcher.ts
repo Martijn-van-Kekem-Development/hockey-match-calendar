@@ -43,8 +43,7 @@ export class KNHBCompetitionFetcher {
 
         // Add competition ID.
         const id = row.id;
-        if (!id) return this.fetcher.log(
-            "error", "Skipping competition, failed to get ID");
+        if (!id) return null;
         object.setID(id.toString());
 
         // Add competition name.
