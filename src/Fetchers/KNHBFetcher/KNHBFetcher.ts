@@ -49,6 +49,7 @@ export class KNHBFetcher extends Fetcher {
     private apiHeaders: Record<string, string> = {
         "Accept": "application/json",
         "Content-Type": "application/json",
+        "X-HAPI-Version": "7"
     };
 
     /**
