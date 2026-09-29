@@ -36,7 +36,7 @@
     "ts-ics": "^2.4.6",
     "tsx": "^4.23.15",
     "typescript-eslint": "^8.70.0",
-    "vitest": "^4.1.10"
+    "vitest": "^5.0.2"
   },
   "dependencies": {
     "country-to-iso": "^1.6.3",
