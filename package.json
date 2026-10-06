@@ -30,7 +30,7 @@
     "@ts-ics/schema-zod": "^2.4.6",
     "@types/node": "^26.6.3",
     "@vitest/coverage-v8": "^4.1.11",
-    "@vitest/ui": "^4.1.10",
+    "@vitest/ui": "^5.0.3",
     "eslint": "^10.11.0",
     "globals": "^17.11.0",
     "ts-ics": "^2.4.6",
